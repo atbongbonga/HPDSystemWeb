@@ -1,0 +1,9 @@
+C:\Users\alven\source\repos\HPDSystemWeb\BaseDAL\bin\Debug\netstandard2.0\BaseDAL.deps.json
+C:\Users\alven\source\repos\HPDSystemWeb\BaseDAL\bin\Debug\netstandard2.0\BaseDAL.dll
+C:\Users\alven\source\repos\HPDSystemWeb\BaseDAL\bin\Debug\netstandard2.0\BaseDAL.pdb
+C:\Users\alven\source\repos\HPDSystemWeb\BaseDAL\obj\Debug\netstandard2.0\BaseDAL.csprojAssemblyReference.cache
+C:\Users\alven\source\repos\HPDSystemWeb\BaseDAL\obj\Debug\netstandard2.0\BaseDAL.csproj.CoreCompileInputs.cache
+C:\Users\alven\source\repos\HPDSystemWeb\BaseDAL\obj\Debug\netstandard2.0\BaseDAL.AssemblyInfoInputs.cache
+C:\Users\alven\source\repos\HPDSystemWeb\BaseDAL\obj\Debug\netstandard2.0\BaseDAL.AssemblyInfo.cs
+C:\Users\alven\source\repos\HPDSystemWeb\BaseDAL\obj\Debug\netstandard2.0\BaseDAL.dll
+C:\Users\alven\source\repos\HPDSystemWeb\BaseDAL\obj\Debug\netstandard2.0\BaseDAL.pdb
