@@ -3,7 +3,7 @@
     ViewBag.Title = "Index";
 }
 
-@*<head>
+<head>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,7 +12,7 @@
     <meta name="author" content="">
 
     <title>SB Admin - Dashboard</title>
-</head>*@
+</head>
 
 <body id="page-top">
 
@@ -249,7 +249,7 @@
         $(function () {
 
             $.ajax({
-                url: '@Url.Action("","")',
+                url: '@Url.Action("GetErrorCountByIncharge", "Home")',
                 dataType: "json",
                 method: 'post',
                 success: function (data) {
@@ -265,7 +265,7 @@
                             '<i class="fas fa-fw fa-briefcase"></i>' +
                             '</div>' +
                             '<div class="text-center" ">' +
-                            '<img src="/HPDUtilityWeb/Content/image/Global/icon-image.png" class="rounded-circle" width="200px" height="200px alt="">' +
+                            '<img src="@Url.Content("~/Content/image/Global/icon-image.png")" class="rounded-circle" width="200px" height="200px alt="">' +
                             '</div>' +
                             '<div class="mr-5"><h5>' + emp.InCharge + '</h5></div>' +
                             '</div>' +
@@ -284,7 +284,7 @@
 
             $(document).on('click', '#EmployeeDetail', function () {
                 var incharge = $(this).attr("data-id");
-                $.post("/HPDUtilityWeb/Home/GetErrorCountByInchargeProgram", { InCharge: incharge }, function (data) {
+                $.post("@Url.Action("GetErrorCountByInchargeProgram", "Home")", { InCharge: incharge }, function (data) {
                     var employeeCard = $('#cardEmpLst');
                     employeeCard.empty();
                     data = JSON.parse(data);
@@ -311,7 +311,7 @@
             $(document).on('click', '#ProjectDetail', function () {
 
                 var progname = $(this).attr("data-id");
-                $.post("/HPDUtilityWeb/Home/GetErrorListByProgram", { ProgramName: progname }, function (data) {
+                $.post("@Url.Action("GetErrorListByProgram", "Home")", { ProgramName: progname }, function (data) {
                     var errorlogTbl = $('#errorlogTable');
                     errorlogTbl.empty();
                     data = JSON.parse(data);
