@@ -38,6 +38,7 @@
     <Compile Include="Logics\ErrorLogsComponent.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="DTO\" />
     <Folder Include="Entities\" />
     <Folder Include="Enums\" />
     <Folder Include="Models\" />

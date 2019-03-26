@@ -1,0 +1,1 @@
+C:\HPDSystemWeb\BASE.DAL\obj\Debug\BASE.DAL.csprojResolveAssemblyReference.cache
