@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BASE.DAL
 {
-    static class Main
+    public class Class1
     {
     }
 }
