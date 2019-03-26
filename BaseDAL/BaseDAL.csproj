@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -7,8 +7,8 @@
   <ItemGroup>
     <Folder Include="DTO\" />
     <Folder Include="Entities\" />
-    <Folder Include="Logic\" />
     <Folder Include="Model\" />
+    <Folder Include="Enums\" />
   </ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.28307.489
+VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HPD.Web", "HPD.Web\HPD.Web.csproj", "{D7D1AAA6-EBF0-426E-859E-1159527B7C1E}"
 EndProject
@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{2D11B811-8B8
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Base", "Base", "{9F9C60DC-FB90-48DF-8EBB-DCF451317917}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseDAL", "BaseDAL\BaseDAL.csproj", "{B4929C01-6102-4CCF-A435-2B3AE057AB0F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaseDAL", "BaseDAL\BaseDAL.csproj", "{B4929C01-6102-4CCF-A435-2B3AE057AB0F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
