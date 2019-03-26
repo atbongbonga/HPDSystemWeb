@@ -121,3 +121,9 @@ C:\HPDSystemWeb\HPD.Web\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.x
 C:\HPDSystemWeb\HPD.Web\bin\EntityFramework.xml
 C:\HPDSystemWeb\HPD.Web\obj\Debug\HPD.Web.dll
 C:\HPDSystemWeb\HPD.Web\obj\Debug\HPD.Web.pdb
+C:\HPDSystemWeb\HPD.Web\bin\System.Net.Http.Formatting.dll
+C:\HPDSystemWeb\HPD.Web\bin\System.Web.Http.dll
+C:\HPDSystemWeb\HPD.Web\bin\System.Web.Http.WebHost.dll
+C:\HPDSystemWeb\HPD.Web\bin\System.Net.Http.Formatting.xml
+C:\HPDSystemWeb\HPD.Web\bin\System.Web.Http.xml
+C:\HPDSystemWeb\HPD.Web\bin\System.Web.Http.WebHost.xml

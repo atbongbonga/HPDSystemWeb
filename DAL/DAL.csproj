@@ -2797,7 +2797,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DTO\" />
-    <Folder Include="HPDModel\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
