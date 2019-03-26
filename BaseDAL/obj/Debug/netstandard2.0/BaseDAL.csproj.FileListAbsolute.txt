@@ -7,3 +7,10 @@ C:\Users\alven\source\repos\HPDSystemWeb\BaseDAL\obj\Debug\netstandard2.0\BaseDA
 C:\Users\alven\source\repos\HPDSystemWeb\BaseDAL\obj\Debug\netstandard2.0\BaseDAL.AssemblyInfo.cs
 C:\Users\alven\source\repos\HPDSystemWeb\BaseDAL\obj\Debug\netstandard2.0\BaseDAL.dll
 C:\Users\alven\source\repos\HPDSystemWeb\BaseDAL\obj\Debug\netstandard2.0\BaseDAL.pdb
+C:\HPDSystemWeb\BaseDAL\bin\Debug\netstandard2.0\BaseDAL.deps.json
+C:\HPDSystemWeb\BaseDAL\bin\Debug\netstandard2.0\BaseDAL.dll
+C:\HPDSystemWeb\BaseDAL\bin\Debug\netstandard2.0\BaseDAL.pdb
+C:\HPDSystemWeb\BaseDAL\obj\Debug\netstandard2.0\BaseDAL.csprojResolveAssemblyReference.cache
+C:\HPDSystemWeb\BaseDAL\obj\Debug\netstandard2.0\BaseDAL.AssemblyInfo.cs
+C:\HPDSystemWeb\BaseDAL\obj\Debug\netstandard2.0\BaseDAL.dll
+C:\HPDSystemWeb\BaseDAL\obj\Debug\netstandard2.0\BaseDAL.pdb

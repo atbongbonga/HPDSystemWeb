@@ -58,3 +58,4 @@ C:\Users\alven\source\repos\HPDSystemWeb\HPD.Web\obj\Debug\HPD.Web.csproj.CoreCo
 C:\Users\alven\source\repos\HPDSystemWeb\HPD.Web\obj\Debug\HPD.Web.csproj.CopyComplete
 C:\Users\alven\source\repos\HPDSystemWeb\HPD.Web\obj\Debug\HPD.Web.dll
 C:\Users\alven\source\repos\HPDSystemWeb\HPD.Web\obj\Debug\HPD.Web.pdb
+C:\HPDSystemWeb\HPD.Web\obj\Debug\HPD.Web.csprojResolveAssemblyReference.cache
