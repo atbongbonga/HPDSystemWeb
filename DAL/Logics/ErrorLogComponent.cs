@@ -4,10 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
 using System.Configuration;
-using Base.DAL.Entities;
-using Base.DAL.Enums;
-using Base.DAL.Models;
-namespace Base.DAL.Logics
+using DAL.Entities;
+using DAL.Enums;
+using DAL.Models;
+
+namespace DAL.Logics
 {
     public class ErrorLogComponent
     {

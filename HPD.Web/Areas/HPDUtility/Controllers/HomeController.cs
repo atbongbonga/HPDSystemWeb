@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json;
-using BASE.DAL.Logics;
+using DAL.Logics;
 
 namespace HPD.Web.Areas.HPDUtility.Controllers
 {
