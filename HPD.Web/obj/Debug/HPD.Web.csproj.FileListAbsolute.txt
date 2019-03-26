@@ -127,3 +127,5 @@ C:\HPDSystemWeb\HPD.Web\bin\System.Web.Http.WebHost.dll
 C:\HPDSystemWeb\HPD.Web\bin\System.Net.Http.Formatting.xml
 C:\HPDSystemWeb\HPD.Web\bin\System.Web.Http.xml
 C:\HPDSystemWeb\HPD.Web\bin\System.Web.Http.WebHost.xml
+C:\HPDSystemWeb\HPD.Web\bin\EntityFramework.SqlServer.dll
+C:\HPDSystemWeb\HPD.Web\bin\EntityFramework.SqlServer.xml
