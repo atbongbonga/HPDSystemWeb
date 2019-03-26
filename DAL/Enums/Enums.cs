@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BASE.DAL.Enums
+namespace Base.DAL.Enums
 {
     enum Office
     {
