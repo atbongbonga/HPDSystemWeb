@@ -3,17 +3,6 @@
     ViewBag.Title = "Index";
 }
 
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>SB Admin - Dashboard</title>
-</head>
-
 <body id="page-top">
 
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
@@ -265,7 +254,7 @@
                             '<i class="fas fa-fw fa-briefcase"></i>' +
                             '</div>' +
                             '<div class="text-center" ">' +
-                            '<img src="@Url.Content("~/Content/image/Global/icon-image.png")" class="rounded-circle" width="200px" height="200px alt="">' +
+                            '<img src="data:image/jpeg;base64,' + emp.InChargeIMG + '"  class="rounded-circle" width="200px" height="200px alt="">' +
                             '</div>' +
                             '<div class="mr-5"><h5>' + emp.InCharge + '</h5></div>' +
                             '</div>' +
