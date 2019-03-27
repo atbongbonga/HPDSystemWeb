@@ -143,6 +143,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\HPDUtility\api\ErrorLogController.cs" />
+    <Compile Include="Areas\HPDUtility\api\param\APIErrorLog.cs" />
     <Compile Include="Areas\HPDUtility\Controllers\HomeController.cs" />
     <Compile Include="Areas\HPDUtility\HPDUtilityAreaRegistration.cs" />
     <Compile Include="Global.asax.cs">

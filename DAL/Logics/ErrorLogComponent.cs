@@ -96,7 +96,8 @@ namespace DAL.Logics
             {
                 cn.Open();
 
-                String query = "SELECT b.InCharge, COUNT(1) IssueCount, c.EmpCode " +
+                String query = "SELECT b.InCharge, COUNT(1) IssueCount, c.EmpCode, " +
+                               "(SELECT EmpImg FROM EMPPic WHERE EmpCode = CAST(c.EmpCode AS varchar)) EmpImg " +
                                "FROM ErrorLog a " +
                                "LEFT JOIN Programs b on a.ProgName = b.Program " +
                                "LEFT JOIN developer c on c.EmpName = b.InCharge " +
@@ -116,7 +117,7 @@ namespace DAL.Logics
                         {
                             InCharge = Convert.ToString(dr["InCharge"]),
                             IssueCount = Convert.ToInt32(dr["IssueCount"]),
-                            //InChargeIMG = (byte[])dr["EmpImg"]
+                            InChargeIMG = (byte[])dr["EmpImg"]
                         });
                     };
                     return model;
