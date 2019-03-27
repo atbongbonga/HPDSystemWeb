@@ -13,7 +13,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/27/2019 09:04:16</publishTime>
     </File>
     <File Include="Areas/HPDUtility/Views/Home/Index.cshtml">
-      <publishTime>03/27/2019 15:40:11</publishTime>
+      <publishTime>03/27/2019 16:56:01</publishTime>
     </File>
     <File Include="Areas/HPDUtility/Views/Shared/_Layout.cshtml">
       <publishTime>03/27/2019 09:04:16</publishTime>
@@ -46,10 +46,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/27/2019 09:04:18</publishTime>
     </File>
     <File Include="bin/HPD.Web.dll">
-      <publishTime>03/27/2019 15:34:11</publishTime>
+      <publishTime>03/27/2019 16:46:17</publishTime>
     </File>
     <File Include="bin/HPD.Web.pdb">
-      <publishTime>03/27/2019 15:34:11</publishTime>
+      <publishTime>03/27/2019 16:46:17</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.TelemetryCorrelation.dll">
       <publishTime>03/27/2019 09:04:18</publishTime>
@@ -188,6 +188,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Content/css/Global/sb-admin.min.css">
       <publishTime>03/15/2019 09:07:32</publishTime>
+    </File>
+    <File Include="Content/image/Global/hipre-logo.png">
+      <publishTime>03/27/2019 16:41:57</publishTime>
     </File>
     <File Include="Content/image/Global/icon-image.png">
       <publishTime>03/27/2019 09:04:16</publishTime>

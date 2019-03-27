@@ -156,6 +156,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\Global\sb-admin.css" />
     <Content Include="Content\css\Global\sb-admin.min.css" />
+    <Content Include="Content\image\Global\hipre-logo.png" />
     <Content Include="Content\image\Global\icon-image.png" />
     <Content Include="Content\js\Global\sb-admin.js" />
     <Content Include="Content\js\Global\sb-admin.min.js" />
