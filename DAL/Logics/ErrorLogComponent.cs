@@ -45,18 +45,25 @@ namespace DAL.Logics
             }
 
         }
-        public bool CreateErroLog(string empcode, string errmsg, string ipadd, string empid, string program, DateTime createddate, string type, string errpic)
+        public bool CreateErroLog(string DocDate, string EmpCode, string WrkStation, string IPAdd, string Outlook, string ProgNameErr, string ProgVerErr, string ProgPath, string ErrMsgErr, string ErrSrc, string ErrDtls, string IssueID, string ErrCode)
         {
             using (HPCOMMONEntities db = new HPCOMMONEntities())
             {
                 var adderrlog = new ErrorLog
                 {
-                    EmpCode = empcode,
-                    ErrMsg = errmsg,
-                    IPAdd = ipadd,
-                    ProgName = program,
-                    DocDate = createddate,
-                    ErrSrc = errpic
+                    DocDate = Convert.ToDateTime(DocDate),
+                    EmpCode = EmpCode,
+                    WrkStation = WrkStation,
+                    IPAdd = IPAdd,
+                    Outlook = Outlook,
+                    ProgName = ProgNameErr,
+                    ProgVer = ProgVerErr,
+                    ProgPath = ProgPath,
+                    ErrMsg = ErrMsgErr,
+                    ErrSrc = ErrSrc,
+                    ErrDtls = ErrDtls,
+                    IssueID = Convert.ToInt32(IssueID),
+                    ErrCode = ErrCode
                 };
                 db.ErrorLogs.Add(adderrlog);
                 db.SaveChanges();

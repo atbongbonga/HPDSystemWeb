@@ -9,11 +9,19 @@ namespace HPD.Web.Areas.HPDUtility.api.param
     {
         public class CreateErrorLog
         {
-            public string userId { get; set; }
-            public string exSys { get; set; }
-            public string exImg { get; set; }
-            public string exType { get; set; }
-            public string vOutlook { get; set; }
+            public string DocDate { get; set; }
+            public string EmpCode { get; set; }
+            public string WrkStation { get; set; }
+            public string IPAdd { get; set; }
+            public string Outlook { get; set; }
+            public string ProgNameErr { get; set; }
+            public string ProgVerErr { get; set; }
+            public string ProgPath { get; set; }
+            public string ErrMsgErr { get; set; }
+            public string ErrDtls { get; set; }
+            public string ErrSrc { get; set; }
+            public string IssueID { get; set; }
+            public string ErrCode { get; set; }
         }
         public class TestAPI
         {

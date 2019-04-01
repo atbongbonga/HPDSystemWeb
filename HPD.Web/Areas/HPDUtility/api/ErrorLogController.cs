@@ -14,17 +14,19 @@ namespace HPD.Web.Areas.HPDUtility.api
     {
 
         [HttpPost]
-        public bool CreateErrorMessage(string empcode, string errmsg, string ipadd, string empid, string program, DateTime createddate, string type, string errpic)
+        public bool CreateErrorMessage(CreateErrorLog errorlog)
         {
             var errorLogComponent = new ErrorLogComponent();
-            var result = errorLogComponent.CreateErroLog(empcode, errmsg, ipadd, empid, program, createddate, type, errpic);
-            return true;
-        }
+            var result = errorLogComponent.CreateErroLog(errorlog.DocDate,errorlog.EmpCode, errorlog.WrkStation, errorlog.IPAdd, errorlog.Outlook, errorlog.ProgNameErr, errorlog.ProgVerErr, errorlog.ProgPath, errorlog.ErrMsgErr, errorlog.ErrSrc, errorlog.ErrDtls, errorlog.IssueID, errorlog.ErrCode);
+            return true;                                 
+        }                                                
 
         [HttpPost]
-        public bool APITest(TestAPI param)
+        public bool APITest(TestAPI param)   
         {
             return true;
         }
-    }
-}
+    }                                                 
+}                                                     
+                                                      
+                                                                                         

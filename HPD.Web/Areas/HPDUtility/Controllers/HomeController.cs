@@ -50,13 +50,6 @@ namespace HPD.Web.Areas.HPDUtility.Controllers
             return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
         }
 
-        [HttpPost]
-        [AllowAnonymous]
-        public ActionResult GetErrorListByProgram(string ProgramName)
-        {
-            var errorLogComponent = new ErrorLogComponent();
-            var result = errorLogComponent.GetErrorByProgram(ProgramName);
-            return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
-        }
+        
     }
 }
