@@ -264,6 +264,7 @@
                                                                 <th>Error Code</th>
                                                                 <th>Error Message</th>
                                                                 <th>Doc Date</th>
+                                                                <th>Action</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody id="bugTableBody">
@@ -380,8 +381,8 @@
             $("#bugTable").DataTable({
                 "processing": true, // for show progress bar
                 "serverSide": true, // for process server side
-                "filter": true, // this is for disable filter (search box)
-                "orderMulti": false, // for disable multiple column at once
+                "filter": true,     // this is for disable filter (search box)
+                 //"orderMulti": false, // for disable multiple column at once
                 "pageLength": 10,
 
                 "ajax": {
@@ -395,7 +396,18 @@
                 "columns": [
                     { "data": "ErrCode", "autoWidth": true },
                     { "data": "ErrMsg", "autoWidth": true },
-                    { "data": "DocDate", "autoWidth": true }
+                    {
+                        "render": function (data, type, full, meta)
+                        { 
+                            var nowDate = new Date(parseInt(full.DocDate.substr(6))).format("mm/dd/yyyy");
+                            return nowDate;
+                        }
+                    },
+                    {
+                        "data": null, render: function (data, type, row) {
+                            return "<a href='#' class='btn btn-success'>Fix</a>";
+                        }
+                    },  
                 ]
             });
 
