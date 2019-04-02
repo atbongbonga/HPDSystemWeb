@@ -189,6 +189,7 @@ namespace DAL.Logics
                     };
                     return model;
                 }
+                cn.Close();
             }
             return model;
         }
@@ -232,7 +233,7 @@ namespace DAL.Logics
                                "FROM ErrorLog a " +
                                "LEFT JOIN Programs b on a.ProgName = b.Program " +
                                "WHERE a.ProgName='" + ProgramName + "' " +
-                               "ORDER BY a.DocDate ";
+                               "ORDER BY a.DocDate " ;
 
                 //cm.Parameters.AddWithValue("@Id", id);
 
@@ -251,10 +252,14 @@ namespace DAL.Logics
                             DocDate = Convert.ToDateTime(dr["DocDate"])
                         });
                     };
-                    return model;
+
+                    return model.ToList();
                 }
+                cn.Close();
+
             }
-            return model;
+
+            return model.ToList();
 
         }
     }

@@ -263,21 +263,12 @@
                                                             <tr>
                                                                 <th>Error Code</th>
                                                                 <th>Error Message</th>
-                                                                <th>Doc Entry</th>
                                                                 <th>Doc Date</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody id="bugTableBody">
 
                                                         </tbody>
-                                                        <tfoot>
-                                                            <tr>
-                                                                <th>Error Code</th>
-                                                                <th>Error Message</th>
-                                                                <th>Doc Entry</th>
-                                                                <th>Doc Date</th> 
-                                                            </tr>
-                                                        </tfoot>
                                                     </table>
                                                 </div>
 
@@ -369,22 +360,44 @@
 {
     <script>
         $(function () {
-                $.post("@Url.Action("GetErrorListByProgram", "Project")", { ProgramName: "@ViewBag.Message" }, function (data) {
-                    var errorlogTbl = $('#bugTableBody');
-                    errorlogTbl.empty();
-                    data = JSON.parse(data);
-                    $(data).each(function (index, err) {
-                        var docdate = new Date(parseInt(err.DocDate.substr(6)));
-                        var fdocdate = docdate.getDate() + '/' + (docdate.getMonth() + 1) + '/' + docdate.getFullYear();
-                        errorlogTbl.append('<tr>' +
-                            '<td>' + err.ErrCode + '</td>' +
-                            '<td>' + err.ErrMsg + '</td>' +
-                            '<td>' + err.DocEntry + '</td>' +
-                            '<td>' + err.DocDate + '</td>' +
-                            '</tr>'
-                        );
-                    });
-                }, "json");
+            @*$.post("@Url.Action("GetErrorListByProgram", "Project")", { ProgramName: "@ViewBag.Message" }, function (data) {
+                var errorlogTbl = $('#bugTableBody');
+                errorlogTbl.empty();
+                data = JSON.parse(data);
+                $(data).each(function (index, err) {
+                    var docdate = new Date(parseInt(err.DocDate.substr(6)));
+                    var fdocdate = docdate.getDate() + '/' + (docdate.getMonth() + 1) + '/' + docdate.getFullYear();
+                    errorlogTbl.append('<tr>' +
+                        '<td>' + err.ErrCode + '</td>' +
+                        '<td>' + err.ErrMsg + '</td>' +
+                        '<td>' + err.DocEntry + '</td>' +
+                        '<td>' + err.DocDate + '</td>' +
+                        '</tr>'
+                    );
+                });
+            }, "json");*@
+
+            $("#bugTable").DataTable({
+                "processing": true, // for show progress bar
+                "serverSide": true, // for process server side
+                "filter": true, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "pageLength": 10,
+
+                "ajax": {
+                "url": "@Url.Action("GetErrorListByProgram", "Project")",
+                "data": {
+                    "ProgramName": "@ViewBag.Message"
+                },
+                "type": "POST",
+                "datatype": "json"
+                },
+                "columns": [
+                    { "data": "ErrCode", "autoWidth": true },
+                    { "data": "ErrMsg", "autoWidth": true },
+                    { "data": "DocDate", "autoWidth": true }
+                ]
+            });
 
 
         });
