@@ -13,7 +13,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/25/2019 15:24:51</publishTime>
     </File>
     <File Include="Areas/HPDUtility/Views/Home/Index.cshtml">
-      <publishTime>04/02/2019 10:15:47</publishTime>
+      <publishTime>04/02/2019 14:58:36</publishTime>
     </File>
     <File Include="Areas/HPDUtility/Views/Project/Details.cshtml">
       <publishTime>04/02/2019 13:09:25</publishTime>
@@ -29,6 +29,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="bin/Antlr3.Runtime.dll">
       <publishTime>03/26/2019 08:58:08</publishTime>
+    </File>
+    <File Include="bin/App_global.asax.compiled">
+      <publishTime>04/02/2019 15:14:15</publishTime>
+    </File>
+    <File Include="bin/App_global.asax.dll">
+      <publishTime>04/02/2019 15:14:15</publishTime>
     </File>
     <File Include="bin/DAL.dll">
       <publishTime>04/02/2019 14:26:40</publishTime>
@@ -5349,6 +5355,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Global.asax">
       <publishTime>03/26/2019 08:58:08</publishTime>
     </File>
+    <File Include="PrecompiledApp.config">
+      <publishTime>04/02/2019 15:14:08</publishTime>
+    </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>03/26/2019 08:58:08</publishTime>
     </File>
@@ -5389,7 +5398,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/26/2019 08:58:08</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>04/02/2019 14:26:42</publishTime>
+      <publishTime>04/02/2019 15:14:06</publishTime>
     </File>
   </ItemGroup>
 </Project>
