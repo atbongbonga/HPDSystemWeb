@@ -13,10 +13,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/25/2019 15:24:51</publishTime>
     </File>
     <File Include="Areas/HPDUtility/Views/Home/Index.cshtml">
-      <publishTime>04/03/2019 09:03:33</publishTime>
+      <publishTime>04/04/2019 10:11:30</publishTime>
     </File>
     <File Include="Areas/HPDUtility/Views/Project/Details.cshtml">
-      <publishTime>04/03/2019 09:03:52</publishTime>
+      <publishTime>04/04/2019 11:22:54</publishTime>
     </File>
     <File Include="Areas/HPDUtility/Views/Shared/_Layout.cshtml">
       <publishTime>04/03/2019 09:05:51</publishTime>
@@ -40,13 +40,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/02/2019 15:14:15</publishTime>
     </File>
     <File Include="bin/DAL.dll">
-      <publishTime>04/03/2019 08:52:46</publishTime>
+      <publishTime>04/04/2019 11:28:55</publishTime>
     </File>
     <File Include="bin/DAL.dll.config">
-      <publishTime>03/26/2019 17:26:23</publishTime>
+      <publishTime>04/04/2019 08:58:08</publishTime>
     </File>
     <File Include="bin/DAL.pdb">
-      <publishTime>04/03/2019 08:52:46</publishTime>
+      <publishTime>04/04/2019 11:28:55</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>10/23/2017 13:15:18</publishTime>
@@ -55,10 +55,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/23/2017 13:15:20</publishTime>
     </File>
     <File Include="bin/HPD.Web.dll">
-      <publishTime>04/03/2019 08:54:41</publishTime>
+      <publishTime>04/04/2019 11:28:55</publishTime>
     </File>
     <File Include="bin/HPD.Web.pdb">
-      <publishTime>04/03/2019 08:54:41</publishTime>
+      <publishTime>04/04/2019 11:28:55</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.TelemetryCorrelation.dll">
       <publishTime>03/26/2019 08:58:09</publishTime>
@@ -5407,7 +5407,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/26/2019 08:58:08</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>04/03/2019 08:54:42</publishTime>
+      <publishTime>04/04/2019 11:29:02</publishTime>
     </File>
   </ItemGroup>
 </Project>

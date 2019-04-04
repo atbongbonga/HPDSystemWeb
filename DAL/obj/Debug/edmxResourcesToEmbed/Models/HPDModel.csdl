@@ -470,6 +470,8 @@
     <Property Name="RecordName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
     <Property Name="CoveragePeriod" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="retpd" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="retmonth" Type="Int32" />
+    <Property Name="retyr" Type="Int32" />
   </EntityType>
   <EntityType Name="AuditReportCarddet">
     <Key>
@@ -835,6 +837,7 @@
     <Property Name="IpAdd" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
     <Property Name="Suffix" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
     <Property Name="POSPath" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="HCLABIPAdd" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="BranchMain">
     <Key>
@@ -3849,6 +3852,9 @@
     <Property Name="Program" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Name="Linenum" Type="Int32" />
     <Property Name="UploadDt" Type="DateTime" Precision="3" />
+    <Property Name="IsDel" Type="Int32" />
+    <Property Name="DelBy" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="DelDate" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="PDFDet">
     <Key>
@@ -18277,5 +18283,41 @@
     <EntitySet Name="yrevalentries" EntityType="Self.yrevalentry" />
     <EntitySet Name="ZipCodes" EntityType="Self.ZipCode" />
     <EntitySet Name="ZSQUAREPROGRAMS" EntityType="Self.ZSQUAREPROGRAM" />
+    <EntitySet Name="ProjectSprints" EntityType="HPCOMMONModel.ProjectSprint" />
+    <EntitySet Name="SprintTasks" EntityType="HPCOMMONModel.SprintTask" />
   </EntityContainer>
+  <EntityType Name="ProjectSprint">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProgramName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Member" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="StartDate" Type="DateTime" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Precision="3" />
+    <Property Name="BP" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="SprintTask">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SprintId" Type="Int32" />
+    <Property Name="Title" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Type" Type="Int32" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AssignTo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="OriHr" Type="Decimal" Precision="2" Scale="1" />
+    <Property Name="RemHr" Type="Decimal" Precision="2" Scale="1" />
+    <Property Name="ComHr" Type="Decimal" Precision="2" Scale="1" />
+    <Property Name="Status" Type="Int32" />
+    <Property Name="Priority" Type="Int32" />
+    <Property Name="Activity" Type="Int32" />
+    <Property Name="CreatedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+  </EntityType>
 </Schema>

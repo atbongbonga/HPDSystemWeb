@@ -12,9 +12,9 @@ namespace HPD.Web.Areas.HPDUtility.Controllers
     public class ProjectController : Controller
     {
         // GET: HPDUtility/Project
-        public ActionResult Details(string ProjectId)
+        public ActionResult Details(string ProgramName)
         {
-            ViewBag.Message = ProjectId;
+            ViewBag.Message = ProgramName;
             return View();
         }
         [HttpPost]
@@ -31,6 +31,15 @@ namespace HPD.Web.Areas.HPDUtility.Controllers
 
             return Json(new { draw = draw, recordsFiltered = result.Count(), recordsTotal = result.Count(), data = model });
             //return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetProjectSprintList(string ProgramName)
+        {
+            var sprintTaskComponent = new SprintTaskComponent();
+            var result = sprintTaskComponent.GetProjectSprintList(ProgramName);
+            var model = result.ToList();
+
+            return Json(JsonConvert.SerializeObject(model), JsonRequestBehavior.AllowGet);
         }
     }
 }

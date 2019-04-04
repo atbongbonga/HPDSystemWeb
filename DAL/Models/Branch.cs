@@ -19,5 +19,6 @@ namespace DAL.Models
         public string IpAdd { get; set; }
         public string Suffix { get; set; }
         public string POSPath { get; set; }
+        public string HCLABIPAdd { get; set; }
     }
 }

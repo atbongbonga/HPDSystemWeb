@@ -932,5 +932,7 @@ namespace DAL.Models
         public virtual DbSet<yrevalentry> yrevalentries { get; set; }
         public virtual DbSet<ZipCode> ZipCodes { get; set; }
         public virtual DbSet<ZSQUAREPROGRAM> ZSQUAREPROGRAMS { get; set; }
+        public virtual DbSet<ProjectSprint> ProjectSprints { get; set; }
+        public virtual DbSet<SprintTask> SprintTasks { get; set; }
     }
 }

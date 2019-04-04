@@ -25,5 +25,8 @@ namespace DAL.Models
         public string Program { get; set; }
         public Nullable<int> Linenum { get; set; }
         public Nullable<System.DateTime> UploadDt { get; set; }
+        public Nullable<int> IsDel { get; set; }
+        public string DelBy { get; set; }
+        public Nullable<System.DateTime> DelDate { get; set; }
     }
 }

@@ -448,7 +448,7 @@
 
             $(document).on('click', '#ProjectDetails', function () {
                 var id = $(this).attr("data-id");
-                location.href = '@Url.Action("Details", "Project")?ProjectId='+id+'';
+                location.href = '@Url.Action("Details", "Project")?ProgramName='+id+'';
             });
         });
 

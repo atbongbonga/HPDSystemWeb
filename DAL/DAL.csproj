@@ -52,8 +52,11 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Entities\ErrorLogs.cs" />
+    <Compile Include="Entities\ProjectSprints.cs" />
+    <Compile Include="Entities\SprintTasks.cs" />
     <Compile Include="Enums\Enums.cs" />
     <Compile Include="Logics\ErrorLogComponent.cs" />
+    <Compile Include="Logics\SprintTaskComponent.cs" />
     <Compile Include="Models\AccAdmin.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
@@ -1929,6 +1932,9 @@
     <Compile Include="Models\ProgUpHist.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProjectSprint.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\PROvertime.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
@@ -2626,6 +2632,9 @@
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SPLIST_QRY.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SprintTask.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SProviderMaster.cs">

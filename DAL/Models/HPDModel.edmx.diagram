@@ -912,6 +912,8 @@
         <EntityTypeShape EntityType="HPCOMMONModel.yrevalentry" Width="1.5" PointX="98.75" PointY="28.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HPCOMMONModel.ZipCode" Width="1.5" PointX="98.75" PointY="31.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HPCOMMONModel.ZSQUAREPROGRAM" Width="1.5" PointX="98.75" PointY="34.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HPCOMMONModel.ProjectSprint" Width="1.5" PointX="37.375" PointY="98.75" />
+        <EntityTypeShape EntityType="HPCOMMONModel.SprintTask" Width="1.5" PointX="39.375" PointY="98.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -479,6 +479,8 @@
     <EntitySetMapping Name="AuditBoxRecordsDets">
       <EntityTypeMapping TypeName="HPCOMMONModel.AuditBoxRecordsDet">
         <MappingFragment StoreEntitySet="AuditBoxRecordsDet">
+          <ScalarProperty Name="retyr" ColumnName="retyr" />
+          <ScalarProperty Name="retmonth" ColumnName="retmonth" />
           <ScalarProperty Name="FormatCode" ColumnName="FormatCode" />
           <ScalarProperty Name="Linenum" ColumnName="Linenum" />
           <ScalarProperty Name="RecordName" ColumnName="RecordName" />
@@ -839,6 +841,7 @@
     <EntitySetMapping Name="Branches">
       <EntityTypeMapping TypeName="HPCOMMONModel.Branch">
         <MappingFragment StoreEntitySet="Branches">
+          <ScalarProperty Name="HCLABIPAdd" ColumnName="HCLABIPAdd" />
           <ScalarProperty Name="Code" ColumnName="Code" />
           <ScalarProperty Name="WhsName" ColumnName="WhsName" />
           <ScalarProperty Name="IpAdd" ColumnName="IpAdd" />
@@ -3913,6 +3916,9 @@
     <EntitySetMapping Name="PDArchives">
       <EntityTypeMapping TypeName="HPCOMMONModel.PDArchive">
         <MappingFragment StoreEntitySet="PDArchives">
+          <ScalarProperty Name="DelDate" ColumnName="DelDate" />
+          <ScalarProperty Name="DelBy" ColumnName="DelBy" />
+          <ScalarProperty Name="IsDel" ColumnName="IsDel" />
           <ScalarProperty Name="Docentry" ColumnName="Docentry" />
           <ScalarProperty Name="DocFilename" ColumnName="DocFilename" />
           <ScalarProperty Name="Doctype" ColumnName="Doctype" />
@@ -16910,6 +16916,42 @@
           <ScalarProperty Name="TestVer" ColumnName="TestVer" />
           <ScalarProperty Name="origExepath" ColumnName="origExepath" />
           <ScalarProperty Name="ErrLog" ColumnName="ErrLog" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProjectSprints">
+      <EntityTypeMapping TypeName="HPCOMMONModel.ProjectSprint">
+        <MappingFragment StoreEntitySet="ProjectSprints">
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="BP" ColumnName="BP" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="Member" ColumnName="Member" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ProgramName" ColumnName="ProgramName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SprintTasks">
+      <EntityTypeMapping TypeName="HPCOMMONModel.SprintTask">
+        <MappingFragment StoreEntitySet="SprintTasks">
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Activity" ColumnName="Activity" />
+          <ScalarProperty Name="Priority" ColumnName="Priority" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="ComHr" ColumnName="ComHr" />
+          <ScalarProperty Name="RemHr" ColumnName="RemHr" />
+          <ScalarProperty Name="OriHr" ColumnName="OriHr" />
+          <ScalarProperty Name="AssignTo" ColumnName="AssignTo" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="SprintId" ColumnName="SprintId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

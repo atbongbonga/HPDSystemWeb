@@ -19,5 +19,7 @@ namespace DAL.Models
         public string RecordName { get; set; }
         public string CoveragePeriod { get; set; }
         public string retpd { get; set; }
+        public Nullable<int> retmonth { get; set; }
+        public Nullable<int> retyr { get; set; }
     }
 }
