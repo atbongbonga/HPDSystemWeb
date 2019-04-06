@@ -361,21 +361,21 @@
                             <form class="user">
                                 <div class="form-group row">
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user input-sm" id="txtANSProgramName" placeholder="Title">
+                                        <input type="text" class="form-control form-control-user input-sm" id="txtANSTitle" placeholder="Title">
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="text" class="form-control form-control-user input-sm" id="txtANSProgramName" placeholder="Program">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-user input-sm" id="txtANSProgramName" placeholder="Member">
+                                    <input type="text" class="form-control form-control-user input-sm" id="txtANSMember" placeholder="Member">
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6">
-                                        <input type="date" class="form-control form-control-user input-sm" id="txtANSProgramName" placeholder="Start Date">
+                                        <input type="date" class="form-control form-control-user input-sm" id="txtANSPSDate" placeholder="Start Date">
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="date" class="form-control form-control-user input-sm" id="txtANSProgramName" placeholder="End Date">
+                                        <input type="date" class="form-control form-control-user input-sm" id="txtANSEDate" placeholder="End Date">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -397,7 +397,7 @@
                     <form class="user">
                         <div class="form-group row">
                             <div class="col-sm-6">
-                                <a href="#" class="btn btn-primary btn-circle">
+                                <a href="#" class="btn btn-primary btn-circle" id="btnANSSave">
                                     <i class="fas fa-save"></i>
                                 </a>
                             </div>
@@ -506,6 +506,13 @@
                 $('#addNewSprintModal').modal('toggle');
 
             });
+
+            $("#btnANSSave").on("click", function () {
+                var fileName = e.target.files[0].name;
+                alert('The file "' + fileName + '" has been selected.');
+            });
+
+            
         });
     </script>
 }
