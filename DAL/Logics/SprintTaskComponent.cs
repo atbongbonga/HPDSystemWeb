@@ -44,5 +44,28 @@ namespace DAL.Logics
             }
             return model;
         }
+
+        public bool CreateProjectSprint(ProjectSprints ProjSprint)
+        {
+            using (HPCOMMONEntities db = new HPCOMMONEntities())
+            {
+                var addprosprint = new ProjectSprint
+                {
+                    Name = ProjSprint.Title,
+                    ProgramName = ProjSprint.ProgramName,
+                    Member = ProjSprint.Member,
+                    StartDate = ProjSprint.StartDate,
+                    EndDate = ProjSprint.EndDate,
+                    BP = ProjSprint.BP,
+                    CreatedBy = "1",
+                    CreatedDate = DateTime.UtcNow
+
+                };
+                db.ProjectSprints.Add(addprosprint);
+                db.SaveChanges();
+
+            }
+                return true;
+        }
     }
 }

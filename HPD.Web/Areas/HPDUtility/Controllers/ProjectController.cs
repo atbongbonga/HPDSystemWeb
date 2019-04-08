@@ -41,5 +41,14 @@ namespace HPD.Web.Areas.HPDUtility.Controllers
 
             return Json(JsonConvert.SerializeObject(model), JsonRequestBehavior.AllowGet);
         }
+        public ActionResult CreateProjectSprint(string path)
+        {
+            //var sprintTaskComponent = new SprintTaskComponent();
+            //var result = sprintTaskComponent.CreateProjectSprint(ProgramName);
+            //var model = result.ToList();
+
+            return Json(JsonConvert.SerializeObject(path), JsonRequestBehavior.AllowGet);
+            
+        }
     }
 }
