@@ -11,4 +11,9 @@ namespace DAL.Enums
         ZSquare,
         DelMonte
     }
+    enum SprintType
+    {
+        New = 1,
+        Expired = 2,
+    }
 }

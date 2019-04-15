@@ -156,6 +156,22 @@
           <ScalarProperty Name="updatedate" ColumnName="updatedate" />
           <ScalarProperty Name="retmonth" ColumnName="retmonth" />
           <ScalarProperty Name="retyr" ColumnName="retyr" />
+          <ScalarProperty Name="Initiator" ColumnName="Initiator" />
+          <ScalarProperty Name="ord" ColumnName="ord" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ANTIBIOTIC_TBl">
+      <EntityTypeMapping TypeName="HPCOMMONModel.ANTIBIOTIC_TBl">
+        <MappingFragment StoreEntitySet="ANTIBIOTIC_TBl">
+          <ScalarProperty Name="DOCENTRY" ColumnName="DOCENTRY" />
+          <ScalarProperty Name="AB_CODE" ColumnName="AB_CODE" />
+          <ScalarProperty Name="AB_NAME" ColumnName="AB_NAME" />
+          <ScalarProperty Name="AB_GROUP" ColumnName="AB_GROUP" />
+          <ScalarProperty Name="AB_OXOID" ColumnName="AB_OXOID" />
+          <ScalarProperty Name="AB_SEQNO" ColumnName="AB_SEQNO" />
+          <ScalarProperty Name="AB_SHORT_NAME" ColumnName="AB_SHORT_NAME" />
+          <ScalarProperty Name="DATE_OF_EFFECTIVITY" ColumnName="DATE_OF_EFFECTIVITY" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -479,13 +495,13 @@
     <EntitySetMapping Name="AuditBoxRecordsDets">
       <EntityTypeMapping TypeName="HPCOMMONModel.AuditBoxRecordsDet">
         <MappingFragment StoreEntitySet="AuditBoxRecordsDet">
-          <ScalarProperty Name="retyr" ColumnName="retyr" />
-          <ScalarProperty Name="retmonth" ColumnName="retmonth" />
           <ScalarProperty Name="FormatCode" ColumnName="FormatCode" />
           <ScalarProperty Name="Linenum" ColumnName="Linenum" />
           <ScalarProperty Name="RecordName" ColumnName="RecordName" />
           <ScalarProperty Name="CoveragePeriod" ColumnName="CoveragePeriod" />
           <ScalarProperty Name="retpd" ColumnName="retpd" />
+          <ScalarProperty Name="retmonth" ColumnName="retmonth" />
+          <ScalarProperty Name="retyr" ColumnName="retyr" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -841,12 +857,12 @@
     <EntitySetMapping Name="Branches">
       <EntityTypeMapping TypeName="HPCOMMONModel.Branch">
         <MappingFragment StoreEntitySet="Branches">
-          <ScalarProperty Name="HCLABIPAdd" ColumnName="HCLABIPAdd" />
           <ScalarProperty Name="Code" ColumnName="Code" />
           <ScalarProperty Name="WhsName" ColumnName="WhsName" />
           <ScalarProperty Name="IpAdd" ColumnName="IpAdd" />
           <ScalarProperty Name="Suffix" ColumnName="Suffix" />
           <ScalarProperty Name="POSPath" ColumnName="POSPath" />
+          <ScalarProperty Name="HCLABIPAdd" ColumnName="HCLABIPAdd" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1071,6 +1087,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="CMEventLogs">
+      <EntityTypeMapping TypeName="HPCOMMONModel.CMEventLog">
+        <MappingFragment StoreEntitySet="CMEventLogs">
+          <ScalarProperty Name="DocEntry" ColumnName="DocEntry" />
+          <ScalarProperty Name="CMNo" ColumnName="CMNo" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="CMinIPs">
       <EntityTypeMapping TypeName="HPCOMMONModel.CMinIP">
         <MappingFragment StoreEntitySet="CMinIP">
@@ -1080,6 +1107,18 @@
           <ScalarProperty Name="WhsCode" ColumnName="WhsCode" />
           <ScalarProperty Name="CardCode" ColumnName="CardCode" />
           <ScalarProperty Name="DocTotal" ColumnName="DocTotal" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CMTTBLs">
+      <EntityTypeMapping TypeName="HPCOMMONModel.CMTTBL">
+        <MappingFragment StoreEntitySet="CMTTBL">
+          <ScalarProperty Name="DOCENTRY" ColumnName="DOCENTRY" />
+          <ScalarProperty Name="FE_CODE" ColumnName="FE_CODE" />
+          <ScalarProperty Name="FE_DESC" ColumnName="FE_DESC" />
+          <ScalarProperty Name="FE_STRING" ColumnName="FE_STRING" />
+          <ScalarProperty Name="DATE_DONE" ColumnName="DATE_DONE" />
+          <ScalarProperty Name="STATUS_CREATED" ColumnName="STATUS_CREATED" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -2205,6 +2244,19 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="FORMULAEXPRs">
+      <EntityTypeMapping TypeName="HPCOMMONModel.FORMULAEXPR">
+        <MappingFragment StoreEntitySet="FORMULAEXPR">
+          <ScalarProperty Name="DOCENTRY" ColumnName="DOCENTRY" />
+          <ScalarProperty Name="DATE_CREATED" ColumnName="DATE_CREATED" />
+          <ScalarProperty Name="FE_CODE" ColumnName="FE_CODE" />
+          <ScalarProperty Name="FE_DESC" ColumnName="FE_DESC" />
+          <ScalarProperty Name="FE_STRING" ColumnName="FE_STRING" />
+          <ScalarProperty Name="DATE_DONE" ColumnName="DATE_DONE" />
+          <ScalarProperty Name="STATUS_CREATED" ColumnName="STATUS_CREATED" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="HabitALUs">
       <EntityTypeMapping TypeName="HPCOMMONModel.HabitALU">
         <MappingFragment StoreEntitySet="HabitALU">
@@ -2576,6 +2628,45 @@
           <ScalarProperty Name="APEPEME" ColumnName="APEPEME" />
           <ScalarProperty Name="MODIFIED_ON" ColumnName="MODIFIED_ON" />
           <ScalarProperty Name="SlsTyp" ColumnName="SlsTyp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ItemMasterhs">
+      <EntityTypeMapping TypeName="HPCOMMONModel.ItemMasterh">
+        <MappingFragment StoreEntitySet="ItemMasterh">
+          <ScalarProperty Name="DOCENTRY" ColumnName="DOCENTRY" />
+          <ScalarProperty Name="DATE_CREATED" ColumnName="DATE_CREATED" />
+          <ScalarProperty Name="IMH_CODE" ColumnName="IMH_CODE" />
+          <ScalarProperty Name="IMH_DESC" ColumnName="IMH_DESC" />
+          <ScalarProperty Name="IMH_TYPE" ColumnName="IMH_TYPE" />
+          <ScalarProperty Name="IMH_PDGROUP" ColumnName="IMH_PDGROUP" />
+          <ScalarProperty Name="IMH_BILLCODE" ColumnName="IMH_BILLCODE" />
+          <ScalarProperty Name="IMH_HOSTCODE" ColumnName="IMH_HOSTCODE" />
+          <ScalarProperty Name="IMH_STKUOM" ColumnName="IMH_STKUOM" />
+          <ScalarProperty Name="IMH_STKITEM_FLAG" ColumnName="IMH_STKITEM_FLAG" />
+          <ScalarProperty Name="IMH_TAXABLE" ColumnName="IMH_TAXABLE" />
+          <ScalarProperty Name="IMH_YTD_SQTY" ColumnName="IMH_YTD_SQTY" />
+          <ScalarProperty Name="IMH_YTD_SAMT" ColumnName="IMH_YTD_SAMT" />
+          <ScalarProperty Name="IMH_STD_COST" ColumnName="IMH_STD_COST" />
+          <ScalarProperty Name="IMH_CURR_P1" ColumnName="IMH_CURR_P1" />
+          <ScalarProperty Name="IMH_EFD_P1" ColumnName="IMH_EFD_P1" />
+          <ScalarProperty Name="IMH_PREV_P1" ColumnName="IMH_PREV_P1" />
+          <ScalarProperty Name="IMH_CURR_P2" ColumnName="IMH_CURR_P2" />
+          <ScalarProperty Name="IMH_EFD_P2" ColumnName="IMH_EFD_P2" />
+          <ScalarProperty Name="IMH_PREV_P2" ColumnName="IMH_PREV_P2" />
+          <ScalarProperty Name="IMH_CURR_P3" ColumnName="IMH_CURR_P3" />
+          <ScalarProperty Name="IMH_EFD_P3" ColumnName="IMH_EFD_P3" />
+          <ScalarProperty Name="IMH_PREV_P3" ColumnName="IMH_PREV_P3" />
+          <ScalarProperty Name="IMH_FIXED_PRICE" ColumnName="IMH_FIXED_PRICE" />
+          <ScalarProperty Name="IMH_REC_FLAG" ColumnName="IMH_REC_FLAG" />
+          <ScalarProperty Name="IMH_UPDATE_BY" ColumnName="IMH_UPDATE_BY" />
+          <ScalarProperty Name="IMH_UPDATE_ON" ColumnName="IMH_UPDATE_ON" />
+          <ScalarProperty Name="IMH_INSURANCE_CODE" ColumnName="IMH_INSURANCE_CODE" />
+          <ScalarProperty Name="IMH_DEPT_CODE" ColumnName="IMH_DEPT_CODE" />
+          <ScalarProperty Name="MODIFIED_ON" ColumnName="MODIFIED_ON" />
+          <ScalarProperty Name="VALID_FLAG" ColumnName="VALID_FLAG" />
+          <ScalarProperty Name="DATE_DONE" ColumnName="DATE_DONE" />
+          <ScalarProperty Name="STATUS_CREATED" ColumnName="STATUS_CREATED" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -3129,29 +3220,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="OCustods">
-      <EntityTypeMapping TypeName="HPCOMMONModel.OCustod">
-        <MappingFragment StoreEntitySet="OCustod">
-          <ScalarProperty Name="EmpID" ColumnName="EmpID" />
-          <ScalarProperty Name="EmpName" ColumnName="EmpName" />
-          <ScalarProperty Name="WhsCode" ColumnName="WhsCode" />
-          <ScalarProperty Name="Balance" ColumnName="Balance" />
-          <ScalarProperty Name="Docentry" ColumnName="Docentry" />
-          <ScalarProperty Name="RDate" ColumnName="RDate" />
-          <ScalarProperty Name="Amount" ColumnName="Amount" />
-          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-          <ScalarProperty Name="PrevBal" ColumnName="PrevBal" />
-          <ScalarProperty Name="ReplenishDay" ColumnName="ReplenishDay" />
-          <ScalarProperty Name="ReplenishType" ColumnName="ReplenishType" />
-          <ScalarProperty Name="LastReplenish" ColumnName="LastReplenish" />
-          <ScalarProperty Name="Activate" ColumnName="Activate" />
-          <ScalarProperty Name="UserAssign" ColumnName="UserAssign" />
-          <ScalarProperty Name="AutoApp" ColumnName="AutoApp" />
-          <ScalarProperty Name="NextRepdt" ColumnName="NextRepdt" />
-          <ScalarProperty Name="PFAssign" ColumnName="PFAssign" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="ODATCs">
       <EntityTypeMapping TypeName="HPCOMMONModel.ODATC">
         <MappingFragment StoreEntitySet="ODATC">
@@ -3262,6 +3330,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="OICDRTAGs">
+      <EntityTypeMapping TypeName="HPCOMMONModel.OICDRTAG">
+        <MappingFragment StoreEntitySet="OICDRTAG">
+          <ScalarProperty Name="EmpCode" ColumnName="EmpCode" />
+          <ScalarProperty Name="DCode" ColumnName="DCode" />
+          <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="OJDTs">
       <EntityTypeMapping TypeName="HPCOMMONModel.OJDT">
         <MappingFragment StoreEntitySet="OJDT">
@@ -3364,6 +3441,48 @@
           <ScalarProperty Name="DeducPeriod" ColumnName="DeducPeriod" />
           <ScalarProperty Name="DeducEmpCode" ColumnName="DeducEmpCode" />
           <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ord_trx">
+      <EntityTypeMapping TypeName="HPCOMMONModel.ord_trx">
+        <MappingFragment StoreEntitySet="ord_trx">
+          <ScalarProperty Name="DocEntry" ColumnName="DocEntry" />
+          <ScalarProperty Name="TestCode" ColumnName="TestCode" />
+          <ScalarProperty Name="TestDesc" ColumnName="TestDesc" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Created_By_ID" ColumnName="Created_By_ID" />
+          <ScalarProperty Name="Created_By_Name" ColumnName="Created_By_Name" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ord_trx_det">
+      <EntityTypeMapping TypeName="HPCOMMONModel.ord_trx_det">
+        <MappingFragment StoreEntitySet="ord_trx_det">
+          <ScalarProperty Name="DocEntry" ColumnName="DocEntry" />
+          <ScalarProperty Name="LineNum" ColumnName="LineNum" />
+          <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+          <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+          <ScalarProperty Name="Stat" ColumnName="Stat" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="DateDone" ColumnName="DateDone" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ORGANISM_TBL">
+      <EntityTypeMapping TypeName="HPCOMMONModel.ORGANISM_TBL">
+        <MappingFragment StoreEntitySet="ORGANISM_TBL">
+          <ScalarProperty Name="DOCENTRY" ColumnName="DOCENTRY" />
+          <ScalarProperty Name="OG_CODE" ColumnName="OG_CODE" />
+          <ScalarProperty Name="OG_NAME" ColumnName="OG_NAME" />
+          <ScalarProperty Name="OG_GROUP" ColumnName="OG_GROUP" />
+          <ScalarProperty Name="OG_SHORT_NAME" ColumnName="OG_SHORT_NAME" />
+          <ScalarProperty Name="OG_ALERT" ColumnName="OG_ALERT" />
+          <ScalarProperty Name="OG_TEST_GRP" ColumnName="OG_TEST_GRP" />
+          <ScalarProperty Name="DATE_DONE" ColumnName="DATE_DONE" />
+          <ScalarProperty Name="STATUS_CREATED" ColumnName="STATUS_CREATED" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -3596,6 +3715,10 @@
           <ScalarProperty Name="Reason" ColumnName="Reason" />
           <ScalarProperty Name="Deleteby" ColumnName="Deleteby" />
           <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
+          <ScalarProperty Name="Stat" ColumnName="Stat" />
+          <ScalarProperty Name="AppDate" ColumnName="AppDate" />
+          <ScalarProperty Name="AppBy" ColumnName="AppBy" />
+          <ScalarProperty Name="DelID" ColumnName="DelID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -3916,9 +4039,6 @@
     <EntitySetMapping Name="PDArchives">
       <EntityTypeMapping TypeName="HPCOMMONModel.PDArchive">
         <MappingFragment StoreEntitySet="PDArchives">
-          <ScalarProperty Name="DelDate" ColumnName="DelDate" />
-          <ScalarProperty Name="DelBy" ColumnName="DelBy" />
-          <ScalarProperty Name="IsDel" ColumnName="IsDel" />
           <ScalarProperty Name="Docentry" ColumnName="Docentry" />
           <ScalarProperty Name="DocFilename" ColumnName="DocFilename" />
           <ScalarProperty Name="Doctype" ColumnName="Doctype" />
@@ -3930,6 +4050,9 @@
           <ScalarProperty Name="Program" ColumnName="Program" />
           <ScalarProperty Name="Linenum" ColumnName="Linenum" />
           <ScalarProperty Name="UploadDt" ColumnName="UploadDt" />
+          <ScalarProperty Name="IsDel" ColumnName="IsDel" />
+          <ScalarProperty Name="DelBy" ColumnName="DelBy" />
+          <ScalarProperty Name="DelDate" ColumnName="DelDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -4208,6 +4331,40 @@
           <ScalarProperty Name="LineNum" ColumnName="LineNum" />
           <ScalarProperty Name="EmpName" ColumnName="EmpName" />
           <ScalarProperty Name="xlSheet" ColumnName="xlSheet" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="POS_AUT_GLOBAL_CMT">
+      <EntityTypeMapping TypeName="HPCOMMONModel.POS_AUT_GLOBAL_CMT">
+        <MappingFragment StoreEntitySet="POS_AUT_GLOBAL_CMT">
+          <ScalarProperty Name="DOCENTRY" ColumnName="DOCENTRY" />
+          <ScalarProperty Name="AUTO_COMMENT_GLOBAL_ID" ColumnName="AUTO_COMMENT_GLOBAL_ID" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
+          <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
+          <ScalarProperty Name="UPDATED_ON" ColumnName="UPDATED_ON" />
+          <ScalarProperty Name="GLOBAL_COMMENT" ColumnName="GLOBAL_COMMENT" />
+          <ScalarProperty Name="GLOBAL_COMMENT_TYPE" ColumnName="GLOBAL_COMMENT_TYPE" />
+          <ScalarProperty Name="IS_VALID" ColumnName="IS_VALID" />
+          <ScalarProperty Name="DATE_OF_EFFECTIVITY" ColumnName="DATE_OF_EFFECTIVITY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="POS_AUTOMATIC_COMMENT">
+      <EntityTypeMapping TypeName="HPCOMMONModel.POS_AUTOMATIC_COMMENT">
+        <MappingFragment StoreEntitySet="POS_AUTOMATIC_COMMENT">
+          <ScalarProperty Name="DOCENTRY" ColumnName="DOCENTRY" />
+          <ScalarProperty Name="AUTO_COMMENT_ID" ColumnName="AUTO_COMMENT_ID" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
+          <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
+          <ScalarProperty Name="DATE_OF_EFFECTIVITY" ColumnName="DATE_OF_EFFECTIVITY" />
+          <ScalarProperty Name="TI_CODE" ColumnName="TI_CODE" />
+          <ScalarProperty Name="IS_VALID" ColumnName="IS_VALID" />
+          <ScalarProperty Name="UPDATE_ON" ColumnName="UPDATE_ON" />
+          <ScalarProperty Name="TI_COMMENT" ColumnName="TI_COMMENT" />
+          <ScalarProperty Name="DATE_DONE" ColumnName="DATE_DONE" />
+          <ScalarProperty Name="STATUS_CREATED" ColumnName="STATUS_CREATED" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -4793,6 +4950,22 @@
           <ScalarProperty Name="UserID" ColumnName="UserID" />
           <ScalarProperty Name="Ver" ColumnName="Ver" />
           <ScalarProperty Name="IssueDoc" ColumnName="IssueDoc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProjectSprints">
+      <EntityTypeMapping TypeName="HPCOMMONModel.ProjectSprint">
+        <MappingFragment StoreEntitySet="ProjectSprints">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ProgramName" ColumnName="ProgramName" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Member" ColumnName="Member" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="BP" ColumnName="BP" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -5600,6 +5773,18 @@
           <ScalarProperty Name="Pd" ColumnName="Pd" />
           <ScalarProperty Name="Target" ColumnName="Target" />
           <ScalarProperty Name="Slpcode" ColumnName="Slpcode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SampleTypes">
+      <EntityTypeMapping TypeName="HPCOMMONModel.SampleType">
+        <MappingFragment StoreEntitySet="SampleType">
+          <ScalarProperty Name="DOCENTRY" ColumnName="DOCENTRY" />
+          <ScalarProperty Name="ST_CODE" ColumnName="ST_CODE" />
+          <ScalarProperty Name="ST_NAME" ColumnName="ST_NAME" />
+          <ScalarProperty Name="ST_SG_CODE" ColumnName="ST_SG_CODE" />
+          <ScalarProperty Name="DATE_DONE" ColumnName="DATE_DONE" />
+          <ScalarProperty Name="STATUS_CREATED" ColumnName="STATUS_CREATED" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -6661,6 +6846,26 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="SprintTasks">
+      <EntityTypeMapping TypeName="HPCOMMONModel.SprintTask">
+        <MappingFragment StoreEntitySet="SprintTasks">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SprintId" ColumnName="SprintId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="AssignTo" ColumnName="AssignTo" />
+          <ScalarProperty Name="OriHr" ColumnName="OriHr" />
+          <ScalarProperty Name="RemHr" ColumnName="RemHr" />
+          <ScalarProperty Name="ComHr" ColumnName="ComHr" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Priority" ColumnName="Priority" />
+          <ScalarProperty Name="Activity" ColumnName="Activity" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="SProviderMasters">
       <EntityTypeMapping TypeName="HPCOMMONModel.SProviderMaster">
         <MappingFragment StoreEntitySet="SProviderMaster">
@@ -6724,6 +6929,86 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="TEST_ITEM">
+      <EntityTypeMapping TypeName="HPCOMMONModel.TEST_ITEM">
+        <MappingFragment StoreEntitySet="TEST_ITEM">
+          <ScalarProperty Name="DocEntry" ColumnName="DocEntry" />
+          <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
+          <ScalarProperty Name="TI_CODE" ColumnName="TI_CODE" />
+          <ScalarProperty Name="TI_NAME" ColumnName="TI_NAME" />
+          <ScalarProperty Name="TI_OTHER_NAME" ColumnName="TI_OTHER_NAME" />
+          <ScalarProperty Name="TI_PRINT_NAME" ColumnName="TI_PRINT_NAME" />
+          <ScalarProperty Name="TI_TEST_GRP" ColumnName="TI_TEST_GRP" />
+          <ScalarProperty Name="TI_CATEGORY" ColumnName="TI_CATEGORY" />
+          <ScalarProperty Name="TI_UNIT" ColumnName="TI_UNIT" />
+          <ScalarProperty Name="TI_DATA_TYPE" ColumnName="TI_DATA_TYPE" />
+          <ScalarProperty Name="TI_FORMULA_CODE" ColumnName="TI_FORMULA_CODE" />
+          <ScalarProperty Name="TI_SPL_TYPE" ColumnName="TI_SPL_TYPE" />
+          <ScalarProperty Name="TI_REC_FLAG" ColumnName="TI_REC_FLAG" />
+          <ScalarProperty Name="TI_DELTA_CHECK" ColumnName="TI_DELTA_CHECK" />
+          <ScalarProperty Name="TI_SI_UNIT" ColumnName="TI_SI_UNIT" />
+          <ScalarProperty Name="TI_SI_FACTOR" ColumnName="TI_SI_FACTOR" />
+          <ScalarProperty Name="TI_LEVEL" ColumnName="TI_LEVEL" />
+          <ScalarProperty Name="TI_ORDER_ENABLE" ColumnName="TI_ORDER_ENABLE" />
+          <ScalarProperty Name="TI_OUTPUT_MASK" ColumnName="TI_OUTPUT_MASK" />
+          <ScalarProperty Name="TI_ANZ_ORDER" ColumnName="TI_ANZ_ORDER" />
+          <ScalarProperty Name="TI_TRIGGER_FORMULA" ColumnName="TI_TRIGGER_FORMULA" />
+          <ScalarProperty Name="TI_TRIGGER_ITEM1" ColumnName="TI_TRIGGER_ITEM1" />
+          <ScalarProperty Name="TI_TRIGGER_ITEM2" ColumnName="TI_TRIGGER_ITEM2" />
+          <ScalarProperty Name="TI_TRIGGER_ITEM3" ColumnName="TI_TRIGGER_ITEM3" />
+          <ScalarProperty Name="TI_TRIGGER_ITEM4" ColumnName="TI_TRIGGER_ITEM4" />
+          <ScalarProperty Name="TI_TRIGGER_ITEM5" ColumnName="TI_TRIGGER_ITEM5" />
+          <ScalarProperty Name="TI_DISP_SEQ" ColumnName="TI_DISP_SEQ" />
+          <ScalarProperty Name="TI_LINK_ITEM" ColumnName="TI_LINK_ITEM" />
+          <ScalarProperty Name="TI_LINK_NO" ColumnName="TI_LINK_NO" />
+          <ScalarProperty Name="TI_ITPV_FLAG" ColumnName="TI_ITPV_FLAG" />
+          <ScalarProperty Name="TI_MRF_FLAG" ColumnName="TI_MRF_FLAG" />
+          <ScalarProperty Name="TI_TM_CODE" ColumnName="TI_TM_CODE" />
+          <ScalarProperty Name="TI_CTL_FLAG" ColumnName="TI_CTL_FLAG" />
+          <ScalarProperty Name="TI_UPDATE_BY" ColumnName="TI_UPDATE_BY" />
+          <ScalarProperty Name="TI_UPDATE_ON" ColumnName="TI_UPDATE_ON" />
+          <ScalarProperty Name="TI_FTR_TPL" ColumnName="TI_FTR_TPL" />
+          <ScalarProperty Name="TI_STAT_TAT" ColumnName="TI_STAT_TAT" />
+          <ScalarProperty Name="TI_ROUTINE_TAT" ColumnName="TI_ROUTINE_TAT" />
+          <ScalarProperty Name="TI_TRIGGER_FR" ColumnName="TI_TRIGGER_FR" />
+          <ScalarProperty Name="TI_URGENT_TAT" ColumnName="TI_URGENT_TAT" />
+          <ScalarProperty Name="TI_ATTACHED_CMT" ColumnName="TI_ATTACHED_CMT" />
+          <ScalarProperty Name="TI_DFLT_VALUE" ColumnName="TI_DFLT_VALUE" />
+          <ScalarProperty Name="TI_MB_TEST_GRP" ColumnName="TI_MB_TEST_GRP" />
+          <ScalarProperty Name="TI_MB_PC_TYPE" ColumnName="TI_MB_PC_TYPE" />
+          <ScalarProperty Name="TI_REORDER_CTL" ColumnName="TI_REORDER_CTL" />
+          <ScalarProperty Name="TI_TH_CODE" ColumnName="TI_TH_CODE" />
+          <ScalarProperty Name="TI_TH_SEQ" ColumnName="TI_TH_SEQ" />
+          <ScalarProperty Name="TI_BB_PC_TYPE" ColumnName="TI_BB_PC_TYPE" />
+          <ScalarProperty Name="TI_LABNO_SUFFIX" ColumnName="TI_LABNO_SUFFIX" />
+          <ScalarProperty Name="TI_LONG_NAME" ColumnName="TI_LONG_NAME" />
+          <ScalarProperty Name="TI_SPL_TYPE2" ColumnName="TI_SPL_TYPE2" />
+          <ScalarProperty Name="TI_QC_VALIDITY" ColumnName="TI_QC_VALIDITY" />
+          <ScalarProperty Name="TI_MB_NOGROWTH_BR" ColumnName="TI_MB_NOGROWTH_BR" />
+          <ScalarProperty Name="TI_MB_NOGROWTH_DAY" ColumnName="TI_MB_NOGROWTH_DAY" />
+          <ScalarProperty Name="TI_MB_NOGROWTH_CODE" ColumnName="TI_MB_NOGROWTH_CODE" />
+          <ScalarProperty Name="TI_MB_PRENOGROWTH_DAY" ColumnName="TI_MB_PRENOGROWTH_DAY" />
+          <ScalarProperty Name="TI_MB_PRENOGROWTH_CODE" ColumnName="TI_MB_PRENOGROWTH_CODE" />
+          <ScalarProperty Name="TI_ORDER_RETENTION" ColumnName="TI_ORDER_RETENTION" />
+          <ScalarProperty Name="TI_TB_CULTURE_FLAG" ColumnName="TI_TB_CULTURE_FLAG" />
+          <ScalarProperty Name="TI_TB_NEGSTAIN_CODE" ColumnName="TI_TB_NEGSTAIN_CODE" />
+          <ScalarProperty Name="TI_TB_MEDIA1" ColumnName="TI_TB_MEDIA1" />
+          <ScalarProperty Name="TI_TB_MEDIA1_CUTOFF" ColumnName="TI_TB_MEDIA1_CUTOFF" />
+          <ScalarProperty Name="TI_TB_MEDIA1_NOGROWTH_CODE" ColumnName="TI_TB_MEDIA1_NOGROWTH_CODE" />
+          <ScalarProperty Name="TI_TB_MEDIA2" ColumnName="TI_TB_MEDIA2" />
+          <ScalarProperty Name="TI_TB_MEDIA2_CUTOFF" ColumnName="TI_TB_MEDIA2_CUTOFF" />
+          <ScalarProperty Name="TI_TB_MEDIA2_NOGROWTH_CODE" ColumnName="TI_TB_MEDIA2_NOGROWTH_CODE" />
+          <ScalarProperty Name="TI_TB_MEDIA3" ColumnName="TI_TB_MEDIA3" />
+          <ScalarProperty Name="TI_TB_MEDIA3_CUTOFF" ColumnName="TI_TB_MEDIA3_CUTOFF" />
+          <ScalarProperty Name="TI_TB_MEDIA3_NOGROWTH_CODE" ColumnName="TI_TB_MEDIA3_NOGROWTH_CODE" />
+          <ScalarProperty Name="TI_MIN_SPL_VOL" ColumnName="TI_MIN_SPL_VOL" />
+          <ScalarProperty Name="TI_OPT_SPL_VOL" ColumnName="TI_OPT_SPL_VOL" />
+          <ScalarProperty Name="TI_USE_PRIMARY_TUBE" ColumnName="TI_USE_PRIMARY_TUBE" />
+          <ScalarProperty Name="DATE_DONE" ColumnName="DATE_DONE" />
+          <ScalarProperty Name="STATUS_CREATED" ColumnName="STATUS_CREATED" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="TestCodeOpts">
       <EntityTypeMapping TypeName="HPCOMMONModel.TestCodeOpt">
         <MappingFragment StoreEntitySet="TestCodeOpt">
@@ -6743,6 +7028,48 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="TESTITPVHs">
+      <EntityTypeMapping TypeName="HPCOMMONModel.TESTITPVH">
+        <MappingFragment StoreEntitySet="TESTITPVH">
+          <ScalarProperty Name="DOCENTRY" ColumnName="DOCENTRY" />
+          <ScalarProperty Name="DATE_CREATED" ColumnName="DATE_CREATED" />
+          <ScalarProperty Name="TIVH_TI_CODE" ColumnName="TIVH_TI_CODE" />
+          <ScalarProperty Name="TIVH_KEY" ColumnName="TIVH_KEY" />
+          <ScalarProperty Name="TIVH_EFD" ColumnName="TIVH_EFD" />
+          <ScalarProperty Name="DATE_DONE" ColumnName="DATE_DONE" />
+          <ScalarProperty Name="STATUS_CREATED" ColumnName="STATUS_CREATED" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TESTPROFILEs">
+      <EntityTypeMapping TypeName="HPCOMMONModel.TESTPROFILE">
+        <MappingFragment StoreEntitySet="TESTPROFILE">
+          <ScalarProperty Name="DOCENTRY" ColumnName="DOCENTRY" />
+          <ScalarProperty Name="DATE_CREATED" ColumnName="DATE_CREATED" />
+          <ScalarProperty Name="TP_CODE" ColumnName="TP_CODE" />
+          <ScalarProperty Name="TP_TI_CODE" ColumnName="TP_TI_CODE" />
+          <ScalarProperty Name="TP_DISP_SEQ" ColumnName="TP_DISP_SEQ" />
+          <ScalarProperty Name="TP_HIDE_PRINT" ColumnName="TP_HIDE_PRINT" />
+          <ScalarProperty Name="TP_UPDATE_BY" ColumnName="TP_UPDATE_BY" />
+          <ScalarProperty Name="TP_UPDATE_ON" ColumnName="TP_UPDATE_ON" />
+          <ScalarProperty Name="DATE_DONE" ColumnName="DATE_DONE" />
+          <ScalarProperty Name="STATUS_CREATED" ColumnName="STATUS_CREATED" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TESTTVs">
+      <EntityTypeMapping TypeName="HPCOMMONModel.TESTTV">
+        <MappingFragment StoreEntitySet="TESTTV">
+          <ScalarProperty Name="DOCENTRY" ColumnName="DOCENTRY" />
+          <ScalarProperty Name="DATE_CREATED" ColumnName="DATE_CREATED" />
+          <ScalarProperty Name="TTV_TI_CODE" ColumnName="TTV_TI_CODE" />
+          <ScalarProperty Name="TTV_TV_CODE" ColumnName="TTV_TV_CODE" />
+          <ScalarProperty Name="TTV_ABNORM_FLAG" ColumnName="TTV_ABNORM_FLAG" />
+          <ScalarProperty Name="DATE_DONE" ColumnName="DATE_DONE" />
+          <ScalarProperty Name="STATUS_CREATED" ColumnName="STATUS_CREATED" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="TestWebs">
       <EntityTypeMapping TypeName="HPCOMMONModel.TestWeb">
         <MappingFragment StoreEntitySet="TestWeb">
@@ -6750,6 +7077,17 @@
           <ScalarProperty Name="ImgFile" ColumnName="ImgFile" />
           <ScalarProperty Name="ImgType" ColumnName="ImgType" />
           <ScalarProperty Name="Size" ColumnName="Size" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TextValue1">
+      <EntityTypeMapping TypeName="HPCOMMONModel.TextValue1">
+        <MappingFragment StoreEntitySet="TextValue1">
+          <ScalarProperty Name="DOCENTRY" ColumnName="DOCENTRY" />
+          <ScalarProperty Name="TV_CODE" ColumnName="TV_CODE" />
+          <ScalarProperty Name="TV_DESC" ColumnName="TV_DESC" />
+          <ScalarProperty Name="DATE_DONE" ColumnName="DATE_DONE" />
+          <ScalarProperty Name="STATUS_CREATED" ColumnName="STATUS_CREATED" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -6842,6 +7180,29 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="TRRANGEs">
+      <EntityTypeMapping TypeName="HPCOMMONModel.TRRANGE">
+        <MappingFragment StoreEntitySet="TRRANGE">
+          <ScalarProperty Name="DOCENTRY" ColumnName="DOCENTRY" />
+          <ScalarProperty Name="DATE_CREATED" ColumnName="DATE_CREATED" />
+          <ScalarProperty Name="TR_TI_CODE" ColumnName="TR_TI_CODE" />
+          <ScalarProperty Name="TR_SEX_CODE" ColumnName="TR_SEX_CODE" />
+          <ScalarProperty Name="TR_FASTING_CODE" ColumnName="TR_FASTING_CODE" />
+          <ScalarProperty Name="TR_AGETO" ColumnName="TR_AGETO" />
+          <ScalarProperty Name="TR_AGECODE" ColumnName="TR_AGECODE" />
+          <ScalarProperty Name="TR_RANGE_DESC" ColumnName="TR_RANGE_DESC" />
+          <ScalarProperty Name="TR_NORMAL_LOLIMIT" ColumnName="TR_NORMAL_LOLIMIT" />
+          <ScalarProperty Name="TR_UPPER_UPLIMIT" ColumnName="TR_UPPER_UPLIMIT" />
+          <ScalarProperty Name="TR_PANIC_LOLIMIT" ColumnName="TR_PANIC_LOLIMIT" />
+          <ScalarProperty Name="TR_PANIC_UPLIMIT" ColumnName="TR_PANIC_UPLIMIT" />
+          <ScalarProperty Name="TR_MRR_DESC" ColumnName="TR_MRR_DESC" />
+          <ScalarProperty Name="TR_UPDATE_BY" ColumnName="TR_UPDATE_BY" />
+          <ScalarProperty Name="TR_UPDATE_ON" ColumnName="TR_UPDATE_ON" />
+          <ScalarProperty Name="DATE_DONE" ColumnName="DATE_DONE" />
+          <ScalarProperty Name="STATUS_CREATED" ColumnName="STATUS_CREATED" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="TrxlogsTestCode_DET">
       <EntityTypeMapping TypeName="HPCOMMONModel.TrxlogsTestCode_DET">
         <MappingFragment StoreEntitySet="TrxlogsTestCode_DET">
@@ -6889,6 +7250,17 @@
           <ScalarProperty Name="TblName" ColumnName="TblName" />
           <ScalarProperty Name="Descrpt" ColumnName="Descrpt" />
           <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UnitTbls">
+      <EntityTypeMapping TypeName="HPCOMMONModel.UnitTbl">
+        <MappingFragment StoreEntitySet="UnitTbl">
+          <ScalarProperty Name="DOCENTRY" ColumnName="DOCENTRY" />
+          <ScalarProperty Name="UNIT_CODE" ColumnName="UNIT_CODE" />
+          <ScalarProperty Name="UNIT_NAME" ColumnName="UNIT_NAME" />
+          <ScalarProperty Name="DATE_DONE" ColumnName="DATE_DONE" />
+          <ScalarProperty Name="STATUS_CREATED" ColumnName="STATUS_CREATED" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -7606,6 +7978,26 @@
           <ScalarProperty Name="Encodedby" ColumnName="Encodedby" />
           <ScalarProperty Name="Encodeddate" ColumnName="Encodeddate" />
           <ScalarProperty Name="whscode" ColumnName="whscode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="amrh_bk">
+      <EntityTypeMapping TypeName="HPCOMMONModel.amrh_bk">
+        <MappingFragment StoreEntitySet="amrh_bk">
+          <ScalarProperty Name="docentry" ColumnName="docentry" />
+          <ScalarProperty Name="Docnum" ColumnName="Docnum" />
+          <ScalarProperty Name="Docname" ColumnName="Docname" />
+          <ScalarProperty Name="Users" ColumnName="Users" />
+          <ScalarProperty Name="Revision" ColumnName="Revision" />
+          <ScalarProperty Name="Retentionpd" ColumnName="Retentionpd" />
+          <ScalarProperty Name="DisposalMethod" ColumnName="DisposalMethod" />
+          <ScalarProperty Name="Encodedby" ColumnName="Encodedby" />
+          <ScalarProperty Name="Encodeddate" ColumnName="Encodeddate" />
+          <ScalarProperty Name="remarks" ColumnName="remarks" />
+          <ScalarProperty Name="updatedate" ColumnName="updatedate" />
+          <ScalarProperty Name="retmonth" ColumnName="retmonth" />
+          <ScalarProperty Name="retyr" ColumnName="retyr" />
+          <ScalarProperty Name="Initiator" ColumnName="Initiator" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -9136,6 +9528,67 @@
           <ScalarProperty Name="stat" ColumnName="stat" />
           <ScalarProperty Name="duration" ColumnName="duration" />
           <ScalarProperty Name="local" ColumnName="local" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CMBranch_Tst">
+      <EntityTypeMapping TypeName="HPCOMMONModel.CMBranch_Tst">
+        <MappingFragment StoreEntitySet="CMBranch_Tst">
+          <ScalarProperty Name="DocEntry" ColumnName="DocEntry" />
+          <ScalarProperty Name="DocDate" ColumnName="DocDate" />
+          <ScalarProperty Name="LabNo" ColumnName="LabNo" />
+          <ScalarProperty Name="CardCode" ColumnName="CardCode" />
+          <ScalarProperty Name="DateRec" ColumnName="DateRec" />
+          <ScalarProperty Name="WhsCode" ColumnName="WhsCode" />
+          <ScalarProperty Name="CMDMno" ColumnName="CMDMno" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <ScalarProperty Name="AdjAmt" ColumnName="AdjAmt" />
+          <ScalarProperty Name="Stat" ColumnName="Stat" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+          <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
+          <ScalarProperty Name="RetainLabNo" ColumnName="RetainLabNo" />
+          <ScalarProperty Name="PMode" ColumnName="PMode" />
+          <ScalarProperty Name="ApprBy" ColumnName="ApprBy" />
+          <ScalarProperty Name="ApprDate" ColumnName="ApprDate" />
+          <ScalarProperty Name="RejBy" ColumnName="RejBy" />
+          <ScalarProperty Name="RejDate" ColumnName="RejDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CMBranchA_Tst">
+      <EntityTypeMapping TypeName="HPCOMMONModel.CMBranchA_Tst">
+        <MappingFragment StoreEntitySet="CMBranchA_Tst">
+          <ScalarProperty Name="DocEntry" ColumnName="DocEntry" />
+          <ScalarProperty Name="LabNo" ColumnName="LabNo" />
+          <ScalarProperty Name="WhsCode" ColumnName="WhsCode" />
+          <ScalarProperty Name="PMode" ColumnName="PMode" />
+          <ScalarProperty Name="CardName" ColumnName="CardName" />
+          <ScalarProperty Name="PatientID" ColumnName="PatientID" />
+          <ScalarProperty Name="PatientName" ColumnName="PatientName" />
+          <ScalarProperty Name="CliID" ColumnName="CliID" />
+          <ScalarProperty Name="CliName" ColumnName="CliName" />
+          <ScalarProperty Name="Refno" ColumnName="Refno" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CMBranchDet_Tst">
+      <EntityTypeMapping TypeName="HPCOMMONModel.CMBranchDet_Tst">
+        <MappingFragment StoreEntitySet="CMBranchDet_Tst">
+          <ScalarProperty Name="DocEntry" ColumnName="DocEntry" />
+          <ScalarProperty Name="DocDate" ColumnName="DocDate" />
+          <ScalarProperty Name="LabNo" ColumnName="LabNo" />
+          <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
+          <ScalarProperty Name="WhsCode" ColumnName="WhsCode" />
+          <ScalarProperty Name="CardCode" ColumnName="CardCode" />
+          <ScalarProperty Name="AdjAmt" ColumnName="AdjAmt" />
+          <ScalarProperty Name="PostDate" ColumnName="PostDate" />
+          <ScalarProperty Name="PostBy" ColumnName="PostBy" />
+          <ScalarProperty Name="CMDMNo" ColumnName="CMDMNo" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="PkgCode" ColumnName="PkgCode" />
+          <ScalarProperty Name="PkgName" ColumnName="PkgName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -11105,6 +11558,29 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="OCustodBks">
+      <EntityTypeMapping TypeName="HPCOMMONModel.OCustodBk">
+        <MappingFragment StoreEntitySet="OCustodBk">
+          <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+          <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+          <ScalarProperty Name="WhsCode" ColumnName="WhsCode" />
+          <ScalarProperty Name="Balance" ColumnName="Balance" />
+          <ScalarProperty Name="Docentry" ColumnName="Docentry" />
+          <ScalarProperty Name="RDate" ColumnName="RDate" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="PrevBal" ColumnName="PrevBal" />
+          <ScalarProperty Name="ReplenishDay" ColumnName="ReplenishDay" />
+          <ScalarProperty Name="ReplenishType" ColumnName="ReplenishType" />
+          <ScalarProperty Name="LastReplenish" ColumnName="LastReplenish" />
+          <ScalarProperty Name="Activate" ColumnName="Activate" />
+          <ScalarProperty Name="UserAssign" ColumnName="UserAssign" />
+          <ScalarProperty Name="AutoApp" ColumnName="AutoApp" />
+          <ScalarProperty Name="NextRepdt" ColumnName="NextRepdt" />
+          <ScalarProperty Name="PFAssign" ColumnName="PFAssign" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="OEMP_bk">
       <EntityTypeMapping TypeName="HPCOMMONModel.OEMP_bk">
         <MappingFragment StoreEntitySet="OEMP_bk">
@@ -11683,6 +12159,54 @@
           <ScalarProperty Name="BNCStat" ColumnName="BNCStat" />
           <ScalarProperty Name="whscode" ColumnName="whscode" />
           <ScalarProperty Name="isSales" ColumnName="isSales" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OPCFvlads">
+      <EntityTypeMapping TypeName="HPCOMMONModel.OPCFvlad">
+        <MappingFragment StoreEntitySet="OPCFvlad">
+          <ScalarProperty Name="DocDate" ColumnName="DocDate" />
+          <ScalarProperty Name="PaidTo" ColumnName="PaidTo" />
+          <ScalarProperty Name="WhsCode" ColumnName="WhsCode" />
+          <ScalarProperty Name="Stat" ColumnName="Stat" />
+          <ScalarProperty Name="stattype" ColumnName="stattype" />
+          <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+          <ScalarProperty Name="Custodian" ColumnName="Custodian" />
+          <ScalarProperty Name="ReceiveAmt" ColumnName="ReceiveAmt" />
+          <ScalarProperty Name="Docnum" ColumnName="Docnum" />
+          <ScalarProperty Name="PostBr" ColumnName="PostBr" />
+          <ScalarProperty Name="BrEntry" ColumnName="BrEntry" />
+          <ScalarProperty Name="Dept" ColumnName="Dept" />
+          <ScalarProperty Name="Encoder" ColumnName="Encoder" />
+          <ScalarProperty Name="Docentry" ColumnName="Docentry" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="RHRemarks" ColumnName="RHRemarks" />
+          <ScalarProperty Name="BNC" ColumnName="BNC" />
+          <ScalarProperty Name="DocCode" ColumnName="DocCode" />
+          <ScalarProperty Name="ATCCode" ColumnName="ATCCode" />
+          <ScalarProperty Name="ATCRate" ColumnName="ATCRate" />
+          <ScalarProperty Name="isRet" ColumnName="isRet" />
+          <ScalarProperty Name="isSls" ColumnName="isSls" />
+          <ScalarProperty Name="SlsStat" ColumnName="SlsStat" />
+          <ScalarProperty Name="CashierID" ColumnName="CashierID" />
+          <ScalarProperty Name="UtilsID" ColumnName="UtilsID" />
+          <ScalarProperty Name="PymtID" ColumnName="PymtID" />
+          <ScalarProperty Name="BNCStat" ColumnName="BNCStat" />
+          <ScalarProperty Name="DepID" ColumnName="DepID" />
+          <ScalarProperty Name="ChngAmt" ColumnName="ChngAmt" />
+          <ScalarProperty Name="SpentAmt" ColumnName="SpentAmt" />
+          <ScalarProperty Name="depSlip" ColumnName="depSlip" />
+          <ScalarProperty Name="Excdesc" ColumnName="Excdesc" />
+          <ScalarProperty Name="BNCAmt" ColumnName="BNCAmt" />
+          <ScalarProperty Name="Postby" ColumnName="Postby" />
+          <ScalarProperty Name="SAPID" ColumnName="SAPID" />
+          <ScalarProperty Name="RepDate" ColumnName="RepDate" />
+          <ScalarProperty Name="NMetRmks" ColumnName="NMetRmks" />
+          <ScalarProperty Name="DtComp" ColumnName="DtComp" />
+          <ScalarProperty Name="AppDate" ColumnName="AppDate" />
+          <ScalarProperty Name="Appby" ColumnName="Appby" />
+          <ScalarProperty Name="CanceledBy" ColumnName="CanceledBy" />
+          <ScalarProperty Name="CanceledDate" ColumnName="CanceledDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -12395,6 +12919,29 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="PCfcustods">
+      <EntityTypeMapping TypeName="HPCOMMONModel.PCfcustod">
+        <MappingFragment StoreEntitySet="PCfcustod">
+          <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+          <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+          <ScalarProperty Name="WhsCode" ColumnName="WhsCode" />
+          <ScalarProperty Name="Balance" ColumnName="Balance" />
+          <ScalarProperty Name="Docentry" ColumnName="Docentry" />
+          <ScalarProperty Name="RDate" ColumnName="RDate" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="PrevBal" ColumnName="PrevBal" />
+          <ScalarProperty Name="ReplenishDay" ColumnName="ReplenishDay" />
+          <ScalarProperty Name="ReplenishType" ColumnName="ReplenishType" />
+          <ScalarProperty Name="LastReplenish" ColumnName="LastReplenish" />
+          <ScalarProperty Name="Activate" ColumnName="Activate" />
+          <ScalarProperty Name="UserAssign" ColumnName="UserAssign" />
+          <ScalarProperty Name="AutoApp" ColumnName="AutoApp" />
+          <ScalarProperty Name="NextRepdt" ColumnName="NextRepdt" />
+          <ScalarProperty Name="PFAssign" ColumnName="PFAssign" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="PCFErrDeletes">
       <EntityTypeMapping TypeName="HPCOMMONModel.PCFErrDelete">
         <MappingFragment StoreEntitySet="PCFErrDelete">
@@ -12799,6 +13346,40 @@
           <ScalarProperty Name="SendTo" ColumnName="SendTo" />
           <ScalarProperty Name="Spec" ColumnName="Spec" />
           <ScalarProperty Name="Act" ColumnName="Act" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PFRlvrPymt128">
+      <EntityTypeMapping TypeName="HPCOMMONModel.PFRlvrPymt128">
+        <MappingFragment StoreEntitySet="PFRlvrPymt128">
+          <ScalarProperty Name="DocEntry" ColumnName="DocEntry" />
+          <ScalarProperty Name="DocDate" ColumnName="DocDate" />
+          <ScalarProperty Name="RlvrName" ColumnName="RlvrName" />
+          <ScalarProperty Name="BaseEntry" ColumnName="BaseEntry" />
+          <ScalarProperty Name="WhsCode" ColumnName="WhsCode" />
+          <ScalarProperty Name="RefDate" ColumnName="RefDate" />
+          <ScalarProperty Name="WithBreak" ColumnName="WithBreak" />
+          <ScalarProperty Name="STime" ColumnName="STime" />
+          <ScalarProperty Name="ETime" ColumnName="ETime" />
+          <ScalarProperty Name="ActSTime" ColumnName="ActSTime" />
+          <ScalarProperty Name="ActETime" ColumnName="ActETime" />
+          <ScalarProperty Name="TotHrs" ColumnName="TotHrs" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="GrossAmt" ColumnName="GrossAmt" />
+          <ScalarProperty Name="EWTRate" ColumnName="EWTRate" />
+          <ScalarProperty Name="EWTAmt" ColumnName="EWTAmt" />
+          <ScalarProperty Name="TotPay" ColumnName="TotPay" />
+          <ScalarProperty Name="PostBy" ColumnName="PostBy" />
+          <ScalarProperty Name="IPAdd" ColumnName="IPAdd" />
+          <ScalarProperty Name="FundFrom" ColumnName="FundFrom" />
+          <ScalarProperty Name="PCFEntry" ColumnName="PCFEntry" />
+          <ScalarProperty Name="TotBrk" ColumnName="TotBrk" />
+          <ScalarProperty Name="GenID" ColumnName="GenID" />
+          <ScalarProperty Name="GenDate" ColumnName="GenDate" />
+          <ScalarProperty Name="GenBy" ColumnName="GenBy" />
+          <ScalarProperty Name="GenIP" ColumnName="GenIP" />
+          <ScalarProperty Name="DiscrepAmt" ColumnName="DiscrepAmt" />
+          <ScalarProperty Name="PFEntry" ColumnName="PFEntry" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -14157,6 +14738,57 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="SAPDM_Tst">
+      <EntityTypeMapping TypeName="HPCOMMONModel.SAPDM_Tst">
+        <MappingFragment StoreEntitySet="SAPDM_Tst">
+          <ScalarProperty Name="DocEntry" ColumnName="DocEntry" />
+          <ScalarProperty Name="DocDate" ColumnName="DocDate" />
+          <ScalarProperty Name="LabNo" ColumnName="LabNo" />
+          <ScalarProperty Name="CardCode" ColumnName="CardCode" />
+          <ScalarProperty Name="DateRec" ColumnName="DateRec" />
+          <ScalarProperty Name="WhsCode" ColumnName="WhsCode" />
+          <ScalarProperty Name="PMode" ColumnName="PMode" />
+          <ScalarProperty Name="DMNo" ColumnName="DMNo" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <ScalarProperty Name="Doctotal" ColumnName="Doctotal" />
+          <ScalarProperty Name="Stat" ColumnName="Stat" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="Refno" ColumnName="Refno" />
+          <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+          <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SAPDMa_Tst">
+      <EntityTypeMapping TypeName="HPCOMMONModel.SAPDMa_Tst">
+        <MappingFragment StoreEntitySet="SAPDMa_Tst">
+          <ScalarProperty Name="Docentry" ColumnName="Docentry" />
+          <ScalarProperty Name="LabNo" ColumnName="LabNo" />
+          <ScalarProperty Name="WhsCode" ColumnName="WhsCode" />
+          <ScalarProperty Name="CardName" ColumnName="CardName" />
+          <ScalarProperty Name="PatientID" ColumnName="PatientID" />
+          <ScalarProperty Name="PatientName" ColumnName="PatientName" />
+          <ScalarProperty Name="CliID" ColumnName="CliID" />
+          <ScalarProperty Name="CliName" ColumnName="CliName" />
+          <ScalarProperty Name="Refno" ColumnName="Refno" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SAPDMDet_Tst">
+      <EntityTypeMapping TypeName="HPCOMMONModel.SAPDMDet_Tst">
+        <MappingFragment StoreEntitySet="SAPDMDet_Tst">
+          <ScalarProperty Name="DocEntry" ColumnName="DocEntry" />
+          <ScalarProperty Name="DocDate" ColumnName="DocDate" />
+          <ScalarProperty Name="LabNo" ColumnName="LabNo" />
+          <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
+          <ScalarProperty Name="PkgCode" ColumnName="PkgCode" />
+          <ScalarProperty Name="PkgName" ColumnName="PkgName" />
+          <ScalarProperty Name="WhsCode" ColumnName="WhsCode" />
+          <ScalarProperty Name="CardCode" ColumnName="CardCode" />
+          <ScalarProperty Name="AdjAmt" ColumnName="AdjAmt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="SAPOPTDtls">
       <EntityTypeMapping TypeName="HPCOMMONModel.SAPOPTDtl">
         <MappingFragment StoreEntitySet="SAPOPTDtl">
@@ -15423,6 +16055,15 @@
           <ScalarProperty Name="WhsCode" ColumnName="WhsCode" />
           <ScalarProperty Name="sduty" ColumnName="sduty" />
           <ScalarProperty Name="IsBreak" ColumnName="IsBreak" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SCInterOICs">
+      <EntityTypeMapping TypeName="HPCOMMONModel.SCInterOIC">
+        <MappingFragment StoreEntitySet="SCInterOIC">
+          <ScalarProperty Name="docentry" ColumnName="docentry" />
+          <ScalarProperty Name="empid" ColumnName="empid" />
+          <ScalarProperty Name="whscode" ColumnName="whscode" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -16916,42 +17557,6 @@
           <ScalarProperty Name="TestVer" ColumnName="TestVer" />
           <ScalarProperty Name="origExepath" ColumnName="origExepath" />
           <ScalarProperty Name="ErrLog" ColumnName="ErrLog" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ProjectSprints">
-      <EntityTypeMapping TypeName="HPCOMMONModel.ProjectSprint">
-        <MappingFragment StoreEntitySet="ProjectSprints">
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="BP" ColumnName="BP" />
-          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-          <ScalarProperty Name="Member" ColumnName="Member" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="ProgramName" ColumnName="ProgramName" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="SprintTasks">
-      <EntityTypeMapping TypeName="HPCOMMONModel.SprintTask">
-        <MappingFragment StoreEntitySet="SprintTasks">
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="Activity" ColumnName="Activity" />
-          <ScalarProperty Name="Priority" ColumnName="Priority" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="ComHr" ColumnName="ComHr" />
-          <ScalarProperty Name="RemHr" ColumnName="RemHr" />
-          <ScalarProperty Name="OriHr" ColumnName="OriHr" />
-          <ScalarProperty Name="AssignTo" ColumnName="AssignTo" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="Type" ColumnName="Type" />
-          <ScalarProperty Name="Title" ColumnName="Title" />
-          <ScalarProperty Name="SprintId" ColumnName="SprintId" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

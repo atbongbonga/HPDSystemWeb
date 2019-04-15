@@ -36,6 +36,7 @@ namespace DAL.Models
         public virtual DbSet<ALULTag> ALULTags { get; set; }
         public virtual DbSet<ALUMonth> ALUMonths { get; set; }
         public virtual DbSet<amrh> amrhs { get; set; }
+        public virtual DbSet<ANTIBIOTIC_TBl> ANTIBIOTIC_TBl { get; set; }
         public virtual DbSet<ApplicantDeploy> ApplicantDeploys { get; set; }
         public virtual DbSet<ApplicantDet> ApplicantDets { get; set; }
         public virtual DbSet<ApplicantEducBck> ApplicantEducBcks { get; set; }
@@ -93,7 +94,9 @@ namespace DAL.Models
         public virtual DbSet<CMBranchA> CMBranchAs { get; set; }
         public virtual DbSet<CMBranchDet> CMBranchDets { get; set; }
         public virtual DbSet<CMCategory> CMCategories { get; set; }
+        public virtual DbSet<CMEventLog> CMEventLogs { get; set; }
         public virtual DbSet<CMinIP> CMinIPs { get; set; }
+        public virtual DbSet<CMTTBL> CMTTBLs { get; set; }
         public virtual DbSet<ColBranch> ColBranches { get; set; }
         public virtual DbSet<ColBranch1> ColBranch1 { get; set; }
         public virtual DbSet<ColBrDeposit> ColBrDeposits { get; set; }
@@ -172,6 +175,7 @@ namespace DAL.Models
         public virtual DbSet<FDReq> FDReqs { get; set; }
         public virtual DbSet<Fllwupdet> Fllwupdets { get; set; }
         public virtual DbSet<FormHeader> FormHeaders { get; set; }
+        public virtual DbSet<FORMULAEXPR> FORMULAEXPRs { get; set; }
         public virtual DbSet<HabitALU> HabitALUs { get; set; }
         public virtual DbSet<HepaPType> HepaPTypes { get; set; }
         public virtual DbSet<HKAuditPic> HKAuditPics { get; set; }
@@ -197,6 +201,7 @@ namespace DAL.Models
         public virtual DbSet<ITDept> ITDepts { get; set; }
         public virtual DbSet<ITEM_MASTERD> ITEM_MASTERD { get; set; }
         public virtual DbSet<ITEM_MASTERH> ITEM_MASTERH { get; set; }
+        public virtual DbSet<ItemMasterh> ItemMasterhs { get; set; }
         public virtual DbSet<J_SCDTR> J_SCDTR { get; set; }
         public virtual DbSet<JDT1> JDT1 { get; set; }
         public virtual DbSet<JEUnif> JEUnifs { get; set; }
@@ -238,17 +243,20 @@ namespace DAL.Models
         public virtual DbSet<OCGenLog> OCGenLogs { get; set; }
         public virtual DbSet<OCInDTR> OCInDTRs { get; set; }
         public virtual DbSet<OCRD_BRANCH> OCRD_BRANCH { get; set; }
-        public virtual DbSet<OCustod> OCustods { get; set; }
         public virtual DbSet<ODATC> ODATCs { get; set; }
         public virtual DbSet<OEMP> OEMPs { get; set; }
         public virtual DbSet<OEMP1> OEMP1 { get; set; }
         public virtual DbSet<ofctn> ofctns { get; set; }
         public virtual DbSet<OIC> OICs { get; set; }
+        public virtual DbSet<OICDRTAG> OICDRTAGs { get; set; }
         public virtual DbSet<OJDT> OJDTs { get; set; }
         public virtual DbSet<OPCF> OPCFs { get; set; }
         public virtual DbSet<OPCFLog> OPCFLogs { get; set; }
         public virtual DbSet<OPCheck> OPChecks { get; set; }
         public virtual DbSet<OPDeduc> OPDeducs { get; set; }
+        public virtual DbSet<ord_trx> ord_trx { get; set; }
+        public virtual DbSet<ord_trx_det> ord_trx_det { get; set; }
+        public virtual DbSet<ORGANISM_TBL> ORGANISM_TBL { get; set; }
         public virtual DbSet<OspTarget> OspTargets { get; set; }
         public virtual DbSet<OT> OTs { get; set; }
         public virtual DbSet<OTTag> OTTags { get; set; }
@@ -302,6 +310,8 @@ namespace DAL.Models
         public virtual DbSet<PFRlvrHdr> PFRlvrHdrs { get; set; }
         public virtual DbSet<PFRlvrPymt> PFRlvrPymts { get; set; }
         public virtual DbSet<PHILAPEEmp> PHILAPEEmps { get; set; }
+        public virtual DbSet<POS_AUT_GLOBAL_CMT> POS_AUT_GLOBAL_CMT { get; set; }
+        public virtual DbSet<POS_AUTOMATIC_COMMENT> POS_AUTOMATIC_COMMENT { get; set; }
         public virtual DbSet<PostLog> PostLogs { get; set; }
         public virtual DbSet<PRAddDet> PRAddDets { get; set; }
         public virtual DbSet<PRAddition> PRAdditions { get; set; }
@@ -334,6 +344,7 @@ namespace DAL.Models
         public virtual DbSet<ProgSrc> ProgSrcs { get; set; }
         public virtual DbSet<ProgStatDesc> ProgStatDescs { get; set; }
         public virtual DbSet<ProgUpHist> ProgUpHists { get; set; }
+        public virtual DbSet<ProjectSprint> ProjectSprints { get; set; }
         public virtual DbSet<PROvertime> PROvertimes { get; set; }
         public virtual DbSet<PrsnlReq> PrsnlReqs { get; set; }
         public virtual DbSet<PrsnlReqDtl> PrsnlReqDtls { get; set; }
@@ -379,6 +390,7 @@ namespace DAL.Models
         public virtual DbSet<SALESCM> SALESCMs { get; set; }
         public virtual DbSet<SalesPerItem> SalesPerItems { get; set; }
         public virtual DbSet<SalesTarget> SalesTargets { get; set; }
+        public virtual DbSet<SampleType> SampleTypes { get; set; }
         public virtual DbSet<SAPDM> SAPDMs { get; set; }
         public virtual DbSet<SAPDMa> SAPDMas { get; set; }
         public virtual DbSet<SAPDMDet> SAPDMDets { get; set; }
@@ -437,14 +449,20 @@ namespace DAL.Models
         public virtual DbSet<SlsApplog> SlsApplogs { get; set; }
         public virtual DbSet<SPLIST_DTL> SPLIST_DTL { get; set; }
         public virtual DbSet<SPLIST_QRY> SPLIST_QRY { get; set; }
+        public virtual DbSet<SprintTask> SprintTasks { get; set; }
         public virtual DbSet<SProviderMaster> SProviderMasters { get; set; }
         public virtual DbSet<SSSCont> SSSConts { get; set; }
         public virtual DbSet<SVisor> SVisors { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TaskList> TaskLists { get; set; }
+        public virtual DbSet<TEST_ITEM> TEST_ITEM { get; set; }
         public virtual DbSet<TestCodeOpt> TestCodeOpts { get; set; }
         public virtual DbSet<TestCodeOpt_Det> TestCodeOpt_Det { get; set; }
+        public virtual DbSet<TESTITPVH> TESTITPVHs { get; set; }
+        public virtual DbSet<TESTPROFILE> TESTPROFILEs { get; set; }
+        public virtual DbSet<TESTTV> TESTTVs { get; set; }
         public virtual DbSet<TestWeb> TestWebs { get; set; }
+        public virtual DbSet<TextValue1> TextValue1 { get; set; }
         public virtual DbSet<TLDtl> TLDtls { get; set; }
         public virtual DbSet<TLDtlTrx> TLDtlTrxes { get; set; }
         public virtual DbSet<TLHdr> TLHdrs { get; set; }
@@ -452,10 +470,12 @@ namespace DAL.Models
         public virtual DbSet<tmpSPLIST> tmpSPLISTs { get; set; }
         public virtual DbSet<TrainAdd> TrainAdds { get; set; }
         public virtual DbSet<TrainASCMntnce> TrainASCMntnces { get; set; }
+        public virtual DbSet<TRRANGE> TRRANGEs { get; set; }
         public virtual DbSet<TrxlogsTestCode_DET> TrxlogsTestCode_DET { get; set; }
         public virtual DbSet<TrxlogsTestCode_HDR> TrxlogsTestCode_HDR { get; set; }
         public virtual DbSet<tst_patient> tst_patient { get; set; }
         public virtual DbSet<TstOptTable> TstOptTables { get; set; }
+        public virtual DbSet<UnitTbl> UnitTbls { get; set; }
         public virtual DbSet<updater> updaters { get; set; }
         public virtual DbSet<UpdHSHist> UpdHSHists { get; set; }
         public virtual DbSet<UpdItem> UpdItems { get; set; }
@@ -491,6 +511,7 @@ namespace DAL.Models
         public virtual DbSet<ALABANG_008_SCTPRemarks_20180706> ALABANG_008_SCTPRemarks_20180706 { get; set; }
         public virtual DbSet<amr_acro> amr_acro { get; set; }
         public virtual DbSet<amrd> amrds { get; set; }
+        public virtual DbSet<amrh_bk> amrh_bk { get; set; }
         public virtual DbSet<AMRHBK> AMRHBKs { get; set; }
         public virtual DbSet<AppFamily> AppFamilies { get; set; }
         public virtual DbSet<ApplicantDetLog> ApplicantDetLogs { get; set; }
@@ -564,6 +585,9 @@ namespace DAL.Models
         public virtual DbSet<CLOGS1> CLOGS1 { get; set; }
         public virtual DbSet<clogsbckup> clogsbckups { get; set; }
         public virtual DbSet<CLOGStmp> CLOGStmps { get; set; }
+        public virtual DbSet<CMBranch_Tst> CMBranch_Tst { get; set; }
+        public virtual DbSet<CMBranchA_Tst> CMBranchA_Tst { get; set; }
+        public virtual DbSet<CMBranchDet_Tst> CMBranchDet_Tst { get; set; }
         public virtual DbSet<COMPLETE_TESTCODE> COMPLETE_TESTCODE { get; set; }
         public virtual DbSet<D15100068sclist_dr> D15100068sclist_dr { get; set; }
         public virtual DbSet<D15100077dr> D15100077dr { get; set; }
@@ -690,6 +714,7 @@ namespace DAL.Models
         public virtual DbSet<NotUpdateCol_Backup_09_09_2017> NotUpdateCol_Backup_09_09_2017 { get; set; }
         public virtual DbSet<NumToWord> NumToWords { get; set; }
         public virtual DbSet<OCRD_BRANCH_TEMP> OCRD_BRANCH_TEMP { get; set; }
+        public virtual DbSet<OCustodBk> OCustodBks { get; set; }
         public virtual DbSet<OEMP_bk> OEMP_bk { get; set; }
         public virtual DbSet<OEMP1_Purge> OEMP1_Purge { get; set; }
         public virtual DbSet<OEMP1bk> OEMP1bk { get; set; }
@@ -708,6 +733,7 @@ namespace DAL.Models
         public virtual DbSet<opcf3> opcf3 { get; set; }
         public virtual DbSet<opcf39908> opcf39908 { get; set; }
         public virtual DbSet<OPCFLogsTMP> OPCFLogsTMPs { get; set; }
+        public virtual DbSet<OPCFvlad> OPCFvlads { get; set; }
         public virtual DbSet<OSLP> OSLPs { get; set; }
         public virtual DbSet<OTEmpReq> OTEmpReqs { get; set; }
         public virtual DbSet<OTEmpReq_backs> OTEmpReq_backs { get; set; }
@@ -728,6 +754,7 @@ namespace DAL.Models
         public virtual DbSet<pcf1rem> pcf1rem { get; set; }
         public virtual DbSet<pcf2> pcf2 { get; set; }
         public virtual DbSet<PCFCal> PCFCals { get; set; }
+        public virtual DbSet<PCfcustod> PCfcustods { get; set; }
         public virtual DbSet<PCFErrDelete> PCFErrDeletes { get; set; }
         public virtual DbSet<PCFErrListbk> PCFErrListbks { get; set; }
         public virtual DbSet<PCFHdr> PCFHdrs { get; set; }
@@ -750,6 +777,7 @@ namespace DAL.Models
         public virtual DbSet<PFRlvrDtlDelete> PFRlvrDtlDeletes { get; set; }
         public virtual DbSet<PFRlvrHdrDelete> PFRlvrHdrDeletes { get; set; }
         public virtual DbSet<PFRlvrHdrLog> PFRlvrHdrLogs { get; set; }
+        public virtual DbSet<PFRlvrPymt128> PFRlvrPymt128 { get; set; }
         public virtual DbSet<PMChange> PMChanges { get; set; }
         public virtual DbSet<PMChangeArc> PMChangeArcs { get; set; }
         public virtual DbSet<PMChangeBk> PMChangeBks { get; set; }
@@ -803,6 +831,9 @@ namespace DAL.Models
         public virtual DbSet<RetroDtlImp> RetroDtlImps { get; set; }
         public virtual DbSet<SalesPerItemBK> SalesPerItemBKs { get; set; }
         public virtual DbSet<sapcm_BK> sapcm_BK { get; set; }
+        public virtual DbSet<SAPDM_Tst> SAPDM_Tst { get; set; }
+        public virtual DbSet<SAPDMa_Tst> SAPDMa_Tst { get; set; }
+        public virtual DbSet<SAPDMDet_Tst> SAPDMDet_Tst { get; set; }
         public virtual DbSet<SAPOPTDtl> SAPOPTDtls { get; set; }
         public virtual DbSet<SAPSet_BACKUP> SAPSet_BACKUP { get; set; }
         public virtual DbSet<SAPSet2> SAPSet2 { get; set; }
@@ -852,6 +883,7 @@ namespace DAL.Models
         public virtual DbSet<SCGPLog> SCGPLogs { get; set; }
         public virtual DbSet<SCGroup> SCGroups { get; set; }
         public virtual DbSet<SChed> SCheds { get; set; }
+        public virtual DbSet<SCInterOIC> SCInterOICs { get; set; }
         public virtual DbSet<SCKeeper> SCKeepers { get; set; }
         public virtual DbSet<SCLIST_2015_PURGE> SCLIST_2015_PURGE { get; set; }
         public virtual DbSet<SCList_BK> SCList_BK { get; set; }
@@ -932,7 +964,5 @@ namespace DAL.Models
         public virtual DbSet<yrevalentry> yrevalentries { get; set; }
         public virtual DbSet<ZipCode> ZipCodes { get; set; }
         public virtual DbSet<ZSQUAREPROGRAM> ZSQUAREPROGRAMS { get; set; }
-        public virtual DbSet<ProjectSprint> ProjectSprints { get; set; }
-        public virtual DbSet<SprintTask> SprintTasks { get; set; }
     }
 }

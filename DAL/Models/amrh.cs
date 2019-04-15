@@ -27,5 +27,7 @@ namespace DAL.Models
         public Nullable<System.DateTime> updatedate { get; set; }
         public Nullable<int> retmonth { get; set; }
         public Nullable<int> retyr { get; set; }
+        public string Initiator { get; set; }
+        public Nullable<int> ord { get; set; }
     }
 }

@@ -10,7 +10,7 @@ namespace DAL.Entities
     {
         public int Id { get; set; }
         public int SprintId { get; set; }
-        public string Name { get; set; }
+        public string Title { get; set; }
         public int Type { get; set; }
         public string Description { get; set; }
         public string AssignTo { get; set; }

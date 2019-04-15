@@ -9,17 +9,35 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <_PublishTargetUrl>C:\inetpub\wwwroot\HPDSystemWeb</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
+    <File Include="Areas/HPDUtility/Content/css/fastselect.css">
+      <publishTime>04/11/2019 10:24:10</publishTime>
+    </File>
+    <File Include="Areas/HPDUtility/Content/css/fastselect.min.css">
+      <publishTime>04/11/2019 11:31:37</publishTime>
+    </File>
+    <File Include="Areas/HPDUtility/Content/js/fastselect.js">
+      <publishTime>04/11/2019 10:24:25</publishTime>
+    </File>
+    <File Include="Areas/HPDUtility/Content/js/fastselect.min.js">
+      <publishTime>04/11/2019 10:24:25</publishTime>
+    </File>
+    <File Include="Areas/HPDUtility/Content/js/fastselect.standalone.js">
+      <publishTime>04/11/2019 10:24:25</publishTime>
+    </File>
+    <File Include="Areas/HPDUtility/Content/js/fastselect.standalone.min.js">
+      <publishTime>04/11/2019 10:24:25</publishTime>
+    </File>
     <File Include="Areas/HPDUtility/Content/js/Home/Index.js">
       <publishTime>03/25/2019 15:24:51</publishTime>
     </File>
     <File Include="Areas/HPDUtility/Views/Home/Index.cshtml">
-      <publishTime>04/04/2019 13:43:23</publishTime>
+      <publishTime>04/12/2019 12:01:50</publishTime>
     </File>
     <File Include="Areas/HPDUtility/Views/Project/Details.cshtml">
-      <publishTime>04/04/2019 16:01:38</publishTime>
+      <publishTime>04/11/2019 12:01:41</publishTime>
     </File>
     <File Include="Areas/HPDUtility/Views/Shared/_Layout.cshtml">
-      <publishTime>04/03/2019 09:05:51</publishTime>
+      <publishTime>04/11/2019 12:00:05</publishTime>
     </File>
     <File Include="Areas/HPDUtility/Views/web.config">
       <publishTime>03/26/2019 15:41:08</publishTime>
@@ -34,13 +52,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/26/2019 08:58:08</publishTime>
     </File>
     <File Include="bin/DAL.dll">
-      <publishTime>04/04/2019 11:28:55</publishTime>
+      <publishTime>04/11/2019 12:02:29</publishTime>
     </File>
     <File Include="bin/DAL.dll.config">
       <publishTime>04/04/2019 08:58:08</publishTime>
     </File>
     <File Include="bin/DAL.pdb">
-      <publishTime>04/04/2019 11:28:55</publishTime>
+      <publishTime>04/11/2019 12:02:29</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>10/23/2017 13:15:18</publishTime>
@@ -49,10 +67,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/23/2017 13:15:20</publishTime>
     </File>
     <File Include="bin/HPD.Web.dll">
-      <publishTime>04/04/2019 16:03:14</publishTime>
+      <publishTime>04/12/2019 12:01:14</publishTime>
     </File>
     <File Include="bin/HPD.Web.pdb">
-      <publishTime>04/04/2019 16:03:14</publishTime>
+      <publishTime>04/12/2019 12:01:14</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.TelemetryCorrelation.dll">
       <publishTime>03/26/2019 08:58:09</publishTime>
@@ -186,6 +204,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Content/bootstrap.min.css">
       <publishTime>03/14/2019 14:19:39</publishTime>
     </File>
+    <File Include="Content/css/Global/bootstrap-tagsinput.css">
+      <publishTime>04/10/2019 17:02:38</publishTime>
+    </File>
     <File Include="Content/css/Global/sb-admin-2.css">
       <publishTime>03/28/2019 09:20:32</publishTime>
     </File>
@@ -204,6 +225,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Content/image/Global/icon-image.png">
       <publishTime>03/25/2019 09:06:03</publishTime>
     </File>
+    <File Include="Content/js/Global/bootstrap-tagsinput.js">
+      <publishTime>04/10/2019 17:02:27</publishTime>
+    </File>
     <File Include="Content/js/Global/date.format.js">
       <publishTime>04/02/2019 12:57:40</publishTime>
     </File>
@@ -218,6 +242,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Content/js/Global/sb-admin.min.js">
       <publishTime>03/15/2019 09:07:49</publishTime>
+    </File>
+    <File Include="Content/js/Global/typeahead.bundle.js">
+      <publishTime>04/10/2019 17:02:46</publishTime>
     </File>
     <File Include="Content/scss/sb-admin.scss">
       <publishTime>03/15/2019 09:26:40</publishTime>
@@ -5410,7 +5437,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/26/2019 08:58:08</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>04/04/2019 16:03:15</publishTime>
+      <publishTime>04/12/2019 12:01:17</publishTime>
     </File>
   </ItemGroup>
 </Project>

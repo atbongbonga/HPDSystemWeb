@@ -5,7 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 using DAL.Logics;
-
+using System.IO;
+using DAL.Entities;
 
 namespace HPD.Web.Areas.HPDUtility.Controllers
 {
@@ -15,6 +16,11 @@ namespace HPD.Web.Areas.HPDUtility.Controllers
         public ActionResult Details(string ProgramName)
         {
             ViewBag.Message = ProgramName;
+            return View();
+        }
+        public ActionResult Sprint(int Id)
+        {
+            ViewBag.Message = Id;
             return View();
         }
         [HttpPost]
@@ -41,14 +47,25 @@ namespace HPD.Web.Areas.HPDUtility.Controllers
 
             return Json(JsonConvert.SerializeObject(model), JsonRequestBehavior.AllowGet);
         }
-        public ActionResult CreateProjectSprint(string path)
+        public ActionResult CreateProjectSprint(ProjectSprints ProjSprint)
         {
-            //var sprintTaskComponent = new SprintTaskComponent();
-            //var result = sprintTaskComponent.CreateProjectSprint(ProgramName);
-            //var model = result.ToList();
+            var sprintTaskComponent = new SprintTaskComponent();
+            var result = sprintTaskComponent.CreateProjectSprint(ProjSprint);
+            return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
 
-            return Json(JsonConvert.SerializeObject(path), JsonRequestBehavior.AllowGet);
-            
+        }
+
+        public ActionResult GetDeveloper()
+        {
+            var developerComponent = new DeveloperComponent();
+            var result = developerComponent.GetDevelopers();
+            return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GetSprintTask(int SprintId)
+        {
+            var sprintTaskComponent = new SprintTaskComponent();
+            var result = sprintTaskComponent.GetSprintTask(SprintId);
+            return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -20,5 +20,9 @@ namespace DAL.Models
         public string Reason { get; set; }
         public string Deleteby { get; set; }
         public Nullable<System.DateTime> DateDeleted { get; set; }
+        public string Stat { get; set; }
+        public Nullable<System.DateTime> AppDate { get; set; }
+        public string AppBy { get; set; }
+        public int DelID { get; set; }
     }
 }

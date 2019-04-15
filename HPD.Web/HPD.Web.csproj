@@ -153,16 +153,30 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\HPDUtility\Content\css\fastselect.css" />
+    <Content Include="Areas\HPDUtility\Content\css\fastselect.min.css" />
+    <Content Include="Areas\HPDUtility\Content\js\fastselect.js" />
+    <Content Include="Areas\HPDUtility\Content\js\fastselect.min.js" />
+    <Content Include="Areas\HPDUtility\Content\js\fastselect.standalone.js" />
+    <Content Include="Areas\HPDUtility\Content\js\fastselect.standalone.min.js" />
+    <Content Include="Content\js\Global\jquery-sortable.js" />
+    <Content Include="Content\js\Global\jquery-ui.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\Global\bootstrap-tagsinput.css" />
+    <Content Include="Content\css\Global\gijgo.min.css" />
+    <Content Include="Content\js\Global\bootstrap-tagsinput.js" />
     <Content Include="Content\css\Global\sb-admin-2.css" />
     <Content Include="Content\css\Global\sb-admin-2.min.css" />
     <Content Include="Content\js\Global\date.format.js" />
+    <Content Include="Content\js\Global\gijgo.min.js" />
+    <Content Include="Content\js\Global\jquery.form-validator.min.js" />
     <Content Include="Content\js\Global\sb-admin-2.js" />
     <Content Include="Content\js\Global\sb-admin-2.min.js" />
     <Content Include="Content\image\Global\hipre-logo.png" />
     <Content Include="Content\image\Global\icon-image.png" />
     <Content Include="Areas\HPDUtility\Content\js\Home\Index.js" />
+    <Content Include="Content\js\Global\typeahead.bundle.js" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\vendor\bootstrap\js\bootstrap.bundle.js" />
     <Content Include="Content\vendor\bootstrap\js\bootstrap.bundle.min.js" />
@@ -1883,6 +1897,7 @@
     <Content Include="Content\vendor\jquery\jquery.min.map" />
     <Content Include="Content\vendor\jquery\jquery.slim.min.map" />
     <Content Include="Areas\HPDUtility\Views\Project\Details.cshtml" />
+    <Content Include="Areas\HPDUtility\Views\Project\Sprint.cshtml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
@@ -1908,7 +1923,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\HPDUtility\Content\css\" />
     <Folder Include="Areas\HPDUtility\Content\image\" />
     <Folder Include="Areas\HPDUtility\Models\" />
   </ItemGroup>

@@ -50,6 +50,5 @@ namespace HPD.Web.Areas.HPDUtility.Controllers
             return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
         }
 
-        
     }
 }

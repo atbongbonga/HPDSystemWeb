@@ -261,7 +261,7 @@
                                             <h1 class="h3 mb-0 text-gray-800">Sprints</h1>
                                             <a href="#" class="d-sm-inline-block btn btn-success btn-circle shadow-sm" id="addNewSprint"><i class="fas fa-plus fa-sm"></i></a>
                                         </div>
-                                        <div class="row py-1" id="sprintCard">
+                                        <div class="row py-1" id="projectSprintTileContainer">
                                             
 
                                         </div>
@@ -358,36 +358,34 @@
                 <div class="modal-body">
                     <div class="container-fluid">
                         <div id="addNewSprintForm">
-                            <form class="user">
+                            <form class="user" id="formANS">
                                 <div class="form-group row">
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user input-sm" id="txtANSTitle" placeholder="Title">
+                                        <input type="text" class="form-control input-sm" id="txtANSTitle" required placeholder="Title" name="ANSTitle"  style="border-radius: 0 !important;">
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user input-sm" id="txtANSProgramName" placeholder="Program">
+                                        <input type="text" class="form-control input-sm" id="txtANSProgramName" disabled placeholder="Program"  style="border-radius: 0 !important;">
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control form-control-user input-sm" id="txtANSMember" placeholder="Member">
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-sm-6">
-                                        <input type="date" class="form-control form-control-user input-sm" id="txtANSPSDate" placeholder="Start Date">
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input type="date" class="form-control form-control-user input-sm" id="txtANSEDate" placeholder="End Date">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    @*<label for="txtANSBP">Upload Blueprint</label>
-                                    <input type="file" class="form-control form-control-user input-sm" id="txtANSBP" placeholder="Blue Print">*@
+                                    <div class="col-lg-12">
+                                        <select class="form-control input-sm multipleSelect" multiple name="Developer" id="msANSMember" placeholder="Member">
 
-                                    <div class="custom-file" id="customFile">
-                                        <input type="file" class="form-control form-control-user input-sm custom-file-input" id="txtANSBP" aria-describedby="fileHelp">
-                                        <label class="custom-file-label" for="txtANSBP">
-                                            Select Blueprint
-                                        </label>
+                                        </select>
                                     </div>
+                                    
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <input type="date" class="form-control input-sm" id="txtANSSDate" required placeholder="Start Date" style="border-radius: 0 !important;">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="date" class="form-control input-sm" id="txtANSEDate" required placeholder="End Date" style="border-radius: 0 !important;">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control input-sm" id="txtANSBP" required placeholder="Blue Print Path" style="border-radius: 0 !important;">
+                                   
                                 </div>
                             </form>
                         </div>
@@ -420,6 +418,19 @@
         $(document).ready(function () {
 
             var ProjectName = "@ViewBag.Message";
+
+            $('.multipleSelect').fastselect();
+
+            $.post("@Url.Action("GetDeveloper", "Project")", function (data) {
+                var devList = $('#msANSMember');
+                devList.empty();
+                data = JSON.parse(data);
+                $(data).each(function (index, dev) {
+                    devList.append(
+                        '<option value="' + dev.EmpCode + '">' + dev.EmpName + '</option>'
+                    );
+                });
+            });
 
             $("#bugTable").DataTable({
                 "processing": true, // for show progress bar
@@ -454,16 +465,18 @@
                 ]
             });
 
-            $.post("@Url.Action("GetProjectSprintList", "Project")", { ProgramName: ProjectName }, function (data) {
-                var sprintCard = $('#sprintCard');
+            var GetProjectSprintList = function () {
+
+                 $.post("@Url.Action("GetProjectSprintList", "Project")", { ProgramName: ProjectName }, function (data) {
+                     var sprintCard = $('#projectSprintTileContainer');
                 sprintCard.empty();
                 data = JSON.parse(data);
-                $(data).each(function (index, proj) {
+                $(data).each(function (index, sprint) {
                     sprintCard.append(
-                        '<div class="col-xl-3 col-md-6 mb-4">' +
+                        '<div class="col-xl-3 col-md-6 mb-4 projectSprintCard" data-id="'+ sprint.Id +'">' +
                         '<div class="card border-left-primary shadow h-100 py-2">' +
                         '<div class="card-header">' +
-                        '<h6 class="m-0 font-weight-bold text-primary">' + proj.Title + '</h6>' +
+                        '<h6 class="m-0 font-weight-bold text-primary">' + sprint.Title + '</h6>' +
                         '</div>' +
                         '<div class="card-body">' +
                         '<div class="row no-gutters align-items-center">' +
@@ -500,18 +513,49 @@
                     );
                 });
             });
+            };
 
+            GetProjectSprintList();
             $("#addNewSprint").on("click", function () {
-                addNewSprintModal
+
+                var mindate = new Date().toISOString().split('T')[0];
+                var currentDate = new Date().toISOString().slice(0, 10);
+
                 $('#addNewSprintModal').modal('toggle');
+                $("#txtANSProgramName").val("@ViewBag.Message");
+                $("#txtANSSDate").val(currentDate);
+                $("#txtANSSDate").attr('min', currentDate);
+                $("#txtANSEDate").val(currentDate);
+                $("#txtANSEDate").attr('min', currentDate);
 
             });
 
             $("#btnANSSave").on("click", function () {
-               var paths = $("#txtANSBP").val();
-               $.post("@Url.Action("CreateProjectSprint", "Project")", { path: paths }, function (data) {
-                   alert(data);
-                });
+                var programname = $("#txtANSProgramName").val();
+                var title = $("#txtANSTitle").val();
+                var member = $("#msANSMember").val();
+                var sdate = $("#txtANSSDate").val();
+                var edate = $("#txtANSEDate").val();
+                var bp = $("#txtANSBP").val();
+                if (programname == "" || title == "" || member == "" || bp == "") {
+                    alert("Invalid Information");
+                }
+                else
+                {
+                    $.post("@Url.Action("CreateProjectSprint", "Project")", { ProgramName: programname, Title: title, Member: member.toString(), StartDate: sdate, EndDate: edate, BP: bp}, function (data) {
+                        if (data) {
+                            $('#addNewSprintModal').modal('toggle');
+                            GetProjectSprintList();
+                        }
+                    });
+
+                }
+
+            });
+
+            $(document).on('click', '.projectSprintCard', function () {
+                sprintId = $(this).attr("data-id");
+                location.href = '@Url.Action("Sprint", "Project")?Id='+sprintId+'';
             });
 
 

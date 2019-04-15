@@ -12,7 +12,7 @@ namespace DAL.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class OCustod
+    public partial class PCfcustod
     {
         public string EmpID { get; set; }
         public string EmpName { get; set; }

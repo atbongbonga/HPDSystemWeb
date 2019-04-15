@@ -16,7 +16,7 @@ namespace DAL.Models
     {
         public int Id { get; set; }
         public string ProgramName { get; set; }
-        public string Name { get; set; }
+        public string Title { get; set; }
         public string Member { get; set; }
         public Nullable<System.DateTime> StartDate { get; set; }
         public Nullable<System.DateTime> EndDate { get; set; }
