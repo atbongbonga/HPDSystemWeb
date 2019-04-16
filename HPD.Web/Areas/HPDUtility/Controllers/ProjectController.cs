@@ -61,6 +61,25 @@ namespace HPD.Web.Areas.HPDUtility.Controllers
             var result = developerComponent.GetDevelopers();
             return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
         }
+        public ActionResult GetSprintDeveloper(int sprintId)
+        {
+            var developerComponent = new DeveloperComponent();
+            var result = developerComponent.GetSprintDeveloper(sprintId);
+            return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult CreateSprintTask(SprintTasks SprintTask)
+        {
+            var sprintTaskComponent = new SprintTaskComponent();
+            var result = sprintTaskComponent.CreateSrintTask(SprintTask);
+            return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult UpdateSprintTaskStatus(int taskId,int status)
+        {
+            var sprintTaskComponent = new SprintTaskComponent();
+            var result = sprintTaskComponent.UpdateSrintTaskStatus(taskId, status);
+            return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
+        }
         public ActionResult GetSprintTask(int SprintId)
         {
             var sprintTaskComponent = new SprintTaskComponent();

@@ -3,6 +3,22 @@
     Layout = "~/Areas/HPDUtility/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+    .placeholder {
+        background-color: transparent;
+        border: 1px dotted #666;
+        height: 100px;
+        margin-bottom: 5px;
+    }
+    .sortable-list {
+        list-style: none;
+    }
+    .dragbleList 
+    {
+        min-height: 150px
+    }
+
+</style>
 <!-- Page Wrapper -->
 <div id="wrapper">
 
@@ -249,9 +265,9 @@
                                     <li class="nav-item">
                                         <a class="active nav-link text-success" id="sprint-tab" data-toggle="tab" href="#sprinttab" role="tab" aria-controls="sprinttab" aria-selected="false">Tasks</a>
                                     </li>
-                                    <li class="nav-item">
+                                    @*<li class="nav-item">
                                         <a class="nav-link text-warning" id="bugs-tab" data-toggle="tab" href="#bugtab" role="tab" aria-controls="bugtab" aria-selected="true">Bugs</a>
-                                    </li>
+                                    </li>*@
 
                                 </ul>
                                 <div class="tab-content" id="myTabContent">
@@ -263,15 +279,44 @@
                                         </div>
                                         <div class="row py-1" id="sprintTaskTileContainer">
 
-                                            <div class="col-md-3 col-sm-3">
+                                            @*Sortable Div*@
+                                            <div class="col-md-3 col-sm-3" id="dragdrop">
                                                 <div class="card shadow mb-4">
                                                     <!-- Card Header - Dropdown -->
                                                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                                        <h6 class="m-0 font-weight-bold text-primary">Backlog</h6>
+                                                        <h6 class="m-0 font-weight-bold text-gray-900 text-uppercase">Backlog</h6>
 
                                                     </div><div class="card-body">
-                                                        <div class="row" id="card">
-                                                            <ul id="taskBacSortable" class="connectedSortable" style="list-style:none;">
+                                                        <div class="row dragbleList" id="card">
+                                                            <ul id="taskBacSortable" class="sortable-list ui-sortable" style="list-style:none;">
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3 col-sm-3" id="dragdrop">
+                                                <div class="card shadow mb-4">
+                                                    <!-- Card Header - Dropdown -->
+                                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                                        <h6 class="m-0 font-weight-bold text-gray-900 text-uppercase">Development</h6>
+                                                    </div><div class="card-body">
+                                                        <div class="row dragbleList" id="card">
+                                                            <ul id="taskDevSortable" class="sortable-list ui-sortable" style="list-style:none;">
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3 col-sm-3" id="dragdrop">
+                                                <div class="card shadow mb-4">
+                                                    <!-- Card Header - Dropdown -->
+                                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                                        <h6 class="m-0 font-weight-bold text-gray-900 text-uppercase">Testing</h6>
+                                                    </div><div class="card-body">
+                                                        <div class="row dragbleList" id="card">
+                                                            <ul id="taskTesSortable" class="sortable-list ui-sortable" style="list-style:none;">
                                                                 
                                                             </ul>
                                                         </div>
@@ -279,43 +324,14 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-3 col-sm-3">
+                                            <div class="col-md-3 col-sm-3" id="dragdrop">
                                                 <div class="card shadow mb-4">
                                                     <!-- Card Header - Dropdown -->
                                                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                                        <h6 class="m-0 font-weight-bold text-primary">Develop</h6>
+                                                        <h6 class="m-0 font-weight-bold text-gray-900 text-uppercase">Deployed</h6>
                                                     </div><div class="card-body">
-                                                        <div class="row" id="card">
-                                                            <ul id="taskDevSortable" class="connectedSortable" style="list-style:none;">
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-3 col-sm-3">
-                                                <div class="card shadow mb-4">
-                                                    <!-- Card Header - Dropdown -->
-                                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                                        <h6 class="m-0 font-weight-bold text-primary">Test</h6>
-                                                    </div><div class="card-body">
-                                                        <div class="row" id="card">
-                                                            <ul id="taskTesSortable" class="connectedSortable" style="list-style:none;">
-                                                                
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-3 col-sm-3">
-                                                <div class="card shadow mb-4">
-                                                    <!-- Card Header - Dropdown -->
-                                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                                        <h6 class="m-0 font-weight-bold text-primary">Deploy</h6>
-                                                    </div><div class="card-body">
-                                                        <div class="row" id="card">
-                                                            <ul id="taskDepSortable" class="connectedSortable" style="list-style:none;">
+                                                        <div class="row dragbleList" id="card">
+                                                            <ul id="taskDepSortable" class="sortable-list ui-sortable" style="list-style:none;">
                                                                 
                                                             </ul>
                                                         </div>
@@ -325,10 +341,10 @@
 
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade py-1" id="bugtab" role="tabpanel" aria-labelledby="bugs-tab">
+                                    @*<div class="tab-pane fade py-1" id="bugtab" role="tabpanel" aria-labelledby="bugs-tab">
                                         <div class="d-sm-flex align-items-center justify-content-between mb-4 py-1">
                                             <h1 class="h3 mb-0 text-gray-800">Bug Reports</h1>
-                                            @*<a href="#" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i>Add New Task</a>*@
+                                            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i>Add New Task</a>
                                         </div>
                                         <div class="row">
                                             <div class="card-body">
@@ -351,7 +367,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>*@
 
                                 </div>
                             </div>
@@ -438,8 +454,7 @@
                                 <div class="form-group row">
                                     <div class="col-sm-6">
                                         <select class="form-control input-sm" id="msANSTAss" placeholder="Assignment" name="Assignment" style="border-radius: 0 !important;">
-                                            <option value="0">Bong</option>
-                                            <option value="1">Dom</option>
+
                                         </select>
                                     </div>
                                     <div class="col-sm-6">
@@ -490,15 +505,17 @@
                     <form class="user">
                         <div class="form-group row">
                             <div class="col-sm-6">
-                                <a href="#" class="btn btn-primary btn-circle" id="btnANSSave">
-                                    <i class="fas fa-save"></i>
+                                <a href="#" class="btn btn-primary" id="btnANSTSave">
+                                    Save
+                                    @*<i class="fas fa-save"></i>*@
                                 </a>
                             </div>
-                            <div class="col-sm-6">
+                            @*<div class="col-sm-6">
                                 <a href="#" class="btn btn-danger btn-circle">
+                                    Cancel
                                     <i class="fas fa-trash"></i>
                                 </a>
-                            </div>
+                            </div>*@
                         </div>
                     </form>
                 </div>
@@ -517,54 +534,86 @@
             var GetSprintTaskList = function () {
 
                 $.post("@Url.Action("GetSprintTask", "Project")", { SprintId: sprintId }, function (data) {
-                data = JSON.parse(data);
+                    data = JSON.parse(data);
+                    var BactaskCard = $('#taskBacSortable');
+                    BactaskCard.empty();
+                    var DevtaskCard = $('#taskDevSortable');
+                    DevtaskCard.empty();
+                    var TestaskCard = $('#taskTesSortable');
+                    TestaskCard.empty();
+                    var DeptaskCard = $('#taskDepSortable');
+                    DeptaskCard.empty();
                 $(data).each(function (index, task) {
                     if (task.Status === 1)
                     {
-                        var backlogtaskCard = $('#taskBacSortable');
-                        backlogtaskCard.empty();
-                        backlogtaskCard.append(
-                            '<li class="ui-state-default">' +
-                            '<div class="card mb-4 py-3 border-left-warning">' +
-                            '<div class="card-body">' + task.Title + '</div>' +
+                        BactaskCard.append(
+                            '<li class="sortable-item" id="' + task.Id + '">' +
+                            (task.Type === 1 ? '<div class="card mb-4 py-3 border-left-info sprintTaskCard" >' : '<div class="card mb-4 py-3 border-left-danger sprintTaskCard" >') +
+                            //'<div class="card mb-4 py-3 border-left-primary sprintTaskCard" >' +
+                            '<div class="card-body row">' +
+                            '<div class="col-auto">' +
+                            (task.Type === 1 ? '<i class="fas fa-clipboard-list fa-2x text-info text-sm"></i>' : '<i class="fas fa-bug fa-2x text-danger text-sm"></i>') +
+                            '</div>' +
+                            '<div clas="col mr-2">' +
+                            '<div class="text-xs font-weight-bold text-uppercase mb-1">' + task.Title + '</div>' +
+                            '</div > ' +
+                            '</div > ' +
                             '</div>' +
                             '</li>'
                         );
                     }
                     else if (task.Status === 2) {
-                        var backlogtaskCard = $('#taskDevSortable');
-                        backlogtaskCard.empty();
-                        backlogtaskCard.append(
-                            '<li class="ui-state-default">' +
-                            '<div class="card mb-4 py-3 border-left-warning">' +
-                            '<div class="card-body">' + task.Title + '</div>' +
+                        DevtaskCard.append(
+                            '<li class="sortable-item" id="' + task.Id + '">' +
+                            (task.Type === 1 ? '<div class="card mb-4 py-3 border-left-info sprintTaskCard" >' : '<div class="card mb-4 py-3 border-left-danger sprintTaskCard" >') +
+                            //'<div class="card mb-4 py-3 border-left-primary sprintTaskCard" >' +
+                            '<div class="card-body row">' +
+                            '<div class="col-auto">' +
+                            (task.Type === 1 ? '<i class="fas fa-clipboard-list fa-2x text-info text-sm"></i>' : '<i class="fas fa-bug fa-2x text-danger text-sm"></i>') +
+                            '</div>' +
+                            '<div clas="col mr-2">' +
+                            '<div class="text-xs font-weight-bold text-uppercase mb-1">' + task.Title + '</div>' +
+                            '</div > ' +
+                            '</div > ' +
                             '</div>' +
                             '</li>'
                         );
                     }
                     else if (task.Status === 3) {
-                        var backlogtaskCard = $('#taskTesSortable');
-                        backlogtaskCard.empty();
-                        backlogtaskCard.append(
-                            '<li class="ui-state-default">' +
-                            '<div class="card mb-4 py-3 border-left-warning">' +
-                            '<div class="card-body">' + task.Title + '</div>' +
+                        TestaskCard.append(
+                            '<li class="sortable-item" id="' + task.Id + '">' +
+                            (task.Type === 1 ? '<div class="card mb-4 py-3 border-left-info sprintTaskCard" >' : '<div class="card mb-4 py-3 border-left-danger sprintTaskCard" >') +
+                            //'<div class="card mb-4 py-3 border-left-primary sprintTaskCard" >' +
+                            '<div class="card-body row">' +
+                            '<div class="col-auto">' +
+                            (task.Type === 1 ? '<i class="fas fa-clipboard-list fa-2x text-info text-sm"></i>' : '<i class="fas fa-bug fa-2x text-danger text-sm"></i>') +
+                            '</div>' +
+                            '<div clas="col mr-2">' +
+                            '<div class="text-xs font-weight-bold text-uppercase mb-1">' + task.Title + '</div>' +
+                            '</div > ' +
+                            '</div > ' +
                             '</div>' +
                             '</li>'
                         );
                     }
                     else if (task.Status === 4) {
-                        var backlogtaskCard = $('#taskDepSortable');
-                        backlogtaskCard.empty();
-                        backlogtaskCard.append(
-                            '<li class="ui-state-default">' +
-                            '<div class="card mb-4 py-3 border-left-warning">' +
-                            '<div class="card-body">' + task.Title + '</div>' +
+                        DeptaskCard.append(
+                            '<li class="sortable-item" id="' + task.Id + '">' +
+                            (task.Type === 1 ? '<div class="card mb-4 py-3 border-left-info sprintTaskCard" >' : '<div class="card mb-4 py-3 border-left-danger sprintTaskCard" >') +
+                            //'<div class="card mb-4 py-3 border-left-primary sprintTaskCard" >' +
+                            '<div class="card-body row">' +
+                            '<div class="col-auto">' +
+                            (task.Type === 1 ? '<i class="fas fa-clipboard-list fa-2x text-info text-sm"></i>' : '<i class="fas fa-bug fa-2x text-danger text-sm"></i>') +
+                            '</div>' +
+                            '<div clas="col mr-2">' +
+                            '<div class="text-xs font-weight-bold text-uppercase mb-1">' + task.Title + '</div>' +
+                            '</div > ' +
+                            '</div > ' +
                             '</div>' +
                             '</li>'
                         );
                     }
-                    
+
                 });
                 });
             };
@@ -580,9 +629,63 @@
                 iconsLibrary: 'fontawesome',
             });
 
-            $("#taskBacSortable, #taskDevSortable, #taskTesSortable, #taskDepSortable").sortable({
-                connectWith: ".connectedSortable"
-            }).disableSelection();
+            $.post("@Url.Action("GetSprintDeveloper", "Project")", { sprintId: sprintId },function (data) {
+                var devList = $('#msANSTAss');
+                devList.empty();
+                data = JSON.parse(data);
+                $(data).each(function (index, dev) {
+                    devList.append(
+                        '<option value="' + dev.EmpCode + '">' + dev.EmpName + '</option>'
+                    );
+                });
+            });
+
+            //$("#taskBacSortable, #taskDevSortable, #taskTesSortable, #taskDepSortable").sortable({
+            //    connectWith: ".connectedSortable"
+            //}).disableSelection();
+
+            $("#btnANSTSave").on("click", function () {
+                var sprintId = sprintId();
+                var title = $("#txtANSTTitle").val();
+
+                if (title == "") {
+                    alert("Invalid Information");
+                }
+                else
+                {
+                    $.post("@Url.Action("CreateSprintTask", "Project")", { Id: sprintId, Title: title, Member: member.toString(), StartDate: sdate, EndDate: edate, BP: bp}, function (data) {
+                        if (data) {
+                            $('#addNewSprintModal').modal('toggle');
+                            GetProjectSprintList();
+                        }
+                    });
+
+                }
+
+            });
+
+            $('#sprintTaskTileContainer .sortable-list').sortable({
+                connectWith: '#sprintTaskTileContainer .sortable-list',
+                placeholder: 'placeholder',
+                receive: function (event, ui) {
+                    var basketID = event.target.id;
+                    var itemID = ui.item[0].id;
+                    if (basketID == "taskBacSortable") {
+                        $.post("@Url.Action("UpdateSprintTaskStatus", "Project")", { taskId: itemID, status: 1 }, function (data) {
+                        });
+                    } else if (basketID == "taskDevSortable") {
+                        $.post("@Url.Action("UpdateSprintTaskStatus", "Project")", { taskId: itemID, status: 2 }, function (data) {
+                        });
+                    } else if (basketID == "taskTesSortable") {
+                        $.post("@Url.Action("UpdateSprintTaskStatus", "Project")", { taskId: itemID, status: 3 }, function (data) {
+                        });
+                    } else if (basketID == "taskDepSortable") {
+                        $.post("@Url.Action("UpdateSprintTaskStatus", "Project")", { taskId: itemID, status: 4 }, function (data) {
+                        });
+                    }
+                }
+
+            });
 
 
         });

@@ -70,6 +70,49 @@ namespace DAL.Logics
             return true;
         }
 
+
+        public bool CreateSrintTask(SprintTasks SprintTask)
+        {
+            using (HPCOMMONEntities db = new HPCOMMONEntities())
+            {
+                var setting = new Settings();
+                var addprinttask = new SprintTask
+                {
+                    SprintId = SprintTask.SprintId,
+                    Title = SprintTask.Title,
+                    Type = SprintTask.Type,
+                    Description = SprintTask.Description,
+                    AssignTo = SprintTask.AssignTo,
+                    OriHr = SprintTask.OriHr,
+                    RemHr = SprintTask.RemHr,
+                    ComHr = SprintTask.ComHr,
+                    Status = Convert.ToInt32(Enums.TaskStatus.New),
+                    Priority = SprintTask.Priority,
+                    Activity = SprintTask.Activity,
+                    CreatedBy = setting.UserIP,
+                    CreatedDate = DateTime.UtcNow
+                };
+                db.SprintTasks.Add(addprinttask);
+                db.SaveChanges();
+
+            }
+            return true;
+        }
+
+        public bool UpdateSrintTaskStatus(int taskId, int status)
+        {
+            using (HPCOMMONEntities db = new HPCOMMONEntities())
+            {
+                var gettask = db.SprintTasks.SingleOrDefault(i => i.Id == taskId);
+                if (gettask != null)
+                {
+                    gettask.Status = status;
+                    db.SaveChanges();
+                }
+
+            }
+            return true;
+        }
         public List<SprintTasks> GetSprintTask(int SprintId)
         {
             var model = new List<SprintTasks>();
@@ -94,6 +137,7 @@ namespace DAL.Logics
                         {
                             Id = Convert.ToInt32(dr["Id"]),
                             Title = Convert.ToString(dr["Title"]),
+                            Type = Convert.ToInt32(dr["Type"]),
                             Status = Convert.ToInt32(dr["Status"])
                         });
                     };
