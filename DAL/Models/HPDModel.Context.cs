@@ -25,6 +25,11 @@ namespace DAL.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<captured_columns> captured_columns { get; set; }
+        public virtual DbSet<change_tables> change_tables { get; set; }
+        public virtual DbSet<ddl_history> ddl_history { get; set; }
+        public virtual DbSet<index_columns> index_columns { get; set; }
+        public virtual DbSet<lsn_time_mapping> lsn_time_mapping { get; set; }
         public virtual DbSet<AccAdmin> AccAdmins { get; set; }
         public virtual DbSet<AcctngALUL> AcctngALULs { get; set; }
         public virtual DbSet<AcsLvl> AcsLvls { get; set; }
@@ -50,6 +55,9 @@ namespace DAL.Models
         public virtual DbSet<AppOtherQ> AppOtherQs { get; set; }
         public virtual DbSet<AppSiteLog> AppSiteLogs { get; set; }
         public virtual DbSet<Archive> Archives { get; set; }
+        public virtual DbSet<ard_DOut> ard_DOut { get; set; }
+        public virtual DbSet<ard_HOut> ard_HOut { get; set; }
+        public virtual DbSet<ard_im> ard_im { get; set; }
         public virtual DbSet<AREA> AREAs { get; set; }
         public virtual DbSet<ASSADMIN> ASSADMINs { get; set; }
         public virtual DbSet<AuditBoxRecord> AuditBoxRecords { get; set; }
@@ -665,6 +673,7 @@ namespace DAL.Models
         public virtual DbSet<EmpSrvItem> EmpSrvItems { get; set; }
         public virtual DbSet<EmpSrvReq_20181012> EmpSrvReq_20181012 { get; set; }
         public virtual DbSet<EmpSrvReq_20181017> EmpSrvReq_20181017 { get; set; }
+        public virtual DbSet<EmpSrvReqBk> EmpSrvReqBks { get; set; }
         public virtual DbSet<EmpSrvReqLog> EmpSrvReqLogs { get; set; }
         public virtual DbSet<EmpSrvReqMaintenance> EmpSrvReqMaintenances { get; set; }
         public virtual DbSet<EmpTrainApp> EmpTrainApps { get; set; }

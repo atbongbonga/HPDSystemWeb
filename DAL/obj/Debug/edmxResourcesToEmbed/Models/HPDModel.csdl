@@ -1,5 +1,67 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="HPCOMMONModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="captured_columns">
+    <Key>
+      <PropertyRef Name="object_id" />
+      <PropertyRef Name="column_ordinal" />
+    </Key>
+    <Property Name="object_id" Type="Int32" Nullable="false" />
+    <Property Name="column_name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="column_id" Type="Int32" />
+    <Property Name="column_type" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="column_ordinal" Type="Int32" Nullable="false" />
+    <Property Name="is_computed" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="change_tables">
+    <Key>
+      <PropertyRef Name="object_id" />
+    </Key>
+    <Property Name="object_id" Type="Int32" Nullable="false" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="source_object_id" Type="Int32" />
+    <Property Name="capture_instance" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="start_lsn" Type="Binary" MaxLength="10" FixedLength="true" />
+    <Property Name="end_lsn" Type="Binary" MaxLength="10" FixedLength="true" />
+    <Property Name="supports_net_changes" Type="Boolean" />
+    <Property Name="has_drop_pending" Type="Boolean" />
+    <Property Name="role_name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="index_name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="filegroup_name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="partition_switch" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ddl_history">
+    <Key>
+      <PropertyRef Name="object_id" />
+      <PropertyRef Name="ddl_lsn" />
+    </Key>
+    <Property Name="source_object_id" Type="Int32" />
+    <Property Name="object_id" Type="Int32" Nullable="false" />
+    <Property Name="required_column_update" Type="Boolean" />
+    <Property Name="ddl_command" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ddl_lsn" Type="Binary" MaxLength="10" FixedLength="true" Nullable="false" />
+    <Property Name="ddl_time" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="index_columns">
+    <Key>
+      <PropertyRef Name="object_id" />
+      <PropertyRef Name="index_ordinal" />
+    </Key>
+    <Property Name="object_id" Type="Int32" Nullable="false" />
+    <Property Name="column_name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="index_ordinal" Type="Byte" Nullable="false" />
+    <Property Name="column_id" Type="Int32" />
+  </EntityType>
+  <EntityType Name="lsn_time_mapping">
+    <Key>
+      <PropertyRef Name="start_lsn" />
+    </Key>
+    <Property Name="start_lsn" Type="Binary" MaxLength="10" FixedLength="true" Nullable="false" />
+    <Property Name="tran_begin_time" Type="DateTime" Precision="3" />
+    <Property Name="tran_end_time" Type="DateTime" Precision="3" />
+    <Property Name="tran_id" Type="Binary" MaxLength="10" FixedLength="false" />
+    <Property Name="tran_begin_lsn" Type="Binary" MaxLength="10" FixedLength="true" />
+  </EntityType>
   <EntityType Name="AccAdmin">
     <Key>
       <PropertyRef Name="EmpCode" />
@@ -440,6 +502,35 @@
     <Property Name="Stat" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="OtherAcct" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
     <Property Name="remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ard_DOut">
+    <Key>
+      <PropertyRef Name="DocEntry" />
+      <PropertyRef Name="LinNum" />
+    </Key>
+    <Property Name="DocEntry" Type="Int32" Nullable="false" />
+    <Property Name="LinNum" Type="Int32" Nullable="false" />
+    <Property Name="Itemcode" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="ItemDesc" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Qty" Type="Int32" />
+    <Property Name="Unit" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="ard_HOut">
+    <Key>
+      <PropertyRef Name="DocEntry" />
+    </Key>
+    <Property Name="DocEntry" Type="Int32" Nullable="false" />
+    <Property Name="DocDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="ard_im">
+    <Key>
+      <PropertyRef Name="Itemcode" />
+    </Key>
+    <Property Name="Itemcode" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ItemDesc" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="DateCreated" Type="DateTime" Precision="3" />
+    <Property Name="DateModified" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="AREA">
     <Key>
@@ -1103,13 +1194,13 @@
   <EntityType Name="CMTTBL">
     <Key>
       <PropertyRef Name="DOCENTRY" />
-      <PropertyRef Name="FE_CODE" />
-      <PropertyRef Name="FE_DESC" />
+      <PropertyRef Name="CMT_TYPE" />
+      <PropertyRef Name="CMT_CODE" />
     </Key>
     <Property Name="DOCENTRY" Type="Int32" Nullable="false" />
-    <Property Name="FE_CODE" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="FE_DESC" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="FE_STRING" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+    <Property Name="CMT_TYPE" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CMT_CODE" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CMT_DESC" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
     <Property Name="DATE_DONE" Type="DateTime" Precision="3" />
     <Property Name="STATUS_CREATED" Type="Boolean" />
   </EntityType>
@@ -6728,9 +6819,9 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="SprintId" Type="Int32" />
-    <Property Name="Title" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Type" Type="Int32" />
-    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
     <Property Name="AssignTo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="OriHr" Type="Decimal" Precision="2" Scale="1" />
     <Property Name="RemHr" Type="Decimal" Precision="2" Scale="1" />
@@ -10887,6 +10978,36 @@
     <Property Name="CutOff" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
     <Property Name="Destination" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="SDForm" Type="Int32" />
+  </EntityType>
+  <EntityType Name="EmpSrvReqBk">
+    <Key>
+      <PropertyRef Name="DocEntry" />
+      <PropertyRef Name="EmpCode" />
+      <PropertyRef Name="ItemCode" />
+      <PropertyRef Name="ItemPrice" />
+      <PropertyRef Name="Remarks" />
+      <PropertyRef Name="Stat" />
+    </Key>
+    <Property Name="DocEntry" Type="Int32" Nullable="false" />
+    <Property Name="DocDate" Type="DateTime" Precision="0" />
+    <Property Name="EmpCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ItemCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ItemPrice" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Qty" Type="Int32" />
+    <Property Name="SQty" Type="Int32" />
+    <Property Name="SEE" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="SAmt" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="TotalAmt" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="QtyIssue" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ReqType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Size" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Stat" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="BaseEntry" Type="Int32" />
+    <Property Name="CutOff" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Destination" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="SDForm" Type="Int32" />
+    <Property Name="Color" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="EmpSrvReqLog">
     <Key>
@@ -18027,6 +18148,11 @@
     <Property Name="ErrLog" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
   </EntityType>
   <EntityContainer Name="HPCOMMONEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="captured_columns" EntityType="Self.captured_columns" />
+    <EntitySet Name="change_tables" EntityType="Self.change_tables" />
+    <EntitySet Name="ddl_history" EntityType="Self.ddl_history" />
+    <EntitySet Name="index_columns" EntityType="Self.index_columns" />
+    <EntitySet Name="lsn_time_mapping" EntityType="Self.lsn_time_mapping" />
     <EntitySet Name="AccAdmins" EntityType="Self.AccAdmin" />
     <EntitySet Name="AcctngALULs" EntityType="Self.AcctngALUL" />
     <EntitySet Name="AcsLvls" EntityType="Self.AcsLvl" />
@@ -18052,6 +18178,9 @@
     <EntitySet Name="AppOtherQs" EntityType="Self.AppOtherQ" />
     <EntitySet Name="AppSiteLogs" EntityType="Self.AppSiteLog" />
     <EntitySet Name="Archives" EntityType="Self.Archive" />
+    <EntitySet Name="ard_DOut" EntityType="Self.ard_DOut" />
+    <EntitySet Name="ard_HOut" EntityType="Self.ard_HOut" />
+    <EntitySet Name="ard_im" EntityType="Self.ard_im" />
     <EntitySet Name="AREAs" EntityType="Self.AREA" />
     <EntitySet Name="ASSADMINs" EntityType="Self.ASSADMIN" />
     <EntitySet Name="AuditBoxRecords" EntityType="Self.AuditBoxRecord" />
@@ -18667,6 +18796,7 @@
     <EntitySet Name="EmpSrvItems" EntityType="Self.EmpSrvItem" />
     <EntitySet Name="EmpSrvReq_20181012" EntityType="Self.EmpSrvReq_20181012" />
     <EntitySet Name="EmpSrvReq_20181017" EntityType="Self.EmpSrvReq_20181017" />
+    <EntitySet Name="EmpSrvReqBks" EntityType="Self.EmpSrvReqBk" />
     <EntitySet Name="EmpSrvReqLogs" EntityType="Self.EmpSrvReqLog" />
     <EntitySet Name="EmpSrvReqMaintenances" EntityType="Self.EmpSrvReqMaintenance" />
     <EntitySet Name="EmpTrainApps" EntityType="Self.EmpTrainApp" />

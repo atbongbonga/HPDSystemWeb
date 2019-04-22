@@ -1,6 +1,70 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="HPCOMMONModelStoreContainer" CdmEntityContainer="HPCOMMONEntities">
+    <EntitySetMapping Name="captured_columns">
+      <EntityTypeMapping TypeName="HPCOMMONModel.captured_columns">
+        <MappingFragment StoreEntitySet="captured_columns">
+          <ScalarProperty Name="object_id" ColumnName="object_id" />
+          <ScalarProperty Name="column_name" ColumnName="column_name" />
+          <ScalarProperty Name="column_id" ColumnName="column_id" />
+          <ScalarProperty Name="column_type" ColumnName="column_type" />
+          <ScalarProperty Name="column_ordinal" ColumnName="column_ordinal" />
+          <ScalarProperty Name="is_computed" ColumnName="is_computed" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="change_tables">
+      <EntityTypeMapping TypeName="HPCOMMONModel.change_tables">
+        <MappingFragment StoreEntitySet="change_tables">
+          <ScalarProperty Name="object_id" ColumnName="object_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="source_object_id" ColumnName="source_object_id" />
+          <ScalarProperty Name="capture_instance" ColumnName="capture_instance" />
+          <ScalarProperty Name="start_lsn" ColumnName="start_lsn" />
+          <ScalarProperty Name="end_lsn" ColumnName="end_lsn" />
+          <ScalarProperty Name="supports_net_changes" ColumnName="supports_net_changes" />
+          <ScalarProperty Name="has_drop_pending" ColumnName="has_drop_pending" />
+          <ScalarProperty Name="role_name" ColumnName="role_name" />
+          <ScalarProperty Name="index_name" ColumnName="index_name" />
+          <ScalarProperty Name="filegroup_name" ColumnName="filegroup_name" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="partition_switch" ColumnName="partition_switch" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ddl_history">
+      <EntityTypeMapping TypeName="HPCOMMONModel.ddl_history">
+        <MappingFragment StoreEntitySet="ddl_history">
+          <ScalarProperty Name="source_object_id" ColumnName="source_object_id" />
+          <ScalarProperty Name="object_id" ColumnName="object_id" />
+          <ScalarProperty Name="required_column_update" ColumnName="required_column_update" />
+          <ScalarProperty Name="ddl_command" ColumnName="ddl_command" />
+          <ScalarProperty Name="ddl_lsn" ColumnName="ddl_lsn" />
+          <ScalarProperty Name="ddl_time" ColumnName="ddl_time" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="index_columns">
+      <EntityTypeMapping TypeName="HPCOMMONModel.index_columns">
+        <MappingFragment StoreEntitySet="index_columns">
+          <ScalarProperty Name="object_id" ColumnName="object_id" />
+          <ScalarProperty Name="column_name" ColumnName="column_name" />
+          <ScalarProperty Name="index_ordinal" ColumnName="index_ordinal" />
+          <ScalarProperty Name="column_id" ColumnName="column_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="lsn_time_mapping">
+      <EntityTypeMapping TypeName="HPCOMMONModel.lsn_time_mapping">
+        <MappingFragment StoreEntitySet="lsn_time_mapping">
+          <ScalarProperty Name="start_lsn" ColumnName="start_lsn" />
+          <ScalarProperty Name="tran_begin_time" ColumnName="tran_begin_time" />
+          <ScalarProperty Name="tran_end_time" ColumnName="tran_end_time" />
+          <ScalarProperty Name="tran_id" ColumnName="tran_id" />
+          <ScalarProperty Name="tran_begin_lsn" ColumnName="tran_begin_lsn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="AccAdmins">
       <EntityTypeMapping TypeName="HPCOMMONModel.AccAdmin">
         <MappingFragment StoreEntitySet="AccAdmin">
@@ -452,6 +516,37 @@
           <ScalarProperty Name="Stat" ColumnName="Stat" />
           <ScalarProperty Name="OtherAcct" ColumnName="OtherAcct" />
           <ScalarProperty Name="remarks" ColumnName="remarks" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ard_DOut">
+      <EntityTypeMapping TypeName="HPCOMMONModel.ard_DOut">
+        <MappingFragment StoreEntitySet="ard_DOut">
+          <ScalarProperty Name="DocEntry" ColumnName="DocEntry" />
+          <ScalarProperty Name="LinNum" ColumnName="LinNum" />
+          <ScalarProperty Name="Itemcode" ColumnName="Itemcode" />
+          <ScalarProperty Name="ItemDesc" ColumnName="ItemDesc" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ard_HOut">
+      <EntityTypeMapping TypeName="HPCOMMONModel.ard_HOut">
+        <MappingFragment StoreEntitySet="ard_HOut">
+          <ScalarProperty Name="DocEntry" ColumnName="DocEntry" />
+          <ScalarProperty Name="DocDate" ColumnName="DocDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ard_im">
+      <EntityTypeMapping TypeName="HPCOMMONModel.ard_im">
+        <MappingFragment StoreEntitySet="ard_im">
+          <ScalarProperty Name="Itemcode" ColumnName="Itemcode" />
+          <ScalarProperty Name="ItemDesc" ColumnName="ItemDesc" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1114,9 +1209,9 @@
       <EntityTypeMapping TypeName="HPCOMMONModel.CMTTBL">
         <MappingFragment StoreEntitySet="CMTTBL">
           <ScalarProperty Name="DOCENTRY" ColumnName="DOCENTRY" />
-          <ScalarProperty Name="FE_CODE" ColumnName="FE_CODE" />
-          <ScalarProperty Name="FE_DESC" ColumnName="FE_DESC" />
-          <ScalarProperty Name="FE_STRING" ColumnName="FE_STRING" />
+          <ScalarProperty Name="CMT_TYPE" ColumnName="CMT_TYPE" />
+          <ScalarProperty Name="CMT_CODE" ColumnName="CMT_CODE" />
+          <ScalarProperty Name="CMT_DESC" ColumnName="CMT_DESC" />
           <ScalarProperty Name="DATE_DONE" ColumnName="DATE_DONE" />
           <ScalarProperty Name="STATUS_CREATED" ColumnName="STATUS_CREATED" />
         </MappingFragment>
@@ -10821,6 +10916,32 @@
           <ScalarProperty Name="CutOff" ColumnName="CutOff" />
           <ScalarProperty Name="Destination" ColumnName="Destination" />
           <ScalarProperty Name="SDForm" ColumnName="SDForm" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmpSrvReqBks">
+      <EntityTypeMapping TypeName="HPCOMMONModel.EmpSrvReqBk">
+        <MappingFragment StoreEntitySet="EmpSrvReqBk">
+          <ScalarProperty Name="DocEntry" ColumnName="DocEntry" />
+          <ScalarProperty Name="DocDate" ColumnName="DocDate" />
+          <ScalarProperty Name="EmpCode" ColumnName="EmpCode" />
+          <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
+          <ScalarProperty Name="ItemPrice" ColumnName="ItemPrice" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="SQty" ColumnName="SQty" />
+          <ScalarProperty Name="SEE" ColumnName="SEE" />
+          <ScalarProperty Name="SAmt" ColumnName="SAmt" />
+          <ScalarProperty Name="TotalAmt" ColumnName="TotalAmt" />
+          <ScalarProperty Name="QtyIssue" ColumnName="QtyIssue" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="ReqType" ColumnName="ReqType" />
+          <ScalarProperty Name="Size" ColumnName="Size" />
+          <ScalarProperty Name="Stat" ColumnName="Stat" />
+          <ScalarProperty Name="BaseEntry" ColumnName="BaseEntry" />
+          <ScalarProperty Name="CutOff" ColumnName="CutOff" />
+          <ScalarProperty Name="Destination" ColumnName="Destination" />
+          <ScalarProperty Name="SDForm" ColumnName="SDForm" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

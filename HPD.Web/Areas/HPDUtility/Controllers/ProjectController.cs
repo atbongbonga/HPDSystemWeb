@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using DAL.Logics;
 using System.IO;
 using DAL.Entities;
+using System.Net;
 
 namespace HPD.Web.Areas.HPDUtility.Controllers
 {
@@ -70,20 +71,28 @@ namespace HPD.Web.Areas.HPDUtility.Controllers
 
         public ActionResult CreateSprintTask(SprintTasks SprintTask)
         {
+
+            SprintTask.Description = SprintTask.Description != null ? WebUtility.HtmlDecode(SprintTask.Description) : null;
             var sprintTaskComponent = new SprintTaskComponent();
             var result = sprintTaskComponent.CreateSrintTask(SprintTask);
             return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
         }
-        public ActionResult UpdateSprintTaskStatus(int taskId,int status)
+        public ActionResult UpdateSprintTaskStatus(int taskId,int act)
         {
             var sprintTaskComponent = new SprintTaskComponent();
-            var result = sprintTaskComponent.UpdateSrintTaskStatus(taskId, status);
+            var result = sprintTaskComponent.UpdateSrintTaskStatus(taskId, act);
             return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
         }
         public ActionResult GetSprintTask(int SprintId)
         {
             var sprintTaskComponent = new SprintTaskComponent();
             var result = sprintTaskComponent.GetSprintTask(SprintId);
+            return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GetTaskDetails(int taskId)
+        {
+            var sprintTaskComponent = new SprintTaskComponent();
+            var result = sprintTaskComponent.GetTaskDetails(taskId);
             return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
         }
     }

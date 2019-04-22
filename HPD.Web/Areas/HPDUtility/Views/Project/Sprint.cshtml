@@ -274,7 +274,7 @@
 
                                     <div class="show active tab-pane fade py-1" id="sprinttab" role="tabpanel" aria-labelledby="sprint-tab">
                                         <div class="d-sm-flex align-items-center justify-content-between mb-4 py-1">
-                                            <h1 class="h3 mb-0 text-gray-800">Tasks</h1>
+                                            <h1 class="h3 mb-0 text-white">Tasks</h1>
                                             <a href="#" class="d-sm-inline-block btn btn-success btn-circle shadow-sm" id="addNewSprintTask"><i class="fas fa-plus fa-sm"></i></a>
                                         </div>
                                         <div class="row py-1" id="sprintTaskTileContainer">
@@ -433,48 +433,60 @@
                 <div class="modal-body">
                     <div class="container-fluid">
                         <div id="addNewSprintForm">
-                            <form class="user" id="formANS">
+                            <form class="user" id="formANST">
                                 <div class="form-group row">
                                     <div class="col-sm-6">
+                                        <label for="txtANSTTitle"><b>Title</b></label>
                                         <input type="text" class="form-control input-sm" id="txtANSTTitle" required placeholder="Title" name="ANSTitle" style="border-radius: 0 !important;">
                                     </div>
                                     <div class="col-lg-3">
+                                    <label for="msANSTType"><b>Type</b></label>
                                     <select class="form-control input-sm" id="msANSTType" placeholder="Type" name="Type" style="border-radius: 0 !important;">
                                         <option value="0">Task</option>
                                         <option value="1">Bug</option>
                                     </select>
                                     </div>
                                     <div class="col-sm-3">
-                                        <select class="form-control input-sm" id="msANSTAct" placeholder="Activity" name="Activity" style="border-radius: 0 !important;" disabled>
+                                        <label for="msANSTStat"><b>Status</b></label>
+                                        <select class="form-control input-sm" id="msANSTStat" placeholder="Activity" name="Activity" style="border-radius: 0 !important;" disabled>
                                             <option value="0">New</option>
-                                            <option value="1">Closed</option>
+                                            <option value="1">Active</option>
+                                            <option value="2">Closed</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6">
+                                        <label for="msANSTAss"><b>Assign To</b></label>
                                         <select class="form-control input-sm" id="msANSTAss" placeholder="Assignment" name="Assignment" style="border-radius: 0 !important;">
 
                                         </select>
                                     </div>
                                     <div class="col-sm-6">
+                                        <label for="msANSTAct"><b>Activity</b></label>
                                         <select class="form-control input-sm" id="msANSTAct" placeholder="Activity" name="Activity" style="border-radius: 0 !important;">
-                                            <option value="0">Development</option>
-                                            <option value="1">Deployment</option>
+                                            <option value="1">Backlog</option>
+                                            <option value="2">Development</option>
+                                            <option value="3">Testing</option>
+                                            <option value="4">Deployment</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-3">
+                                        <label for="txtANSTOH"><b>Original Hour</b></label>
                                         <input type="number" class="form-control input-sm" id="txtANSTOH" required placeholder="Orginal Hour" name="txtANSTOH" style="border-radius: 0 !important;">
                                     </div>
                                     <div class="col-sm-3">
+                                        <label for="txtANSTRH"><b>Remaining Hour</b></label>
                                         <input type="number" class="form-control input-sm" id="txtANSTRH" required placeholder="Remaining Hour" name="txtANSTRH" style="border-radius: 0 !important;">
                                     </div>
                                     <div class="col-sm-3">
+                                        <label for="txtANSTCH"><b>Completed Hour</b></label>
                                         <input type="number" class="form-control input-sm" id="txtANSTCH" required placeholder="Completed Hour" name="txtANSTCH" style="border-radius: 0 !important;">
                                     </div>
                                     <div class="col-sm-3">
+                                        <label for="msPrio"><b>Priority</b></label>
                                         <select class="form-control input-sm" id="msPrio" placeholder="Priority" name="Priority" style="border-radius: 0 !important;">
                                             <option value="1">1</option>
                                             <option value="2">2</option>
@@ -486,11 +498,9 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-12">
+                                        <label for="edtANSTDesc"><b>Decsription</b></label>
                                         <textarea id="edtANSTDesc">
                                             <br/>
-                                            <br />
-                                            <br />
-                                            <br />
                                             <br />
                                         </textarea>
                                     </div>
@@ -544,70 +554,86 @@
                     var DeptaskCard = $('#taskDepSortable');
                     DeptaskCard.empty();
                 $(data).each(function (index, task) {
-                    if (task.Status === 1)
+                    if (task.Activity === 1)
                     {
                         BactaskCard.append(
-                            '<li class="sortable-item" id="' + task.Id + '">' +
-                            (task.Type === 1 ? '<div class="card mb-4 py-3 border-left-info sprintTaskCard" >' : '<div class="card mb-4 py-3 border-left-danger sprintTaskCard" >') +
+                            '<li class="sortable-item task" id="' + task.Id + '">' +
+                            (task.Type === 0 ? '<div class="card mb-4 py-3 border-left-info sprintTaskCard" data-id="' + task.Id + '">' : '<div class="card mb-4 py-3 border-left-danger sprintTaskCard"  data-id="' + task.Id + '">') +
                             //'<div class="card mb-4 py-3 border-left-primary sprintTaskCard" >' +
-                            '<div class="card-body row">' +
-                            '<div class="col-auto">' +
-                            (task.Type === 1 ? '<i class="fas fa-clipboard-list fa-2x text-info text-sm"></i>' : '<i class="fas fa-bug fa-2x text-danger text-sm"></i>') +
-                            '</div>' +
-                            '<div clas="col mr-2">' +
-                            '<div class="text-xs font-weight-bold text-uppercase mb-1">' + task.Title + '</div>' +
+                            '<div class="card-body">' +
+                            '<div class="row">'+
+                            '<div clas="col-auto mr-2">' +
+                            '<div class="text-xs mb-1">' + task.Title + '</div>' +
                             '</div > ' +
+                            '</div>' +
+                            //'<div class="row">' +
+                            //'<div class="col-12">' +
+                            //(task.Type === 0 ? '<i class="fas fa-clipboard-list fa-2x text-info text-sm text-right"></i>' : '<i class="fas fa-bug fa-2x text-danger text-sm text-right"></i>') +
+                            //'</div>' +
+                            //'</div>' +
                             '</div > ' +
                             '</div>' +
                             '</li>'
                         );
                     }
-                    else if (task.Status === 2) {
+                    else if (task.Activity === 2) {
                         DevtaskCard.append(
-                            '<li class="sortable-item" id="' + task.Id + '">' +
-                            (task.Type === 1 ? '<div class="card mb-4 py-3 border-left-info sprintTaskCard" >' : '<div class="card mb-4 py-3 border-left-danger sprintTaskCard" >') +
+                            '<li class="sortable-item task" id="' + task.Id + '">' +
+                            (task.Type === 0 ? '<div class="card mb-4 py-3 border-left-info sprintTaskCard" data-id="' + task.Id + '">' : '<div class="card mb-4 py-3 border-left-danger sprintTaskCard"  data-id="' + task.Id + '">') +
                             //'<div class="card mb-4 py-3 border-left-primary sprintTaskCard" >' +
-                            '<div class="card-body row">' +
-                            '<div class="col-auto">' +
-                            (task.Type === 1 ? '<i class="fas fa-clipboard-list fa-2x text-info text-sm"></i>' : '<i class="fas fa-bug fa-2x text-danger text-sm"></i>') +
-                            '</div>' +
-                            '<div clas="col mr-2">' +
-                            '<div class="text-xs font-weight-bold text-uppercase mb-1">' + task.Title + '</div>' +
+                            '<div class="card-body">' +
+                            '<div class="row">' +
+                            '<div clas="col-auto mr-2">' +
+                            '<div class="text-xs mb-1">' + task.Title + '</div>' +
                             '</div > ' +
+                            '</div>' +
+                            //'<div class="row">' +
+                            //'<div class="col-12">' +
+                            //(task.Type === 0 ? '<i class="fas fa-clipboard-list fa-2x text-info text-sm text-right"></i>' : '<i class="fas fa-bug fa-2x text-danger text-sm text-right"></i>') +
+                            //'</div>' +
+                            //'</div>' +
                             '</div > ' +
                             '</div>' +
                             '</li>'
                         );
                     }
-                    else if (task.Status === 3) {
+                    else if (task.Activity === 3) {
                         TestaskCard.append(
-                            '<li class="sortable-item" id="' + task.Id + '">' +
-                            (task.Type === 1 ? '<div class="card mb-4 py-3 border-left-info sprintTaskCard" >' : '<div class="card mb-4 py-3 border-left-danger sprintTaskCard" >') +
+                            '<li class="sortable-item task" id="' + task.Id + '">' +
+                            (task.Type === 0 ? '<div class="card mb-4 py-3 border-left-info sprintTaskCard" data-id="' + task.Id + '">' : '<div class="card mb-4 py-3 border-left-danger sprintTaskCard"  data-id="' + task.Id + '">') +
                             //'<div class="card mb-4 py-3 border-left-primary sprintTaskCard" >' +
-                            '<div class="card-body row">' +
-                            '<div class="col-auto">' +
-                            (task.Type === 1 ? '<i class="fas fa-clipboard-list fa-2x text-info text-sm"></i>' : '<i class="fas fa-bug fa-2x text-danger text-sm"></i>') +
-                            '</div>' +
-                            '<div clas="col mr-2">' +
-                            '<div class="text-xs font-weight-bold text-uppercase mb-1">' + task.Title + '</div>' +
+                            '<div class="card-body">' +
+                            '<div class="row">' +
+                            '<div clas="col-auto mr-2">' +
+                            '<div class="text-xs mb-1">' + task.Title + '</div>' +
                             '</div > ' +
+                            '</div>' +
+                            //'<div class="row">' +
+                            //'<div class="col-12">' +
+                            //(task.Type === 0 ? '<i class="fas fa-clipboard-list fa-2x text-info text-sm text-right"></i>' : '<i class="fas fa-bug fa-2x text-danger text-sm text-right"></i>') +
+                            //'</div>' +
+                            //'</div>' +
                             '</div > ' +
                             '</div>' +
                             '</li>'
                         );
                     }
-                    else if (task.Status === 4) {
+                    else if (task.Activity === 4) {
                         DeptaskCard.append(
-                            '<li class="sortable-item" id="' + task.Id + '">' +
-                            (task.Type === 1 ? '<div class="card mb-4 py-3 border-left-info sprintTaskCard" >' : '<div class="card mb-4 py-3 border-left-danger sprintTaskCard" >') +
+                            '<li class="sortable-item task" id="' + task.Id + '">' +
+                            (task.Type === 0 ? '<div class="card mb-4 py-3 border-left-info sprintTaskCard" data-id="' + task.Id + '">' : '<div class="card mb-4 py-3 border-left-danger sprintTaskCard"  data-id="' + task.Id + '">') +
                             //'<div class="card mb-4 py-3 border-left-primary sprintTaskCard" >' +
-                            '<div class="card-body row">' +
-                            '<div class="col-auto">' +
-                            (task.Type === 1 ? '<i class="fas fa-clipboard-list fa-2x text-info text-sm"></i>' : '<i class="fas fa-bug fa-2x text-danger text-sm"></i>') +
-                            '</div>' +
-                            '<div clas="col mr-2">' +
-                            '<div class="text-xs font-weight-bold text-uppercase mb-1">' + task.Title + '</div>' +
+                            '<div class="card-body">' +
+                            '<div class="row">' +
+                            '<div clas="col-auto mr-2">' +
+                            '<div class="text-xs mb-1">' + task.Title + '</div>' +
                             '</div > ' +
+                            '</div>' +
+                            //'<div class="row">' +
+                            //'<div class="col-12">' +
+                            //(task.Type === 0 ? '<i class="fas fa-clipboard-list fa-2x text-info text-sm text-right"></i>' : '<i class="fas fa-bug fa-2x text-danger text-sm text-right"></i>') +
+                            //'</div>' +
+                            //'</div>' +
                             '</div > ' +
                             '</div>' +
                             '</li>'
@@ -644,19 +670,28 @@
             //    connectWith: ".connectedSortable"
             //}).disableSelection();
 
-            $("#btnANSTSave").on("click", function () {
-                var sprintId = sprintId();
-                var title = $("#txtANSTTitle").val();
+            //.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 
+            $("#btnANSTSave").on("click", function () {
+                var title = $("#txtANSTTitle").val();
+                var type = $("#msANSTType").val();
+                var description = $("#edtANSTDesc").html();
+                var assignTo = $("#msANSTAss").val();
+                var oriHr = $("#txtANSTOH").val();
+                var remHr = $("#txtANSTRH").val();
+                var comHr = $("#txtANSTCH").val();
+                var status = $("#msANSTStat").val();
+                var priority = $("#msPrio").val();
+                var activity = $("#msANSTAct").val();
                 if (title == "") {
                     alert("Invalid Information");
                 }
                 else
                 {
-                    $.post("@Url.Action("CreateSprintTask", "Project")", { Id: sprintId, Title: title, Member: member.toString(), StartDate: sdate, EndDate: edate, BP: bp}, function (data) {
+                    $.post("@Url.Action("CreateSprintTask", "Project")", { SprintId: sprintId, Title: title, Type: type, Description: description.toString(), AssignTo: assignTo, OriHr: oriHr, RemHr: remHr, ComHr: comHr, Status: status, Priority: priority, Activity: activity }, function (data) {
                         if (data) {
-                            $('#addNewSprintModal').modal('toggle');
-                            GetProjectSprintList();
+                            GetSprintTaskList();
+                            $('#addNewSprintTaskModal').modal('toggle');
                         }
                     });
 
@@ -671,20 +706,40 @@
                     var basketID = event.target.id;
                     var itemID = ui.item[0].id;
                     if (basketID == "taskBacSortable") {
-                        $.post("@Url.Action("UpdateSprintTaskStatus", "Project")", { taskId: itemID, status: 1 }, function (data) {
+                        $.post("@Url.Action("UpdateSprintTaskStatus", "Project")", { taskId: itemID, act: 1 }, function (data) {
                         });
                     } else if (basketID == "taskDevSortable") {
-                        $.post("@Url.Action("UpdateSprintTaskStatus", "Project")", { taskId: itemID, status: 2 }, function (data) {
+                        $.post("@Url.Action("UpdateSprintTaskStatus", "Project")", { taskId: itemID, act: 2 }, function (data) {
                         });
                     } else if (basketID == "taskTesSortable") {
-                        $.post("@Url.Action("UpdateSprintTaskStatus", "Project")", { taskId: itemID, status: 3 }, function (data) {
+                        $.post("@Url.Action("UpdateSprintTaskStatus", "Project")", { taskId: itemID, act: 3 }, function (data) {
                         });
                     } else if (basketID == "taskDepSortable") {
-                        $.post("@Url.Action("UpdateSprintTaskStatus", "Project")", { taskId: itemID, status: 4 }, function (data) {
+                        $.post("@Url.Action("UpdateSprintTaskStatus", "Project")", { taskId: itemID, act: 4 }, function (data) {
                         });
                     }
                 }
 
+            });
+
+            $(document).on('click', '.sprintTaskCard', function () {
+                taskId = $(this).attr("data-id");
+                $(".gj-editor").find("div[role='body']").html("");
+                $.post("@Url.Action("GetTaskDetails", "Project")", { taskId: taskId }, function (data) {
+                    var taskdetails = $.parseJSON(data);
+                    $("#txtANSTTitle").val(taskdetails.Title);
+                    $("#msANSTType").val(taskdetails.Type);
+                    $(".gj-editor").find("div[role='body']").append(taskdetails.Description);
+                    $("#msANSTAss").val(taskdetails.AssignTo);
+                    $("#txtANSTOH").val(taskdetails.OriHr);
+                    $("#txtANSTRH").val(taskdetails.RemHr);
+                    $("#txtANSTCH").val(taskdetails.ComHr);
+                    $("#msANSTStat").val(taskdetails.Status);
+                    $("#msPrio").val(taskdetails.Priority);
+                    $("#msANSTAct").val(taskdetails.Activity);
+
+                    $('#addNewSprintTaskModal').modal('toggle');
+                });
             });
 
 

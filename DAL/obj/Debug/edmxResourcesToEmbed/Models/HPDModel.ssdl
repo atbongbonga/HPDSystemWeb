@@ -1,5 +1,67 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="HPCOMMONModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="captured_columns">
+    <Key>
+      <PropertyRef Name="object_id" />
+      <PropertyRef Name="column_ordinal" />
+    </Key>
+    <Property Name="object_id" Type="int" Nullable="false" />
+    <Property Name="column_name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="column_id" Type="int" />
+    <Property Name="column_type" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="column_ordinal" Type="int" Nullable="false" />
+    <Property Name="is_computed" Type="bit" />
+  </EntityType>
+  <EntityType Name="change_tables">
+    <Key>
+      <PropertyRef Name="object_id" />
+    </Key>
+    <Property Name="object_id" Type="int" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="source_object_id" Type="int" />
+    <Property Name="capture_instance" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="start_lsn" Type="binary" MaxLength="10" />
+    <Property Name="end_lsn" Type="binary" MaxLength="10" />
+    <Property Name="supports_net_changes" Type="bit" />
+    <Property Name="has_drop_pending" Type="bit" />
+    <Property Name="role_name" Type="nvarchar" MaxLength="128" />
+    <Property Name="index_name" Type="nvarchar" MaxLength="128" />
+    <Property Name="filegroup_name" Type="nvarchar" MaxLength="128" />
+    <Property Name="create_date" Type="datetime" />
+    <Property Name="partition_switch" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ddl_history">
+    <Key>
+      <PropertyRef Name="object_id" />
+      <PropertyRef Name="ddl_lsn" />
+    </Key>
+    <Property Name="source_object_id" Type="int" />
+    <Property Name="object_id" Type="int" Nullable="false" />
+    <Property Name="required_column_update" Type="bit" />
+    <Property Name="ddl_command" Type="nvarchar(max)" />
+    <Property Name="ddl_lsn" Type="binary" MaxLength="10" Nullable="false" />
+    <Property Name="ddl_time" Type="datetime" />
+  </EntityType>
+  <EntityType Name="index_columns">
+    <Key>
+      <PropertyRef Name="object_id" />
+      <PropertyRef Name="index_ordinal" />
+    </Key>
+    <Property Name="object_id" Type="int" Nullable="false" />
+    <Property Name="column_name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="index_ordinal" Type="tinyint" Nullable="false" />
+    <Property Name="column_id" Type="int" />
+  </EntityType>
+  <EntityType Name="lsn_time_mapping">
+    <Key>
+      <PropertyRef Name="start_lsn" />
+    </Key>
+    <Property Name="start_lsn" Type="binary" MaxLength="10" Nullable="false" />
+    <Property Name="tran_begin_time" Type="datetime" />
+    <Property Name="tran_end_time" Type="datetime" />
+    <Property Name="tran_id" Type="varbinary" MaxLength="10" />
+    <Property Name="tran_begin_lsn" Type="binary" MaxLength="10" />
+  </EntityType>
   <EntityType Name="AccAdmin">
     <Key>
       <PropertyRef Name="EmpCode" />
@@ -1438,6 +1500,35 @@ warning 6013: The table/view 'HPCOMMON.dbo.AppStatus' does not have a primary ke
     <Property Name="Stat" Type="varchar" MaxLength="20" />
     <Property Name="OtherAcct" Type="varchar" MaxLength="300" />
     <Property Name="remarks" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="ard_DOut">
+    <Key>
+      <PropertyRef Name="DocEntry" />
+      <PropertyRef Name="LinNum" />
+    </Key>
+    <Property Name="DocEntry" Type="int" Nullable="false" />
+    <Property Name="LinNum" Type="int" Nullable="false" />
+    <Property Name="Itemcode" Type="varchar" MaxLength="15" />
+    <Property Name="ItemDesc" Type="varchar" MaxLength="30" />
+    <Property Name="Qty" Type="int" />
+    <Property Name="Unit" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="ard_HOut">
+    <Key>
+      <PropertyRef Name="DocEntry" />
+    </Key>
+    <Property Name="DocEntry" Type="int" Nullable="false" />
+    <Property Name="DocDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="ard_im">
+    <Key>
+      <PropertyRef Name="Itemcode" />
+    </Key>
+    <Property Name="Itemcode" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="ItemDesc" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="DateModified" Type="datetime" />
   </EntityType>
   <EntityType Name="AREA">
     <Key>
@@ -3823,13 +3914,13 @@ warning 6013: The table/view 'HPCOMMON.dbo.CMT_TBL' does not have a primary key 
   <EntityType Name="CMTTBL">
     <Key>
       <PropertyRef Name="DOCENTRY" />
-      <PropertyRef Name="FE_CODE" />
-      <PropertyRef Name="FE_DESC" />
+      <PropertyRef Name="CMT_TYPE" />
+      <PropertyRef Name="CMT_CODE" />
     </Key>
     <Property Name="DOCENTRY" Type="int" Nullable="false" />
-    <Property Name="FE_CODE" Type="varchar" MaxLength="6" Nullable="false" />
-    <Property Name="FE_DESC" Type="varchar" MaxLength="20" Nullable="false" />
-    <Property Name="FE_STRING" Type="varchar" MaxLength="80" />
+    <Property Name="CMT_TYPE" Type="varchar" MaxLength="2" Nullable="false" />
+    <Property Name="CMT_CODE" Type="varchar" MaxLength="6" Nullable="false" />
+    <Property Name="CMT_DESC" Type="varchar" MaxLength="70" />
     <Property Name="DATE_DONE" Type="datetime" />
     <Property Name="STATUS_CREATED" Type="bit" />
   </EntityType>
@@ -6447,6 +6538,38 @@ warning 6002: The table/view 'HPCOMMON.dbo.EmpSrvReq_20181017' does not have a p
     <Property Name="CutOff" Type="varchar" MaxLength="10" />
     <Property Name="Destination" Type="varchar(max)" />
     <Property Name="SDForm" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'HPCOMMON.dbo.EmpSrvReqBk' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="EmpSrvReqBk">
+    <Key>
+      <PropertyRef Name="DocEntry" />
+      <PropertyRef Name="EmpCode" />
+      <PropertyRef Name="ItemCode" />
+      <PropertyRef Name="ItemPrice" />
+      <PropertyRef Name="Remarks" />
+      <PropertyRef Name="Stat" />
+    </Key>
+    <Property Name="DocEntry" Type="int" Nullable="false" />
+    <Property Name="DocDate" Type="date" />
+    <Property Name="EmpCode" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="ItemCode" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="ItemPrice" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Qty" Type="int" />
+    <Property Name="SQty" Type="int" />
+    <Property Name="SEE" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="SAmt" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="TotalAmt" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="QtyIssue" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="Remarks" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="ReqType" Type="varchar" MaxLength="20" />
+    <Property Name="Size" Type="varchar" MaxLength="10" />
+    <Property Name="Stat" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="BaseEntry" Type="int" />
+    <Property Name="CutOff" Type="varchar" MaxLength="10" />
+    <Property Name="Destination" Type="varchar(max)" />
+    <Property Name="SDForm" Type="int" />
+    <Property Name="Color" Type="varchar" MaxLength="30" />
   </EntityType>
   <EntityType Name="EmpSrvReqDtl">
     <Key>
@@ -20015,9 +20138,9 @@ warning 6013: The table/view 'HPCOMMON.dbo.SPD_CODE' does not have a primary key
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="SprintId" Type="int" />
-    <Property Name="Title" Type="varchar" MaxLength="20" />
+    <Property Name="Title" Type="varchar" MaxLength="50" />
     <Property Name="Type" Type="int" />
-    <Property Name="Description" Type="varchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" MaxLength="4000" />
     <Property Name="AssignTo" Type="varchar" MaxLength="20" />
     <Property Name="OriHr" Type="decimal" Precision="2" Scale="1" />
     <Property Name="RemHr" Type="decimal" Precision="2" Scale="1" />
@@ -21741,6 +21864,11 @@ warning 6002: The table/view 'HPCOMMON.dbo.ZSQUAREPROGRAMS' does not have a prim
     <Property Name="ErrLog" Type="char" MaxLength="1" />
   </EntityType>
   <EntityContainer Name="HPCOMMONModelStoreContainer">
+    <EntitySet Name="captured_columns" EntityType="Self.captured_columns" Schema="cdc" store:Type="Tables" />
+    <EntitySet Name="change_tables" EntityType="Self.change_tables" Schema="cdc" store:Type="Tables" />
+    <EntitySet Name="ddl_history" EntityType="Self.ddl_history" Schema="cdc" store:Type="Tables" />
+    <EntitySet Name="index_columns" EntityType="Self.index_columns" Schema="cdc" store:Type="Tables" />
+    <EntitySet Name="lsn_time_mapping" EntityType="Self.lsn_time_mapping" Schema="cdc" store:Type="Tables" />
     <EntitySet Name="AccAdmin" EntityType="Self.AccAdmin" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AcctngALUL" EntityType="Self.AcctngALUL" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AcsLvl" EntityType="Self.AcsLvl" Schema="dbo" store:Type="Tables" />
@@ -21766,6 +21894,9 @@ warning 6002: The table/view 'HPCOMMON.dbo.ZSQUAREPROGRAMS' does not have a prim
     <EntitySet Name="AppOtherQ" EntityType="Self.AppOtherQ" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AppSiteLog" EntityType="Self.AppSiteLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Archive" EntityType="Self.Archive" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ard_DOut" EntityType="Self.ard_DOut" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ard_HOut" EntityType="Self.ard_HOut" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ard_im" EntityType="Self.ard_im" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AREA" EntityType="Self.AREA" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ASSADMIN" EntityType="Self.ASSADMIN" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AuditBoxRecords" EntityType="Self.AuditBoxRecords" Schema="dbo" store:Type="Tables" />
@@ -25176,6 +25307,30 @@ warning 6002: The table/view 'HPCOMMON.dbo.ZSQUAREPROGRAMS' does not have a prim
     [EmpSrvReq_20181017].[Destination] AS [Destination], 
     [EmpSrvReq_20181017].[SDForm] AS [SDForm]
     FROM [dbo].[EmpSrvReq_20181017] AS [EmpSrvReq_20181017]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="EmpSrvReqBk" EntityType="Self.EmpSrvReqBk" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [EmpSrvReqBk].[DocEntry] AS [DocEntry], 
+    [EmpSrvReqBk].[DocDate] AS [DocDate], 
+    [EmpSrvReqBk].[EmpCode] AS [EmpCode], 
+    [EmpSrvReqBk].[ItemCode] AS [ItemCode], 
+    [EmpSrvReqBk].[ItemPrice] AS [ItemPrice], 
+    [EmpSrvReqBk].[Qty] AS [Qty], 
+    [EmpSrvReqBk].[SQty] AS [SQty], 
+    [EmpSrvReqBk].[SEE] AS [SEE], 
+    [EmpSrvReqBk].[SAmt] AS [SAmt], 
+    [EmpSrvReqBk].[TotalAmt] AS [TotalAmt], 
+    [EmpSrvReqBk].[QtyIssue] AS [QtyIssue], 
+    [EmpSrvReqBk].[Remarks] AS [Remarks], 
+    [EmpSrvReqBk].[ReqType] AS [ReqType], 
+    [EmpSrvReqBk].[Size] AS [Size], 
+    [EmpSrvReqBk].[Stat] AS [Stat], 
+    [EmpSrvReqBk].[BaseEntry] AS [BaseEntry], 
+    [EmpSrvReqBk].[CutOff] AS [CutOff], 
+    [EmpSrvReqBk].[Destination] AS [Destination], 
+    [EmpSrvReqBk].[SDForm] AS [SDForm], 
+    [EmpSrvReqBk].[Color] AS [Color]
+    FROM [dbo].[EmpSrvReqBk] AS [EmpSrvReqBk]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="EmpSrvReqLog" EntityType="Self.EmpSrvReqLog" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 

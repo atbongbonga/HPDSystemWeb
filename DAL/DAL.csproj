@@ -239,6 +239,15 @@
     <Compile Include="Models\Archive.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ard_DOut.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ard_HOut.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ard_im.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\AREA.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
@@ -503,6 +512,9 @@
     <Compile Include="Models\Calendar.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\captured_columns.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CCTime.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
@@ -510,6 +522,9 @@
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ChangeLog.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\change_tables.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ClinicianSale.cs">
@@ -651,6 +666,9 @@
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\daudtischedule.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ddl_history.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\deducfordelete.cs">
@@ -977,6 +995,9 @@
     <Compile Include="Models\EmpSrvReq.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EmpSrvReqBk.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EmpSrvReqDtl.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
@@ -1151,6 +1172,9 @@
     <Compile Include="Models\IDTK_20180531.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\index_columns.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\InDTR.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
@@ -1245,6 +1269,9 @@
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LOAReq.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\lsn_time_mapping.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Marlon.cs">

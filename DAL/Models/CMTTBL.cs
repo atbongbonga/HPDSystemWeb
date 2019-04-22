@@ -15,9 +15,9 @@ namespace DAL.Models
     public partial class CMTTBL
     {
         public int DOCENTRY { get; set; }
-        public string FE_CODE { get; set; }
-        public string FE_DESC { get; set; }
-        public string FE_STRING { get; set; }
+        public string CMT_TYPE { get; set; }
+        public string CMT_CODE { get; set; }
+        public string CMT_DESC { get; set; }
         public Nullable<System.DateTime> DATE_DONE { get; set; }
         public Nullable<bool> STATUS_CREATED { get; set; }
     }

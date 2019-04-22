@@ -99,14 +99,14 @@ namespace DAL.Logics
             return true;
         }
 
-        public bool UpdateSrintTaskStatus(int taskId, int status)
+        public bool UpdateSrintTaskStatus(int taskId, int act)
         {
             using (HPCOMMONEntities db = new HPCOMMONEntities())
             {
                 var gettask = db.SprintTasks.SingleOrDefault(i => i.Id == taskId);
                 if (gettask != null)
                 {
-                    gettask.Status = status;
+                    gettask.Activity = act;
                     db.SaveChanges();
                 }
 
@@ -138,10 +138,53 @@ namespace DAL.Logics
                             Id = Convert.ToInt32(dr["Id"]),
                             Title = Convert.ToString(dr["Title"]),
                             Type = Convert.ToInt32(dr["Type"]),
-                            Status = Convert.ToInt32(dr["Status"])
+                            Status = Convert.ToInt32(dr["Status"]),
+                            Activity = Convert.ToInt32(dr["Activity"])
                         });
                     };
                     return model;
+                }
+                cn.Close();
+            }
+            return model;
+
+        }
+
+        public SprintTasks GetTaskDetails(int taskId)
+        {
+            var model = new SprintTasks();
+
+            using (SqlConnection cn = new SqlConnection(dbcon))
+            {
+                cn.Open();
+
+                String query = "SELECT * FROM dbo.SprintTasks WHERE Id = '" + taskId + "' ";
+
+
+                //cm.Parameters.AddWithValue("@Id", id);
+
+                SqlCommand cmd = new SqlCommand(query, cn);
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        model.Id = Convert.ToInt32(dr["Id"]);
+                        model.SprintId = Convert.ToInt32(dr["SprintId"]);
+                        model.Title = Convert.ToString(dr["Title"]);
+                        model.Type = Convert.ToInt32(dr["Type"]);
+                        model.Description = Convert.ToString(dr["Description"]);
+                        model.AssignTo = Convert.ToString(dr["AssignTo"]);
+                        model.OriHr = Convert.ToDecimal(dr["OriHr"]);
+                        model.RemHr = Convert.ToDecimal(dr["RemHr"]);
+                        model.ComHr = Convert.ToDecimal(dr["ComHr"]);
+                        model.Status = Convert.ToInt32(dr["Status"]);
+                        model.Priority = Convert.ToInt32(dr["Priority"]);
+                        model.Activity = Convert.ToInt32(dr["Activity"]);
+                        model.CreatedBy = Convert.ToString(dr["CreatedBy"]);
+                        model.CreatedDate = Convert.ToDateTime(dr["CreatedDate"]);
+                    }
                 }
                 cn.Close();
             }
