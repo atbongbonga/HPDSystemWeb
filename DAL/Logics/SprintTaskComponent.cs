@@ -99,7 +99,32 @@ namespace DAL.Logics
             return true;
         }
 
-        public bool UpdateSrintTaskStatus(int taskId, int act)
+        public bool UpdateSprintTask(SprintTasks SprintTask)
+        {
+            using (HPCOMMONEntities db = new HPCOMMONEntities())
+            {
+                var gettask = db.SprintTasks.SingleOrDefault(i => i.Id == SprintTask.Id);
+                if (gettask != null)
+                {
+                    gettask.SprintId = SprintTask.SprintId;
+                    gettask.Title = SprintTask.Title;
+                    gettask.Type = SprintTask.Type;
+                    gettask.Description = SprintTask.Description;
+                    gettask.AssignTo = SprintTask.AssignTo;
+                    gettask.OriHr = SprintTask.OriHr;
+                    gettask.RemHr = SprintTask.RemHr;
+                    gettask.ComHr = SprintTask.ComHr;
+                    gettask.Status = SprintTask.Status;
+                    gettask.Priority = SprintTask.Priority;
+                    gettask.Activity = SprintTask.Activity;
+                    db.SaveChanges();
+                }
+
+            }
+            return true;
+        }
+
+        public bool UpdateSrintTaskActivity(int taskId, int act)
         {
             using (HPCOMMONEntities db = new HPCOMMONEntities())
             {

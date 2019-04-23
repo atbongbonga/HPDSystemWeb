@@ -441,14 +441,14 @@
                                     </div>
                                     <div class="col-lg-3">
                                     <label for="msANSTType"><b>Type</b></label>
-                                    <select class="form-control input-sm" id="msANSTType" placeholder="Type" name="Type" style="border-radius: 0 !important;">
+                                    <select class="form-control input-sm" id="msANSTType" required placeholder="Type" name="Type" style="border-radius: 0 !important;">
                                         <option value="0">Task</option>
                                         <option value="1">Bug</option>
                                     </select>
                                     </div>
                                     <div class="col-sm-3">
                                         <label for="msANSTStat"><b>Status</b></label>
-                                        <select class="form-control input-sm" id="msANSTStat" placeholder="Activity" name="Activity" style="border-radius: 0 !important;" disabled>
+                                        <select class="form-control input-sm" id="msANSTStat" required placeholder="Activity" name="Activity" style="border-radius: 0 !important;">
                                             <option value="0">New</option>
                                             <option value="1">Active</option>
                                             <option value="2">Closed</option>
@@ -458,13 +458,13 @@
                                 <div class="form-group row">
                                     <div class="col-sm-6">
                                         <label for="msANSTAss"><b>Assign To</b></label>
-                                        <select class="form-control input-sm" id="msANSTAss" placeholder="Assignment" name="Assignment" style="border-radius: 0 !important;">
+                                        <select class="form-control input-sm" id="msANSTAss" required placeholder="Assignment" name="Assignment" style="border-radius: 0 !important;">
 
                                         </select>
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="msANSTAct"><b>Activity</b></label>
-                                        <select class="form-control input-sm" id="msANSTAct" placeholder="Activity" name="Activity" style="border-radius: 0 !important;">
+                                        <select class="form-control input-sm" id="msANSTAct" required placeholder="Activity" name="Activity" style="border-radius: 0 !important;">
                                             <option value="1">Backlog</option>
                                             <option value="2">Development</option>
                                             <option value="3">Testing</option>
@@ -487,7 +487,7 @@
                                     </div>
                                     <div class="col-sm-3">
                                         <label for="msPrio"><b>Priority</b></label>
-                                        <select class="form-control input-sm" id="msPrio" placeholder="Priority" name="Priority" style="border-radius: 0 !important;">
+                                        <select class="form-control input-sm" id="msPrio" required placeholder="Priority" name="Priority" style="border-radius: 0 !important;">
                                             <option value="1">1</option>
                                             <option value="2">2</option>
                                             <option value="3">3</option>
@@ -519,6 +519,10 @@
                                     Save
                                     @*<i class="fas fa-save"></i>*@
                                 </a>
+                                <a href="#" class="btn btn-primary" id="btnANSTUpdate">
+                                    Update
+                                    @*<i class="fas fa-save"></i>*@
+                                </a>
                             </div>
                             @*<div class="col-sm-6">
                                 <a href="#" class="btn btn-danger btn-circle">
@@ -540,6 +544,21 @@
         $(document).ready(function () {
 
             var sprintId = "@ViewBag.Message";
+
+            var ClearTaskForm = function () {
+
+                $("#txtANSTTitle").val("");
+                $("#msANSTType").val("");
+                $(".gj-editor").find("div[role='body']").html("");
+                $(".gj-editor").find("div[role='body']").append("<br/><br/>");
+                $("#msANSTAss").val("");
+                $("#txtANSTOH").val("");
+                $("#txtANSTRH").val("");
+                $("#txtANSTCH").val("");
+                $("#msANSTStat").val("");
+                $("#msPrio").val("");
+                $("#msANSTAct").val("");
+            };
 
             var GetSprintTaskList = function () {
 
@@ -647,6 +666,9 @@
             GetSprintTaskList();
 
             $("#addNewSprintTask").on("click", function () {
+                ClearTaskForm();
+                $("#btnANSTSave").show().prop('disabled', false);
+                $("#btnANSTUpdate").hide().prop('disabled', true);
                 $('#addNewSprintTaskModal').modal('toggle');
             });
 
@@ -691,7 +713,39 @@
                     $.post("@Url.Action("CreateSprintTask", "Project")", { SprintId: sprintId, Title: title, Type: type, Description: description.toString(), AssignTo: assignTo, OriHr: oriHr, RemHr: remHr, ComHr: comHr, Status: status, Priority: priority, Activity: activity }, function (data) {
                         if (data) {
                             GetSprintTaskList();
+                            ClearTaskForm();
                             $('#addNewSprintTaskModal').modal('toggle');
+
+                        }
+                    });
+
+                }
+
+            });
+
+            $("#btnANSTUpdate").on("click", function () {
+                taskId = $(this).attr("data-id");
+                var title = $("#txtANSTTitle").val();
+                var type = $("#msANSTType").val();
+                var description = $("#edtANSTDesc").html();
+                var assignTo = $("#msANSTAss").val();
+                var oriHr = $("#txtANSTOH").val();
+                var remHr = $("#txtANSTRH").val();
+                var comHr = $("#txtANSTCH").val();
+                var status = $("#msANSTStat").val();
+                var priority = $("#msPrio").val();
+                var activity = $("#msANSTAct").val();
+                if (title == "") {
+                    alert("Invalid Information");
+                }
+                else
+                {
+                    $.post("@Url.Action("UpdateSprintTask", "Project")", {Id:taskId, SprintId: sprintId, Title: title, Type: type, Description: description.toString(), AssignTo: assignTo, OriHr: oriHr, RemHr: remHr, ComHr: comHr, Status: status, Priority: priority, Activity: activity }, function (data) {
+                        if (data) {
+                            GetSprintTaskList();
+                            ClearTaskForm();
+                            $('#addNewSprintTaskModal').modal('toggle');
+
                         }
                     });
 
@@ -706,16 +760,16 @@
                     var basketID = event.target.id;
                     var itemID = ui.item[0].id;
                     if (basketID == "taskBacSortable") {
-                        $.post("@Url.Action("UpdateSprintTaskStatus", "Project")", { taskId: itemID, act: 1 }, function (data) {
+                        $.post("@Url.Action("UpdateSprintTaskActivity", "Project")", { taskId: itemID, act: 1 }, function (data) {
                         });
                     } else if (basketID == "taskDevSortable") {
-                        $.post("@Url.Action("UpdateSprintTaskStatus", "Project")", { taskId: itemID, act: 2 }, function (data) {
+                        $.post("@Url.Action("UpdateSprintTaskActivity", "Project")", { taskId: itemID, act: 2 }, function (data) {
                         });
                     } else if (basketID == "taskTesSortable") {
-                        $.post("@Url.Action("UpdateSprintTaskStatus", "Project")", { taskId: itemID, act: 3 }, function (data) {
+                        $.post("@Url.Action("UpdateSprintTaskActivity", "Project")", { taskId: itemID, act: 3 }, function (data) {
                         });
                     } else if (basketID == "taskDepSortable") {
-                        $.post("@Url.Action("UpdateSprintTaskStatus", "Project")", { taskId: itemID, act: 4 }, function (data) {
+                        $.post("@Url.Action("UpdateSprintTaskActivity", "Project")", { taskId: itemID, act: 4 }, function (data) {
                         });
                     }
                 }
@@ -723,7 +777,11 @@
             });
 
             $(document).on('click', '.sprintTaskCard', function () {
+                ClearTaskForm();
                 taskId = $(this).attr("data-id");
+                $("#btnANSTSave").hide().prop('disabled', true);
+                $("#btnANSTUpdate").show().prop('disabled', false);
+                $("#btnANSTUpdate").attr('data-id', taskId);
                 $(".gj-editor").find("div[role='body']").html("");
                 $.post("@Url.Action("GetTaskDetails", "Project")", { taskId: taskId }, function (data) {
                     var taskdetails = $.parseJSON(data);
@@ -737,7 +795,6 @@
                     $("#msANSTStat").val(taskdetails.Status);
                     $("#msPrio").val(taskdetails.Priority);
                     $("#msANSTAct").val(taskdetails.Activity);
-
                     $('#addNewSprintTaskModal').modal('toggle');
                 });
             });
