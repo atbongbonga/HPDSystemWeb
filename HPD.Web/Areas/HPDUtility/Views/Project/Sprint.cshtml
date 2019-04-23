@@ -475,15 +475,15 @@
                                 <div class="form-group row">
                                     <div class="col-sm-3">
                                         <label for="txtANSTOH"><b>Original Hour</b></label>
-                                        <input type="number" class="form-control input-sm" id="txtANSTOH" required placeholder="Orginal Hour" name="txtANSTOH" style="border-radius: 0 !important;">
+                                        <input type="number" class="form-control input-sm" id="txtANSTOH" required placeholder="Orginal Hour" name="txtANSTOH" style="border-radius: 0 !important;" onkeypress="return isNumberKey(event)">
                                     </div>
                                     <div class="col-sm-3">
                                         <label for="txtANSTRH"><b>Remaining Hour</b></label>
-                                        <input type="number" class="form-control input-sm" id="txtANSTRH" required placeholder="Remaining Hour" name="txtANSTRH" style="border-radius: 0 !important;">
+                                        <input type="number" class="form-control input-sm" id="txtANSTRH" required placeholder="Remaining Hour" name="txtANSTRH" style="border-radius: 0 !important;" onkeypress="return isNumberKey(event)">
                                     </div>
                                     <div class="col-sm-3">
                                         <label for="txtANSTCH"><b>Completed Hour</b></label>
-                                        <input type="number" class="form-control input-sm" id="txtANSTCH" required placeholder="Completed Hour" name="txtANSTCH" style="border-radius: 0 !important;">
+                                        <input type="number" class="form-control input-sm" id="txtANSTCH" required placeholder="Completed Hour" name="txtANSTCH" style="border-radius: 0 !important;" onkeypress="return isNumberKey(event)">
                                     </div>
                                     <div class="col-sm-3">
                                         <label for="msPrio"><b>Priority</b></label>
@@ -541,10 +541,19 @@
 @section scripts
 {
     <script>
+        function isNumberKey(evt) {
+                var charCode = (evt.which) ? evt.which : evt.keyCode;
+                if (charCode != 46 && charCode > 31
+                    && (charCode < 48 || charCode > 57))
+                    return false;
+
+                return true;
+        }
         $(document).ready(function () {
 
             var sprintId = "@ViewBag.Message";
 
+            
             var ClearTaskForm = function () {
 
                 $("#txtANSTTitle").val("");

@@ -108,7 +108,7 @@ namespace DAL.Logics
                                "FROM ErrorLog a " +
                                "LEFT JOIN Programs b on a.ProgName = b.Program " +
                                "LEFT JOIN developer c on c.EmpName = b.InCharge " +
-                               "WHERE c.Designation ='" + Office.ZSquare + "' " +
+                               "WHERE a.Fixed='"+ "N" +"' AND c.Designation ='" + Office.ZSquare + "' " +
                                "GROUP BY b.InCharge, c.EmpCode ";
 
                 //cm.Parameters.AddWithValue("@Id", id);
@@ -169,7 +169,7 @@ namespace DAL.Logics
                 String query = "SELECT a.ProgName,COUNT(1) IssueCount " +
                                "FROM ErrorLog a " +
                                "LEFT JOIN Programs b on a.ProgName = b.Program " +
-                               "WHERE b.InCharge='" + InCharge + "' " +
+                               "WHERE a.Fixed='" + "N" + "' AND b.InCharge='" + InCharge + "' " +
                                "GROUP BY a.ProgName ";
 
                 //cm.Parameters.AddWithValue("@Id", id);
@@ -232,7 +232,7 @@ namespace DAL.Logics
                 String query = "SELECT a.* " +
                                "FROM ErrorLog a " +
                                "LEFT JOIN Programs b on a.ProgName = b.Program " +
-                               "WHERE a.ProgName='" + ProgramName + "' " +
+                               "WHERE a.Fixed='" + "N" + "' AND a.ProgName='" + ProgramName + "' " +
                                "ORDER BY a.DocDate " ;
 
                 //cm.Parameters.AddWithValue("@Id", id);
