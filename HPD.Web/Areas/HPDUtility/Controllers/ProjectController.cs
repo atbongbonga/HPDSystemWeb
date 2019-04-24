@@ -24,7 +24,7 @@ namespace HPD.Web.Areas.HPDUtility.Controllers
             return RedirectToAction("NotFound", "Error");
 
         }
-        public ActionResult Sprint(int ?Id)
+        public ActionResult Sprint(int? Id)
         {
             if (Id != null)
             {
