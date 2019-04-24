@@ -16,11 +16,16 @@ namespace DAL.Enums
         New = 1,
         Expired = 2,
     }
-    enum TaskStatus
+    enum TaskActvity
     {
         New = 1,
-        Developing = 2,
+        Development = 2,
         Testing = 3,
-        Deployed = 4
+        Deployment = 4
+    }
+    enum TaskType
+    {
+        Task = 0,
+        Bug = 1
     }
 }

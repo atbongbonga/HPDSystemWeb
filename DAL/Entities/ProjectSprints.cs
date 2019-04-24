@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Entities
 {
-    public class ProjectSprints
+    public class ProjectSprints : SprintDetails
     {
         public int Id { get; set; }
         public string ProgramName { get; set; }
@@ -18,5 +18,10 @@ namespace DAL.Entities
         public int Status { get; set; }
         public DateTime CreatedDate { get; set; }
         public string CreatedBy { get; set;  }
+    }
+    public class SprintDetails
+    {
+        public int BugCount { get; set; }
+        public int TaskCount { get; set; }
     }
 }

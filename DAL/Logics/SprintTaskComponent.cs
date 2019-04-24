@@ -16,6 +16,7 @@ namespace DAL.Logics
         public List<ProjectSprints> GetProjectSprintList(string ProgramName)
         {
             var model = new List<ProjectSprints>();
+            var db = new HPCOMMONEntities();
 
             using (SqlConnection cn = new SqlConnection(dbcon))
             {
@@ -33,10 +34,15 @@ namespace DAL.Logics
                 {
                     while (dr.Read())
                     {
+                        int sid = Convert.ToInt32(dr["Id"]);
+                        var sprinttaskcount = db.SprintTasks.Where(i => i.SprintId == sid && i.Type == (int)Enums.TaskType.Task).Count();
+                        var sprintbugcount = db.SprintTasks.Where(i => i.SprintId == sid && i.Type == (int)Enums.TaskType.Bug).Count();
                         model.Add(new ProjectSprints
                         {
                            Id = Convert.ToInt32(dr["Id"]),
-                           Title = Convert.ToString(dr["Title"])
+                           Title = Convert.ToString(dr["Title"]),
+                           TaskCount = sprinttaskcount,
+                           BugCount = sprintbugcount
                         });
                     };
                     return model;
@@ -86,7 +92,7 @@ namespace DAL.Logics
                     OriHr = SprintTask.OriHr,
                     RemHr = SprintTask.RemHr,
                     ComHr = SprintTask.ComHr,
-                    Status = Convert.ToInt32(Enums.TaskStatus.New),
+                    Status = Convert.ToInt32(Enums.TaskActvity.New),
                     Priority = SprintTask.Priority,
                     Activity = SprintTask.Activity,
                     CreatedBy = setting.UserIP,

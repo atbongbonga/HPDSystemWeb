@@ -421,11 +421,11 @@
     </div>
 
     <!-- Add New Task Modal-->
-    <div class="modal fade" id="addNewSprintTaskModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="addNewSprintTaskModal" tabindex="-1" role="dialog" aria-labelledby="antModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add New Task</h5>
+                    <h5 class="modal-title" id="antModalLabel">Add New Task</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -586,7 +586,7 @@
                     {
                         BactaskCard.append(
                             '<li class="sortable-item task" id="' + task.Id + '">' +
-                            (task.Type === 0 ? '<div class="card mb-4 py-3 border-left-info sprintTaskCard" data-id="' + task.Id + '">' : '<div class="card mb-4 py-3 border-left-danger sprintTaskCard"  data-id="' + task.Id + '">') +
+                            (task.Type === 0 ? '<div class="card mb-4 py-3 border-left-success sprintTaskCard" data-id="' + task.Id + '">' : '<div class="card mb-4 py-3 border-left-danger sprintTaskCard"  data-id="' + task.Id + '">') +
                             //'<div class="card mb-4 py-3 border-left-primary sprintTaskCard" >' +
                             '<div class="card-body">' +
                             '<div class="row">'+
@@ -607,7 +607,7 @@
                     else if (task.Activity === 2) {
                         DevtaskCard.append(
                             '<li class="sortable-item task" id="' + task.Id + '">' +
-                            (task.Type === 0 ? '<div class="card mb-4 py-3 border-left-info sprintTaskCard" data-id="' + task.Id + '">' : '<div class="card mb-4 py-3 border-left-danger sprintTaskCard"  data-id="' + task.Id + '">') +
+                            (task.Type === 0 ? '<div class="card mb-4 py-3 border-left-success sprintTaskCard" data-id="' + task.Id + '">' : '<div class="card mb-4 py-3 border-left-danger sprintTaskCard"  data-id="' + task.Id + '">') +
                             //'<div class="card mb-4 py-3 border-left-primary sprintTaskCard" >' +
                             '<div class="card-body">' +
                             '<div class="row">' +
@@ -628,7 +628,7 @@
                     else if (task.Activity === 3) {
                         TestaskCard.append(
                             '<li class="sortable-item task" id="' + task.Id + '">' +
-                            (task.Type === 0 ? '<div class="card mb-4 py-3 border-left-info sprintTaskCard" data-id="' + task.Id + '">' : '<div class="card mb-4 py-3 border-left-danger sprintTaskCard"  data-id="' + task.Id + '">') +
+                            (task.Type === 0 ? '<div class="card mb-4 py-3 border-left-success sprintTaskCard" data-id="' + task.Id + '">' : '<div class="card mb-4 py-3 border-left-danger sprintTaskCard"  data-id="' + task.Id + '">') +
                             //'<div class="card mb-4 py-3 border-left-primary sprintTaskCard" >' +
                             '<div class="card-body">' +
                             '<div class="row">' +
@@ -649,7 +649,7 @@
                     else if (task.Activity === 4) {
                         DeptaskCard.append(
                             '<li class="sortable-item task" id="' + task.Id + '">' +
-                            (task.Type === 0 ? '<div class="card mb-4 py-3 border-left-info sprintTaskCard" data-id="' + task.Id + '">' : '<div class="card mb-4 py-3 border-left-danger sprintTaskCard"  data-id="' + task.Id + '">') +
+                            (task.Type === 0 ? '<div class="card mb-4 py-3 border-left-success sprintTaskCard" data-id="' + task.Id + '">' : '<div class="card mb-4 py-3 border-left-danger sprintTaskCard"  data-id="' + task.Id + '">') +
                             //'<div class="card mb-4 py-3 border-left-primary sprintTaskCard" >' +
                             '<div class="card-body">' +
                             '<div class="row">' +
@@ -678,6 +678,7 @@
                 ClearTaskForm();
                 $("#btnANSTSave").show().prop('disabled', false);
                 $("#btnANSTUpdate").hide().prop('disabled', true);
+                $("#antModalLabel").text("Add New Task");
                 $('#addNewSprintTaskModal').modal('toggle');
             });
 
@@ -791,6 +792,8 @@
                 $("#btnANSTSave").hide().prop('disabled', true);
                 $("#btnANSTUpdate").show().prop('disabled', false);
                 $("#btnANSTUpdate").attr('data-id', taskId);
+                $("#antModalLabel").text("Update Task");
+                
                 $(".gj-editor").find("div[role='body']").html("");
                 $.post("@Url.Action("GetTaskDetails", "Project")", { taskId: taskId }, function (data) {
                     var taskdetails = $.parseJSON(data);
