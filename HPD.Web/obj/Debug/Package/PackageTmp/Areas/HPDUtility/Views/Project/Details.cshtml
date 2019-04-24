@@ -361,14 +361,17 @@
                             <form class="user" id="formANS">
                                 <div class="form-group row">
                                     <div class="col-sm-6">
+                                        <label for="txtANSTitle"><b>Title</b></label>
                                         <input type="text" class="form-control input-sm" id="txtANSTitle" required placeholder="Title" name="ANSTitle"  style="border-radius: 0 !important;">
                                     </div>
                                     <div class="col-sm-6">
+                                        <label for="txtANSProgramName"><b>Program Name</b></label>
                                         <input type="text" class="form-control input-sm" id="txtANSProgramName" disabled placeholder="Program"  style="border-radius: 0 !important;">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-lg-12">
+                                        <label for="msANSMember"><b>Member</b></label>
                                         <select class="form-control input-sm multipleSelect" multiple name="Developer" id="msANSMember" placeholder="Member">
 
                                         </select>
@@ -377,13 +380,16 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6">
+                                        <label for="txtANSSDate"><b>Start Date</b></label>
                                         <input type="date" class="form-control input-sm" id="txtANSSDate" required placeholder="Start Date" style="border-radius: 0 !important;">
                                     </div>
                                     <div class="col-sm-6">
+                                        <label for="txtANSEDate"><b>End Date</b></label>
                                         <input type="date" class="form-control input-sm" id="txtANSEDate" required placeholder="End Date" style="border-radius: 0 !important;">
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label for="txtANSEDate"><b>Blue Print</b></label>
                                     <input type="text" class="form-control input-sm" id="txtANSBP" required placeholder="Blue Print Path" style="border-radius: 0 !important;">
                                    
                                 </div>
@@ -395,15 +401,15 @@
                     <form class="user">
                         <div class="form-group row">
                             <div class="col-sm-6">
-                                <a href="#" class="btn btn-primary btn-circle" id="btnANSSave">
-                                    <i class="fas fa-save"></i>
+                                <a href="#" class="btn btn-primary" id="btnANSSave">Save
+                                    @*<i class="fas fa-save"></i>*@
                                 </a>
                             </div>
-                            <div class="col-sm-6">
-                                <a href="#" class="btn btn-danger btn-circle">
+                            @*<div class="col-sm-6">
+                                <a href="#" class="btn btn-danger">Delete
                                     <i class="fas fa-trash"></i>
                                 </a>
-                            </div>
+                            </div>*@
                         </div>
                     </form>
                 </div>
@@ -482,7 +488,7 @@
                         '<div class="row no-gutters align-items-center">' +
                         '<div class="col mr-2">' +
                         '<div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Bugs</div>' +
-                        '<div class="h5 mb-0 font-weight-bold text-gray-800">18</div>' +
+                        '<div class="h5 mb-0 font-weight-bold text-gray-800">' + sprint.BugCount + '</div>' +
                         '</div>' +
                         '<div class="col">' +
                         '<div class="progress progress-sm mr-2">' +
@@ -496,7 +502,7 @@
                         '<div class="row no-gutters align-items-center">' +
                         '<div class="col mr-2">' +
                         '<div class="text-xs font-weight-bold text-success text-uppercase mb-1">Task</div>' +
-                        '<div class="h5 mb-0 font-weight-bold text-gray-800">10</div>' +
+                        '<div class="h5 mb-0 font-weight-bold text-gray-800">' + sprint.TaskCount + '</div>' +
                         '</div>' +
                         '<div class="col">' +
                         '<div class="progress progress-sm mr-2">' +

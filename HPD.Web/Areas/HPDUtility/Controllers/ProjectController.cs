@@ -16,13 +16,22 @@ namespace HPD.Web.Areas.HPDUtility.Controllers
         // GET: HPDUtility/Project
         public ActionResult Details(string ProgramName)
         {
-            ViewBag.Message = ProgramName;
-            return View();
+            if (ProgramName != null)
+            {
+                ViewBag.Message = ProgramName;
+                return View();
+            }
+            return RedirectToAction("NotFound", "Error");
+
         }
-        public ActionResult Sprint(int Id)
+        public ActionResult Sprint(int ?Id)
         {
-            ViewBag.Message = Id;
-            return View();
+            if (Id != null)
+            {
+                ViewBag.Message = Id;
+                return View();
+            }
+            return RedirectToAction("NotFound", "Error");
         }
         [HttpPost]
         [AllowAnonymous]
