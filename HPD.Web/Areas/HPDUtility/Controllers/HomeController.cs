@@ -5,9 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 using DAL.Logics;
+using HPD.Web.CustomAuthentication;
 
 namespace HPD.Web.Areas.HPDUtility.Controllers
 {
+    [CustomAuthorize(Roles = "Admin")]
     public class HomeController : Controller
     {
         // GET: HPDUtility/Home
@@ -16,7 +18,6 @@ namespace HPD.Web.Areas.HPDUtility.Controllers
             return View();
         }
         //[HttpPost]
-        [AllowAnonymous]
         public ActionResult CreateErrorLog()
         {
             var errorLogComponent = new ErrorLogComponent();
@@ -25,7 +26,6 @@ namespace HPD.Web.Areas.HPDUtility.Controllers
             return null;
         }
         [HttpPost]
-        [AllowAnonymous]
         public ActionResult GetErrorLogs()
         {
             var errorLogComponent = new ErrorLogComponent();
@@ -34,7 +34,6 @@ namespace HPD.Web.Areas.HPDUtility.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
         public ActionResult GetErrorCountByIncharge()
         {
             var errorLogComponent = new ErrorLogComponent();
@@ -42,7 +41,6 @@ namespace HPD.Web.Areas.HPDUtility.Controllers
             return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        [AllowAnonymous]
         public ActionResult GetErrorCountByInchargeProgram(string InCharge)
         {
             var errorLogComponent = new ErrorLogComponent();

@@ -19,8 +19,8 @@
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort />
-    <IISExpressAnonymousAuthentication />
-    <IISExpressWindowsAuthentication />
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
@@ -149,6 +149,11 @@
     <Compile Include="Areas\HPDUtility\Controllers\HomeController.cs" />
     <Compile Include="Areas\HPDUtility\Controllers\ProjectController.cs" />
     <Compile Include="Areas\HPDUtility\HPDUtilityAreaRegistration.cs" />
+    <Compile Include="Areas\HPDUtility\Models\LoginViewModel.cs" />
+    <Compile Include="CustomAuthentication\CustomAuthorizeAttribute.cs" />
+    <Compile Include="CustomAuthentication\CustomMembership.cs" />
+    <Compile Include="CustomAuthentication\CustomMembershipUser.cs" />
+    <Compile Include="CustomAuthentication\CustomPrincipal.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1901,9 +1906,9 @@
     <Content Include="Content\vendor\jquery\jquery.slim.min.map" />
     <Content Include="Areas\HPDUtility\Views\Project\Details.cshtml" />
     <Content Include="Areas\HPDUtility\Views\Project\Sprint.cshtml" />
-    <Content Include="Areas\HPDUtility\Views\Account\Login.cshtml" />
     <Content Include="Areas\HPDUtility\Views\Shared\_LayoutAccount.cshtml" />
     <Content Include="Areas\HPDUtility\Views\Error\NotFound.cshtml" />
+    <Content Include="Areas\HPDUtility\Views\Account\Index.cshtml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
@@ -1930,7 +1935,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\HPDUtility\Content\image\" />
-    <Folder Include="Areas\HPDUtility\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

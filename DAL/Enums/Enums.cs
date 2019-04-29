@@ -28,4 +28,9 @@ namespace DAL.Enums
         Task = 0,
         Bug = 1
     }
+    enum Roles
+    {
+        User,
+        Admin
+    }
 }
