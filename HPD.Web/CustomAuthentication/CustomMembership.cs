@@ -35,14 +35,22 @@ namespace HPD.Web.CustomAuthentication
                 SqlCommand cmd = new SqlCommand("UserLogin", cn);
 
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("@UserName", SqlDbType.VarChar).Value = "bong";
-                cmd.Parameters.Add("@Password", SqlDbType.VarChar).Value = "nllnlf41514";
+                cmd.Parameters.Add("@UserName", SqlDbType.VarChar).Value = username;
+                cmd.Parameters.Add("@Password", SqlDbType.VarChar).Value = password;
                 SqlDataReader dr = cmd.ExecuteReader();
                 if (dr.HasRows)
                 {
                     dr.Read();
-
-                    return true;
+                    var model = (new Users
+                    {
+                        UserId = Convert.ToInt32(dr["UserID"])
+                    });
+                    if (model.UserId.ToString() != null)
+                    {
+                        return true;
+                    }
+                    return false;
+                    
                 }
                 cn.Close();
                 return false;
@@ -94,24 +102,21 @@ namespace HPD.Web.CustomAuthentication
 
             using (SqlConnection cn = new SqlConnection(dbcon))
             {
+                
                 cn.Open();
-                SqlCommand cmd = new SqlCommand("UserLogin", cn);
 
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("@UserName", SqlDbType.VarChar).Value = username;
-                cmd.Parameters.Add("@Password", SqlDbType.VarChar).Value = "nllnlf41514";
+                String query = "SELECT a.UserID, a.EmpName, a.Dept " +
+                               "FROM Users2 a " +
+                               "WHERE a.UserName ='" + username + "' ";
+
+                SqlCommand cmd = new SqlCommand(query, cn);
                 SqlDataReader dr = cmd.ExecuteReader();
                 if (dr.HasRows)
                 {
                     dr.Read();
                     var model = (new Users
                     {
-                        UserId = Convert.ToInt32(dr["UserID"]),
-                        Username = Convert.ToString(dr["UserName"]),
-                        FirstName = Convert.ToString(dr["EmpName"]),
-                        LastName = Convert.ToString(dr["EmpName"]),
-                        Email = Convert.ToString(dr["EmpName"]),
-                        Role = "Admin"
+                        UserId = Convert.ToInt32(dr["UserID"])
                     });
                     var selectedUser = new CustomMembershipUser(model);
                     return selectedUser;

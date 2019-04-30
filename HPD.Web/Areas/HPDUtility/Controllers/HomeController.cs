@@ -12,19 +12,13 @@ namespace HPD.Web.Areas.HPDUtility.Controllers
     [CustomAuthorize(Roles = "Admin")]
     public class HomeController : Controller
     {
+        
         // GET: HPDUtility/Home
         public ActionResult Index()
         {
             return View();
         }
-        //[HttpPost]
-        public ActionResult CreateErrorLog()
-        {
-            var errorLogComponent = new ErrorLogComponent();
-            //var result = errorLogComponent.CreateErroLog("001", "sample");
-            //return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
-            return null;
-        }
+
         [HttpPost]
         public ActionResult GetErrorLogs()
         {
@@ -47,6 +41,18 @@ namespace HPD.Web.Areas.HPDUtility.Controllers
             var result = errorLogComponent.GetErrorCountByProgram(InCharge);
             return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
         }
-
+        [HttpPost]
+        public ActionResult GetUserProfileImage()
+        {
+            var identity = ((CustomPrincipal)HttpContext.User);
+            if (identity != null)
+            {
+                var userComponent = new UserComponent();
+                var result = userComponent.GetUserDetails(Convert.ToString(identity.UserId));
+                return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
+            }
+            return null;
+            
+        }
     }
 }

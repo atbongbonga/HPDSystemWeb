@@ -28,7 +28,7 @@ namespace HPD.Web
 
         protected void Application_PostAuthenticateRequest(Object sender, EventArgs e)
         {
-            HttpCookie authCookie = Request.Cookies["Cookie1"];
+            HttpCookie authCookie = Request.Cookies["userseccookie"];
             if (authCookie != null)
             {
                 FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookie.Value);

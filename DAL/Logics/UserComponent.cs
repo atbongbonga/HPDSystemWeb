@@ -16,35 +16,38 @@ namespace DAL.Logics
         String dbcon = ConfigurationManager.ConnectionStrings["STAGHPCOMMON"].ConnectionString;
 
 
-        public List<Users> ValidateAccount()
+        public Users GetUserDetails(string EmpCode)
         {
-            var model = new List<Users>();
+
             using (SqlConnection cn = new SqlConnection(dbcon))
             {
                 cn.Open();
-                SqlCommand cmd = new SqlCommand("UserLogin", cn);
 
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("@UserName", SqlDbType.VarChar).Value = "bong";
-                cmd.Parameters.Add("@Password", SqlDbType.VarChar).Value = "nllnlf41514";
+
+                String query = "SELECT a.EmpCode, a.EmpName, a.LName, a.FName, a.MName, b.EmpImg " +
+                                          "FROM SCEmp a " +
+                                          "LEFT JOIN EMPPic b on b.EmpCode = CAST(a.EmpCode AS varchar) " +
+                                          "WHERE a.EmpCode ='" + EmpCode + "' ";
+
+                SqlCommand cmd = new SqlCommand(query, cn);
                 SqlDataReader dr = cmd.ExecuteReader();
                 if (dr.HasRows)
                 {
                     dr.Read();
-                    model.Add(new Users
+                    var model = (new Users
                     {
-                        UserId = Convert.ToInt32(dr["UserID"]),
-                        Username = Convert.ToString(dr["UserName"]),
-                        FirstName = Convert.ToString(dr["EmpName"]),
-                        LastName = Convert.ToString(dr["EmpName"]),
-                        Email = Convert.ToString(dr["EmpName"]),
-                        Role = "User"
+                        UserId = Convert.ToInt32(dr["EmpCode"]),
+                        FirstName = Convert.ToString(dr["FName"]),
+                        LastName = Convert.ToString(dr["LName"]),
+                        ProfileImg = (byte[])(dr["EmpImg"]),
+                        Role = "Admin"
                     });
 
                     return model;
                 }
-                return null;
                 cn.Close();
+                return null;
+               
             }
         }
 

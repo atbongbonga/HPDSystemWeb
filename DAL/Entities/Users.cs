@@ -13,7 +13,15 @@ namespace DAL.Entities
         public string Password { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public byte[] ProfileImg { get; set; }
         public string Email { get; set; }
         public string Role { get; set; }
+    }
+    public class UserDetails : Users
+    {
+        public string EmpCode { get; set; }
+
+        
+
     }
 }

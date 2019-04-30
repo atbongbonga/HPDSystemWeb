@@ -13,40 +13,41 @@ using HPD.Web.Areas.HPDUtility.Models;
 
 namespace HPD.Web.Areas.HPDUtility.Controllers
 {
+    [AllowAnonymous]
     public class AccountController : Controller
     {
         // GET: HPDUtility/Account
-        public ActionResult Index(string ReturnUrl = "")
+        public ActionResult Index()
         {
             if (User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Index", "Home");
             }
-            ViewBag.ReturnUrl = ReturnUrl;
             return View();
         }
 
         [HttpPost]
-        [AllowAnonymous]
         //[ValidateAntiForgeryToken]
         public ActionResult Login(LoginViewModel loginvm)
         {
-            string ReturnUrl = "";
-            //var userComponent = new UserComponent();
 
             if (Membership.ValidateUser(loginvm.UserName, loginvm.Password))
             {
-                var user = (CustomMembershipUser)Membership.GetUser(loginvm.UserName, false);
-                if (user != null)
+                var getuser = (CustomMembershipUser)Membership.GetUser(loginvm.UserName, false);
+                
+                if (getuser != null)
                 {
+                    var userComponent = new UserComponent();
+                    var getuserdetail = userComponent.GetUserDetails(Convert.ToString(getuser.UserId));
                     Models.CustomSerializeModel userModel = new Models.CustomSerializeModel()
                     {
-                        UserId = user.UserId,
-                        FirstName = user.FirstName,
-                        LastName = user.LastName,
-                        RoleName = user.Role
-                    };
+                        UserId = getuserdetail.UserId,
+                        FirstName = getuserdetail.FirstName,
+                        LastName = getuserdetail.LastName,
+                        RoleName = getuserdetail.Role
 
+                    };
+                    
                     string userData = JsonConvert.SerializeObject(userModel);
                     FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket
                         (
@@ -54,35 +55,25 @@ namespace HPD.Web.Areas.HPDUtility.Controllers
                         );
 
                     string enTicket = FormsAuthentication.Encrypt(authTicket);
-                    HttpCookie faCookie = new HttpCookie("Cookie1", enTicket);
+                    HttpCookie faCookie = new HttpCookie("userseccookie", enTicket);
                     Response.Cookies.Add(faCookie);
+
+                    return RedirectToAction("Index", "Home");
                 }
 
-                if (Url.IsLocalUrl(ReturnUrl))
-                {
-                    return Redirect(ReturnUrl);
-                }
-                else
-                {
-                    return RedirectToAction("Index","Home");
-                }
             }
-            return View();
+            return View(); 
         }
 
         public ActionResult Logout()
         {
-            HttpCookie cookie = new HttpCookie("Cookie1", "");
+            HttpCookie cookie = new HttpCookie("userseccookie", "");
             cookie.Expires = DateTime.Now.AddDays(-10);
             cookie.Value = null;
             Response.Cookies.Add(cookie);
 
             FormsAuthentication.SignOut();
-            return RedirectToAction("Index", "Account", null);
+            return RedirectToAction("Index", "Account");
         }
-        //public ActionResult Login(string u, string p)
-        //{
-        //    return View();
-        //}
     }
 }

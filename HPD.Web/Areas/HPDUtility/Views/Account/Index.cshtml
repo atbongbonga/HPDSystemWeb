@@ -2,9 +2,6 @@
 @{
     Layout = "~/Areas/HPDUtility/Views/Shared/_LayoutAccount.cshtml";
 }
-
-<body style="background-color:#007E33">
-
     <div class="container">
 
         <!-- Outer Row -->
@@ -37,7 +34,7 @@
                                                 <label class="custom-control-label" for="customCheck">Remember Me</label>
                                             </div>
                                         </div>
-                                        <a href="#" class="btn btn-success btn-user btn-block" id="btnUserLogin">
+                                        <a class="btn btn-success btn-user btn-block text-white" id="btnUserLogin">
                                             Login
                                         </a>
                                     </form>
@@ -59,21 +56,28 @@
         </div>
 
     </div>
-
-</body>
 @section scripts
 {
     <script type="text/javascript">
         $(document).ready(function () {
 
+            window.addEventListener("pageshow", function (event) {
+                var historyTraversal = event.persisted ||
+                    (typeof window.performance != "undefined" &&
+                        window.performance.navigation.type === 2);
+                if (historyTraversal) {
+                    // Handle page restore.
+                    window.location.reload();
+                }
+            });
+
             $("#btnUserLogin").on("click", function () {
-                var u = $("#txtUserName").text();
-                var p = $("#txtPassword").text();
+                var u = String($("#txtUserName").val());
+                var p = String($("#txtPassword").val());
                 var adata = {
                     loginvm: 
-                        { 'UserName': u, 'Password': p}
+                        { 'UserName':u, 'Password': p}
                 }
-                
                 $.ajax({
                     url: '@Url.Action("Login", "Account")',
                     dataType: 'json',
@@ -81,11 +85,13 @@
                     data: JSON.stringify(adata),
                     contentType: "application/json; charset=utf-8",
                     success: function () {
-
+                        location.reload();
                     },
                     error: function (err) {
-                        alert(err);
+                        //alert(err);
+                        location.reload();
                     }
+                    
                 });
             });
         });

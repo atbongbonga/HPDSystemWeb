@@ -8,9 +8,11 @@ using DAL.Logics;
 using System.IO;
 using DAL.Entities;
 using System.Net;
+using HPD.Web.CustomAuthentication;
 
 namespace HPD.Web.Areas.HPDUtility.Controllers
 {
+    [CustomAuthorize(Roles = "Admin")]
     public class ProjectController : Controller
     {
         // GET: HPDUtility/Project
