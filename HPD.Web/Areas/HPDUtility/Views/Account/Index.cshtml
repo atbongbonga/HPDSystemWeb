@@ -71,11 +71,13 @@
                 }
             });
 
+            var res = "@ViewBag.Message";
+
             $("#btnUserLogin").on("click", function () {
                 var u = String($("#txtUserName").val());
                 var p = String($("#txtPassword").val());
                 var adata = {
-                    loginvm: 
+                    loginvm:
                         { 'UserName':u, 'Password': p}
                 }
                 $.ajax({
@@ -86,12 +88,13 @@
                     contentType: "application/json; charset=utf-8",
                     success: function () {
                         location.reload();
+                        alert("wew");
                     },
                     error: function (err) {
-                        //alert(err);
                         location.reload();
+                        alert(res);
                     }
-                    
+
                 });
             });
         });

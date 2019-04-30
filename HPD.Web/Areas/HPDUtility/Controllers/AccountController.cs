@@ -58,10 +58,13 @@ namespace HPD.Web.Areas.HPDUtility.Controllers
                     HttpCookie faCookie = new HttpCookie("userseccookie", enTicket);
                     Response.Cookies.Add(faCookie);
 
+                    ViewBag.Message = "Valid Credential";
                     return RedirectToAction("Index", "Home");
+
                 }
 
             }
+            ViewBag.Message = "Invalid Credential";
             return View(); 
         }
 
