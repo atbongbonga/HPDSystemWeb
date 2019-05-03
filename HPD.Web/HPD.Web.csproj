@@ -1909,6 +1909,8 @@
     <Content Include="Areas\HPDUtility\Views\Shared\_LayoutAccount.cshtml" />
     <Content Include="Areas\HPDUtility\Views\Error\NotFound.cshtml" />
     <Content Include="Areas\HPDUtility\Views\Account\Index.cshtml" />
+    <Content Include="Areas\HPDUtility\Views\Home\UserView.cshtml" />
+    <Content Include="Areas\HPDUtility\Views\Home\AdminView.cshtml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />

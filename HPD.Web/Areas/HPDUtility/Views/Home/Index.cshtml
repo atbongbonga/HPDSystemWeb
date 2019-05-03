@@ -1,119 +1,21 @@
-﻿
+﻿@using HPD.Web.CustomAuthentication
 @{
     Layout = "~/Areas/HPDUtility/Views/Shared/_Layout.cshtml";
 }
+@if (HttpContext.Current.User.Identity.IsAuthenticated)
+{
+    var identity = ((CustomPrincipal)HttpContext.Current.User);
+    if (identity.Roles == "Admin")
+    {
+        @Html.Partial("AdminView")
+    }
+    else if (identity.Roles == "User")
+    {
+        @Html.Partial("UserView");
+    }
+}
     
-    <!-- Begin Page Content -->
-    <div class="container-fluid">
-
-                <!-- Page Heading -->
-                <h1 class="h3 mb-4 text-gray-800">Dashboard</h1>
-
-                <div class="row">
-                    <div class="col-lg-12">
-                        <!-- Basic Card Example -->
-                        <div class="card shadow mb-4" style="display:none">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Projects Owned</h6>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-xl-3 col-md-6 mb-4">
-                                        <div class="card border-left-primary shadow h-100 py-2">
-                                            <div class="card-header">
-                                                <h6 class="m-0 font-weight-bold text-primary">Project Name</h6>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="row no-gutters align-items-center">
-                                                    <div class="col mr-2">
-                                                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Bugs</div>
-                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="progress progress-sm mr-2">
-                                                            <div class="progress-bar bg-danger" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-auto">
-                                                        <i class="fas fa-bug fa-2x text-gray-300"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="row no-gutters align-items-center">
-                                                    <div class="col mr-2">
-                                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Task</div>
-                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">10</div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="progress progress-sm mr-2">
-                                                            <div class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-auto">
-                                                        <i class="fas fa-tasks fa-2x text-gray-300"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-xl-12 col-lg-8">
-                        <div class="card shadow mb-4">
-                            <!-- Card Header - Dropdown -->
-                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">System Developer</h6>
-
-                            </div>
-                            <div class="card-body">
-                                <div class="row" id="cardEmpLst">
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <!-- /.container-fluid -->
-            </div>
-    <!-- End of Main Content -->
-
-    <!-- List of Program Modal-->
-    <div class="modal fade" id="programListModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Projects</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="container-fluid">
-                        <div class="row" id="programDetails">
-
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <form class="user">
-                        <div class="form-group row">
-                            <div class="col-sm-6">
-                                <a href="#" class="btn btn-danger btn-circle" data-dismiss="modal">
-                                    <i class="fas fa-window-close"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 
 @section scripts
 {
@@ -206,7 +108,59 @@
             });
 
 
+
+
+
+            //USER ROLE JS
+
+
+            var id = $("#userIdentity").attr("data-id");
+            var adata = {
+                InCharge: id
+            }
+            console.log()
+            $.ajax({
+                url: '@Url.Action("GetErrorCountByInchargeProgram", "Home")',
+                dataType: "json",
+                method: 'post',
+                data: {
+                    InCharge: id
+                },
+                success: function (data) {
+                    var projectCard = $('#userProject');
+                    projectCard.empty();
+                    data = JSON.parse(data);
+                    $(data).each(function (index, proj) {
+                        projectCard.append(
+                            '<div class="col-xl-3 col-md-3 mb-3" id="ProjectDetails" data-id="' + proj.ProgramName + '">' +
+                            '<div class="card border-left-primary shadow h-100">' +
+                            '<div class="card-header">' +
+                            '<h6 class="m-0 font-weight-bold text-primary">' + proj.ProgramName + '</h6>' +
+                            '</div>' +
+                            '<div class="card-body">' +
+                            '<div class="row no-gutters align-items-center">' +
+                            '<div class="col mr-2">' +
+                            '<div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Bugs</div>' +
+                            '<div class="h5 mb-0 font-weight-bold text-gray-800">' + proj.IssueCount + '</div>' +
+                            '</div>' +
+                            '<div class="col-auto">' +
+                            '<i class="fas fa-bug fa-2x text-gray-300"></i>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>'
+                        );
+                    });
+                },
+                error: function (err) {
+                    alert(err);
+                }
+            });
+
+
         });
+
 
     </script>
 }

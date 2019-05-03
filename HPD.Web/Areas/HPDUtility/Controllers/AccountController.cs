@@ -10,6 +10,7 @@ using System.Web.Security;
 using DAL.Logics;
 using HPD.Web.CustomAuthentication;
 using HPD.Web.Areas.HPDUtility.Models;
+using Enums = DAL.Enums;
 
 namespace HPD.Web.Areas.HPDUtility.Controllers
 {
@@ -19,15 +20,27 @@ namespace HPD.Web.Areas.HPDUtility.Controllers
         // GET: HPDUtility/Account
         public ActionResult Index()
         {
+           
             if (User.Identity.IsAuthenticated)
             {
+                #region role designation
+                //var identity = ((CustomPrincipal)HttpContext.User);
+                //if (identity.Roles.Contains(Enums.Roles.Admin.ToString()))
+                //{
+                //    return RedirectToAction("Index", "Home");
+                //}
+                //else if (identity.Roles.Contains(Enums.Roles.User.ToString()))
+                //{
+                //    return RedirectToAction("NotFound", "Error");
+                //}
+                #endregion
+
                 return RedirectToAction("Index", "Home");
             }
             return View();
         }
 
         [HttpPost]
-        //[ValidateAntiForgeryToken]
         public ActionResult Login(LoginViewModel loginvm)
         {
 
@@ -58,14 +71,16 @@ namespace HPD.Web.Areas.HPDUtility.Controllers
                     HttpCookie faCookie = new HttpCookie("userseccookie", enTicket);
                     Response.Cookies.Add(faCookie);
 
-                    ViewBag.Message = "Valid Credential";
-                    return RedirectToAction("Index", "Home");
+                    var successres = new { success = true, message = "Valid Credential" };
+                   
+                    return Json(JsonConvert.SerializeObject(successres),JsonRequestBehavior.AllowGet);
 
                 }
 
             }
-            ViewBag.Message = "Invalid Credential";
-            return View(); 
+            var errorres = new { success = false, message = "Invalid Credential" };
+
+            return Json(JsonConvert.SerializeObject(errorres), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Logout()

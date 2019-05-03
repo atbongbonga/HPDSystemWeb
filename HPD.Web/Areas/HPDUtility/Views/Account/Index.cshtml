@@ -39,12 +39,15 @@
                                         </a>
                                     </form>
                                     <hr>
-                                    <div class="text-center">
+                                    <div class="loginalertmessage">
+                                        
+                                    </div>
+                                    @*<div class="text-center">
                                         <a class="small" href="#">Forgot Password?</a>
                                     </div>
                                     <div class="text-center">
                                         <a class="small" href="#">Create an Account!</a>
-                                    </div>
+                                    </div>*@
                                 </div>
                             </div>
                         </div>
@@ -61,6 +64,10 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
+            //timer = setTimeout(function () {
+            //    $('.loginalertmessage').hide(500);
+            //}, 3000);
+
             window.addEventListener("pageshow", function (event) {
                 var historyTraversal = event.persisted ||
                     (typeof window.performance != "undefined" &&
@@ -74,6 +81,7 @@
             var res = "@ViewBag.Message";
 
             $("#btnUserLogin").on("click", function () {
+                $(".loginalertmessage").hide();
                 var u = String($("#txtUserName").val());
                 var p = String($("#txtPassword").val());
                 var adata = {
@@ -86,13 +94,38 @@
                     method: 'post',
                     data: JSON.stringify(adata),
                     contentType: "application/json; charset=utf-8",
-                    success: function () {
-                        location.reload();
-                        alert("wew");
+                    success: function (res) {
+                        var alertmsg = $('.loginalertmessage');
+                        alertmsg.empty();
+                        res = JSON.parse(res);
+                        
+                        if (res.success) {
+                            alertmsg.append('<div class="alert alert-success" role="alert">' +
+                                '<strong> Success! </strong >' 
+                                + res.message + '</div>');
+
+                            $(".loginalertmessage").fadeTo(1000, 500).slideUp(200, function () {
+                                $(".loginalertmessage").slideUp(200);
+                                location.reload();
+                            });
+                        }
+                        else
+                        {
+                            alertmsg.append('<div class="alert alert-danger" role="alert">' +
+                                '<strong> Error! </strong >' 
+                                + res.message + '</div>');
+
+                            $(".loginalertmessage").fadeTo(2000, 500).slideUp(500, function () {
+                                $(".loginalertmessage").slideUp(500);
+                            });
+
+                        }
+                       
+                        
                     },
                     error: function (err) {
-                        location.reload();
-                        alert(res);
+                        //location.reload();
+                        alert(res.message);
                     }
 
                 });

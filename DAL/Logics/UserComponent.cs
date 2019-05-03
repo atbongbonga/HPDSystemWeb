@@ -24,9 +24,11 @@ namespace DAL.Logics
                 cn.Open();
 
 
-                String query = "SELECT a.EmpCode, a.EmpName, a.LName, a.FName, a.MName, b.EmpImg " +
+                String query = "SELECT a.EmpCode, a.EmpName, a.LName, a.FName, a.MName, b.EmpImg, c.UserRole, d.EmpName AS Name " +
                                           "FROM SCEmp a " +
                                           "LEFT JOIN EMPPic b on b.EmpCode = CAST(a.EmpCode AS varchar) " +
+                                          "LEFT JOIN Users2 c on c.UserID = CAST(a.EmpCode AS varchar) " +
+                                          "LEFT JOIN developer d on d.EmpCode = CAST(a.EmpCode AS varchar) " +
                                           "WHERE a.EmpCode ='" + EmpCode + "' ";
 
                 SqlCommand cmd = new SqlCommand(query, cn);
@@ -37,10 +39,10 @@ namespace DAL.Logics
                     var model = (new Users
                     {
                         UserId = Convert.ToInt32(dr["EmpCode"]),
-                        FirstName = Convert.ToString(dr["FName"]),
+                        FirstName = Convert.ToString(dr["Name"]),
                         LastName = Convert.ToString(dr["LName"]),
                         ProfileImg = (byte[])(dr["EmpImg"]),
-                        Role = "Admin"
+                        Role = Convert.ToString(dr["UserRole"]),
                     });
 
                     return model;

@@ -31,7 +31,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/25/2019 15:24:51</publishTime>
     </File>
     <File Include="Areas/HPDUtility/Views/Account/Index.cshtml">
-      <publishTime>04/30/2019 14:23:46</publishTime>
+      <publishTime>05/02/2019 13:42:31</publishTime>
     </File>
     <File Include="Areas/HPDUtility/Views/Account/Login.cshtml">
       <publishTime>04/24/2019 12:44:13</publishTime>
@@ -39,8 +39,14 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Areas/HPDUtility/Views/Error/NotFound.cshtml">
       <publishTime>04/25/2019 08:40:44</publishTime>
     </File>
+    <File Include="Areas/HPDUtility/Views/Home/AdminView.cshtml">
+      <publishTime>05/03/2019 13:14:49</publishTime>
+    </File>
     <File Include="Areas/HPDUtility/Views/Home/Index.cshtml">
-      <publishTime>04/30/2019 17:53:53</publishTime>
+      <publishTime>05/03/2019 13:23:05</publishTime>
+    </File>
+    <File Include="Areas/HPDUtility/Views/Home/UserView.cshtml">
+      <publishTime>05/03/2019 11:19:38</publishTime>
     </File>
     <File Include="Areas/HPDUtility/Views/Project/Details.cshtml">
       <publishTime>04/30/2019 17:57:38</publishTime>
@@ -49,7 +55,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/30/2019 18:01:20</publishTime>
     </File>
     <File Include="Areas/HPDUtility/Views/Shared/_Layout.cshtml">
-      <publishTime>04/30/2019 17:56:25</publishTime>
+      <publishTime>05/03/2019 11:53:03</publishTime>
     </File>
     <File Include="Areas/HPDUtility/Views/Shared/_LayoutAccount.cshtml">
       <publishTime>04/24/2019 11:00:54</publishTime>
@@ -73,13 +79,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/02/2019 15:14:15</publishTime>
     </File>
     <File Include="bin/DAL.dll">
-      <publishTime>04/30/2019 17:57:52</publishTime>
+      <publishTime>05/03/2019 13:20:56</publishTime>
     </File>
     <File Include="bin/DAL.dll.config">
       <publishTime>04/22/2019 11:23:00</publishTime>
     </File>
     <File Include="bin/DAL.pdb">
-      <publishTime>04/30/2019 17:57:52</publishTime>
+      <publishTime>05/03/2019 13:20:56</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>10/23/2017 13:15:18</publishTime>
@@ -88,10 +94,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/23/2017 13:15:20</publishTime>
     </File>
     <File Include="bin/HPD.Web.dll">
-      <publishTime>04/30/2019 18:01:34</publishTime>
+      <publishTime>05/03/2019 13:24:17</publishTime>
     </File>
     <File Include="bin/HPD.Web.pdb">
-      <publishTime>04/30/2019 18:01:34</publishTime>
+      <publishTime>05/03/2019 13:24:17</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.TelemetryCorrelation.dll">
       <publishTime>03/26/2019 08:58:09</publishTime>
@@ -5467,7 +5473,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/26/2019 08:58:08</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>04/30/2019 18:01:38</publishTime>
+      <publishTime>05/03/2019 13:24:20</publishTime>
     </File>
   </ItemGroup>
 </Project>

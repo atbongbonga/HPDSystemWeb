@@ -227,9 +227,10 @@
                                 @if (HttpContext.Current.User.Identity.IsAuthenticated)
                                 {
                                     var identity = ((CustomPrincipal)HttpContext.Current.User);
-                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="userIdentity" data-id="@identity.FirstName">
                                         @Html.Label(string.Format(identity.FirstName))
                                     </span>
+
                                 }
                                 <img id="imguserprofile" class="img-profile rounded-circle" src="">
 
