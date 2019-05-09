@@ -145,6 +145,7 @@
     <Compile Include="Areas\HPDUtility\api\ErrorLogController.cs" />
     <Compile Include="Areas\HPDUtility\api\param\APIErrorLog.cs" />
     <Compile Include="Areas\HPDUtility\Controllers\AccountController.cs" />
+    <Compile Include="Areas\HPDUtility\Controllers\DataDictionaryController.cs" />
     <Compile Include="Areas\HPDUtility\Controllers\ErrorController.cs" />
     <Compile Include="Areas\HPDUtility\Controllers\HomeController.cs" />
     <Compile Include="Areas\HPDUtility\Controllers\ProjectController.cs" />
@@ -162,10 +163,12 @@
   <ItemGroup>
     <Content Include="Areas\HPDUtility\Content\css\fastselect.css" />
     <Content Include="Areas\HPDUtility\Content\css\fastselect.min.css" />
+    <Content Include="Areas\HPDUtility\Content\css\selectize.bootstrap3.css" />
     <Content Include="Areas\HPDUtility\Content\js\fastselect.js" />
     <Content Include="Areas\HPDUtility\Content\js\fastselect.min.js" />
     <Content Include="Areas\HPDUtility\Content\js\fastselect.standalone.js" />
     <Content Include="Areas\HPDUtility\Content\js\fastselect.standalone.min.js" />
+    <Content Include="Areas\HPDUtility\Content\js\selectize.min.js" />
     <Content Include="Content\image\Global\hipre-logoLg.jpeg" />
     <Content Include="Content\js\Global\jquery-sortable.js" />
     <Content Include="Content\bootstrap.css" />
@@ -1911,6 +1914,7 @@
     <Content Include="Areas\HPDUtility\Views\Account\Index.cshtml" />
     <Content Include="Areas\HPDUtility\Views\Home\UserView.cshtml" />
     <Content Include="Areas\HPDUtility\Views\Home\AdminView.cshtml" />
+    <Content Include="Areas\HPDUtility\Views\DataDictionary\Index.cshtml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />

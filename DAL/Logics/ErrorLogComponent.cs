@@ -63,7 +63,8 @@ namespace DAL.Logics
                     ErrSrc = ErrSrc,
                     ErrDtls = ErrDtls,
                     IssueID = Convert.ToInt32(IssueID),
-                    ErrCode = ErrCode
+                    ErrCode = ErrCode,
+                    Fixed = "N"
                 };
                 db.ErrorLogs.Add(adderrlog);
                 db.SaveChanges();

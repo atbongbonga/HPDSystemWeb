@@ -51,12 +51,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Entities\DataDictionary.cs" />
     <Compile Include="Entities\Developers.cs" />
     <Compile Include="Entities\ErrorLogs.cs" />
     <Compile Include="Entities\ProjectSprints.cs" />
     <Compile Include="Entities\SprintTasks.cs" />
     <Compile Include="Entities\Users.cs" />
     <Compile Include="Enums\Enums.cs" />
+    <Compile Include="Logics\DataDictionaryComponent.cs" />
     <Compile Include="Logics\DeveloperComponent.cs" />
     <Compile Include="Logics\ErrorLogComponent.cs" />
     <Compile Include="Logics\SprintTaskComponent.cs" />

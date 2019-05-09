@@ -1,0 +1,328 @@
+﻿@{
+    Layout = "~/Areas/HPDUtility/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-4 text-gray-800">Data Dictionary</h1>
+
+    <div class="row">
+        <div class="col-xl-12 col-lg-8">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                @*<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Data Dictionary</h6>
+
+                </div>*@
+                <div class="card-body">
+                    <div class="dbconalertmessage">
+
+                    </div>
+                    <div class="row" id="cardServerInfo">
+                        <div class="col-lg-12 col-md-3">
+                            <form>
+                                <div class="form-group row">
+                                    <div class="col-lg-3 col-md-3">
+                                        <input type="text" class="form-control form-control-user" id="txtDDSrvName" placeholder="Server Name">
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <input type="text" class="form-control form-control-user" id="txtDDSrvUserName" placeholder="Username">
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <input type="password" class="form-control form-control-user" id="txtDDSrvPassword" placeholder="Password">
+                                    </div>
+                                    <div class="col-lg-auto">
+                                        <a class="btn btn-success btn-user btn-block text-white" id="btnDDSrvLogin">
+                                            Login
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-auto" >
+                                        <a class="btn btn-danger btn-user btn-block text-white" id="btnDDSrvLogout" style="display:none">
+                                            Logout
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                            </form>
+                        </div>
+                    </div><hr>
+                    <div id="ServerInfoDiv" style="display:none">
+                    <h1 class="h5 mb-2 text-gray-800">Server Details:</h1>
+                    <div class="row" id="cardTableInfo">
+                        <div class="col-lg-6 col-md-6">
+                            <div class="row">
+                                <div class="col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <select class="form-control sm singleInputDynamic" data-load-once="true" name="Database" id="msDDDatabase" placeholder="Database">
+                                        </select>
+                                    </div>
+                                </div><br>
+                                <div class="col-sm-6 col-md-6" id="divmsDDTable">
+                                    <div class="form-group">
+                                        <select class="form-control input-sm singleInputDynamic" data-load-once="true" name="Table" id="msDDTable" placeholder="Table">
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-2">
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-7 col-md-7">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <table id="tblDDTable" class="table table-bordered table-light table-hover table-responsive" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Column</th>
+                                                <th>Data Type</th>
+                                                <th>Description</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="dbTableBody"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-5 col-md-5" id="cardDatabaseInfo">
+                        </div>
+                    </div>  
+                    <div class="row">
+                        
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- /.container-fluid -->
+</div>
+<!-- End of Main Content -->
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+
+
+            window.addEventListener("pageshow", function (event) {
+                var historyTraversal = event.persisted ||
+                    (typeof window.performance != "undefined" &&
+                        window.performance.navigation.type === 2);
+                if (historyTraversal) {
+                    // Handle page restore.
+                    window.location.reload();
+                }
+            });
+
+            $("#btnDDSrvLogin").on("click", function () {
+                var sname = $("#txtDDSrvName").val();
+                var uname = $("#txtDDSrvUserName").val();
+                var pass = $("#txtDDSrvPassword").val();
+                $.post("@Url.Action("ServerLogin","DataDictionary")", { servername: sname, username: uname, password: pass}, function (data) {
+                    if (data == "true") {
+                        $("#txtDDSrvName").prop('disabled', true);
+                        $("#txtDDSrvUserName").prop('disabled', true);
+                        $("#txtDDSrvPassword").prop('disabled', true);
+                        $("#btnDDSrvLogout").show();
+                        $("#btnDDSrvLogin").hide();
+                        $.post("@Url.Action("GetServerDatabaseList", "DataDictionary")", { servername: sname, username: uname, password: pass }, function (data) {
+                             var dbList = $('#msDDDatabase');
+                             dbList.empty();
+                             data = JSON.parse(data);
+                             $(data).each(function (index, db) {
+                                 dbList.append(
+                                     '<option value="' + db.DatabaseName + '">' + db.DatabaseName + '</option>'
+                                 );
+                             });
+                        });
+
+                        var alertmsg = $('.dbconalertmessage');
+                        alertmsg.empty();
+                        alertmsg.append('<div class="alert alert-success" role="alert">' +
+                            '<strong> Success! </strong >Server Connected</div>');
+                        $(".dbconalertmessage").fadeTo(1000, 500).slideUp(500, function () {
+                            $(".dbconalertmessage").slideUp(500);
+                            $("#ServerInfoDiv").show().fadeIn(1000, 500);
+                        });
+                    }
+                    else {
+                        var alertmsg = $('.dbconalertmessage');
+                        alertmsg.empty();
+                        alertmsg.append('<div class="alert alert-danger" role="alert">' +
+                            '<strong> Error! </strong >Failed to connect,Kindly check your credentials</div>');
+                        $(".dbconalertmessage").fadeTo(1000, 500).slideUp(500, function () {
+                            $(".dbconalertmessage").slideUp(500);
+                            $("#ServerInfoDiv").hide().fadeOut(1000, 500);
+                        });
+                    }
+                });
+            });
+
+            $("#btnDDSrvLogout").on("click", function () {
+                $("#txtDDSrvName").prop('disabled', false);
+                $("#txtDDSrvUserName").prop('disabled', false);
+                $("#txtDDSrvPassword").prop('disabled', false);
+                $("#btnDDSrvLogout").hide();
+                $("#btnDDSrvLogin").show();
+                $("#ServerInfoDiv").hide().fadeOut(2000, 500);
+
+                location.reload(true);
+            });
+
+            $('#msDDDatabase').fastselect({
+                onItemSelect: function ($item, itemModel) {
+                    var sname = $("#txtDDSrvName").val();
+                    var uname = $("#txtDDSrvUserName").val();
+                    var pass = $("#txtDDSrvPassword").val();
+                    var db = itemModel.value;
+                    $.post("@Url.Action("GetDatabaseTableList", "DataDictionary")", { servername: sname, dbname: db, username: uname, password: pass }, function (data) {
+                        //$('#msDDTable').fastselect({
+                        //    onItemSelect: null
+                        //});
+                        var mstbList = $('#divmsDDTable').find('.fstResults');
+                        var tbList = $('#msDDTable');
+                        tbList.empty();
+                        data = JSON.parse(data);
+                        $(data).each(function (index, tb) {
+                            tbList.append(
+                                '<option value="' + tb.TableName + '">' + tb.TableName + '</option>'
+                            );
+                        });
+
+                    });
+                }
+            });
+
+            $('#msDDTable').fastselect({
+                onItemSelect: function ($item, itemModel) {
+                    var sname = $("#txtDDSrvName").val();
+                    var uname = $("#txtDDSrvUserName").val();
+                    var pass = $("#txtDDSrvPassword").val();
+                    var db = $("#msDDDatabase").val();
+                    var tbl = itemModel.value;
+                    $("#tblDDTable").dataTable().fnDestroy();
+                    tblTableProperties(sname, db, tbl, uname, pass);
+
+                    $.post("@Url.Action("GetDatabaseInformation", "DataDictionary")", { servername: sname, dbname: db, tblname: tbl, username: uname, password: pass } , function(data) {
+                        var dbinfo = $('#cardDatabaseInfo');
+                        dbinfo.empty();
+                        data = JSON.parse(data);
+                        dbinfo.append(
+                            '<div class="card mb-3" style="max-width: 20rem;">' +
+                            '<div class="card-body">' +
+                            '<h5 class="card-title text-info"><b>Database Information</b></h5>' +
+                            '<label><b>Database Name</b></label>' +
+                            '<p class="card-text">' + data.LogicalName +'</p>' +
+                            '<label><b>Data File Size</b></label>' +
+                            '<p class="card-text">' + data.DataFileSize +'MB</p>' +
+                            '<label><b>Log File Size</b></label>' +
+                            '<p class="card-text">' + data.LogFileSize +'</p>' +
+                            '<label><b>Total Table</b></label>' +
+                            '<p class="card-text">' + data.DatabaseTableCount +'</p>' +
+                            '<h5 class="card-title text-info"><b>Table Information</b></h5>' +
+                            '<label><b>Table Name</b></label>' +
+                            '<p class="card-text">' + data.TableName +'</p>' +
+                            '<label><b>Total Data</b></label>' +
+                            '<p class="card-text">' + data.TableDataCount +'</p>' +
+                            '</div>' +
+                            '</div>'
+                        );
+                     
+
+                    });
+                }
+            });
+
+            var tblTableProperties = function (sname, db, tbl, uname, pass) {
+                $("#tblDDTable").DataTable({
+                        "processing": true,
+                        "serverSide": true,
+                        "filter": false,
+                        "pageLength": 10,
+                        "ajax": {
+                            "url": "@Url.Action("GetTableProperty", "DataDictionary")",
+                            "data": {
+                                "servername": sname,
+                                "dbname": db,
+                                "tblname": tbl,
+                                "username": uname,
+                                "password": pass,
+                            },
+                            "type": "POST",
+                            "datatype": "json"
+                        },
+                        "columns": [
+                            { "data": "ColumnName", "width": "30%" },
+                            { "data": "DataType", "width": "10%" },
+                            {
+                                "data": "Description", "width": "50%", render: function (data, type, row) {
+                                    if (data != null)
+                                    {
+                                        return data;
+                                    }
+                                    else
+                                    {
+                                        return '<input class="form-control" id="Markup" name="Markup" type="text"  value = ' + data + '  >';
+                                    }
+                                }
+                            },
+                            {
+                                "data": null, render: function (data, type, row) {
+                                    return "<button class='btn btn-circle btn-sm btn-primary edit'><i class='fas fa-pen fa-sm'></i></button>";
+                                }
+                            },
+                        ]
+                    });
+            };
+
+            //inline edit
+            $("#tblDDTable").on('mousedown.edit', ".edit", function (e) {
+
+                $(this).find('i').removeClass().addClass("fa fa-check");
+                $(this).removeClass('edit').addClass("save");
+                var $row = $(this).closest("tr").off("mousedown");
+                var $tds = $row.find("td:nth-child(3)");
+
+                $.each($tds, function (i, el) {
+                    var txt = $(this).text();
+                    $(this).html("").append("<input class='form-control input-sm' type='text' value=\"" + txt + "\">");
+                });
+            });
+            //inline save
+            $("#tblDDTable").on('mousedown.save', ".save", function (e) {
+                var sname = $("#txtDDSrvName").val();
+                var uname = $("#txtDDSrvUserName").val();
+                var pass = $("#txtDDSrvPassword").val();
+                var db = $("#msDDDatabase").val();
+                var tbl = $("#msDDTable").val();
+                var name = $(this).closest("tr").find("td:nth-child(1)").text();
+                var desc = $(this).closest("tr").find("input").val();
+
+                $(this).find('i').removeClass().addClass("fas fa-pen fa-sm");
+                $(this).removeClass('save').addClass("edit");
+                var $row = $(this).closest("tr");
+                var $tds = $row.find("td:nth-child(3)");
+
+                $.each($tds, function (i, el) {
+                    var txt = $(this).find("input").val()
+                    $(this).html(txt);
+                });
+
+                $.post("@Url.Action("SaveExtendedProperty", "DataDictionary")", { servername: sname, dbname: db, tblname: tbl, username: uname, password: pass, colname: name, coldesc: desc}, function (data) {
+                    //alert(data);
+                });
+
+            });
+
+        });
+    </script>
+}

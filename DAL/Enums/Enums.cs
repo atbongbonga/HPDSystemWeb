@@ -33,4 +33,9 @@ namespace DAL.Enums
         User,
         Admin
     }
+    public enum ConnState
+    {
+        Closed = 0,
+        Open = 1
+    }
 }

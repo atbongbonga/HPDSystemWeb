@@ -9,7 +9,7 @@ using HPD.Web.CustomAuthentication;
 
 namespace HPD.Web.Areas.HPDUtility.Controllers
 {
-    [CustomAuthorize(Roles = "Admin")]
+    [CustomAuthorize(Roles = "Admin, User")]
     public class HomeController : Controller
     {
         
