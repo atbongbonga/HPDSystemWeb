@@ -24,4 +24,9 @@ namespace DAL.Entities
         public string TableName { get; set; }
         public string TableDataCount { get; set; }
     }
+    public class DatabaseUsageInfo
+    {
+        public string DataFileSize { get; set; }
+        public string LogFileSize { get; set; }
+    }
 }

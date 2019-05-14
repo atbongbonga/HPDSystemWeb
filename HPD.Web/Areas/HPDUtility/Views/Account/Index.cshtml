@@ -77,10 +77,19 @@
                     window.location.reload();
                 }
             });
+            $("#txtUserName").focus();
 
             var res = "@ViewBag.Message";
-
+            $("#txtPassword").keypress(function (e) {
+                if (e.keyCode == '13')
+                {
+                    userLogin();
+                }
+            });
             $("#btnUserLogin").on("click", function () {
+                userLogin();
+            });
+            var userLogin = function () {
                 $(".loginalertmessage").hide();
                 var u = String($("#txtUserName").val());
                 var p = String($("#txtPassword").val());
@@ -98,10 +107,10 @@
                         var alertmsg = $('.loginalertmessage');
                         alertmsg.empty();
                         res = JSON.parse(res);
-                        
+
                         if (res.success) {
                             alertmsg.append('<div class="alert alert-success" role="alert">' +
-                                '<strong> Success! </strong >' 
+                                '<strong> Success! </strong >'
                                 + res.message + '</div>');
 
                             $(".loginalertmessage").fadeTo(1000, 500).slideUp(200, function () {
@@ -112,16 +121,16 @@
                         else
                         {
                             alertmsg.append('<div class="alert alert-danger" role="alert">' +
-                                '<strong> Error! </strong >' 
+                                '<strong> Error! </strong >'
                                 + res.message + '</div>');
 
                             $(".loginalertmessage").fadeTo(2000, 500).slideUp(500, function () {
                                 $(".loginalertmessage").slideUp(500);
                             });
-
+                            $("#txtUserName").focus();
                         }
-                       
-                        
+
+
                     },
                     error: function (err) {
                         //location.reload();
@@ -129,7 +138,8 @@
                     }
 
                 });
-            });
+            };
+
         });
     </script>
 }

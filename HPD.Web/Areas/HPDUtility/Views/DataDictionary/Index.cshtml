@@ -1,7 +1,10 @@
 ﻿@{
     Layout = "~/Areas/HPDUtility/Views/Shared/_Layout.cshtml";
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js" type="text/javascript"></script>
+        <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 }
 
+   
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
@@ -34,13 +37,13 @@
                                         <input type="password" class="form-control form-control-user" id="txtDDSrvPassword" placeholder="Password">
                                     </div>
                                     <div class="col-lg-auto">
-                                        <a class="btn btn-success btn-user btn-block text-white" id="btnDDSrvLogin">
-                                            Login
+                                        <a class="btn btn-success btn-user btn-block text-white" id="btnDDSrvConn">
+                                            Connect
                                         </a>
                                     </div>
                                     <div class="col-lg-auto" >
-                                        <a class="btn btn-danger btn-user btn-block text-white" id="btnDDSrvLogout" style="display:none">
-                                            Logout
+                                        <a class="btn btn-danger btn-user btn-block text-white" id="btnDDSrvDisConn" style="display:none">
+                                            Disconnect
                                         </a>
                                     </div>
                                 </div>
@@ -90,12 +93,28 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-5 col-md-5" id="cardDatabaseInfo">
+                        <div class="col-lg-5 col-md-5">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <div class="row" id="cardDatabaseInfo">
+
+                                    </div>
+                                    <hr>
+                                    <div class="row" id="cardDbDiskUsageChart" style="display:none">
+                                        <div class="">
+                                            <div class="">
+                                                <div style="width:100%;height:100%">
+                                                    <canvas id="dbusagechart" style="padding: 0;margin: auto;display: block; "> </canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
                         </div>
                     </div>  
-                    <div class="row">
-                        
-                    </div>
+                 
                     </div>
                 </div>
             </div>
@@ -107,11 +126,13 @@
 </div>
 <!-- End of Main Content -->
 
+ 
 @section scripts
 {
+   
+
     <script>
         $(document).ready(function () {
-
 
             window.addEventListener("pageshow", function (event) {
                 var historyTraversal = event.persisted ||
@@ -123,26 +144,28 @@
                 }
             });
 
-            $("#btnDDSrvLogin").on("click", function () {
+            $("#txtDDSrvName").focus();
+
+            var connectServer = function () {
                 var sname = $("#txtDDSrvName").val();
                 var uname = $("#txtDDSrvUserName").val();
                 var pass = $("#txtDDSrvPassword").val();
-                $.post("@Url.Action("ServerLogin","DataDictionary")", { servername: sname, username: uname, password: pass}, function (data) {
+                $.post("@Url.Action("ServerLogin","DataDictionary")", { servername: sname, username: uname, password: pass }, function (data) {
                     if (data == "true") {
                         $("#txtDDSrvName").prop('disabled', true);
                         $("#txtDDSrvUserName").prop('disabled', true);
                         $("#txtDDSrvPassword").prop('disabled', true);
-                        $("#btnDDSrvLogout").show();
-                        $("#btnDDSrvLogin").hide();
+                        $("#btnDDSrvDisConn").show();
+                        $("#btnDDSrvConn").hide();
                         $.post("@Url.Action("GetServerDatabaseList", "DataDictionary")", { servername: sname, username: uname, password: pass }, function (data) {
-                             var dbList = $('#msDDDatabase');
-                             dbList.empty();
-                             data = JSON.parse(data);
-                             $(data).each(function (index, db) {
-                                 dbList.append(
-                                     '<option value="' + db.DatabaseName + '">' + db.DatabaseName + '</option>'
-                                 );
-                             });
+                            var dbList = $('#msDDDatabase');
+                            dbList.empty();
+                            data = JSON.parse(data);
+                            $(data).each(function (index, db) {
+                                dbList.append(
+                                    '<option value="' + db.DatabaseName + '">' + db.DatabaseName + '</option>'
+                                );
+                            });
                         });
 
                         var alertmsg = $('.dbconalertmessage');
@@ -163,19 +186,29 @@
                             $(".dbconalertmessage").slideUp(500);
                             $("#ServerInfoDiv").hide().fadeOut(1000, 500);
                         });
+                        $("#txtDDSrvName").focus();
                     }
                 });
+
+            };
+
+            $("#btnDDSrvConn").on("click", function (e) {
+                connectServer();
+            });
+            $("#txtDDSrvPassword").keypress(function(e) {
+                if (e.keyCode == '13') { connectServer(); }
             });
 
-            $("#btnDDSrvLogout").on("click", function () {
+            $("#btnDDSrvDisConn").on("click", function () {
                 $("#txtDDSrvName").prop('disabled', false);
                 $("#txtDDSrvUserName").prop('disabled', false);
                 $("#txtDDSrvPassword").prop('disabled', false);
-                $("#btnDDSrvLogout").hide();
-                $("#btnDDSrvLogin").show();
+                $("#btnDDSrvDisConn").hide();
+                $("#btnDDSrvConn").show();
                 $("#ServerInfoDiv").hide().fadeOut(2000, 500);
 
                 location.reload(true);
+
             });
 
             $('#msDDDatabase').fastselect({
@@ -217,28 +250,23 @@
                         dbinfo.empty();
                         data = JSON.parse(data);
                         dbinfo.append(
-                            '<div class="card mb-3" style="max-width: 20rem;">' +
-                            '<div class="card-body">' +
-                            '<h5 class="card-title text-info"><b>Database Information</b></h5>' +
-                            '<label><b>Database Name</b></label>' +
-                            '<p class="card-text">' + data.LogicalName +'</p>' +
-                            '<label><b>Data File Size</b></label>' +
-                            '<p class="card-text">' + data.DataFileSize +'MB</p>' +
-                            '<label><b>Log File Size</b></label>' +
-                            '<p class="card-text">' + data.LogFileSize +'</p>' +
-                            '<label><b>Total Table</b></label>' +
-                            '<p class="card-text">' + data.DatabaseTableCount +'</p>' +
-                            '<h5 class="card-title text-info"><b>Table Information</b></h5>' +
-                            '<label><b>Table Name</b></label>' +
-                            '<p class="card-text">' + data.TableName +'</p>' +
-                            '<label><b>Total Data</b></label>' +
-                            '<p class="card-text">' + data.TableDataCount +'</p>' +
+                            '<div class="">' +
+                            '<div class="">' +
+                            '<h5 class="card-title text-info">Database Information</h5>' +
+                            '<label>Database Name:<span class="label label-primary"> ' + data.LogicalName +'</span></label></br>' +
+                            '<label>Data File Size:<span class="label label-primary"> ' + data.DataFileSize.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") +' MB</span></label></br>' +
+                            '<label>Log File Size:<span class="label label-primary"> ' + data.LogFileSize.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") +' MB</span></label></br>' +
+                            '<label>Total Table:<span class="label label-primary"> ' + data.DatabaseTableCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span></label></br>' +
+                            '<h5 class="card-title text-info">Table Information</h5>' +
+                            '<label>Table Name:<span class="label label-primary"> ' + data.TableName + '</span></label></br>' +
+                            '<label>Total Data:<span class="label label-primary"> ' + data.TableDataCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span></label>' +
                             '</div>' +
                             '</div>'
                         );
-                     
+
 
                     });
+                    dbDiskUsagePieGraph(sname, db, tbl, uname, pass);
                 }
             });
 
@@ -277,16 +305,87 @@
                             },
                             {
                                 "data": null, render: function (data, type, row) {
-                                    return "<button class='btn btn-circle btn-sm btn-primary edit'><i class='fas fa-pen fa-sm'></i></button>";
+                                    return "<button class='btn btn-circle btn-sm btn-primary edit' ><i class='fas fa-pen fa-sm'></i></button>";
                                 }
                             },
                         ]
                     });
             };
 
-            //inline edit
-            $("#tblDDTable").on('mousedown.edit', ".edit", function (e) {
+            //Chart JS
+            var dbDiskUsagePieGraph = function (sname, db, tbl, uname, pass) {
+                $.ajax({
+                    url: "@Url.Action("GetDatabaseUsageGraph", "DataDictionary")",
+                    data: {
+                        servername: sname,
+                        dbname: db,
+                        tblname: tbl,
+                        username: uname,
+                        password: pass
+                    },
+                    type: "POST",
+                    //contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (res) {
+                        res = JSON.parse(res);
+                        //console.log(res.DataFileSize);
+                        //var aData = res;
+                        //var aLabels = aData[0];
+                        //var aDatasets1 = aData[1];
+                        var dataT = {
+                            labels: [
+                                "Data file usage(MB)",
+                                "Transaction log usage(MB)",
+                            ],
+                            datasets: [{
+                                label: "Test Data",
+                                data: [
+                                    parseInt(res.DataFileSize,10),
+                                    parseInt(res.LogFileSize,10),
+                                ],
+                                fill: false,
+                                backgroundColor: [
+                                    "rgba(0, 0, 89)",
+                                    "rgba(140, 0, 0)",
+                                ],
+                                borderColor: [
+                                    "rgb(0, 0, 63)",
+                                    "rgb(114, 0, 0)",
+                                ],
+                                borderWidth: 1
+                            }]
+                        };
+                        var ctx = $("#dbusagechart").get(0).getContext("2d");
+                        var myNewChart = new Chart(ctx, {
+                        type: 'doughnut',
+                        data: dataT,
+                            options: {
+                                responsive: true,
+                                title: { display: true, text: 'Database Disk Usage' },
+                                legend: { position: 'bottom' }
+                            }
+                        });
+                    }
+                });
+                $("#cardDbDiskUsageChart").show();
+            };
 
+            //inline edit
+            $("#tblDDTable").on('keypress', ".edit", function (e) {
+                if (e.keyCode == '13')
+                {
+                    $(this).find('i').removeClass().addClass("fa fa-check");
+                    $(this).removeClass('edit').addClass("save");
+                    var $row = $(this).closest("tr").off("mousedown");
+                    var $tds = $row.find("td:nth-child(3)");
+
+                    $.each($tds, function (i, el) {
+                        var txt = $(this).text();
+                        $(this).html("").append("<input class='form-control input-sm' id='txtcoldesc' type='text' value=\"" + txt + "\">");
+                    });
+                }
+            });
+            $("#tblDDTable").on('mousedown.edit', ".edit", function (e) {
                 $(this).find('i').removeClass().addClass("fa fa-check");
                 $(this).removeClass('edit').addClass("save");
                 var $row = $(this).closest("tr").off("mousedown");
@@ -294,10 +393,66 @@
 
                 $.each($tds, function (i, el) {
                     var txt = $(this).text();
-                    $(this).html("").append("<input class='form-control input-sm' type='text' value=\"" + txt + "\">");
+                    $(this).html("").append("<input class='form-control input-sm' id='txtcoldesc' type='text' value=\"" + txt + "\">");
+                    $(this).find("input").focus();
                 });
+
             });
+
+
             //inline save
+             $("#tblDDTable").on('keypress', "#txtcoldesc", function (e) {
+                if (e.keyCode == '13')
+                {
+                    var sname = $("#txtDDSrvName").val();
+                    var uname = $("#txtDDSrvUserName").val();
+                    var pass = $("#txtDDSrvPassword").val();
+                    var db = $("#msDDDatabase").val();
+                    var tbl = $("#msDDTable").val();
+                    var name = $(this).closest("tr").find("td:nth-child(1)").text();
+                    var desc = $(this).closest("tr").find("input").val();
+
+                    $('.save').find('i').removeClass().addClass("fas fa-pen fa-sm");
+                    $('.save').removeClass('save').addClass("edit");
+                    var $row = $(this).closest("tr");
+                    var $tds = $row.find("td:nth-child(3)");
+
+                    $.each($tds, function (i, el) {
+                        var txt = $(this).find("input").val()
+                        $(this).html(txt);
+                    });
+
+                    $.post("@Url.Action("SaveExtendedProperty", "DataDictionary")", { servername: sname, dbname: db, tblname: tbl, username: uname, password: pass, colname: name, coldesc: desc}, function (data) {
+                        //alert(data);
+                    });
+                }
+            });
+            $("#tblDDTable").on('keypress', ".save", function (e) {
+                if (e.keyCode == '13')
+                {
+                    var sname = $("#txtDDSrvName").val();
+                    var uname = $("#txtDDSrvUserName").val();
+                    var pass = $("#txtDDSrvPassword").val();
+                    var db = $("#msDDDatabase").val();
+                    var tbl = $("#msDDTable").val();
+                    var name = $(this).closest("tr").find("td:nth-child(1)").text();
+                    var desc = $(this).closest("tr").find("input").val();
+
+                    $(this).find('i').removeClass().addClass("fas fa-pen fa-sm");
+                    $(this).removeClass('save').addClass("edit");
+                    var $row = $(this).closest("tr");
+                    var $tds = $row.find("td:nth-child(3)");
+
+                    $.each($tds, function (i, el) {
+                        var txt = $(this).find("input").val()
+                        $(this).html(txt);
+                    });
+
+                    $.post("@Url.Action("SaveExtendedProperty", "DataDictionary")", { servername: sname, dbname: db, tblname: tbl, username: uname, password: pass, colname: name, coldesc: desc}, function (data) {
+                        //alert(data);
+                    });
+                }
+            });
             $("#tblDDTable").on('mousedown.save', ".save", function (e) {
                 var sname = $("#txtDDSrvName").val();
                 var uname = $("#txtDDSrvUserName").val();
@@ -320,9 +475,9 @@
                 $.post("@Url.Action("SaveExtendedProperty", "DataDictionary")", { servername: sname, dbname: db, tblname: tbl, username: uname, password: pass, colname: name, coldesc: desc}, function (data) {
                     //alert(data);
                 });
-
             });
-
         });
+
     </script>
+
 }

@@ -60,5 +60,11 @@ namespace HPD.Web.Areas.HPDUtility.Controllers
             var result = datadictionaryComponent.GetDatabaseInformation(servername, dbname, tblname, username, password);
             return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
         }
+        public ActionResult GetDatabaseUsageGraph(string servername, string dbname, string tblname, string username, string password)
+        {
+            var datadictionaryComponent = new DataDictionaryComponent();
+            var result = datadictionaryComponent.GetDatabaseUsageGraph(servername, dbname, tblname, username, password);
+            return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
+        }
     }
 }

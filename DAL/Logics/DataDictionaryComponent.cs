@@ -130,7 +130,7 @@ namespace DAL.Logics
             using (SqlConnection cn = new SqlConnection(connstr))
             {
                 cn.Open();
-                String query = "SELECT TOP 1 1 FROM sys.extended_properties a INNER JOIN sys.tables b ON a.major_id = a.major_id WHERE b.name = '" + tblname +  "' And a.name ='" + colname + "' ";
+                String query = "SELECT TOP 1 1 FROM sys.extended_properties a INNER JOIN sys.tables b ON a.major_id = OBJECT_ID('" + tblname + "') WHERE a.name ='" + colname + "' ";
                 SqlCommand cmd = new SqlCommand(query, cn);
                 SqlDataReader dr = cmd.ExecuteReader();
 
@@ -195,6 +195,34 @@ namespace DAL.Logics
                 return model;
             }
         }
-        
+
+        public DatabaseUsageInfo GetDatabaseUsageGraph(string servername, string dbname, string tblname, string username, string password)
+        {
+            String connstr = "Server=" + servername + ";Database=" + dbname + ";Integrated Security=False;UID=" + username + ";PWD=" + password + "";
+            var model = new DatabaseUsageInfo();
+            using (SqlConnection cn = new SqlConnection(connstr))
+            {
+                cn.Open();
+                String query = "with fs as (SELECT * FROM sys.master_files) " +
+                    "SELECT(SELECT Name)DatabaseName, " +
+                    "(SELECT CAST(SUM((size * 8) / 1024) AS VARCHAR) FROM fs WHERE TYPE = 0 and fs.database_id = db.database_id) DataFileSizeMB, " +
+                    "(SELECT CAST(SUM((size * 8) / 1024) AS VARCHAR) FROM fs WHERE TYPE = 1 and fs.database_id = db.database_id) LogFileSizeMB, " +
+                    "(SELECT CAST(COUNT(*)AS VARCHAR) FROM sys.tables ) TotalTableCount, " +
+                    "(SELECT CAST(COUNT(*)AS VARCHAR) FROM dbo." + tblname + ") TotalTableDataCount " +
+                    "FROM sys.databases db WHERE db.name = '" + dbname + "' ";
+
+                SqlCommand cmd = new SqlCommand(query, cn);
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        model.DataFileSize = Convert.ToString(dr[1]);
+                        model.LogFileSize = Convert.ToString(dr[2]);
+                    }
+                }
+                return model;
+            }
+        }
     }
 }
