@@ -48,8 +48,11 @@
 
                                     <div class="show active tab-pane fade py-1" id="sprinttab" role="tabpanel" aria-labelledby="sprint-tab">
                                         <div class="d-sm-flex align-items-center justify-content-between mb-4 py-1">
-                                            <h1 class="h3 mb-0 text-white">Tasks</h1>
-                                            <a href="#" class="d-sm-inline-block btn btn-success btn-circle shadow-sm" id="addNewSprintTask"><i class="fas fa-plus fa-sm"></i></a>
+                                            <h1 class="h3 mb-0 text-gray-800">Tasks</h1>
+                                            <div class="d-sm-inline-block">
+                                                <a href="#" class=" btn btn-success btn-circle shadow-sm" id="addNewSprintTask" alt="Add New Task"><i class="fas fa-plus fa-sm"></i></a>
+                                                <a href="#" class=" btn btn-info btn-circle shadow-sm" id="sprintTaskDetails" alt="Sprint Details"><i class="fas fa-bars fa-sm"></i></a>
+                                            </div>
                                         </div>
                                         <div class="row py-1" id="sprintTaskTileContainer">
 
@@ -155,7 +158,7 @@
                 <!-- /.container-fluid -->
             </div>
     <!-- End of Main Content -->
-            
+
     <!-- Add New Task Modal-->
     <div class="modal fade" id="addNewSprintTaskModal" tabindex="-1" role="dialog" aria-labelledby="antModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
@@ -273,6 +276,126 @@
         </div>
     </div>
 
+    <!--Sprint Details-->
+    <div class="modal fade" id="sprintTaskDetailsModal" tabindex="-1" role="dialog" aria-labelledby="antModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="antModalLabel">Sprint Details</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <ul class="nav nav-tabs" id="sprintDetailsTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="sprintcontent-tab" data-toggle="tab" href="#sprintcontent" role="tab" aria-controls="sprintcontent" aria-selected="true">Content</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="memcapacity-tab" data-toggle="tab" href="#memcapacity" role="tab" aria-controls="memcapacity" aria-selected="false">Capacity</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="workdet-tab" data-toggle="tab" href="#workdet" role="tab" aria-controls="workdet" aria-selected="false">Work</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="sprintDetailsTabCon">
+                            <!--Sprint Content-->
+                            <div class="tab-pane fade py-3 show active" id="sprintcontent" role="tabpanel" aria-labelledby="sprintcontent-tab">
+                                <h1 class="h5 mb-4 text-gray-800">Sprint Content</h1>
+                                <hr>
+                                <div class="container-fluid">
+                                    <div id="sprintContentForm">
+                                        <form class="user" id="formANS">
+                                            <div class="form-group row">
+                                                <div class="col-sm-6">
+                                                    <label for="txtANSTitle"><b>Title</b></label>
+                                                    <input type="text" class="form-control input-sm" id="txtANSTitle" required placeholder="Title" name="ANSTitle" style="border-radius: 0 !important;">
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label for="txtANSProgramName"><b>Program Name</b></label>
+                                                    <input type="text" class="form-control input-sm" id="txtANSProgramName" disabled placeholder="Program" style="border-radius: 0 !important;">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-lg-12">
+                                                    <label for="msANSMember"><b>Member</b></label>
+                                                    <select class="form-control input-sm multipleSelect" multiple name="Developer" id="msANSMember" placeholder="Member"></select>
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-sm-6">
+                                                    <label for="txtANSSDate"><b>Start Date</b></label>
+                                                    <input type="date" class="form-control input-sm" id="txtANSSDate" required placeholder="Start Date" style="border-radius: 0 !important;">
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label for="txtANSEDate"><b>End Date</b></label>
+                                                    <input type="date" class="form-control input-sm" id="txtANSEDate" required placeholder="End Date" style="border-radius: 0 !important;">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="txtANSEDate"><b>Blue Print</b></label>
+                                                <input type="text" class="form-control input-sm" id="txtANSBP" required placeholder="Blue Print Path" style="border-radius: 0 !important;">
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Member Capacity-->
+                            <div class="tab-pane fade py-3" id="memcapacity" role="tabpanel" aria-labelledby="memcapacity-tab">
+                                <h1 class="h5 mb-4 text-gray-800">Member Capacity</h1>
+                                <hr>
+                                <table id="tblMemberCapacity" class="table table-bordered table-light table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Member</th>
+                                            <th>Capacity per day</th>
+                                            <th>Days off</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="dbTableBody"></tbody>
+                                </table>
+                            </div>
+                            <!--Work Details-->
+                            <div class="tab-pane fade py-3" id="workdet" role="tabpanel" aria-labelledby="workdet-tab">
+                                <h1 class="h5 mb-4 text-gray-800">Work Details</h1>
+                                <hr>
+                                <h1 class="h6 mb-4 text-gray-800">Work</h1>
+                                <label for="">Team</label>
+                                <div class="progress">
+                                    <div class="progress-bar text-center" role="progressbar"  id="pbarteamwd" aria-valuenow="0" aria-valuemin="0" aria-valuemax="0"> 
+                                    </div>                   
+                                </div>
+                                <h1 class="h6 mb-4 text-gray-800">Work By: Assigned To</h1>
+                                <div id="divuserwd">
+
+                                </div>
+                                <label for="">Mark</label>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar"  id="pbartotuserwork" aria-valuenow="0" aria-valuemin="0" aria-valuemax="0"></div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <form class="user">
+                        <div class="form-group row">
+                            <div class="col-sm-6">
+                                <a href="#" class="btn btn-danger">
+                                    Cancel
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @section scripts
 {
     <script>
@@ -296,9 +419,10 @@
                 }
             });
 
+
+
             var sprintId = "@ViewBag.Message";
 
-            
             var ClearTaskForm = function () {
 
                 $("#txtANSTTitle").val("");
@@ -426,6 +550,11 @@
                 $("#antModalLabel").text("Add New Task");
                 $('#addNewSprintTaskModal').modal('toggle');
             });
+            $("#sprintTaskDetails").on("click", function () {
+
+                $('#sprintTaskDetailsModal').modal('toggle');
+            });
+
 
             $("#edtANSTDesc").editor({
                 uiLibrary: 'bootstrap4',
@@ -538,7 +667,7 @@
                 $("#btnANSTUpdate").show().prop('disabled', false);
                 $("#btnANSTUpdate").attr('data-id', taskId);
                 $("#antModalLabel").text("Update Task");
-                
+
                 $(".gj-editor").find("div[role='body']").html("");
                 $.post("@Url.Action("GetTaskDetails", "Project")", { taskId: taskId }, function (data) {
                     var taskdetails = $.parseJSON(data);
@@ -556,6 +685,59 @@
                 });
             });
 
+            $.post("@Url.Action("GetSprintMemberCapacity", "Project")", { sprintId: sprintId }, function (data) {
+                var memCapList = $('#tblMemberCapacity').find('#dbTableBody');
+                memCapList.html("");
+                data = JSON.parse(data);
+                $(data).each(function (index, mem) {
+                    memCapList.append(
+                        '<tr data-id="' + mem.EmpCode + '">'+
+                        '<td>' + mem.EmpName + '</td>' +
+                        '<td>' + mem.Capacity.toFixed(1) + ' Hr</td>' +
+                        '<td>' + mem.DaysOffCount + '</td>' +
+                        '<tr>'
+                    ).css('cursor','pointer');
+
+                });
+            });
+            $('#tblMemberCapacity #dbTableBody tr').click(function () {
+                alert($(this).attr('data-id'));
+            });
+
+            $.post("@Url.Action("GetTeamWorkDetails", "Project")", { sprintId: sprintId }, function (data) {
+                data = JSON.parse(data);
+                $('#pbarteamwd').attr('aria-valuemax', data.TotalTeamWork);
+                $('#pbarteamwd').attr('aria-valuenow', data.TotalTeamTaskWork);
+                $('#pbarteamwd').text(data.TotalTeamTaskWork + 'h' + 'of ' + data.TotalTeamWork + 'h');
+                refreshpbar();
+            });
+
+            $.post("@Url.Action("GetUserWorkDetails", "Project")", { sprintId: sprintId }, function (data) {
+                var userWorkDetails = $('#divuserwd');
+                userWorkDetails.html("");
+                data = JSON.parse(data);
+                $(data).each(function (index, uw) {
+                    userWorkDetails.append(
+                        '<label for=""></label>' +
+                        '<div class="progress">' +
+                        '<div class="progress-bar" role="progressbar" id="" aria-valuenow="' + uw.TotalUserTaskWork + '" aria-valuemin="0" aria-valuemax="' + uw.TotalUserWork + '">' +
+                        '' + uw.TotalUserTaskWork + 'h' + ' of ' + uw.TotalUserWork + 'h' +
+                        '</div > ' +
+                        '</div>'
+                    );
+                });
+                refreshpbar();
+            });
+
+            var refreshpbar = function () {
+                $('.progress-bar').each(function () {
+                    var min = $(this).attr('aria-valuemin');
+                    var max = $(this).attr('aria-valuemax');
+                    var now = $(this).attr('aria-valuenow');
+                    var siz = (now - min) * 100 / (max - min);
+                    $(this).css('width', siz + '%');
+                });
+            };
 
         });
     </script>

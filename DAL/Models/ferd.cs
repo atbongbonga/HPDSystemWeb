@@ -12,25 +12,27 @@ namespace DAL.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ferd
+    public partial class Ferd
     {
-        public Nullable<int> DocEntry { get; set; }
-        public string Code { get; set; }
-        public System.DateTime DocDate { get; set; }
-        public Nullable<System.TimeSpan> STime { get; set; }
-        public Nullable<System.TimeSpan> ETime { get; set; }
-        public string Leg { get; set; }
-        public Nullable<decimal> TTime { get; set; }
-        public string Stat { get; set; }
+        public int DocEntry { get; set; }
+        public Nullable<System.DateTime> DocDate { get; set; }
+        public string EmpCode { get; set; }
+        public string ItemCode { get; set; }
+        public decimal ItemPrice { get; set; }
+        public Nullable<int> Qty { get; set; }
+        public Nullable<int> SQty { get; set; }
+        public Nullable<decimal> SEE { get; set; }
+        public Nullable<decimal> SAmt { get; set; }
+        public Nullable<decimal> TotalAmt { get; set; }
+        public Nullable<decimal> QtyIssue { get; set; }
         public string Remarks { get; set; }
-        public string WhsCode { get; set; }
-        public string IsBreak { get; set; }
-        public Nullable<int> sduty { get; set; }
-        public string PostedBy { get; set; }
-        public string Hol { get; set; }
-        public Nullable<System.DateTime> ModifiedDate { get; set; }
-        public string Period { get; set; }
-        public Nullable<int> MinTI { get; set; }
-        public Nullable<int> MaxTI { get; set; }
+        public string ReqType { get; set; }
+        public string Size { get; set; }
+        public string Stat { get; set; }
+        public Nullable<int> BaseEntry { get; set; }
+        public string CutOff { get; set; }
+        public string Destination { get; set; }
+        public Nullable<int> SDForm { get; set; }
+        public string Color { get; set; }
     }
 }

@@ -51,7 +51,6 @@ namespace DAL.Logics
             }
             return model;
         }
-
         public bool CreateProjectSprint(ProjectSprints ProjSprint)
         {
             using (HPCOMMONEntities db = new HPCOMMONEntities())
@@ -75,14 +74,12 @@ namespace DAL.Logics
             }
             return true;
         }
-
-
         public bool CreateSrintTask(SprintTasks SprintTask)
         {
             using (HPCOMMONEntities db = new HPCOMMONEntities())
             {
                 var setting = new Settings();
-                var addprinttask = new SprintTask
+                var addsprinttask = new SprintTask
                 {
                     SprintId = SprintTask.SprintId,
                     Title = SprintTask.Title,
@@ -98,13 +95,12 @@ namespace DAL.Logics
                     CreatedBy = setting.UserIP,
                     CreatedDate = DateTime.UtcNow
                 };
-                db.SprintTasks.Add(addprinttask);
+                db.SprintTasks.Add(addsprinttask);
                 db.SaveChanges();
 
             }
             return true;
         }
-
         public bool UpdateSprintTask(SprintTasks SprintTask)
         {
             using (HPCOMMONEntities db = new HPCOMMONEntities())
@@ -129,7 +125,6 @@ namespace DAL.Logics
             }
             return true;
         }
-
         public bool UpdateSrintTaskActivity(int taskId, int act)
         {
             using (HPCOMMONEntities db = new HPCOMMONEntities())
@@ -144,7 +139,7 @@ namespace DAL.Logics
             }
             return true;
         }
-        public List<SprintTasks> GetSprintTask(int SprintId)
+        public List<SprintTasks> GetSprintTask(int sprintId)
         {
             var model = new List<SprintTasks>();
 
@@ -152,7 +147,7 @@ namespace DAL.Logics
             {
                 cn.Open();
 
-                String query = "SELECT * FROM dbo.SprintTasks WHERE SprintId = '" + SprintId + "' ";
+                String query = "SELECT * FROM dbo.SprintTasks WHERE SprintId = '" + sprintId + "' ";
 
 
                 //cm.Parameters.AddWithValue("@Id", id);
@@ -180,7 +175,6 @@ namespace DAL.Logics
             return model;
 
         }
-
         public SprintTasks GetTaskDetails(int taskId)
         {
             var model = new SprintTasks();
@@ -221,6 +215,194 @@ namespace DAL.Logics
             }
             return model;
 
+        }
+        public bool CreateSprintCapacity(SprintCapacities SprintCapacity)
+        {
+            using (HPCOMMONEntities db = new HPCOMMONEntities())
+            {
+                var addsprintcapacity = new SprintCapacity
+                {
+                    SprintId = SprintCapacity.SprintId,
+                    EmpCode = SprintCapacity.EmpCode,
+                    Capacity = Convert.ToDecimal(SprintCapacity.Capacity)
+                };
+                db.SprintCapacities.Add(addsprintcapacity);
+                db.SaveChanges();
+
+            }
+            return true;
+        }
+        #region GET SPRINT WORKING DAYS
+        private bool CreateSprintDaysOff(SprintDaysOffs SprintDaysOff)
+        {
+            using (HPCOMMONEntities db = new HPCOMMONEntities())
+            {
+                var addsprintdaysoff = new SprintDaysOff
+                {
+                    SprintId = SprintDaysOff.SprintId,
+                    EmpCode = SprintDaysOff.EmpCode,
+                    StartDate = SprintDaysOff.StartDate,
+                    EndDate = SprintDaysOff.EndDate
+                };
+                db.SprintDaysOffs.Add(addsprintdaysoff);
+                db.SaveChanges();
+            }
+                return true;
+        }
+        private int GetWorkingDays(int sprintId)
+        {
+            int count = 0;
+            int useddays = GetUsedWorkingDays(sprintId);
+            using (HPCOMMONEntities db = new HPCOMMONEntities())
+            {
+                
+                var getsprint = db.ProjectSprints.Select(i => i).Where(i => i.Id == sprintId).FirstOrDefault();
+                DateTime sdate = Convert.ToDateTime(getsprint.StartDate);
+                DateTime edate = Convert.ToDateTime(getsprint.EndDate);
+                
+                for (DateTime index = sdate; index < edate; index = index.AddDays(1))
+                {
+                    if (index.DayOfWeek != DayOfWeek.Sunday && index.DayOfWeek != DayOfWeek.Saturday)
+                    {
+                        count += 1;
+                    }
+                }   
+            }
+            return count - useddays;
+        }
+        private int GetUsedWorkingDays(int sprintId)
+        {
+            int count = 0;
+            using (HPCOMMONEntities db = new HPCOMMONEntities())
+            {
+
+                var getsprint = db.ProjectSprints.Select(i => i).Where(i => i.Id == sprintId).FirstOrDefault();
+                DateTime sdate = Convert.ToDateTime(getsprint.StartDate);
+                DateTime edate = DateTime.UtcNow.Date;
+
+                for (DateTime index = sdate; index < edate; index = index.AddDays(1))
+                {
+                    if (index.DayOfWeek != DayOfWeek.Sunday && index.DayOfWeek != DayOfWeek.Saturday)
+                    {
+                        count += 1;
+                    }
+                }  
+            }
+            return count;
+        }
+        #endregion
+
+        #region TEAM WORK DETAILS
+        public SprintWorkDetails TeamWorkDetails(int sprintId)
+        {
+            var model = new SprintWorkDetails();
+            using (HPCOMMONEntities db = new HPCOMMONEntities())
+            {
+                model.TotalTeamWork = TotalTeamWork(sprintId);
+                model.TotalTeamTaskWork = TotalTeamTaskWork(sprintId);
+                return model;
+            }
+
+        }
+        private decimal TotalTeamWork(int sprintId)
+        {
+            using (HPCOMMONEntities db = new HPCOMMONEntities())
+            {
+                var getsprint = db.ProjectSprints.Select(i => i).Where(i => i.Id == sprintId).FirstOrDefault();
+                var getteamdaysoff = db.SprintDaysOffs.Select(i => i).Where(i => i.SprintId == sprintId && i.EmpCode == null).Count();
+                int dowps = GetWorkingDays(sprintId) - getteamdaysoff;
+                return Convert.ToDecimal(dowps * 9.6);
+            }
+            
+        }
+        private decimal TotalTeamTaskWork(int sprintId)
+        {
+            using (HPCOMMONEntities db = new HPCOMMONEntities())
+            {
+                var getsprintteamusedhr = db.SprintTasks.Where(i => i.SprintId == sprintId).Select(i => i.OriHr).Sum();
+                return Convert.ToDecimal(getsprintteamusedhr);
+            }
+        }
+        #endregion
+
+        #region USER WORK DETAILS
+        public List<SprintWorkDetails> UserWorkDetails(int sprintId)
+        {
+            var sprintmem = GetSprintMemberCapacity(sprintId);
+            var model = new List<SprintWorkDetails>();
+            if (sprintmem != null)
+            {
+                foreach (var data in sprintmem)
+                {
+                    model.Add(new SprintWorkDetails()
+                    {
+                        TotalUserWork = TotalUserWork(sprintId, data.EmpCode),
+                        TotalUserTaskWork = TotalUserTaskWork(sprintId, data.EmpCode)
+                    });
+
+                }
+                return model;
+            }
+            return model;
+        }
+        private decimal TotalUserWork(int sprintId, int empCode)
+        {
+            using (HPCOMMONEntities db = new HPCOMMONEntities())
+            {
+                var getsprint = db.ProjectSprints.Select(i => i).Where(i => i.Id == sprintId).FirstOrDefault();
+                var getusercapacity = db.SprintCapacities.Select(i => i).Where(i => i.SprintId == sprintId && i.EmpCode == empCode).FirstOrDefault();
+                var getuserdaysoff = db.SprintDaysOffs.Select(i => i).Where(i => i.SprintId == sprintId && i.EmpCode == empCode).Count();
+                int dowps = GetWorkingDays(sprintId) - getuserdaysoff;
+                return Convert.ToDecimal(dowps * getusercapacity.Capacity);
+            }
+        }
+        private decimal TotalUserTaskWork(int sprintId, int empCode)
+        {
+            using (HPCOMMONEntities db = new HPCOMMONEntities())
+            {
+                var getsprintuserusedhr = db.SprintTasks.Where(i => i.SprintId == sprintId && i.AssignTo == empCode.ToString()).Select(i => i.OriHr).Sum();
+                return Convert.ToDecimal(getsprintuserusedhr);
+            }
+        }
+        #endregion
+
+
+        public List<SprintMembers> GetSprintMemberCapacity(int sprintId)
+        {
+            var model = new List<SprintMembers>();
+            var db = new HPCOMMONEntities();
+            using (SqlConnection cn = new SqlConnection(dbcon))
+            {
+                cn.Open();
+                String query = "SELECT a.EmpCode, a.EmpName, b.SprintId, b.Capacity FROM dbo.SCEmp a " +
+                    "LEFT JOIN dbo.SprintCapacity b ON a.EmpCode = CAST(b.EmpCode AS VARCHAR) " +
+                    "WHERE b.SprintId = "+ sprintId + " ";
+
+                SqlCommand cmd = new SqlCommand(query, cn);
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        var daysoff = new List<SprintDaysOff>();
+                        int empcode = Convert.ToInt32(dr[0]);
+                        daysoff = db.SprintDaysOffs.Select(i => i).Where(i => i.SprintId == sprintId && i.EmpCode == empcode).ToList();
+                        model.Add(new SprintMembers
+                        {
+                            EmpCode = Convert.ToInt32(dr[0]),
+                            EmpName = Convert.ToString(dr[1]),
+                            SprintId = Convert.ToInt32(dr[2]),
+                            Capacity = Convert.ToDecimal(dr[3]),
+                            DaysOffCount = daysoff.Count(),
+                            DaysOffList = daysoff
+                        });
+
+                    };
+                }
+                cn.Close();
+
+                return model;
+            }
         }
     }
 }

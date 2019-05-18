@@ -45,5 +45,14 @@ namespace DAL.Models
         public Nullable<System.DateTime> CheckDate { get; set; }
         public string ChkNoSchool { get; set; }
         public string ChkNoEmp { get; set; }
+        public Nullable<decimal> TotalAdd { get; set; }
+        public Nullable<decimal> SchoolDisc { get; set; }
+        public Nullable<decimal> Uniform { get; set; }
+        public Nullable<decimal> ClassPicture { get; set; }
+        public Nullable<decimal> ID { get; set; }
+        public Nullable<decimal> Retreat { get; set; }
+        public Nullable<decimal> TotalLess { get; set; }
+        public Nullable<decimal> EmpAmt { get; set; }
+        public Nullable<decimal> schAmt { get; set; }
     }
 }

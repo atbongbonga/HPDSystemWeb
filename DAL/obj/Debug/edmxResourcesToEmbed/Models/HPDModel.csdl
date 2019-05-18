@@ -1387,6 +1387,89 @@
     <Property Name="AllowEdit" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
     <Property Name="Branch" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
   </EntityType>
+  <EntityType Name="ColUpd_CMT_TBL">
+    <Key>
+      <PropertyRef Name="Docentry" />
+      <PropertyRef Name="cmt_type" />
+    </Key>
+    <Property Name="Docentry" Type="Int32" Nullable="false" />
+    <Property Name="cmt_type" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="cmt_code" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="cmt_desc" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="Datecrated" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="IP" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="ColUpd_ItemMasterH">
+    <Key>
+      <PropertyRef Name="DOCENTRY" />
+      <PropertyRef Name="TESTCODE" />
+    </Key>
+    <Property Name="DOCENTRY" Type="Int32" Nullable="false" />
+    <Property Name="TESTCODE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="COL" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="VALUE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="CREATED_ON" Type="DateTime" Precision="3" />
+    <Property Name="CREATED_BY" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="IP" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="ColUpd_test_item">
+    <Key>
+      <PropertyRef Name="Docentry" />
+      <PropertyRef Name="testcode" />
+      <PropertyRef Name="Col" />
+      <PropertyRef Name="Val" />
+    </Key>
+    <Property Name="Docentry" Type="Int32" Nullable="false" />
+    <Property Name="testcode" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Col" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Val" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Created_on" Type="DateTime" Precision="3" />
+    <Property Name="Created_by" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="Ip" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="branch" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="ColUpd_TEST_ITPVH">
+    <Key>
+      <PropertyRef Name="DOCENTRY" />
+      <PropertyRef Name="TIVH_TI_CODE" />
+    </Key>
+    <Property Name="DOCENTRY" Type="Int32" Nullable="false" />
+    <Property Name="TIVH_TI_CODE" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TIVH_KEY" Type="Decimal" Precision="10" Scale="0" />
+    <Property Name="TIVH_EFD" Type="DateTime" Precision="3" />
+    <Property Name="CREATED_ON" Type="DateTime" Precision="3" />
+    <Property Name="CREATED_BY" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="IP" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="ColUpd_TestItem">
+    <Key>
+      <PropertyRef Name="DOCENTRY" />
+      <PropertyRef Name="TESTCODE" />
+    </Key>
+    <Property Name="DOCENTRY" Type="Int32" Nullable="false" />
+    <Property Name="TESTCODE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="VALUE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="CREATED_ON" Type="DateTime" Precision="3" />
+    <Property Name="CREATED_BY" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="IP" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="BRANCH" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="ColUpd_TESTTV">
+    <Key>
+      <PropertyRef Name="DOCENTRY" />
+      <PropertyRef Name="TTV_TI_CODE" />
+      <PropertyRef Name="TTV_TV_CODE" />
+    </Key>
+    <Property Name="DOCENTRY" Type="Int32" Nullable="false" />
+    <Property Name="TTV_TI_CODE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TTV_TV_CODE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TTV_ABNORM_FLAG" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="DATE_CREATED" Type="DateTime" Precision="3" />
+    <Property Name="IV" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="BRANCH" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="CREATED_BY" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+  </EntityType>
   <EntityType Name="Connection">
     <Key>
       <PropertyRef Name="CONNECTION_NAME" />
@@ -2784,6 +2867,22 @@
     <Property Name="Col" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="ColName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
   </EntityType>
+  <EntityType Name="JobDescReq">
+    <Key>
+      <PropertyRef Name="Docentry" />
+    </Key>
+    <Property Name="Docentry" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmpCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ReqType" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="reqFrom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="reqTo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="UT" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="ReqDate" Type="DateTime" Precision="0" />
+    <Property Name="ReqBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ReqStat" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="HrCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DateSent" Type="DateTime" Precision="0" />
+  </EntityType>
   <EntityType Name="KeeperLog">
     <Key>
       <PropertyRef Name="LogId" />
@@ -3478,11 +3577,12 @@
     </Key>
     <Property Name="DocEntry" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="TestCode" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-    <Property Name="TestDesc" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="TestDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="DateCreated" Type="DateTime" Precision="3" />
     <Property Name="Created_By_ID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
     <Property Name="Created_By_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Frm" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="Method" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="ord_trx_det">
     <Key>
@@ -3497,6 +3597,8 @@
     <Property Name="DateCreated" Type="DateTime" Precision="3" />
     <Property Name="DateDone" Type="DateTime" Precision="3" />
     <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="DateModified" Type="DateTime" Precision="3" />
+    <Property Name="SID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="ORGANISM_TBL">
     <Key>
@@ -4364,12 +4466,12 @@
     <Property Name="AUTO_COMMENT_ID" Type="String" MaxLength="18" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="CREATED_BY" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
     <Property Name="UPDATED_BY" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
-    <Property Name="CREATED_ON" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
-    <Property Name="DATE_OF_EFFECTIVITY" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
+    <Property Name="CREATED_ON" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DATE_OF_EFFECTIVITY" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="TI_CODE" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
     <Property Name="IS_VALID" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
     <Property Name="UPDATE_ON" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
-    <Property Name="TI_COMMENT" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
+    <Property Name="TI_COMMENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="DATE_DONE" Type="DateTime" Precision="3" />
     <Property Name="STATUS_CREATED" Type="Boolean" />
   </EntityType>
@@ -6418,6 +6520,15 @@
     <Property Name="CheckDate" Type="DateTime" Precision="3" />
     <Property Name="ChkNoSchool" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="ChkNoEmp" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="TotalAdd" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="SchoolDisc" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Uniform" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ClassPicture" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ID" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Retreat" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="TotalLess" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="EmpAmt" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="schAmt" Type="Decimal" Precision="18" Scale="2" />
   </EntityType>
   <EntityType Name="ScholEmp">
     <Key>
@@ -6813,6 +6924,25 @@
     <Property Name="DocEntry" Type="Int32" Nullable="false" />
     <Property Name="Qry" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" Nullable="false" />
   </EntityType>
+  <EntityType Name="SprintCapacity">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="SprintId" Type="Int32" />
+    <Property Name="EmpCode" Type="Int32" />
+    <Property Name="Capacity" Type="Decimal" Precision="2" Scale="1" />
+  </EntityType>
+  <EntityType Name="SprintDaysOff">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="SprintId" Type="Int32" />
+    <Property Name="EmpCode" Type="Int32" />
+    <Property Name="StartDate" Type="DateTime" Precision="0" />
+    <Property Name="EndDate" Type="DateTime" Precision="0" />
+  </EntityType>
   <EntityType Name="SprintTask">
     <Key>
       <PropertyRef Name="Id" />
@@ -7187,7 +7317,7 @@
     <Property Name="Module" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
     <Property Name="Category" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
     <Property Name="Stat" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="UserID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="UserID" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="tst_patient">
     <Key>
@@ -7228,6 +7358,29 @@
     <Property Name="filtype" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
     <Property Name="filpath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="filname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="UpdCol_TRRANGE">
+    <Key>
+      <PropertyRef Name="DOCENTRY" />
+      <PropertyRef Name="TR_TI_CODE" />
+    </Key>
+    <Property Name="DOCENTRY" Type="Int32" Nullable="false" />
+    <Property Name="TR_TI_CODE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TR_SEX_CODE" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="TR_FASTING_CODE" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="TR_AGETO" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="TR_AGECODE" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="TR_RANGE_DESC" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="TR_NORMAL_LOLIMIT" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="TR_UPPER_UPLIMIT" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="TR_PANIC_LOLIMIT" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="TR_PANIC_UPLIMIT" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="TR_MRR_DESC" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="TR_UPDATE_BY" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="TR_UPDATE_ON" Type="DateTime" Precision="3" />
+    <Property Name="CREATED_BY" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="IP" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DATE_DONE" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="UpdHSHist">
     <Key>
@@ -7370,6 +7523,7 @@
     <Property Name="AOPCancel" Type="Int32" />
     <Property Name="ResignDate" Type="DateTime" Precision="0" />
     <Property Name="ReqUtype1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="UserRole" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Users2_backup20180328">
     <Key>
@@ -7456,6 +7610,112 @@
     <Property Name="EmpName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
     <Property Name="Active" Type="Int32" />
     <Property Name="Remarks" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="AggregatedCounter">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Key" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Value" Type="Int64" Nullable="false" />
+    <Property Name="ExpireAt" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Counter">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Key" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Value" Type="Int16" Nullable="false" />
+    <Property Name="ExpireAt" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Hash">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Key" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Field" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ExpireAt" Type="DateTime" Precision="7" />
+  </EntityType>
+  <EntityType Name="Job">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StateId" Type="Int32" />
+    <Property Name="StateName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="InvocationData" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Arguments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ExpireAt" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="JobParameters" Relationship="Self.FK_HangFire_JobParameter_Job" FromRole="Job" ToRole="JobParameter" />
+    <NavigationProperty Name="States" Relationship="Self.FK_HangFire_State_Job" FromRole="Job" ToRole="State" />
+  </EntityType>
+  <EntityType Name="JobParameter">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="JobId" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Job" Relationship="Self.FK_HangFire_JobParameter_Job" FromRole="JobParameter" ToRole="Job" />
+  </EntityType>
+  <EntityType Name="JobQueue">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="JobId" Type="Int32" Nullable="false" />
+    <Property Name="Queue" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FetchedAt" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="List">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Key" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ExpireAt" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Schema">
+    <Key>
+      <PropertyRef Name="Version" />
+    </Key>
+    <Property Name="Version" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Server">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Data" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LastHeartbeat" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="Set">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Key" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Score" Type="Double" Nullable="false" />
+    <Property Name="Value" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ExpireAt" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="State">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="JobId" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Reason" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Data" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Job" Relationship="Self.FK_HangFire_State_Job" FromRole="State" ToRole="Job" />
   </EntityType>
   <EntityType Name="AcsLvl1">
     <Key>
@@ -8406,6 +8666,39 @@
     <Property Name="deptgrp" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="empid" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
   </EntityType>
+  <EntityType Name="AuditReportCarddetbk0515">
+    <Key>
+      <PropertyRef Name="docentry" />
+      <PropertyRef Name="Yr" />
+      <PropertyRef Name="Pd" />
+      <PropertyRef Name="GoalGRP" />
+      <PropertyRef Name="stat" />
+      <PropertyRef Name="whscode" />
+      <PropertyRef Name="GID" />
+      <PropertyRef Name="deptgrp" />
+      <PropertyRef Name="empid" />
+    </Key>
+    <Property Name="docentry" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Yr" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Pd" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Goals" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+    <Property Name="Branchcode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Errcnt" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="encodedby" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="encodeddt" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="date" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="posted" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Subgoals" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+    <Property Name="goalsdesc" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+    <Property Name="BRTYPE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="GoalGRP" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="sec" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="stat" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="whscode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="GID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="deptgrp" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="empid" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
   <EntityType Name="AuditReportCarddetBK2">
     <Key>
       <PropertyRef Name="docentry" />
@@ -8527,6 +8820,35 @@
     <Property Name="TrxDate" Type="DateTime" Precision="3" />
     <Property Name="PxName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
   </EntityType>
+  <EntityType Name="BCDSR_CASHIER1">
+    <Key>
+      <PropertyRef Name="DocEntry" />
+      <PropertyRef Name="WhsCode" />
+      <PropertyRef Name="LabNo" />
+    </Key>
+    <Property Name="DocEntry" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CashierID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="WhsCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LabNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CardCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="PxName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PMode" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="Amt" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Remarks" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="TrxDate" Type="DateTime" Precision="3" />
+    <Property Name="GenID" Type="Int32" />
+    <Property Name="DBTerm" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="LISRemarks" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="PxAge" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="Stat" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="CMNo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="IsCM" Type="Int32" />
+    <Property Name="MxCash" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="MxCard" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="CardName" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="MxCheck" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="DepAmt" Type="Decimal" Precision="18" Scale="2" />
+  </EntityType>
   <EntityType Name="BCDSR009">
     <Key>
       <PropertyRef Name="DocEntry" />
@@ -8586,6 +8908,35 @@
     <Property Name="DepAmt" Type="Decimal" Precision="18" Scale="2" />
   </EntityType>
   <EntityType Name="bcdsr10262018">
+    <Key>
+      <PropertyRef Name="DocEntry" />
+      <PropertyRef Name="WhsCode" />
+      <PropertyRef Name="LabNo" />
+    </Key>
+    <Property Name="DocEntry" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CashierID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="WhsCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LabNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CardCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="PxName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PMode" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="Amt" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Remarks" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="TrxDate" Type="DateTime" Precision="3" />
+    <Property Name="GenID" Type="Int32" />
+    <Property Name="DBTerm" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="LISRemarks" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="PxAge" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="Stat" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="CMNo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="IsCM" Type="Int32" />
+    <Property Name="MxCash" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="MxCard" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="CardName" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="MxCheck" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="DepAmt" Type="Decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="BCDSR2">
     <Key>
       <PropertyRef Name="DocEntry" />
       <PropertyRef Name="WhsCode" />
@@ -8746,6 +9097,23 @@
     <Property Name="MxCard" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="CardName" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
     <Property Name="PType" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="BCGenID2">
+    <Key>
+      <PropertyRef Name="GenID" />
+      <PropertyRef Name="CashierID" />
+      <PropertyRef Name="WhsCode" />
+    </Key>
+    <Property Name="GenID" Type="Int32" Nullable="false" />
+    <Property Name="CashierID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="WhsCode" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CashAmt" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="SDate" Type="DateTime" Precision="3" />
+    <Property Name="EDate" Type="DateTime" Precision="3" />
+    <Property Name="Stat" Type="Int32" />
+    <Property Name="UserID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="CutOff" Type="Int32" />
+    <Property Name="DepID" Type="Int32" />
   </EntityType>
   <EntityType Name="BCLabDep_bk">
     <Key>
@@ -9620,6 +9988,20 @@
     <Property Name="Category" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
     <Property Name="PkgCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="PkgName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="ColUpd_FORMULA_EXPR">
+    <Key>
+      <PropertyRef Name="DocEntry" />
+      <PropertyRef Name="CreatedBy" />
+      <PropertyRef Name="DateCreated" />
+    </Key>
+    <Property Name="DocEntry" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FE_CODe" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="FE_DESC" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="FE_STRING" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+    <Property Name="IP" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedBy" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DateCreated" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
   </EntityType>
   <EntityType Name="COMPLETE_TESTCODE">
     <Key>
@@ -11234,30 +11616,35 @@
     <Property Name="PType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
   </EntityType>
-  <EntityType Name="ferd">
+  <EntityType Name="Ferd">
     <Key>
-      <PropertyRef Name="Code" />
-      <PropertyRef Name="DocDate" />
-      <PropertyRef Name="WhsCode" />
+      <PropertyRef Name="DocEntry" />
+      <PropertyRef Name="EmpCode" />
+      <PropertyRef Name="ItemCode" />
+      <PropertyRef Name="ItemPrice" />
+      <PropertyRef Name="Remarks" />
+      <PropertyRef Name="Stat" />
     </Key>
-    <Property Name="DocEntry" Type="Int32" />
-    <Property Name="Code" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="DocDate" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="STime" Type="Time" Precision="7" />
-    <Property Name="ETime" Type="Time" Precision="7" />
-    <Property Name="Leg" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="TTime" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="Stat" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
-    <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="WhsCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="IsBreak" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-    <Property Name="sduty" Type="Int32" />
-    <Property Name="PostedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="Hol" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-    <Property Name="Period" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="MinTI" Type="Int32" />
-    <Property Name="MaxTI" Type="Int32" />
+    <Property Name="DocEntry" Type="Int32" Nullable="false" />
+    <Property Name="DocDate" Type="DateTime" Precision="0" />
+    <Property Name="EmpCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ItemCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ItemPrice" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Qty" Type="Int32" />
+    <Property Name="SQty" Type="Int32" />
+    <Property Name="SEE" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="SAmt" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="TotalAmt" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="QtyIssue" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ReqType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Size" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Stat" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="BaseEntry" Type="Int32" />
+    <Property Name="CutOff" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Destination" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="SDForm" Type="Int32" />
+    <Property Name="Color" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="GenALULog">
     <Key>
@@ -13727,6 +14114,39 @@
     <Property Name="Act" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="PFRlvrPymt128">
+    <Key>
+      <PropertyRef Name="DocEntry" />
+    </Key>
+    <Property Name="DocEntry" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DocDate" Type="DateTime" Precision="3" />
+    <Property Name="RlvrName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="BaseEntry" Type="Int32" />
+    <Property Name="WhsCode" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="RefDate" Type="DateTime" Precision="0" />
+    <Property Name="WithBreak" Type="Int32" />
+    <Property Name="STime" Type="Time" Precision="7" />
+    <Property Name="ETime" Type="Time" Precision="7" />
+    <Property Name="ActSTime" Type="Time" Precision="7" />
+    <Property Name="ActETime" Type="Time" Precision="7" />
+    <Property Name="TotHrs" Type="Time" Precision="7" />
+    <Property Name="Rate" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="GrossAmt" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="EWTRate" Type="Int32" />
+    <Property Name="EWTAmt" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="TotPay" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PostBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="IPAdd" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="FundFrom" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="PCFEntry" Type="Int32" />
+    <Property Name="TotBrk" Type="Time" Precision="7" />
+    <Property Name="GenID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="GenDate" Type="DateTime" Precision="3" />
+    <Property Name="GenBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="GenIP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DiscrepAmt" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PFEntry" Type="Int32" />
+  </EntityType>
+  <EntityType Name="PFRlvrPymt2">
     <Key>
       <PropertyRef Name="DocEntry" />
     </Key>
@@ -17950,6 +18370,39 @@
     <Property Name="SupStat" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="MgmtStat" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
   </EntityType>
+  <EntityType Name="tmpverti">
+    <Key>
+      <PropertyRef Name="docentry" />
+      <PropertyRef Name="Yr" />
+      <PropertyRef Name="Pd" />
+      <PropertyRef Name="GoalGRP" />
+      <PropertyRef Name="stat" />
+      <PropertyRef Name="whscode" />
+      <PropertyRef Name="GID" />
+      <PropertyRef Name="deptgrp" />
+      <PropertyRef Name="empid" />
+    </Key>
+    <Property Name="docentry" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Yr" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Pd" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Goals" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+    <Property Name="Branchcode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Errcnt" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="encodedby" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="encodeddt" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="date" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="posted" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Subgoals" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+    <Property Name="goalsdesc" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+    <Property Name="BRTYPE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="GoalGRP" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="sec" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="stat" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="whscode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="GID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="deptgrp" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="empid" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
   <EntityType Name="trainfeedback">
     <Key>
       <PropertyRef Name="empcode" />
@@ -17985,6 +18438,121 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="BRNCH_NM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="UpdCol_ANTIBIOTIC">
+    <Key>
+      <PropertyRef Name="DOCENTRY" />
+    </Key>
+    <Property Name="DOCENTRY" Type="Int32" Nullable="false" />
+    <Property Name="AB_CODE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="AB_NAME" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="AB_GROUP" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="AB_OXOID" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="AB_SEQNO" Type="Decimal" Precision="3" Scale="0" />
+    <Property Name="AB_SHORT_NAME" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="IP" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Created_On" Type="DateTime" Precision="3" />
+    <Property Name="Created_By" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="UpdCol_FORMULA_EXPR">
+    <Key>
+      <PropertyRef Name="DOCENTRY" />
+      <PropertyRef Name="CREATEDBY" />
+      <PropertyRef Name="IP" />
+    </Key>
+    <Property Name="DOCENTRY" Type="Int32" Nullable="false" />
+    <Property Name="FE_CODE" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="FE_DESC" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="FE_STRING" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+    <Property Name="DATECREATED" Type="DateTime" Precision="3" />
+    <Property Name="CREATEDBY" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IP" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UpdCol_ORGANISM">
+    <Key>
+      <PropertyRef Name="DocEntry" />
+    </Key>
+    <Property Name="DocEntry" Type="Int32" Nullable="false" />
+    <Property Name="OG_CODE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="OG_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="OG_GROUP" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="OG_SHORT_NAME" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="OG_ALERT" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="OG_TEST_GRP" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="CREATEDBY" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="CREATED_ON" Type="DateTime" Precision="3" />
+    <Property Name="IP" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="UpdCol_POS_AUTOMATIC_COMMENT">
+    <Key>
+      <PropertyRef Name="DOCENTRY" />
+      <PropertyRef Name="AUTO_COMMENT_ID" />
+    </Key>
+    <Property Name="DOCENTRY" Type="Int32" Nullable="false" />
+    <Property Name="AUTO_COMMENT_ID" Type="String" MaxLength="18" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CREATED_BY" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
+    <Property Name="UPDATED_BY" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
+    <Property Name="CREATED_ON" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DATE_OF_EFFECTIVITY" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="TI_CODE" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
+    <Property Name="IS_VALID" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
+    <Property Name="UPDATE_ON" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
+    <Property Name="TI_COMMENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="IP" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="CREATEDon" Type="DateTime" Precision="3" />
+    <Property Name="CREATEDby" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="UpdCol_POS_AUTOMATIC_GLOBAL_COMMENT">
+    <Key>
+      <PropertyRef Name="DOCENTRY" />
+    </Key>
+    <Property Name="DOCENTRY" Type="Int32" Nullable="false" />
+    <Property Name="AUTO_COMMENT_GLOBAL_ID" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="CREATED_BY" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="UPDATED_BY" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="CREATED_ON" Type="DateTime" Precision="3" />
+    <Property Name="UPDATED_ON" Type="DateTime" Precision="3" />
+    <Property Name="GLOBAL_COMMENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="GLOBAL_COMMENT_TYPE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="IS_VALID" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="DATE_OF_EFFECTIVITY" Type="DateTime" Precision="3" />
+    <Property Name="Created_On1" Type="DateTime" Precision="3" />
+    <Property Name="Created_by1" Type="String" MaxLength="90" FixedLength="false" Unicode="false" />
+    <Property Name="IP" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="UpdCol_SAMPLE_TYPE">
+    <Key>
+      <PropertyRef Name="DOCENTRY" />
+    </Key>
+    <Property Name="DOCENTRY" Type="Int32" Nullable="false" />
+    <Property Name="ST_CODE" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="ST_NAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ST_SG_CODE" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="IP" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Created_on" Type="DateTime" Precision="3" />
+    <Property Name="Created_by" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="UpdCol_TEXTVALUE">
+    <Key>
+      <PropertyRef Name="DOCENTRY" />
+    </Key>
+    <Property Name="DOCENTRY" Type="Int32" Nullable="false" />
+    <Property Name="TV_CODE" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="TV_DESC" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="IP" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="CREATED_ON" Type="DateTime" Precision="3" />
+    <Property Name="CREATED_BY" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="UpdCol_UNIT_TBL">
+    <Key>
+      <PropertyRef Name="DOCENTRY" />
+    </Key>
+    <Property Name="DOCENTRY" Type="Int32" Nullable="false" />
+    <Property Name="UNIT_CODE" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="UNIT_NAME" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="IP" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="CREATED_BY" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="CREATED_ON" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="UserAccLvl1">
     <Key>
@@ -18147,6 +18715,34 @@
     <Property Name="origExepath" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Name="ErrLog" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
   </EntityType>
+  <Association Name="FK_HangFire_JobParameter_Job">
+    <End Role="Job" Type="Self.Job" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="JobParameter" Type="Self.JobParameter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Job">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="JobParameter">
+        <PropertyRef Name="JobId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HangFire_State_Job">
+    <End Role="Job" Type="Self.Job" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="State" Type="Self.State" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Job">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="State">
+        <PropertyRef Name="JobId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="HPCOMMONEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="captured_columns" EntityType="Self.captured_columns" />
     <EntitySet Name="change_tables" EntityType="Self.change_tables" />
@@ -18236,6 +18832,12 @@
     <EntitySet Name="CollTypes" EntityType="Self.CollType" />
     <EntitySet Name="ColTracks" EntityType="Self.ColTrack" />
     <EntitySet Name="Coltrack1" EntityType="Self.Coltrack1" />
+    <EntitySet Name="ColUpd_CMT_TBL" EntityType="Self.ColUpd_CMT_TBL" />
+    <EntitySet Name="ColUpd_ItemMasterH" EntityType="Self.ColUpd_ItemMasterH" />
+    <EntitySet Name="ColUpd_test_item" EntityType="Self.ColUpd_test_item" />
+    <EntitySet Name="ColUpd_TEST_ITPVH" EntityType="Self.ColUpd_TEST_ITPVH" />
+    <EntitySet Name="ColUpd_TestItem" EntityType="Self.ColUpd_TestItem" />
+    <EntitySet Name="ColUpd_TESTTV" EntityType="Self.ColUpd_TESTTV" />
     <EntitySet Name="Connections" EntityType="Self.Connection" />
     <EntitySet Name="CPMHists" EntityType="Self.CPMHist" />
     <EntitySet Name="CPMLocks" EntityType="Self.CPMLock" />
@@ -18337,6 +18939,7 @@
     <EntitySet Name="JDT1" EntityType="Self.JDT1" />
     <EntitySet Name="JEUnifs" EntityType="Self.JEUnif" />
     <EntitySet Name="JGEFlds" EntityType="Self.JGEFld" />
+    <EntitySet Name="JobDescReqs" EntityType="Self.JobDescReq" />
     <EntitySet Name="KeeperLogs" EntityType="Self.KeeperLog" />
     <EntitySet Name="LeaveLogs" EntityType="Self.LeaveLog" />
     <EntitySet Name="LIDtls" EntityType="Self.LIDtl" />
@@ -18580,6 +19183,8 @@
     <EntitySet Name="SlsApplogs" EntityType="Self.SlsApplog" />
     <EntitySet Name="SPLIST_DTL" EntityType="Self.SPLIST_DTL" />
     <EntitySet Name="SPLIST_QRY" EntityType="Self.SPLIST_QRY" />
+    <EntitySet Name="SprintCapacities" EntityType="Self.SprintCapacity" />
+    <EntitySet Name="SprintDaysOffs" EntityType="Self.SprintDaysOff" />
     <EntitySet Name="SprintTasks" EntityType="Self.SprintTask" />
     <EntitySet Name="SProviderMasters" EntityType="Self.SProviderMaster" />
     <EntitySet Name="SSSConts" EntityType="Self.SSSCont" />
@@ -18608,6 +19213,7 @@
     <EntitySet Name="TstOptTables" EntityType="Self.TstOptTable" />
     <EntitySet Name="UnitTbls" EntityType="Self.UnitTbl" />
     <EntitySet Name="updaters" EntityType="Self.updater" />
+    <EntitySet Name="UpdCol_TRRANGE" EntityType="Self.UpdCol_TRRANGE" />
     <EntitySet Name="UpdHSHists" EntityType="Self.UpdHSHist" />
     <EntitySet Name="UpdItems" EntityType="Self.UpdItem" />
     <EntitySet Name="UpdLogs" EntityType="Self.UpdLog" />
@@ -18623,6 +19229,17 @@
     <EntitySet Name="WEEKLY_SLS_PER_SR" EntityType="Self.WEEKLY_SLS_PER_SR" />
     <EntitySet Name="WorkStations" EntityType="Self.WorkStation" />
     <EntitySet Name="ZProgs" EntityType="Self.ZProg" />
+    <EntitySet Name="AggregatedCounters" EntityType="Self.AggregatedCounter" />
+    <EntitySet Name="Counters" EntityType="Self.Counter" />
+    <EntitySet Name="Hashes" EntityType="Self.Hash" />
+    <EntitySet Name="Jobs" EntityType="Self.Job" />
+    <EntitySet Name="JobParameters" EntityType="Self.JobParameter" />
+    <EntitySet Name="JobQueues" EntityType="Self.JobQueue" />
+    <EntitySet Name="Lists" EntityType="Self.List" />
+    <EntitySet Name="Schemata" EntityType="Self.Schema" />
+    <EntitySet Name="Servers" EntityType="Self.Server" />
+    <EntitySet Name="Sets" EntityType="Self.Set" />
+    <EntitySet Name="States" EntityType="Self.State" />
     <EntitySet Name="AcsLvl1" EntityType="Self.AcsLvl1" />
     <EntitySet Name="adt_rpt_dtl" EntityType="Self.adt_rpt_dtl" />
     <EntitySet Name="ALABANG_008_IDTag_20180706" EntityType="Self.ALABANG_008_IDTag_20180706" />
@@ -18664,6 +19281,7 @@
     <EntitySet Name="AuditReportCards" EntityType="Self.AuditReportCard" />
     <EntitySet Name="auditreportcarddet201812" EntityType="Self.auditreportcarddet201812" />
     <EntitySet Name="AuditReportCarddetBKs" EntityType="Self.AuditReportCarddetBK" />
+    <EntitySet Name="AuditReportCarddetbk0515" EntityType="Self.AuditReportCarddetbk0515" />
     <EntitySet Name="AuditReportCarddetBK2" EntityType="Self.AuditReportCarddetBK2" />
     <EntitySet Name="auditreportcardgoals_bk" EntityType="Self.auditreportcardgoals_bk" />
     <EntitySet Name="auditreportcardlogs" EntityType="Self.auditreportcardlog" />
@@ -18673,14 +19291,17 @@
     <EntitySet Name="AUMs" EntityType="Self.AUM" />
     <EntitySet Name="BackFerds" EntityType="Self.BackFerd" />
     <EntitySet Name="bcChecks" EntityType="Self.bcCheck" />
+    <EntitySet Name="BCDSR_CASHIER1" EntityType="Self.BCDSR_CASHIER1" />
     <EntitySet Name="BCDSR009" EntityType="Self.BCDSR009" />
     <EntitySet Name="BCDSR10232018" EntityType="Self.BCDSR10232018" />
     <EntitySet Name="bcdsr10262018" EntityType="Self.bcdsr10262018" />
+    <EntitySet Name="BCDSR2" EntityType="Self.BCDSR2" />
     <EntitySet Name="BCDSRAlls" EntityType="Self.BCDSRAll" />
     <EntitySet Name="BCDSRBKs" EntityType="Self.BCDSRBK" />
     <EntitySet Name="BCDSRc26main" EntityType="Self.BCDSRc26main" />
     <EntitySet Name="BCDSRTmps" EntityType="Self.BCDSRTmp" />
     <EntitySet Name="BCDSRtmpVs" EntityType="Self.BCDSRtmpV" />
+    <EntitySet Name="BCGenID2" EntityType="Self.BCGenID2" />
     <EntitySet Name="BCLabDep_bk" EntityType="Self.BCLabDep_bk" />
     <EntitySet Name="BCLabDep2" EntityType="Self.BCLabDep2" />
     <EntitySet Name="BCSendHS" EntityType="Self.BCSendH" />
@@ -18719,6 +19340,7 @@
     <EntitySet Name="CMBranch_Tst" EntityType="Self.CMBranch_Tst" />
     <EntitySet Name="CMBranchA_Tst" EntityType="Self.CMBranchA_Tst" />
     <EntitySet Name="CMBranchDet_Tst" EntityType="Self.CMBranchDet_Tst" />
+    <EntitySet Name="ColUpd_FORMULA_EXPR" EntityType="Self.ColUpd_FORMULA_EXPR" />
     <EntitySet Name="COMPLETE_TESTCODE" EntityType="Self.COMPLETE_TESTCODE" />
     <EntitySet Name="D15100068sclist_dr" EntityType="Self.D15100068sclist_dr" />
     <EntitySet Name="D15100077dr" EntityType="Self.D15100077dr" />
@@ -18810,7 +19432,7 @@
     <EntitySet Name="ErrorDescs" EntityType="Self.ErrorDesc" />
     <EntitySet Name="ErrorLog_Bk" EntityType="Self.ErrorLog_Bk" />
     <EntitySet Name="fdlistroses" EntityType="Self.fdlistrose" />
-    <EntitySet Name="ferds" EntityType="Self.ferd" />
+    <EntitySet Name="Ferds" EntityType="Self.Ferd" />
     <EntitySet Name="GenALULogs" EntityType="Self.GenALULog" />
     <EntitySet Name="GenDTRLogs" EntityType="Self.GenDTRLog" />
     <EntitySet Name="GenTrigs" EntityType="Self.GenTrig" />
@@ -18910,6 +19532,7 @@
     <EntitySet Name="PFRlvrHdrDeletes" EntityType="Self.PFRlvrHdrDelete" />
     <EntitySet Name="PFRlvrHdrLogs" EntityType="Self.PFRlvrHdrLog" />
     <EntitySet Name="PFRlvrPymt128" EntityType="Self.PFRlvrPymt128" />
+    <EntitySet Name="PFRlvrPymt2" EntityType="Self.PFRlvrPymt2" />
     <EntitySet Name="PMChanges" EntityType="Self.PMChange" />
     <EntitySet Name="PMChangeArcs" EntityType="Self.PMChangeArc" />
     <EntitySet Name="PMChangeBks" EntityType="Self.PMChangeBk" />
@@ -19084,9 +19707,18 @@
     <EntitySet Name="TestCodeOpt1" EntityType="Self.TestCodeOpt1" />
     <EntitySet Name="testskills" EntityType="Self.testskill" />
     <EntitySet Name="TMP2" EntityType="Self.TMP2" />
+    <EntitySet Name="tmpvertis" EntityType="Self.tmpverti" />
     <EntitySet Name="trainfeedbacks" EntityType="Self.trainfeedback" />
     <EntitySet Name="TrvlBrnches" EntityType="Self.TrvlBrnch" />
     <EntitySet Name="TrvlBrnchLogs" EntityType="Self.TrvlBrnchLog" />
+    <EntitySet Name="UpdCol_ANTIBIOTIC" EntityType="Self.UpdCol_ANTIBIOTIC" />
+    <EntitySet Name="UpdCol_FORMULA_EXPR" EntityType="Self.UpdCol_FORMULA_EXPR" />
+    <EntitySet Name="UpdCol_ORGANISM" EntityType="Self.UpdCol_ORGANISM" />
+    <EntitySet Name="UpdCol_POS_AUTOMATIC_COMMENT" EntityType="Self.UpdCol_POS_AUTOMATIC_COMMENT" />
+    <EntitySet Name="UpdCol_POS_AUTOMATIC_GLOBAL_COMMENT" EntityType="Self.UpdCol_POS_AUTOMATIC_GLOBAL_COMMENT" />
+    <EntitySet Name="UpdCol_SAMPLE_TYPE" EntityType="Self.UpdCol_SAMPLE_TYPE" />
+    <EntitySet Name="UpdCol_TEXTVALUE" EntityType="Self.UpdCol_TEXTVALUE" />
+    <EntitySet Name="UpdCol_UNIT_TBL" EntityType="Self.UpdCol_UNIT_TBL" />
     <EntitySet Name="UserAccLvl1" EntityType="Self.UserAccLvl1" />
     <EntitySet Name="UserAccLvlbks" EntityType="Self.UserAccLvlbk" />
     <EntitySet Name="users" EntityType="Self.user" />
@@ -19096,5 +19728,13 @@
     <EntitySet Name="yrevalentries" EntityType="Self.yrevalentry" />
     <EntitySet Name="ZipCodes" EntityType="Self.ZipCode" />
     <EntitySet Name="ZSQUAREPROGRAMS" EntityType="Self.ZSQUAREPROGRAM" />
+    <AssociationSet Name="FK_HangFire_JobParameter_Job" Association="Self.FK_HangFire_JobParameter_Job">
+      <End Role="Job" EntitySet="Jobs" />
+      <End Role="JobParameter" EntitySet="JobParameters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HangFire_State_Job" Association="Self.FK_HangFire_State_Job">
+      <End Role="Job" EntitySet="Jobs" />
+      <End Role="State" EntitySet="States" />
+    </AssociationSet>
   </EntityContainer>
 </Schema>

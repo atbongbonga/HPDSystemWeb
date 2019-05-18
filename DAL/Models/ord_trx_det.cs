@@ -22,5 +22,7 @@ namespace DAL.Models
         public Nullable<System.DateTime> DateCreated { get; set; }
         public Nullable<System.DateTime> DateDone { get; set; }
         public string Remarks { get; set; }
+        public Nullable<System.DateTime> DateModified { get; set; }
+        public string SID { get; set; }
     }
 }

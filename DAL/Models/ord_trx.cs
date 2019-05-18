@@ -20,6 +20,7 @@ namespace DAL.Models
         public Nullable<System.DateTime> DateCreated { get; set; }
         public string Created_By_ID { get; set; }
         public string Created_By_Name { get; set; }
-        public string Remarks { get; set; }
+        public string Frm { get; set; }
+        public string Method { get; set; }
     }
 }

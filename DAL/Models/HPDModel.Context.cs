@@ -113,6 +113,12 @@ namespace DAL.Models
         public virtual DbSet<CollType> CollTypes { get; set; }
         public virtual DbSet<ColTrack> ColTracks { get; set; }
         public virtual DbSet<Coltrack1> Coltrack1 { get; set; }
+        public virtual DbSet<ColUpd_CMT_TBL> ColUpd_CMT_TBL { get; set; }
+        public virtual DbSet<ColUpd_ItemMasterH> ColUpd_ItemMasterH { get; set; }
+        public virtual DbSet<ColUpd_test_item> ColUpd_test_item { get; set; }
+        public virtual DbSet<ColUpd_TEST_ITPVH> ColUpd_TEST_ITPVH { get; set; }
+        public virtual DbSet<ColUpd_TestItem> ColUpd_TestItem { get; set; }
+        public virtual DbSet<ColUpd_TESTTV> ColUpd_TESTTV { get; set; }
         public virtual DbSet<Connection> Connections { get; set; }
         public virtual DbSet<CPMHist> CPMHists { get; set; }
         public virtual DbSet<CPMLock> CPMLocks { get; set; }
@@ -214,6 +220,7 @@ namespace DAL.Models
         public virtual DbSet<JDT1> JDT1 { get; set; }
         public virtual DbSet<JEUnif> JEUnifs { get; set; }
         public virtual DbSet<JGEFld> JGEFlds { get; set; }
+        public virtual DbSet<JobDescReq> JobDescReqs { get; set; }
         public virtual DbSet<KeeperLog> KeeperLogs { get; set; }
         public virtual DbSet<LeaveLog> LeaveLogs { get; set; }
         public virtual DbSet<LIDtl> LIDtls { get; set; }
@@ -457,6 +464,8 @@ namespace DAL.Models
         public virtual DbSet<SlsApplog> SlsApplogs { get; set; }
         public virtual DbSet<SPLIST_DTL> SPLIST_DTL { get; set; }
         public virtual DbSet<SPLIST_QRY> SPLIST_QRY { get; set; }
+        public virtual DbSet<SprintCapacity> SprintCapacities { get; set; }
+        public virtual DbSet<SprintDaysOff> SprintDaysOffs { get; set; }
         public virtual DbSet<SprintTask> SprintTasks { get; set; }
         public virtual DbSet<SProviderMaster> SProviderMasters { get; set; }
         public virtual DbSet<SSSCont> SSSConts { get; set; }
@@ -485,6 +494,7 @@ namespace DAL.Models
         public virtual DbSet<TstOptTable> TstOptTables { get; set; }
         public virtual DbSet<UnitTbl> UnitTbls { get; set; }
         public virtual DbSet<updater> updaters { get; set; }
+        public virtual DbSet<UpdCol_TRRANGE> UpdCol_TRRANGE { get; set; }
         public virtual DbSet<UpdHSHist> UpdHSHists { get; set; }
         public virtual DbSet<UpdItem> UpdItems { get; set; }
         public virtual DbSet<UpdLog> UpdLogs { get; set; }
@@ -500,6 +510,17 @@ namespace DAL.Models
         public virtual DbSet<WEEKLY_SLS_PER_SR> WEEKLY_SLS_PER_SR { get; set; }
         public virtual DbSet<WorkStation> WorkStations { get; set; }
         public virtual DbSet<ZProg> ZProgs { get; set; }
+        public virtual DbSet<AggregatedCounter> AggregatedCounters { get; set; }
+        public virtual DbSet<Counter> Counters { get; set; }
+        public virtual DbSet<Hash> Hashes { get; set; }
+        public virtual DbSet<Job> Jobs { get; set; }
+        public virtual DbSet<JobParameter> JobParameters { get; set; }
+        public virtual DbSet<JobQueue> JobQueues { get; set; }
+        public virtual DbSet<List> Lists { get; set; }
+        public virtual DbSet<Schema> Schemata { get; set; }
+        public virtual DbSet<Server> Servers { get; set; }
+        public virtual DbSet<Set> Sets { get; set; }
+        public virtual DbSet<State> States { get; set; }
         public virtual DbSet<AcsLvl1> AcsLvl1 { get; set; }
         public virtual DbSet<adt_rpt_dtl> adt_rpt_dtl { get; set; }
         public virtual DbSet<ALABANG_008_IDTag_20180706> ALABANG_008_IDTag_20180706 { get; set; }
@@ -541,6 +562,7 @@ namespace DAL.Models
         public virtual DbSet<AuditReportCard> AuditReportCards { get; set; }
         public virtual DbSet<auditreportcarddet201812> auditreportcarddet201812 { get; set; }
         public virtual DbSet<AuditReportCarddetBK> AuditReportCarddetBKs { get; set; }
+        public virtual DbSet<AuditReportCarddetbk0515> AuditReportCarddetbk0515 { get; set; }
         public virtual DbSet<AuditReportCarddetBK2> AuditReportCarddetBK2 { get; set; }
         public virtual DbSet<auditreportcardgoals_bk> auditreportcardgoals_bk { get; set; }
         public virtual DbSet<auditreportcardlog> auditreportcardlogs { get; set; }
@@ -550,14 +572,17 @@ namespace DAL.Models
         public virtual DbSet<AUM> AUMs { get; set; }
         public virtual DbSet<BackFerd> BackFerds { get; set; }
         public virtual DbSet<bcCheck> bcChecks { get; set; }
+        public virtual DbSet<BCDSR_CASHIER1> BCDSR_CASHIER1 { get; set; }
         public virtual DbSet<BCDSR009> BCDSR009 { get; set; }
         public virtual DbSet<BCDSR10232018> BCDSR10232018 { get; set; }
         public virtual DbSet<bcdsr10262018> bcdsr10262018 { get; set; }
+        public virtual DbSet<BCDSR2> BCDSR2 { get; set; }
         public virtual DbSet<BCDSRAll> BCDSRAlls { get; set; }
         public virtual DbSet<BCDSRBK> BCDSRBKs { get; set; }
         public virtual DbSet<BCDSRc26main> BCDSRc26main { get; set; }
         public virtual DbSet<BCDSRTmp> BCDSRTmps { get; set; }
         public virtual DbSet<BCDSRtmpV> BCDSRtmpVs { get; set; }
+        public virtual DbSet<BCGenID2> BCGenID2 { get; set; }
         public virtual DbSet<BCLabDep_bk> BCLabDep_bk { get; set; }
         public virtual DbSet<BCLabDep2> BCLabDep2 { get; set; }
         public virtual DbSet<BCSendH> BCSendHS { get; set; }
@@ -596,6 +621,7 @@ namespace DAL.Models
         public virtual DbSet<CMBranch_Tst> CMBranch_Tst { get; set; }
         public virtual DbSet<CMBranchA_Tst> CMBranchA_Tst { get; set; }
         public virtual DbSet<CMBranchDet_Tst> CMBranchDet_Tst { get; set; }
+        public virtual DbSet<ColUpd_FORMULA_EXPR> ColUpd_FORMULA_EXPR { get; set; }
         public virtual DbSet<COMPLETE_TESTCODE> COMPLETE_TESTCODE { get; set; }
         public virtual DbSet<D15100068sclist_dr> D15100068sclist_dr { get; set; }
         public virtual DbSet<D15100077dr> D15100077dr { get; set; }
@@ -687,7 +713,7 @@ namespace DAL.Models
         public virtual DbSet<ErrorDesc> ErrorDescs { get; set; }
         public virtual DbSet<ErrorLog_Bk> ErrorLog_Bk { get; set; }
         public virtual DbSet<fdlistrose> fdlistroses { get; set; }
-        public virtual DbSet<ferd> ferds { get; set; }
+        public virtual DbSet<Ferd> Ferds { get; set; }
         public virtual DbSet<GenALULog> GenALULogs { get; set; }
         public virtual DbSet<GenDTRLog> GenDTRLogs { get; set; }
         public virtual DbSet<GenTrig> GenTrigs { get; set; }
@@ -787,6 +813,7 @@ namespace DAL.Models
         public virtual DbSet<PFRlvrHdrDelete> PFRlvrHdrDeletes { get; set; }
         public virtual DbSet<PFRlvrHdrLog> PFRlvrHdrLogs { get; set; }
         public virtual DbSet<PFRlvrPymt128> PFRlvrPymt128 { get; set; }
+        public virtual DbSet<PFRlvrPymt2> PFRlvrPymt2 { get; set; }
         public virtual DbSet<PMChange> PMChanges { get; set; }
         public virtual DbSet<PMChangeArc> PMChangeArcs { get; set; }
         public virtual DbSet<PMChangeBk> PMChangeBks { get; set; }
@@ -961,9 +988,18 @@ namespace DAL.Models
         public virtual DbSet<TestCodeOpt1> TestCodeOpt1 { get; set; }
         public virtual DbSet<testskill> testskills { get; set; }
         public virtual DbSet<TMP2> TMP2 { get; set; }
+        public virtual DbSet<tmpverti> tmpvertis { get; set; }
         public virtual DbSet<trainfeedback> trainfeedbacks { get; set; }
         public virtual DbSet<TrvlBrnch> TrvlBrnches { get; set; }
         public virtual DbSet<TrvlBrnchLog> TrvlBrnchLogs { get; set; }
+        public virtual DbSet<UpdCol_ANTIBIOTIC> UpdCol_ANTIBIOTIC { get; set; }
+        public virtual DbSet<UpdCol_FORMULA_EXPR> UpdCol_FORMULA_EXPR { get; set; }
+        public virtual DbSet<UpdCol_ORGANISM> UpdCol_ORGANISM { get; set; }
+        public virtual DbSet<UpdCol_POS_AUTOMATIC_COMMENT> UpdCol_POS_AUTOMATIC_COMMENT { get; set; }
+        public virtual DbSet<UpdCol_POS_AUTOMATIC_GLOBAL_COMMENT> UpdCol_POS_AUTOMATIC_GLOBAL_COMMENT { get; set; }
+        public virtual DbSet<UpdCol_SAMPLE_TYPE> UpdCol_SAMPLE_TYPE { get; set; }
+        public virtual DbSet<UpdCol_TEXTVALUE> UpdCol_TEXTVALUE { get; set; }
+        public virtual DbSet<UpdCol_UNIT_TBL> UpdCol_UNIT_TBL { get; set; }
         public virtual DbSet<UserAccLvl1> UserAccLvl1 { get; set; }
         public virtual DbSet<UserAccLvlbk> UserAccLvlbks { get; set; }
         public virtual DbSet<user> users { get; set; }

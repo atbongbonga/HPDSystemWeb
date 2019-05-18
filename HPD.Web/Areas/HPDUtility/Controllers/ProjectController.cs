@@ -112,5 +112,24 @@ namespace HPD.Web.Areas.HPDUtility.Controllers
             var result = sprintTaskComponent.GetTaskDetails(taskId);
             return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
         }
+        public ActionResult GetSprintMemberCapacity(int sprintId)
+        {
+            var sprintTaskComponent = new SprintTaskComponent();
+            var result = sprintTaskComponent.GetSprintMemberCapacity(sprintId);
+            return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GetTeamWorkDetails(int sprintId)
+        {
+            var sprintTaskComponent = new SprintTaskComponent();
+            var result = sprintTaskComponent.TeamWorkDetails(sprintId);
+            return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetUserWorkDetails(int sprintId)
+        {
+            var sprintTaskComponent = new SprintTaskComponent();
+            var result = sprintTaskComponent.UserWorkDetails(sprintId);
+            return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
+        }
     }
 }

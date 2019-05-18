@@ -43,5 +43,6 @@ namespace DAL.Models
         public Nullable<int> AOPCancel { get; set; }
         public Nullable<System.DateTime> ResignDate { get; set; }
         public string ReqUtype1 { get; set; }
+        public string UserRole { get; set; }
     }
 }

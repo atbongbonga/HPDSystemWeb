@@ -55,7 +55,10 @@
     <Compile Include="Entities\Developers.cs" />
     <Compile Include="Entities\ErrorLogs.cs" />
     <Compile Include="Entities\ProjectSprints.cs" />
+    <Compile Include="Entities\SprintCapacities.cs" />
+    <Compile Include="Entities\SprintDaysOffs.cs" />
     <Compile Include="Entities\SprintTasks.cs" />
+    <Compile Include="Entities\SprintWorkDetails.cs" />
     <Compile Include="Entities\Users.cs" />
     <Compile Include="Enums\Enums.cs" />
     <Compile Include="Logics\DataDictionaryComponent.cs" />
@@ -82,6 +85,9 @@
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\adt_rpt_dtl.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AggregatedCounter.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ALABANG_008_IDTag_20180706.cs">
@@ -282,6 +288,9 @@
     <Compile Include="Models\AuditReportCarddetBK.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AuditReportCarddetbk0515.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\AuditReportCarddetBK2.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
@@ -342,6 +351,9 @@
     <Compile Include="Models\bcdsr10262018.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BCDSR2.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\BCDSRAll.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
@@ -357,6 +369,9 @@
     <Compile Include="Models\BCDSRtmpV.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BCDSR_CASHIER1.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\BCFDList.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
@@ -364,6 +379,9 @@
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BCGenID.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BCGenID2.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BCLabDep.cs">
@@ -606,10 +624,34 @@
     <Compile Include="Models\Coltrack1.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ColUpd_CMT_TBL.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ColUpd_FORMULA_EXPR.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ColUpd_ItemMasterH.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ColUpd_TestItem.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ColUpd_TESTTV.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ColUpd_test_item.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ColUpd_TEST_ITPVH.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\COMPLETE_TESTCODE.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Connection.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Counter.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CPMHist.cs">
@@ -1086,7 +1128,7 @@
     <Compile Include="Models\FD_UnTag.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ferd.cs">
+    <Compile Include="Models\Ferd.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Fllwupdet.cs">
@@ -1111,6 +1153,9 @@
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HabitALU.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Hash.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HepaPType.cs">
@@ -1230,6 +1275,18 @@
     <Compile Include="Models\JGEFld.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Job.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\JobDescReq.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\JobParameter.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\JobQueue.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\JOB_LIST.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
@@ -1261,6 +1318,9 @@
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LIHdr.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\List.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LIS_UserSV.cs">
@@ -1813,6 +1873,9 @@
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PFRlvrPymt128.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PFRlvrPymt2.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PHILAPEEmp.cs">
@@ -2460,6 +2523,9 @@
     <Compile Include="Models\ScheduleHist.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Schema.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ScholarReq.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
@@ -2724,7 +2790,13 @@
     <Compile Include="Models\Sequence.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Server.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ServerMaintenance.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Set.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SlsApplog.cs">
@@ -2734,6 +2806,12 @@
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SPLIST_QRY.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SprintCapacity.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SprintDaysOff.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SprintTask.cs">
@@ -2746,6 +2824,9 @@
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SSSEmp.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\State.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SVisor.cs">
@@ -2814,6 +2895,9 @@
     <Compile Include="Models\tmpSPLIST.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tmpverti.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TrainAdd.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
@@ -2848,6 +2932,33 @@
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\updater.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UpdCol_ANTIBIOTIC.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UpdCol_FORMULA_EXPR.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UpdCol_ORGANISM.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UpdCol_POS_AUTOMATIC_COMMENT.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UpdCol_POS_AUTOMATIC_GLOBAL_COMMENT.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UpdCol_SAMPLE_TYPE.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UpdCol_TEXTVALUE.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UpdCol_TRRANGE.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UpdCol_UNIT_TBL.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UpdHSHist.cs">
