@@ -51,8 +51,49 @@ namespace DAL.Logics
             }
             return model;
         }
+        public List<ProjectSprints> GetAllSprint()
+        {
+            var model = new List<ProjectSprints>();
+            var db = new HPCOMMONEntities();
+
+            using (SqlConnection cn = new SqlConnection(dbcon))
+            {
+                cn.Open();
+
+                String query = "SELECT * FROM dbo.ProjectSprints ";
+
+
+                //cm.Parameters.AddWithValue("@Id", id);
+
+                SqlCommand cmd = new SqlCommand(query, cn);
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        int sid = Convert.ToInt32(dr["Id"]);
+                        var sprinttaskcount = db.SprintTasks.Where(i => i.SprintId == sid && i.Type == (int)Enums.TaskType.Task).Count();
+                        var sprintbugcount = db.SprintTasks.Where(i => i.SprintId == sid && i.Type == (int)Enums.TaskType.Bug).Count();
+                        model.Add(new ProjectSprints
+                        {
+                            Id = Convert.ToInt32(dr["Id"]),
+                            Title = Convert.ToString(dr["Title"]),
+                            ProgramName = Convert.ToString(dr["ProgramName"]),
+                            StartDate = Convert.ToDateTime(dr["StartDate"]),
+                            EndDate = Convert.ToDateTime(dr["EndDate"]),
+
+                        });
+                    };
+                    return model;
+                }
+                cn.Close();
+            }
+            return model;
+        }
         public bool CreateProjectSprint(ProjectSprints ProjSprint)
         {
+            String[] members = ProjSprint.Member.ToString().Split(Convert.ToChar(","));
             using (HPCOMMONEntities db = new HPCOMMONEntities())
             {
                 var setting = new Settings();
@@ -71,6 +112,18 @@ namespace DAL.Logics
                 db.ProjectSprints.Add(addprosprint);
                 db.SaveChanges();
 
+                foreach (var mem in members)
+                {
+                    var addmemcapacity = new SprintCapacity
+                    {
+                        SprintId = addprosprint.Id,
+                        EmpCode = Convert.ToInt32(mem),
+                        Capacity = 0
+
+                    };
+                    db.SprintCapacities.Add(addmemcapacity);
+                    db.SaveChanges();
+                }
             }
             return true;
         }
@@ -216,22 +269,106 @@ namespace DAL.Logics
             return model;
 
         }
-        public bool CreateSprintCapacity(SprintCapacities SprintCapacity)
+        public bool UpdateUserCapacity(SprintCapacities SprintCapacity)
         {
             using (HPCOMMONEntities db = new HPCOMMONEntities())
             {
-                var addsprintcapacity = new SprintCapacity
+                var getmembercapacity = db.SprintCapacities.SingleOrDefault(i => i.SprintId == SprintCapacity.SprintId && i.EmpCode == SprintCapacity.EmpCode);
+                if (getmembercapacity != null)
                 {
-                    SprintId = SprintCapacity.SprintId,
-                    EmpCode = SprintCapacity.EmpCode,
-                    Capacity = Convert.ToDecimal(SprintCapacity.Capacity)
-                };
-                db.SprintCapacities.Add(addsprintcapacity);
-                db.SaveChanges();
-
+                    getmembercapacity.Capacity = SprintCapacity.Capacity;
+                    db.SaveChanges();
+                }
+                return true;
             }
-            return true;
         }
+
+        public List<SprintMembers> GetSprintMemberCapacity(int sprintId)
+        {
+            var model = new List<SprintMembers>();
+            var db = new HPCOMMONEntities();
+            using (SqlConnection cn = new SqlConnection(dbcon))
+            {
+                cn.Open();
+                String query = "SELECT a.EmpCode, a.EmpName, b.SprintId, b.Capacity FROM dbo.SCEmp a " +
+                    "LEFT JOIN dbo.SprintCapacity b ON a.EmpCode = CAST(b.EmpCode AS VARCHAR) " +
+                    "WHERE b.SprintId = " + sprintId + " ";
+
+                SqlCommand cmd = new SqlCommand(query, cn);
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        var daysoff = new List<SprintDaysOff>();
+                        int empcode = Convert.ToInt32(dr[0]);
+                        daysoff = db.SprintDaysOffs.Select(i => i).Where(i => i.SprintId == sprintId && i.EmpCode == empcode).ToList();
+                        model.Add(new SprintMembers
+                        {
+                            EmpCode = Convert.ToInt32(dr[0]),
+                            EmpName = Convert.ToString(dr[1]),
+                            SprintId = Convert.ToInt32(dr[2]),
+                            Capacity = Convert.ToDecimal(dr[3]),
+                            DaysOffCount = daysoff.Count(),
+                            DaysOffList = daysoff
+                        });
+
+                    };
+                }
+                cn.Close();
+
+                return model;
+            }
+        }
+
+        public bool CreateUpdateMemberDaysOff(SprintDaysOffs SprintDayOff)
+        {
+            using (HPCOMMONEntities db = new HPCOMMONEntities())
+            {
+                var getuserdaysoff = db.SprintDaysOffs.Select(i => i).Where(i => i.Id == SprintDayOff.Id).FirstOrDefault();
+                if (getuserdaysoff != null)
+                {
+                    getuserdaysoff.StartDate = SprintDayOff.StartDate;
+                    getuserdaysoff.EndDate = SprintDayOff.EndDate;
+                    db.SaveChanges();
+                }
+                else
+                {
+                    var userdaysoff = new SprintDaysOff
+                    {
+                        SprintId = SprintDayOff.SprintId,
+                        EmpCode = SprintDayOff.EmpCode,
+                        StartDate = SprintDayOff.StartDate,
+                        EndDate = SprintDayOff.EndDate
+                    };
+                    db.SprintDaysOffs.Add(userdaysoff);
+                    db.SaveChanges();
+                }
+                return true;
+            }
+        }
+        public List<SprintDaysOffs> GetSpintMemberDaysOff(int sprintId, int empCode)
+        {
+            var model = new List<SprintDaysOffs>();
+            using (HPCOMMONEntities db = new HPCOMMONEntities())
+            {
+                var getuserdaysoff = db.SprintDaysOffs.Select(i => i).Where(i => i.SprintId == sprintId && i.EmpCode == empCode).ToList();
+                if (getuserdaysoff != null)
+                {
+                    foreach (var udo in getuserdaysoff)
+                    {
+                        model.Add(new SprintDaysOffs
+                        {
+                            Id = udo.Id,
+                            StartDate = Convert.ToDateTime(udo.StartDate),
+                            EndDate = Convert.ToDateTime(udo.EndDate)
+                        });
+                    }
+                }
+            }
+            return model;
+        }
+
         #region GET SPRINT WORKING DAYS
         private bool CreateSprintDaysOff(SprintDaysOffs SprintDaysOff)
         {
@@ -308,10 +445,13 @@ namespace DAL.Logics
         {
             using (HPCOMMONEntities db = new HPCOMMONEntities())
             {
-                var getsprint = db.ProjectSprints.Select(i => i).Where(i => i.Id == sprintId).FirstOrDefault();
-                var getteamdaysoff = db.SprintDaysOffs.Select(i => i).Where(i => i.SprintId == sprintId && i.EmpCode == null).Count();
-                int dowps = GetWorkingDays(sprintId) - getteamdaysoff;
-                return Convert.ToDecimal(dowps * 9.6);
+                //var getsprint = db.ProjectSprints.Select(i => i).Where(i => i.Id == sprintId).FirstOrDefault();
+                //var getteamdaysoff = db.SprintDaysOffs.Select(i => i).Where(i => i.SprintId == sprintId && i.EmpCode == null).Count();
+                //int dowps = GetWorkingDays(sprintId) - getteamdaysoff;
+                //return Convert.ToDecimal(dowps * 9.6);
+
+                var uwd = UserWorkDetails(sprintId);
+                return uwd.Sum(i => i.TotalUserWork);
             }
             
         }
@@ -336,13 +476,14 @@ namespace DAL.Logics
                 {
                     model.Add(new SprintWorkDetails()
                     {
+                        EmpName = data.EmpName,
                         TotalUserWork = TotalUserWork(sprintId, data.EmpCode),
                         TotalUserTaskWork = TotalUserTaskWork(sprintId, data.EmpCode)
                     });
 
                 }
                 return model;
-            }
+            }                                    
             return model;
         }
         private decimal TotalUserWork(int sprintId, int empCode)
@@ -366,43 +507,6 @@ namespace DAL.Logics
         }
         #endregion
 
-
-        public List<SprintMembers> GetSprintMemberCapacity(int sprintId)
-        {
-            var model = new List<SprintMembers>();
-            var db = new HPCOMMONEntities();
-            using (SqlConnection cn = new SqlConnection(dbcon))
-            {
-                cn.Open();
-                String query = "SELECT a.EmpCode, a.EmpName, b.SprintId, b.Capacity FROM dbo.SCEmp a " +
-                    "LEFT JOIN dbo.SprintCapacity b ON a.EmpCode = CAST(b.EmpCode AS VARCHAR) " +
-                    "WHERE b.SprintId = "+ sprintId + " ";
-
-                SqlCommand cmd = new SqlCommand(query, cn);
-                SqlDataReader dr = cmd.ExecuteReader();
-                if (dr.HasRows)
-                {
-                    while (dr.Read())
-                    {
-                        var daysoff = new List<SprintDaysOff>();
-                        int empcode = Convert.ToInt32(dr[0]);
-                        daysoff = db.SprintDaysOffs.Select(i => i).Where(i => i.SprintId == sprintId && i.EmpCode == empcode).ToList();
-                        model.Add(new SprintMembers
-                        {
-                            EmpCode = Convert.ToInt32(dr[0]),
-                            EmpName = Convert.ToString(dr[1]),
-                            SprintId = Convert.ToInt32(dr[2]),
-                            Capacity = Convert.ToDecimal(dr[3]),
-                            DaysOffCount = daysoff.Count(),
-                            DaysOffList = daysoff
-                        });
-
-                    };
-                }
-                cn.Close();
-
-                return model;
-            }
-        }
+        
     }
 }

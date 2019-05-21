@@ -8,6 +8,7 @@ namespace DAL.Entities
 {
     public class SprintWorkDetails
     {
+        public string EmpName { get; set; }
         public decimal TotalTeamWork { get; set; }
         public decimal TotalTeamTaskWork { get; set; }
         public decimal TotalUserWork { get; set; }

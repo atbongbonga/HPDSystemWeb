@@ -289,19 +289,20 @@
                 <div class="modal-body">
                     <div class="container-fluid">
                         <ul class="nav nav-tabs" id="sprintDetailsTab" role="tablist">
-                            <li class="nav-item">
+                            @*<li class="nav-item">
                                 <a class="nav-link active" id="sprintcontent-tab" data-toggle="tab" href="#sprintcontent" role="tab" aria-controls="sprintcontent" aria-selected="true">Content</a>
+                            </li>*@
+                            <li class="nav-item">
+                                <a class="nav-link active" id="workdet-tab" data-toggle="tab" href="#workdet" role="tab" aria-controls="workdet" aria-selected="false">Work</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="memcapacity-tab" data-toggle="tab" href="#memcapacity" role="tab" aria-controls="memcapacity" aria-selected="false">Capacity</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="workdet-tab" data-toggle="tab" href="#workdet" role="tab" aria-controls="workdet" aria-selected="false">Work</a>
-                            </li>
+                            
                         </ul>
                         <div class="tab-content" id="sprintDetailsTabCon">
                             <!--Sprint Content-->
-                            <div class="tab-pane fade py-3 show active" id="sprintcontent" role="tabpanel" aria-labelledby="sprintcontent-tab">
+                            @*<div class="tab-pane fade py-3 show active" id="sprintcontent" role="tabpanel" aria-labelledby="sprintcontent-tab">
                                 <h1 class="h5 mb-4 text-gray-800">Sprint Content</h1>
                                 <hr>
                                 <div class="container-fluid">
@@ -342,6 +343,27 @@
                                         </form>
                                     </div>
                                 </div>
+                            </div>*@
+                            <!--Work Details-->
+                            <div class="tab-pane fade py-3 show active" id="workdet" role="tabpanel" aria-labelledby="workdet-tab">
+                                <h1 class="h5 mb-4 text-gray-800">Work Details</h1>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h1 class="h6 mb-4 text-gray-800">Work</h1>
+                                        <label for="">Team</label>
+                                        <div class="progress">
+                                            <div class="progress-bar text-center" role="progressbar" id="pbarteamwd" aria-valuenow="0" aria-valuemin="0" aria-valuemax="0">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <h1 class="h6 mb-4 text-gray-800">Work By: Assigned To</h1>
+                                        <div id="divuserwd">
+
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <!--Member Capacity-->
                             <div class="tab-pane fade py-3" id="memcapacity" role="tabpanel" aria-labelledby="memcapacity-tab">
@@ -350,34 +372,15 @@
                                 <table id="tblMemberCapacity" class="table table-bordered table-light table-hover">
                                     <thead>
                                         <tr>
-                                            <th>Member</th>
-                                            <th>Capacity per day</th>
-                                            <th>Days off</th>
+                                            <th style="width:50%">Member</th>
+                                            <th style="width:25%">Capacity/Day</th>
+                                            <th style="width:25%">Days off</th>
                                         </tr>
                                     </thead>
                                     <tbody id="dbTableBody"></tbody>
                                 </table>
                             </div>
-                            <!--Work Details-->
-                            <div class="tab-pane fade py-3" id="workdet" role="tabpanel" aria-labelledby="workdet-tab">
-                                <h1 class="h5 mb-4 text-gray-800">Work Details</h1>
-                                <hr>
-                                <h1 class="h6 mb-4 text-gray-800">Work</h1>
-                                <label for="">Team</label>
-                                <div class="progress">
-                                    <div class="progress-bar text-center" role="progressbar"  id="pbarteamwd" aria-valuenow="0" aria-valuemin="0" aria-valuemax="0"> 
-                                    </div>                   
-                                </div>
-                                <h1 class="h6 mb-4 text-gray-800">Work By: Assigned To</h1>
-                                <div id="divuserwd">
-
-                                </div>
-                                <label for="">Mark</label>
-                                <div class="progress">
-                                    <div class="progress-bar" role="progressbar"  id="pbartotuserwork" aria-valuenow="0" aria-valuemin="0" aria-valuemax="0"></div>
-                                </div>
-                                
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -385,9 +388,9 @@
                     <form class="user">
                         <div class="form-group row">
                             <div class="col-sm-6">
-                                <a href="#" class="btn btn-danger">
+                                @*<a href="#" class="btn btn-danger">
                                     Cancel
-                                </a>
+                                </a>*@
                             </div>
                         </div>
                     </form>
@@ -395,6 +398,49 @@
             </div>
         </div>
     </div>
+
+    <!--User Days Off-->
+    <div class="modal fade" id="userDaysoffModal" tabindex="-1" role="dialog" aria-labelledby="antModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="antModalLabel">Add Days Off</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="d-sm-flex align-items-center justify-content-between mb-4 py-1">
+                    <h1 class="h6 mb-4 text-gray-800"></h1>
+                    <div class="d-sm-inline-block">
+                        <a href="#" class=" btn btn-sm btn-success btn-circle shadow-sm" id="addNewUserDaysOff" alt="Add New Days Off" data-id=""><i class="fas fa-plus fa-xs"></i></a>
+                    </div>
+                </div>
+                <table id="tblMemberDaysOff" class="table table-bordered table-light table-hover">
+                    <thead>
+                        <tr>
+                            <th style="width:40%">Start Date</th>
+                            <th style="width:40%">End Date</th>
+                            <th style="width:20%">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dbTableBody"></tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <form class="user">
+                    <div class="form-group row">
+                        <div class="col-sm-6">
+                            @*<a href="#" class="btn btn-primary btn-xs">
+                                Save
+                            </a>*@
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section scripts
 {
@@ -426,16 +472,16 @@
             var ClearTaskForm = function () {
 
                 $("#txtANSTTitle").val("");
-                $("#msANSTType").val("");
+                //$("#msANSTType").val("");
                 $(".gj-editor").find("div[role='body']").html("");
                 $(".gj-editor").find("div[role='body']").append("<br/><br/>");
                 $("#msANSTAss").val("");
                 $("#txtANSTOH").val("");
                 $("#txtANSTRH").val("");
                 $("#txtANSTCH").val("");
-                $("#msANSTStat").val("");
-                $("#msPrio").val("");
-                $("#msANSTAct").val("");
+                //$("#msANSTStat").val("");
+                //$("#msPrio").val("");
+                //$("#msANSTAct").val("");
             };
 
             var GetSprintTaskList = function () {
@@ -693,8 +739,8 @@
                     memCapList.append(
                         '<tr data-id="' + mem.EmpCode + '">'+
                         '<td>' + mem.EmpName + '</td>' +
-                        '<td>' + mem.Capacity.toFixed(1) + ' Hr</td>' +
-                        '<td>' + mem.DaysOffCount + '</td>' +
+                        '<td><input class="form-control input-xs txtmemcap" data-id="' + mem.EmpCode + '" type="text" value="' + mem.Capacity.toFixed(1) + '" onkeypress="return isNumberKey(event)"></td>' +
+                        '<td><a href="#" class="badge badge-dark badgedoc" data-id="' + mem.EmpCode + '">' + mem.DaysOffCount + '</a></td>' +
                         '<tr>'
                     ).css('cursor','pointer');
 
@@ -708,7 +754,7 @@
                 data = JSON.parse(data);
                 $('#pbarteamwd').attr('aria-valuemax', data.TotalTeamWork);
                 $('#pbarteamwd').attr('aria-valuenow', data.TotalTeamTaskWork);
-                $('#pbarteamwd').text(data.TotalTeamTaskWork + 'h' + 'of ' + data.TotalTeamWork + 'h');
+                $('#pbarteamwd').text(data.TotalTeamTaskWork + 'h' + ' of ' + data.TotalTeamWork + 'h');
                 refreshpbar();
             });
 
@@ -717,14 +763,27 @@
                 userWorkDetails.html("");
                 data = JSON.parse(data);
                 $(data).each(function (index, uw) {
-                    userWorkDetails.append(
-                        '<label for=""></label>' +
-                        '<div class="progress">' +
-                        '<div class="progress-bar" role="progressbar" id="" aria-valuenow="' + uw.TotalUserTaskWork + '" aria-valuemin="0" aria-valuemax="' + uw.TotalUserWork + '">' +
-                        '' + uw.TotalUserTaskWork + 'h' + ' of ' + uw.TotalUserWork + 'h' +
-                        '</div > ' +
-                        '</div>'
-                    );
+                    if (uw.TotalUserTaskWork > uw.TotalUserWork) {
+                        userWorkDetails.append(
+                            '<label for="">' + uw.EmpName + '</label>' +
+                            '<div class="progress">' +
+                            '<div class="progress-bar bg-danger" role="progressbar" id="" aria-valuenow="' + uw.TotalUserTaskWork + '" aria-valuemin="0" aria-valuemax="' + uw.TotalUserWork + '">' +
+                            '' + uw.TotalUserTaskWork + 'h' + ' of ' + uw.TotalUserWork + 'h' +
+                            '</div > ' +
+                            '</div>'
+                        );
+                    }
+                    else {
+                        userWorkDetails.append(
+                            '<label for="">' + uw.EmpName + '</label>' +
+                            '<div class="progress">' +
+                            '<div class="progress-bar bg-success" role="progressbar" id="" aria-valuenow="' + uw.TotalUserTaskWork + '" aria-valuemin="0" aria-valuemax="' + uw.TotalUserWork + '">' +
+                            '' + uw.TotalUserTaskWork + 'h' + ' of ' + uw.TotalUserWork + 'h' +
+                            '</div > ' +
+                            '</div>'
+                        );
+                    }
+
                 });
                 refreshpbar();
             });
@@ -738,6 +797,103 @@
                     $(this).css('width', siz + '%');
                 });
             };
+
+            $("#tblMemberCapacity").on('keypress',".txtmemcap", function (e) {
+                if (e.keyCode == '13') {
+                    var empcode = $(this).attr("data-id");
+                    var capacity = $(this).val();
+                    $.post("@Url.Action("UpdateUserCapacity", "Project")", { SprintId: sprintId, EmpCode: empcode, Capacity: capacity },function (data) {
+                        alert(data);
+                    });
+
+                };
+            });
+
+            $("#tblMemberCapacity").on('click',".badgedoc", function (e) {
+                var empcode = $(this).attr("data-id");
+                $("#addNewUserDaysOff").attr("data-id", empcode);
+                $.post("@Url.Action("GetSpintMemberDaysOff", "Project")", { sprintId: sprintId, empCode: empcode }, function (data) {
+                    var memDaysOffList = $('#tblMemberDaysOff').find('#dbTableBody');
+                    memDaysOffList.html("");
+                    data = JSON.parse(data);
+                        $(data).each(function (index, mem) {
+                            var sdate = new Date(mem.StartDate);
+                            var edate = new Date(mem.EndDate);
+                            memDaysOffList.append(
+                                '<tr id="' + mem.Id + '" data-id="' + empcode + '">' +
+                                '<td>' + sdate.toLocaleDateString() + '</td>' +
+                                '<td>' + edate.toLocaleDateString() + '</td>' +
+                                '<td><button class="btn btn-circle btn-sm btn-primary edit" ><i class="fas fa-pen fa-sm"></i></button> ' +
+                                '<button class="btn btn-circle btn-sm btn-danger delete" ><i class="fas fa-trash fa-sm"></i></button></td>' +
+                                '<tr>'
+                            ).css('cursor', 'pointer');
+                        });
+                });
+                $('#userDaysoffModal').modal('toggle');
+            });
+
+            $("#tblMemberDaysOff").on('mousedown.edit', ".edit", function (e) {
+                $(this).find('i').removeClass().addClass("fa fa-check");
+                $(this).removeClass('edit').addClass("save");
+                var $row = $(this).closest("tr").off("mousedown");
+                var $tds = $row.find("td:nth-child(1)");
+                var $tdss = $row.find("td:nth-child(2)");
+
+                $.each($tds, function (i, el) {
+                    var txt = $(this).text();
+                    $(this).html("").append("<input class='form-control input-sm dtsdate' type='date'>");
+                });
+
+                $.each($tdss, function (i, el) {
+                    var txt = $(this).text();
+                    $(this).html("").append("<input class='form-control input-sm dtedate' type='date'>");
+                });
+            });
+
+            $("#tblMemberDaysOff").on('mousedown.edit', ".save", function (e) {
+                var id = $(this).parents("tr").attr("id");
+                var empcode = $("#addNewUserDaysOff").attr("data-id");
+                var sdate = $(this).closest("tr").find(".dtsdate").val();
+                var edate = $(this).closest("tr").find(".dtedate").val();
+
+                $(this).find('i').removeClass().addClass("fas fa-pen fa-sm");
+                $(this).removeClass('save').addClass("edit");
+                var $row = $(this).closest("tr").off("mousedown");
+                var $tds = $row.find("td:nth-child(1)");
+                var $tdss = $row.find("td:nth-child(2)");
+
+                $.each($tds, function (i, el) {
+                    var txt = $(this).find(".dtsdate").val()
+                    var sdate = new Date(txt)
+                    $(this).html(sdate.toLocaleDateString());
+                });
+                $.each($tdss, function (i, el) {
+                    var txt = $(this).find(".dtedate").val()
+                    var edate = new Date(txt)
+                    $(this).html(edate.toLocaleDateString());
+                });
+
+                $.post("@Url.Action("CreateUpdateMemberDaysOff", "Project")", { Id: id, SprintId: sprintId, EmpCode: empcode, StartDate: sdate, EndDate: edate}, function (data) {
+                    //alert(data);
+                });
+
+
+            });
+
+            $("#tblMemberDaysOff").on('mousedown.edit', ".delete", function (e) {
+                $(this).parents("tr").remove();
+            });
+
+            $("#addNewUserDaysOff").on('click', function () {
+                var memDaysOffList = $('#tblMemberDaysOff').find('#dbTableBody');
+                memDaysOffList.append(
+                    '<tr data-id="">' +
+                    '<td><input class="form-control input-sm dtsdate" type="date"></td>' +
+                    '<td><input class="form-control input-sm dtedate" type="date"></td>' +
+                    '<td><button class="btn btn-circle btn-sm btn-primary save" ><i class="fas fa-check fa-sm"></i></button> ' +
+                    '<button class="btn btn-circle btn-sm btn-danger delete" ><i class="fas fa-trash fa-sm"></i></button></td>'
+                );
+            });
 
         });
     </script>

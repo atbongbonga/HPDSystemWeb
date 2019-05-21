@@ -59,6 +59,14 @@ namespace HPD.Web.Areas.HPDUtility.Controllers
 
             return Json(JsonConvert.SerializeObject(model), JsonRequestBehavior.AllowGet);
         }
+        public ActionResult GetAllSprintList()
+        {
+            var sprintTaskComponent = new SprintTaskComponent();
+            var result = sprintTaskComponent.GetAllSprint();
+            var model = result.ToList();
+
+            return Json(JsonConvert.SerializeObject(model), JsonRequestBehavior.AllowGet);
+        }
         public ActionResult CreateProjectSprint(ProjectSprints ProjSprint)
         {
             var sprintTaskComponent = new SprintTaskComponent();
@@ -129,6 +137,24 @@ namespace HPD.Web.Areas.HPDUtility.Controllers
         {
             var sprintTaskComponent = new SprintTaskComponent();
             var result = sprintTaskComponent.UserWorkDetails(sprintId);
+            return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult UpdateUserCapacity(SprintCapacities SprintCapacity)
+        {
+            var sprintTaskComponent = new SprintTaskComponent();
+            var result = sprintTaskComponent.UpdateUserCapacity(SprintCapacity);
+            return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GetSpintMemberDaysOff(int sprintId, int empCode)
+        {
+            var sprintTaskComponent = new SprintTaskComponent();
+            var result = sprintTaskComponent.GetSpintMemberDaysOff(sprintId, empCode);
+            return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult CreateUpdateMemberDaysOff(SprintDaysOffs SprintDaysOff)
+        {
+            var sprintTaskComponent = new SprintTaskComponent();
+            var result = sprintTaskComponent.CreateUpdateMemberDaysOff(SprintDaysOff);
             return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
         }
     }

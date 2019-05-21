@@ -2,6 +2,37 @@
 @{
     Layout = "~/Areas/HPDUtility/Views/Shared/_Layout.cshtml";
 }
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-4 text-gray-800">Dashboard</h1>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <!-- Basic Card Example -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Blueprint Calendar</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row" id="bluePrintCalendar">
+                        <div class="box box-primary">
+                            <div class="box-body no-padding">
+                                <!-- THE CALENDAR -->
+                                <div id="calendar"></div>
+                            </div><!-- /.box-body -->
+                        </div><!-- /. box -->
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.container-fluid -->
+</div>
+<!-- End of Main Content -->
+
 @if (HttpContext.Current.User.Identity.IsAuthenticated)
 {
     var identity = ((CustomPrincipal)HttpContext.Current.User);
@@ -14,7 +45,9 @@
         @Html.Partial("UserView");
     }
 }
-    
+
+
+
     
 
 @section scripts
@@ -108,26 +141,11 @@
             });
 
 
-
-
-
             //USER ROLE JS
-
-
-            var id = $("#userIdentity").attr("data-id");
-            var adata = {
-                InCharge: id
-            }
-            console.log()
-            $.ajax({
-                url: '@Url.Action("GetErrorCountByInchargeProgram", "Home")',
-                dataType: "json",
-                method: 'post',
-                data: {
-                    InCharge: id
-                },
-                success: function (data) {
-                    var projectCard = $('#userProject');
+            var loaddevprojects = function () {
+                var incharge = $("#userIdentity").attr("data-id");
+            $.post("@Url.Action("GetErrorCountByInchargeProgram", "Home")", { InCharge: incharge }, function (data) {
+                var projectCard = $('#userProject');
                     projectCard.empty();
                     data = JSON.parse(data);
                     $(data).each(function (index, proj) {
@@ -152,12 +170,73 @@
                             '</div>'
                         );
                     });
-                },
-                error: function (err) {
-                    alert(err);
-                }
-            });
+                }, "json");
+            };
 
+            loaddevprojects();
+
+
+            //FULL CALENDAR
+
+            $('#calendar').fullCalendar({
+                themeSystem: 'bootstrap4',
+                header:
+                {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                buttonText: {
+                    today: 'today',
+                    month: 'month',
+                    week: 'week',
+                    day: 'day'
+                },
+                rendering: 'background',
+                height: 500,
+                events: function (start, end, timezone, callback) {
+                    $.ajax({
+                        url: '@Url.Action("GetAllSprintList", "Project")',
+                        type: "GET",
+                        dataType: "JSON",
+
+                        success: function (result) {
+                            var events = [];
+                            result = JSON.parse(result);
+                            $.each(result, function (i, data) {
+                                events.push(
+                                    {
+                                        id: data.Id,
+                                        title: data.Title,
+                                        description: data.ProgramName,
+                                        start: moment(data.StartDate).format('YYYY-MM-DD'),
+                                        end: moment(data.EndDate).format('YYYY-MM-DD'),
+                                        color: '#378006'
+                                    });
+                            });
+
+                            callback(events);
+                        }
+                    });
+                },
+                eventClick: function (calEvent, jsEvent, view) {
+                    location.href = '@Url.Action("Sprint", "Project")?Id=' + calEvent.id+'';
+                    //alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+                    //alert('View: ' + view.name);
+                    //// change the border color just for fun
+                    //$(this).css('border-color', 'red');
+                },
+                eventRender: function (event, element) {
+                    element.qtip(
+                        {
+                            content: event.description,
+                        });
+                    if (event.color) {
+                        element.css('background-color', event.color)
+                    }
+                },
+
+            });
 
         });
 

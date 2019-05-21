@@ -5,8 +5,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title Hi-Precision Diagnostics Utility</title>
-    @*@Styles.Render("~/Content/css")
-        @Scripts.Render("~/bundles/modernizr")*@
+    @*@Styles.Render("~/Content/css")*@
+    @*@Scripts.Render("~/bundles/modernizr")*@
 
     <!-- Custom fonts for this template-->
     <link rel="stylesheet" type="text/css" href="~/Content/vendor/fontawesome-free/css/all.min.css"/>
@@ -22,6 +22,13 @@
 
     <!-- Text Editor-->
     <link rel="stylesheet" type="text/css" href="~/Content/css/Global/gijgo.min.css" />
+
+    <!--Full Calendar JS-->
+    <link rel="stylesheet" type="text/css" href="~/Areas/HPDUtility/Content/css/FullCalendar/jquery.qtip.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Areas/HPDUtility/Content/css/FullCalendar/fullcalendar.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Areas/HPDUtility/Content/css/FullCalendar/fullcalendar.print.css" media="print" />
+    
+   
 
     @RenderSection("styles", required: false)
 </head>
@@ -342,9 +349,16 @@
         <!-- JS Sortable-->
         <script src="~/Content/js/Global/jquery-ui.js" type="text/javascript"></script>
 
-       
+        <!--Chart JS-->
         <script src="~/Areas/HPDUtility/Content/js/Chart.min.js" type="text/javascript"></script>
-       
+
+        <!--Full Calendar JS-->
+        <script src="~/Areas/HPDUtility/Content/js/FullCalendar/moment.min.js" type="text/javascript"></script>
+        <script src="~/Areas/HPDUtility/Content/js/FullCalendar/jquery.qtip.min.js" type="text/javascript"></script>
+        <script src="~/Areas/HPDUtility/Content/js/FullCalendar/fullcalendar.min.js" type="text/javascript"></script>
+        
+        
+        
         <!-- Demo scripts for this page-->
         @*<script src="~/Content/js/demo/datatables-demo.js"></script>
             <script src="~/Content/js/demo/chart-area-demo.js"></script>*@
