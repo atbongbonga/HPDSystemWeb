@@ -4,7 +4,13 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--PWA--><meta name="theme-color" content="#2196f3" />
+    
     <title>@ViewBag.Title Hi-Precision Diagnostics Utility</title>
+
+    <!--PWA--><link rel="manifest" href="~/manifest.json" />
+
     @*@Styles.Render("~/Content/css")*@
     @*@Scripts.Render("~/bundles/modernizr")*@
 
@@ -377,6 +383,20 @@
                  });
 
                 });
+        </script>
+
+        <!--PWA-->
+        <script>
+            if ('serviceWorker' in navigator) {
+                // Use the window load event to keep the page load performant
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('/service-worker.js', {
+                        scope: './'
+                    });
+                });
+            } else {
+                console.log('No need to register a new service worker!');
+            }
         </script>
 
 

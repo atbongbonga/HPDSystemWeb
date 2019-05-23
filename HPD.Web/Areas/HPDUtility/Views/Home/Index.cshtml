@@ -172,71 +172,83 @@
                     });
                 }, "json");
             };
-
             loaddevprojects();
 
 
             //FULL CALENDAR
+            var loadbpdevbpcalendar = function () {
+                $('#calendar').fullCalendar({
+                    themeSystem: 'bootstrap4',
+                    header:
+                    {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'month,agendaWeek,agendaDay'
+                    },
+                    buttonText: {
+                        today: 'today',
+                        month: 'month',
+                        week: 'week',
+                        day: 'day'
+                    },
+                    rendering: 'background',
+                    height: 500,
+                    events: function (start, end, timezone, callback) {
+                        $.ajax({
+                            url: '@Url.Action("GetSprintListByDev", "Project")',
+                            type: "GET",
+                            dataType: "JSON",
+                            //data: {
+                            //    empCode: dev
+                            //},
+                            success: function (result) {
+                                var events = [];
+                                result = JSON.parse(result);
+                                $.each(result, function (i, data) {
+                                    //Random Event Color
+                                    var letters = '012345'.split('');
+                                    var rancolor = '#';
+                                    rancolor += letters[Math.round(Math.random() * 5)];
+                                    letters = '0123456789ABCDEF'.split('');
+                                    for (var i = 0; i < 5; i++) {
+                                        rancolor += letters[Math.round(Math.random() * 15)];
+                                    }
 
-            $('#calendar').fullCalendar({
-                themeSystem: 'bootstrap4',
-                header:
-                {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'month,agendaWeek,agendaDay'
-                },
-                buttonText: {
-                    today: 'today',
-                    month: 'month',
-                    week: 'week',
-                    day: 'day'
-                },
-                rendering: 'background',
-                height: 500,
-                events: function (start, end, timezone, callback) {
-                    $.ajax({
-                        url: '@Url.Action("GetAllSprintList", "Project")',
-                        type: "GET",
-                        dataType: "JSON",
+                                    events.push(
+                                        {
+                                            id: data.Id,
+                                            title: data.Title,
+                                            description: data.ProgramName,
+                                            start: moment(data.EndDate).format('YYYY-MM-DD'),
+                                            end: moment(data.EndDate).format('YYYY-MM-DD'),
+                                            color: rancolor
+                                        });
+                                });
 
-                        success: function (result) {
-                            var events = [];
-                            result = JSON.parse(result);
-                            $.each(result, function (i, data) {
-                                events.push(
-                                    {
-                                        id: data.Id,
-                                        title: data.Title,
-                                        description: data.ProgramName,
-                                        start: moment(data.StartDate).format('YYYY-MM-DD'),
-                                        end: moment(data.EndDate).format('YYYY-MM-DD'),
-                                        color: '#378006'
-                                    });
-                            });
-
-                            callback(events);
-                        }
-                    });
-                },
-                eventClick: function (calEvent, jsEvent, view) {
-                    location.href = '@Url.Action("Sprint", "Project")?Id=' + calEvent.id+'';
-                    //alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-                    //alert('View: ' + view.name);
-                    //// change the border color just for fun
-                    //$(this).css('border-color', 'red');
-                },
-                eventRender: function (event, element) {
-                    element.qtip(
-                        {
-                            content: event.description,
+                                callback(events);
+                            }
                         });
-                    if (event.color) {
-                        element.css('background-color', event.color)
-                    }
-                },
+                    },
+                    eventClick: function (calEvent, jsEvent, view) {
+                        location.href = '@Url.Action("Sprint", "Project")?Id=' + calEvent.id + '';
+                        //alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+                        //alert('View: ' + view.name);
+                        //// change the border color just for fun
+                        //$(this).css('border-color', 'red');
+                    },
+                    eventRender: function (event, element) {
+                        element.qtip(
+                            {
+                                content: event.description,
+                            });
+                        if (event.color) {
+                            element.css('background-color', event.color)
+                        }
+                    },
 
-            });
+                });
+            };
+            loadbpdevbpcalendar();
 
         });
 

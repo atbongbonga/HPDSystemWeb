@@ -283,6 +283,7 @@
             });
 
             $("#btnANSSave").on("click", function () {
+                $(this).attr("disabled", true);
                 var programname = $("#txtANSProgramName").val();
                 var title = $("#txtANSTitle").val();
                 var member = $("#msANSMember").val();
@@ -290,13 +291,16 @@
                 var edate = $("#txtANSEDate").val();
                 var bp = $("#txtANSBP").val();
                 if (programname == "" || title == "" || member == "" || bp == "") {
+                    $(this).removeAttr("disabled");
                     alert("Invalid Information");
                 }
                 else
                 {
                     $.post("@Url.Action("CreateProjectSprint", "Project")", { ProgramName: programname, Title: title, Member: member.toString(), StartDate: sdate, EndDate: edate, BP: bp}, function (data) {
                         if (data) {
+
                             $('#addNewSprintModal').modal('toggle');
+                            $(this).removeAttr("disabled");
                             GetProjectSprintList();
                         }
                     });

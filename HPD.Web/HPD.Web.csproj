@@ -145,6 +145,7 @@
     <Compile Include="Areas\HPDUtility\api\ErrorLogController.cs" />
     <Compile Include="Areas\HPDUtility\api\param\APIErrorLog.cs" />
     <Compile Include="Areas\HPDUtility\Controllers\AccountController.cs" />
+    <Compile Include="Areas\HPDUtility\Controllers\BPCalendarController.cs" />
     <Compile Include="Areas\HPDUtility\Controllers\DataDictionaryController.cs" />
     <Compile Include="Areas\HPDUtility\Controllers\ErrorController.cs" />
     <Compile Include="Areas\HPDUtility\Controllers\HomeController.cs" />
@@ -2002,6 +2003,8 @@
     <Content Include="Areas\HPDUtility\Content\js\Chart\utils.js" />
     <Content Include="Areas\HPDUtility\Content\js\FullCalendar\fullcalendar.min.js" />
     <Content Include="Areas\HPDUtility\Content\js\FullCalendar\moment.min.js" />
+    <Content Include="manifest.json" />
+    <Content Include="Areas\HPDUtility\Views\BPCalendar\Index.cshtml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
@@ -2015,6 +2018,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="serviceworker.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

@@ -22,5 +22,7 @@ namespace DAL.Models
         public Nullable<decimal> Amt { get; set; }
         public Nullable<System.DateTime> TrxDate { get; set; }
         public string PxName { get; set; }
+        public Nullable<System.DateTime> OrdDate { get; set; }
+        public string CardName { get; set; }
     }
 }

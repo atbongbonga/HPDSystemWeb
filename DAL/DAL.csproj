@@ -90,6 +90,9 @@
     <Compile Include="Models\AggregatedCounter.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ainvh.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ALABANG_008_IDTag_20180706.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
@@ -352,6 +355,9 @@
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BCDSR2.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BCDSR3.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BCDSRAll.cs">
@@ -636,13 +642,22 @@
     <Compile Include="Models\ColUpd_TestItem.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ColUpd_TESTPROFILE.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ColUpd_TESTTV.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ColUpd_test_item.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Colupd_TEST_ITPVD.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ColUpd_TEST_ITPVH.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ColUpd_TEST_TV.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\COMPLETE_TESTCODE.cs">
@@ -1164,7 +1179,13 @@
     <Compile Include="Models\HiredApplicantDet.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\HKAuditlist.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\HKAuditPic.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HKBrList.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HOMESERVICE1.cs">
@@ -1234,6 +1255,15 @@
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\InvMngt.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IQADept.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IQA_dtl.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IQA_hdr.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IssSale.cs">
@@ -2854,6 +2884,9 @@
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TestCodeOpt_Det.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TESTITPVD.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TESTITPVH.cs">

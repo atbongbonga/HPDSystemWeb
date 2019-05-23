@@ -1,0 +1,20 @@
+﻿{
+  "name": "HPD Web Utility",
+  "short_name": "HPDWU",
+  "description": "Web utility",
+
+  "icons": [
+    {
+      "src": "/Content/image/Global/hipre-logoLg.jpeg",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/Content/image/Global/hipre-logoLg.jpeg",
+      "sizes": "512x512"
+    }
+  ],
+  "display": "standalone",
+  "start_url": "/",
+  "scope": "/",
+  "theme_color": "#ffffff"
+}

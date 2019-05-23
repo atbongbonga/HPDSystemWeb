@@ -67,6 +67,19 @@ namespace HPD.Web.Areas.HPDUtility.Controllers
 
             return Json(JsonConvert.SerializeObject(model), JsonRequestBehavior.AllowGet);
         }
+        public ActionResult GetSprintListByDev()
+        {
+            var identity = ((CustomPrincipal)HttpContext.User);
+            if (identity.Roles == "Admin")
+            {
+                return GetAllSprintList();
+            }
+            var empCode = identity.UserId;
+            var sprintTaskComponent = new SprintTaskComponent();
+            var result = sprintTaskComponent.GetSprintByDeveloper(empCode.ToString());
+            var model = result.ToList();
+            return Json(JsonConvert.SerializeObject(model), JsonRequestBehavior.AllowGet);
+        }
         public ActionResult CreateProjectSprint(ProjectSprints ProjSprint)
         {
             var sprintTaskComponent = new SprintTaskComponent();
@@ -87,6 +100,7 @@ namespace HPD.Web.Areas.HPDUtility.Controllers
             var result = developerComponent.GetSprintDeveloper(sprintId);
             return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
         }
+        
 
         public ActionResult CreateSprintTask(SprintTasks SprintTask)
         {

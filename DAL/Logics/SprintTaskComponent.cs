@@ -82,6 +82,7 @@ namespace DAL.Logics
                             ProgramName = Convert.ToString(dr["ProgramName"]),
                             StartDate = Convert.ToDateTime(dr["StartDate"]),
                             EndDate = Convert.ToDateTime(dr["EndDate"]),
+                            Member = Convert.ToString(dr["Member"]),
 
                         });
                     };
@@ -90,6 +91,20 @@ namespace DAL.Logics
                 cn.Close();
             }
             return model;
+        }
+
+        public List<ProjectSprints> GetSprintByDeveloper(string empCode)
+        {
+            if (!string.IsNullOrEmpty(empCode))
+            {
+                var getallbpsprint = GetAllSprint().Where(i => i.Member.Contains(empCode)).ToList();
+                if (getallbpsprint != null)
+                {
+                    return getallbpsprint;
+                }
+                return null;
+            }
+            return GetAllSprint();
         }
         public bool CreateProjectSprint(ProjectSprints ProjSprint)
         {
@@ -125,8 +140,9 @@ namespace DAL.Logics
                     db.SaveChanges();
                 }
             }
+
             return true;
-        }
+            }
         public bool CreateSrintTask(SprintTasks SprintTask)
         {
             using (HPCOMMONEntities db = new HPCOMMONEntities())

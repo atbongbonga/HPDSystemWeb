@@ -35,6 +35,7 @@ namespace DAL.Models
         public virtual DbSet<AcsLvl> AcsLvls { get; set; }
         public virtual DbSet<AddBranch> AddBranches { get; set; }
         public virtual DbSet<AdtBrRecord> AdtBrRecords { get; set; }
+        public virtual DbSet<ainvh> ainvhs { get; set; }
         public virtual DbSet<ALULDtl> ALULDtls { get; set; }
         public virtual DbSet<ALULHdr> ALULHdrs { get; set; }
         public virtual DbSet<ALULmon> ALULmons { get; set; }
@@ -116,8 +117,11 @@ namespace DAL.Models
         public virtual DbSet<ColUpd_CMT_TBL> ColUpd_CMT_TBL { get; set; }
         public virtual DbSet<ColUpd_ItemMasterH> ColUpd_ItemMasterH { get; set; }
         public virtual DbSet<ColUpd_test_item> ColUpd_test_item { get; set; }
+        public virtual DbSet<Colupd_TEST_ITPVD> Colupd_TEST_ITPVD { get; set; }
         public virtual DbSet<ColUpd_TEST_ITPVH> ColUpd_TEST_ITPVH { get; set; }
+        public virtual DbSet<ColUpd_TEST_TV> ColUpd_TEST_TV { get; set; }
         public virtual DbSet<ColUpd_TestItem> ColUpd_TestItem { get; set; }
+        public virtual DbSet<ColUpd_TESTPROFILE> ColUpd_TESTPROFILE { get; set; }
         public virtual DbSet<ColUpd_TESTTV> ColUpd_TESTTV { get; set; }
         public virtual DbSet<Connection> Connections { get; set; }
         public virtual DbSet<CPMHist> CPMHists { get; set; }
@@ -193,6 +197,7 @@ namespace DAL.Models
         public virtual DbSet<HabitALU> HabitALUs { get; set; }
         public virtual DbSet<HepaPType> HepaPTypes { get; set; }
         public virtual DbSet<HKAuditPic> HKAuditPics { get; set; }
+        public virtual DbSet<HKBrList> HKBrLists { get; set; }
         public virtual DbSet<HOMESERVICE1> HOMESERVICE1 { get; set; }
         public virtual DbSet<HPDAccess> HPDAccesses { get; set; }
         public virtual DbSet<HPDProgram> HPDPrograms { get; set; }
@@ -206,6 +211,9 @@ namespace DAL.Models
         public virtual DbSet<InDTR> InDTRs { get; set; }
         public virtual DbSet<INDTRTag> INDTRTags { get; set; }
         public virtual DbSet<InvMngt> InvMngts { get; set; }
+        public virtual DbSet<IQA_dtl> IQA_dtl { get; set; }
+        public virtual DbSet<IQA_hdr> IQA_hdr { get; set; }
+        public virtual DbSet<IQADept> IQADepts { get; set; }
         public virtual DbSet<IssSale> IssSales { get; set; }
         public virtual DbSet<ISUser> ISUsers { get; set; }
         public virtual DbSet<IT_ALUL> IT_ALUL { get; set; }
@@ -577,6 +585,7 @@ namespace DAL.Models
         public virtual DbSet<BCDSR10232018> BCDSR10232018 { get; set; }
         public virtual DbSet<bcdsr10262018> bcdsr10262018 { get; set; }
         public virtual DbSet<BCDSR2> BCDSR2 { get; set; }
+        public virtual DbSet<BCDSR3> BCDSR3 { get; set; }
         public virtual DbSet<BCDSRAll> BCDSRAlls { get; set; }
         public virtual DbSet<BCDSRBK> BCDSRBKs { get; set; }
         public virtual DbSet<BCDSRc26main> BCDSRc26main { get; set; }
@@ -719,6 +728,7 @@ namespace DAL.Models
         public virtual DbSet<GenTrig> GenTrigs { get; set; }
         public virtual DbSet<GenTrig2> GenTrig2 { get; set; }
         public virtual DbSet<HiredApplicantDet> HiredApplicantDets { get; set; }
+        public virtual DbSet<HKAuditlist> HKAuditlists { get; set; }
         public virtual DbSet<HPD_PM> HPD_PM { get; set; }
         public virtual DbSet<HRForm> HRForms { get; set; }
         public virtual DbSet<IDTK_20180531> IDTK_20180531 { get; set; }
@@ -986,6 +996,7 @@ namespace DAL.Models
         public virtual DbSet<tblSample> tblSamples { get; set; }
         public virtual DbSet<testable> testables { get; set; }
         public virtual DbSet<TestCodeOpt1> TestCodeOpt1 { get; set; }
+        public virtual DbSet<TESTITPVD> TESTITPVDs { get; set; }
         public virtual DbSet<testskill> testskills { get; set; }
         public virtual DbSet<TMP2> TMP2 { get; set; }
         public virtual DbSet<tmpverti> tmpvertis { get; set; }
