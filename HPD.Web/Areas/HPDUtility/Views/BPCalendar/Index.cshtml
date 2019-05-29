@@ -26,33 +26,39 @@
                 <div class="card-body">
                     <div class="row" id="bluePrintCalendar">
                         <div class="box box-primary">
-                            <div class="row" id="bpfilteroption">
-                                <div class="col-lg-12 col-md-3">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12">
                                     <div class="form-group row">
-                                        <div class="col-lg-4 col-md-4">
-                                            
+                                        <div class="col-lg-9 col-md-5">
+                                            <div class="box-body no-padding">
+                                                <div id="calendar"></div>
+                                                <hr>
+                                            </div>
                                         </div>
-                                        <div class="col-lg-4 col-md-4">
-                                           
-                                        </div>
-                                        <div class="col-lg-4 col-md-4">
-                                            <div class="form-group form-inline">
-                                                <label for="msBPCDeveloper" class="mr-sm-2">Developer:</label>
-                                                <select class=" mb-2 mr-sm-2 form-control singleInputDynamic" data-load-once="true" name="Developer" id="msBPCDeveloper" placeholder="Developer"></select>
-                                                <button class="btn btn-primary btn-user btn-circle text-white" id="btnSrchBPCDeveloper">
-                                                    <i class="fa fa-search"></i>
-                                                </button>
+
+                                        <div class="col-lg-3 col-md-3">
+                                            @*<label for="msBPCDeveloper" class="mr-sm-2">Developer:</label>*@
+                                            <div class="row">
+                                                <div class="col-9">
+                                                    <select class="form-control singleInputDynamic" data-load-once="true" name="Developer" id="msBPCDeveloper" placeholder="Developer"></select>
+                                                </div>
+                                                <div class="col-3">
+                                                    <button class="btn btn-primary btn-user btn-circle text-white" id="btnSrchBPCDeveloper">
+                                                        <i class="fa fa-search"></i>
+                                                    </button>
+                                                </div>
+                                            </div> 
+                                            <hr>
+                                            <div id="bpdevlegend">
+                                                
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <hr/>
-                            <div class="box-body no-padding">
-                                <!-- THE CALENDAR -->
-                                <div id="calendar"></div>
-                            </div><!-- /.box-body -->
-                        </div><!-- /. box -->
+
+                            
+                        </div>
 
                     </div>
                 </div>
@@ -112,15 +118,30 @@
             $.post("@Url.Action("GetDeveloper", "BPCalendar")", function (data) {
                 var dbList = $('#msBPCDeveloper');
                 dbList.empty();
-                dbList.prepend("<option value=''>ALL</option>");    
+
+                var devlistcc = $('#bpdevlegend');
+                devlistcc.empty();
+
+                dbList.prepend("<option value=''>ALL</option>");
                 data = JSON.parse(data);
                 $(data).each(function (index, db) {
+
                     dbList.append(
                         '<option value="' + db.EmpCode + '">' + db.EmpName + '</option>'
                     );
-                   
+
+                    devlistcc.append(
+                        '<a class="dropdown-item d-flex align-items-center">' +
+                        '<div class="dropdown-list-image mr-2">' +
+                        '<img class="rounded-circle img-thumbnail" src="data:image/jpeg;base64,' + db.EmpIMG +'" alt="" style="height:45px; width:45px;background-color:' + db.ColorCode+'">' +
+                        '<div class="status-indicator bg-success"></div>' +
+                        '</div>' +
+                        '<div class="text-xs mb-1">' + db.EmpName + '</div>' +
+                        '</a>'
+                    );
+
                 });
-                
+
             });
             //$('#msBPCDeveloper').fastselect({
             //    onItemSelect: function ($item, itemModel) {
@@ -137,16 +158,14 @@
                 {
                     left: 'prev,next today',
                     center: 'title',
-                    right: 'month,agendaWeek,agendaDay'
+                    right: 'month'
                 },
                 buttonText: {
                     today: 'today',
-                    month: 'month',
-                    week: 'week',
-                    day: 'day'
+                    month: 'month'
                 },
                 rendering: 'background',
-                height: 500,
+                height: 700,
                 events: function (start, end, timezone, callback) {
                     $.ajax({
                         url: '@Url.Action("GetSprintListByDev", "BPCalendar")',
@@ -159,14 +178,27 @@
                             var events = [];
                             result = JSON.parse(result);
                             $.each(result, function (i, data) {
-                                //Random Event Color
-                                var letters = '012345'.split('');
-                                var rancolor = '#';
-                                rancolor += letters[Math.round(Math.random() * 5)];
-                                letters = '0123456789ABCDEF'.split('');
-                                for (var i = 0; i < 5; i++) {
-                                    rancolor += letters[Math.round(Math.random() * 15)];
+                                //for Developer color coding
+                                function getdevcc(pn) {
+                                    var devcc;
+                                    $.ajax({
+                                        type: 'POST',
+                                        dataType: 'json',
+                                        url: '@Url.Action("GetDevColorCodeByProgram", "BPCalendar")',
+                                        data: { 'progName': pn },
+                                        async: false,
+                                        success: function (cc) {
+                                            cc = JSON.parse(cc);
+                                            devcc = cc;
+                                        },
+                                        error: function () {
+                                            alert('Error occured');
+                                        }
+                                    });
+                                    return devcc;
                                 }
+
+                                var devcc = getdevcc(data.ProgramName);
                                 events.push(
                                     {
                                         id: data.Id,
@@ -174,7 +206,7 @@
                                         description: data.ProgramName,
                                         start: moment(data.EndDate).format('YYYY-MM-DD'),
                                         end: moment(data.EndDate).format('YYYY-MM-DD'),
-                                        color: rancolor,
+                                        color: devcc.ColorCode,
                                         sdate: moment(data.StartDate).format('MM/DD/YYYY')
                                     });
                             });
@@ -191,7 +223,7 @@
 
                     var sdate = calEvent.sdate;
                     var edate = calEvent.start;
-                    
+
                     $("#SDMProgramName").text(calEvent.description);
                     $("#txtSDMTitle").text(calEvent.title);
                     $("#txtSDMProjLen").text(sdate + ' to ' + edate.format('MM/DD/YYYY'));
@@ -204,7 +236,7 @@
                                 '<p class="text-black-50">' + dev.EmpName + '</p>'
                             );
                         });
-                                   
+
                     });
                     $('#sprintDetailsModal').modal('toggle');
                     $(this).css('border-color', 'red');

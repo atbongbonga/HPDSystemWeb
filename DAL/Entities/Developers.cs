@@ -11,6 +11,11 @@ namespace DAL.Entities
         public string EmpCode { get; set; }
         public string EmpName { get; set; }
         public string Designation { get; set; }
+        public string ColorCode { get; set; }
         public byte[] EmpIMG { get; set; }
      }
+    public class DeveloperColorCode
+    {
+        public string ColorCode { get; set; }
+    }
 }

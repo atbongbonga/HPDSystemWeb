@@ -167,11 +167,11 @@ namespace DAL.Logics
             {
                 cn.Open();
 
-                String query = "SELECT a.ProgName,COUNT(1) IssueCount " +
-                               "FROM ErrorLog a " +
-                               "LEFT JOIN Programs b on a.ProgName = b.Program " +
-                               "WHERE a.Fixed='" + "N" + "' AND b.InCharge='" + InCharge + "' " +
-                               "GROUP BY a.ProgName ";
+                String query = "SELECT a.Program,COUNT(1) IssueCount " +
+                    "FROM Programs a " +
+                    "LEFT JOIN ErrorLog b on a.Program = b.ProgName AND b.fixed = 'N' " +
+                    "WHERE a.InCharge='" + InCharge + "' " +
+                    "GROUP BY a.Program";
 
                 //cm.Parameters.AddWithValue("@Id", id);
 
@@ -184,7 +184,7 @@ namespace DAL.Logics
                     {
                         model.Add(new ErrorByProgram
                         {
-                            ProgramName = Convert.ToString(dr["ProgName"]),
+                            ProgramName = Convert.ToString(dr["Program"]),
                             IssueCount = Convert.ToInt32(dr["IssueCount"]),
                         });
                     };
@@ -234,7 +234,7 @@ namespace DAL.Logics
                                "FROM ErrorLog a " +
                                "LEFT JOIN Programs b on a.ProgName = b.Program " +
                                "WHERE a.Fixed='" + "N" + "' AND a.ProgName='" + ProgramName + "' " +
-                               "ORDER BY a.DocDate " ;
+                               "ORDER BY a.DocDate DESC ";
 
                 //cm.Parameters.AddWithValue("@Id", id);
 

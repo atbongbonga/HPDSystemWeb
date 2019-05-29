@@ -46,7 +46,7 @@ namespace DAL.Logics
             {
                 cn.Open();
 
-                String query = "SELECT a.EmpCode, a.EmpName, a.Designation, b.EmpImg " +
+                String query = "SELECT a.EmpCode, a.EmpName, a.Designation, a.ColorCode, b.EmpImg " +
                                "FROM developer a " +
                                "LEFT JOIN EMPPic b on b.EmpCode = CAST(a.EmpCode AS varchar) " +
                                "WHERE a.Designation ='" + Office.ZSquare + "' ";
@@ -65,6 +65,7 @@ namespace DAL.Logics
                             EmpCode = Convert.ToString(dr["EmpCode"]),
                             EmpName = Convert.ToString(dr["EmpName"]),
                             Designation = Convert.ToString(dr["Designation"]),
+                            ColorCode = Convert.ToString(dr["ColorCode"]),
                             EmpIMG = (byte[])dr["EmpImg"]
                         });
                     };
@@ -141,6 +142,35 @@ namespace DAL.Logics
                     return model;
                 }
                 
+            }
+            return model;
+        }
+
+        public DeveloperColorCode GetDevColorCodeByProgram(string progName)
+        {
+
+            var model = new DeveloperColorCode();
+            using (SqlConnection cn = new SqlConnection(dbcon))
+            {
+                cn.Open();
+
+                String query = "SELECT a.InCharge ,b.ColorCode " +
+                    "FROM dbo.Programs a " +
+                    "LEFT JOIN dbo.developer b ON a.InCharge = b.EmpName " +
+                    "WHERE a.Program ='" + progName + "' ";
+
+                //cm.Parameters.AddWithValue("@Id", id);
+                SqlCommand cmd = new SqlCommand(query, cn);
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.HasRows)
+                {
+                    dr.Read();
+                    model.ColorCode = Convert.ToString(dr["ColorCode"]);
+                    return model;
+                }
+
+                cn.Close();
             }
             return model;
         }

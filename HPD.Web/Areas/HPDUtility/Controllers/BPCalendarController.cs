@@ -32,7 +32,6 @@ namespace HPD.Web.Areas.HPDUtility.Controllers
             var sprintTaskComponent = new SprintTaskComponent();
             var result = sprintTaskComponent.GetSprintByDeveloper(empCode);
             var model = result.ToList();
-
             return Json(JsonConvert.SerializeObject(model), JsonRequestBehavior.AllowGet);
         }
         public ActionResult GetDeveloper()
@@ -45,6 +44,12 @@ namespace HPD.Web.Areas.HPDUtility.Controllers
         {
             var developerComponent = new DeveloperComponent();
             var result = developerComponent.GetSprintDeveloper(sprintId);
+            return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GetDevColorCodeByProgram(string progName)
+        {
+            var developerComponent = new DeveloperComponent();
+            var result = developerComponent.GetDevColorCodeByProgram(progName);
             return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
         }
     }
