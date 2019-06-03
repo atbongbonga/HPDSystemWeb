@@ -24,5 +24,7 @@ namespace DAL.Models
         public Nullable<int> Status { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public string CreatedBy { get; set; }
+        public Nullable<bool> IsBP { get; set; }
+        public Nullable<System.DateTime> DoneDate { get; set; }
     }
 }

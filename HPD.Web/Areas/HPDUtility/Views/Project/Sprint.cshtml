@@ -289,11 +289,11 @@
                 <div class="modal-body">
                     <div class="container-fluid">
                         <ul class="nav nav-tabs" id="sprintDetailsTab" role="tablist">
-                            @*<li class="nav-item">
-                                <a class="nav-link active" id="sprintcontent-tab" data-toggle="tab" href="#sprintcontent" role="tab" aria-controls="sprintcontent" aria-selected="true">Content</a>
-                            </li>*@
                             <li class="nav-item">
-                                <a class="nav-link active" id="workdet-tab" data-toggle="tab" href="#workdet" role="tab" aria-controls="workdet" aria-selected="false">Work</a>
+                                <a class="nav-link active" id="sprintcontent-tab" data-toggle="tab" href="#sprintcontent" role="tab" aria-controls="sprintcontent" aria-selected="true">Content</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="workdet-tab" data-toggle="tab" href="#workdet" role="tab" aria-controls="workdet" aria-selected="false">Work</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="memcapacity-tab" data-toggle="tab" href="#memcapacity" role="tab" aria-controls="memcapacity" aria-selected="false">Capacity</a>
@@ -302,7 +302,7 @@
                         </ul>
                         <div class="tab-content" id="sprintDetailsTabCon">
                             <!--Sprint Content-->
-                            @*<div class="tab-pane fade py-3 show active" id="sprintcontent" role="tabpanel" aria-labelledby="sprintcontent-tab">
+                            <div class="tab-pane fade py-3 show active" id="sprintcontent" role="tabpanel" aria-labelledby="sprintcontent-tab">
                                 <h1 class="h5 mb-4 text-gray-800">Sprint Content</h1>
                                 <hr>
                                 <div class="container-fluid">
@@ -318,13 +318,13 @@
                                                     <input type="text" class="form-control input-sm" id="txtANSProgramName" disabled placeholder="Program" style="border-radius: 0 !important;">
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
+                                            @*<div class="form-group row">
                                                 <div class="col-lg-12">
                                                     <label for="msANSMember"><b>Member</b></label>
                                                     <select class="form-control input-sm multipleSelect" multiple name="Developer" id="msANSMember" placeholder="Member"></select>
                                                 </div>
 
-                                            </div>
+                                            </div>*@
                                             <div class="form-group row">
                                                 <div class="col-sm-6">
                                                     <label for="txtANSSDate"><b>Start Date</b></label>
@@ -338,14 +338,33 @@
                                             <div class="form-group">
                                                 <label for="txtANSEDate"><b>Blue Print</b></label>
                                                 <input type="text" class="form-control input-sm" id="txtANSBP" required placeholder="Blue Print Path" style="border-radius: 0 !important;">
-
                                             </div>
-                                        </form>
+                                        </form><hr>
+                                        <div class="form-group row ">
+                                            <div class="col-sm-6"></div>
+                                            <div class="col-sm-2">
+                                                <a href="#" class="btn btn-danger" id="btnPSDelete" hidden>
+                                                    Delete
+                                                </a>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <a href="#" class="btn btn-success" data-toggle="modal" data-target="#doneModal">
+                                                    Done
+                                                </a>
+                                            </div>
+                                            
+                                            <div class="col-sm-2">
+                                                <a href="#" class="btn btn-primary" id="btnPSUpdate">
+                                                    Update
+                                                </a>
+                                            </div>
+                                            
+                                        </div>
                                     </div>
                                 </div>
-                            </div>*@
+                            </div>
                             <!--Work Details-->
-                            <div class="tab-pane fade py-3 show active" id="workdet" role="tabpanel" aria-labelledby="workdet-tab">
+                            <div class="tab-pane fade py-3" id="workdet" role="tabpanel" aria-labelledby="workdet-tab">
                                 <h1 class="h5 mb-4 text-gray-800">Work Details</h1>
                                 <hr>
                                 <div class="row">
@@ -442,6 +461,24 @@
     </div>
 </div>
 
+    <!-- Done Modal-->
+    <div class="modal fade" id="doneModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Deploy?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Yes" below if you are ready to deploy this sprint.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">No</button>
+                    <button class="btn btn-primary" type="button" data-dismiss="modal" id="btnPSDone">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @section scripts
 {
     <script>
@@ -893,6 +930,59 @@
                     '<td><button class="btn btn-circle btn-sm btn-primary save" ><i class="fas fa-check fa-sm"></i></button> ' +
                     '<button class="btn btn-circle btn-sm btn-danger delete" ><i class="fas fa-trash fa-sm"></i></button></td>'
                 );
+            });
+            var LoadProjectSprintDetails = function (sprintId)
+            {
+                var currentDate = new Date().toISOString().slice(0, 10);
+
+                $.post("@Url.Action("GetProjectSprintById", "Project")", { sprintId: sprintId }, function (data) {
+                    var data = $.parseJSON(data);
+                    var startd = moment(data.StartDate).format('YYYY-MM-DD');
+                    var endd = moment(data.EndDate).format('YYYY-MM-DD');
+                    $("#txtANSProgramName").val(data.ProgramName);
+                    $("#txtANSTitle").val(data.Title);
+                    //$("#msANSMember").val();
+                    $("#txtANSSDate").val(startd);
+                    $("#txtANSEDate").val(endd);
+                    $("#txtANSBP").val(data.BP);
+                });
+            };
+
+            LoadProjectSprintDetails(sprintId);
+
+            $("#btnPSDelete").on("click", function () {
+                $.post("@Url.Action("DeleteProjectSprint", "Project")", { sprintId: sprintId }, function (data) {
+                    location.href = '@Url.Action("Index", "Home")';
+                });
+            });
+
+            $("#btnPSUpdate").on("click", function () {
+                $(this).attr("disabled", true);
+                var programname = $("#txtANSProgramName").val();
+                var title = $("#txtANSTitle").val();
+                //var member = $("#msANSMember").val();
+                var sdate = $("#txtANSSDate").val();
+                var edate = $("#txtANSEDate").val();
+                var bp = $("#txtANSBP").val();
+                if (programname == "" || title == "") {
+                    $(this).removeAttr("disabled");
+                    alert("Invalid Information");
+                }
+                else {
+                    $.post("@Url.Action("UpdateProjectSprint", "Project")", {Id: sprintId, ProgramName: programname, Title: title, StartDate: sdate, EndDate: edate, BP: bp }, function (data) {
+                        if (data) {
+                            $('#addNewSprintModal').modal('toggle');
+                            $(this).removeAttr("disabled");
+                            location.href = '@Url.Action("Index", "Home")';
+                        }
+                    });
+                }
+            });
+
+            $("#btnPSDone").on("click", function () {
+                $.post("@Url.Action("UpdateProjectSprintStatus", "Project")", { sprintId: sprintId }, function (data) {
+                   
+                });
             });
 
         });

@@ -66,5 +66,6 @@ namespace DAL.Models
         public Nullable<decimal> ATCRate { get; set; }
         public Nullable<System.DateTime> DateResigned { get; set; }
         public string acctno { get; set; }
+        public string DiploCert { get; set; }
     }
 }

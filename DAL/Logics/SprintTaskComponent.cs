@@ -22,10 +22,7 @@ namespace DAL.Logics
             {
                 cn.Open();
 
-                String query = "SELECT * FROM dbo.ProjectSprints WHERE ProgramName = '" + ProgramName + "' ";
-
-
-                //cm.Parameters.AddWithValue("@Id", id);
+                String query = "SELECT * FROM dbo.ProjectSprints WHERE ProgramName = '" + ProgramName + "' OR ProgramName = '" + Convert.ToString(Enums.Programs.All) + "' ";
 
                 SqlCommand cmd = new SqlCommand(query, cn);
                 SqlDataReader dr = cmd.ExecuteReader();
@@ -39,10 +36,12 @@ namespace DAL.Logics
                         var sprintbugcount = db.SprintTasks.Where(i => i.SprintId == sid && i.Type == (int)Enums.TaskType.Bug).Count();
                         model.Add(new ProjectSprints
                         {
-                           Id = Convert.ToInt32(dr["Id"]),
-                           Title = Convert.ToString(dr["Title"]),
-                           TaskCount = sprinttaskcount,
-                           BugCount = sprintbugcount
+                            Id = Convert.ToInt32(dr["Id"]),
+                            Title = Convert.ToString(dr["Title"]),
+                            IsBP = Convert.ToBoolean(dr["IsBP"]),
+                            TaskCount = sprinttaskcount,
+                            BugCount = sprintbugcount
+                            
                         });
                     };
                     return model;
@@ -60,7 +59,7 @@ namespace DAL.Logics
             {
                 cn.Open();
 
-                String query = "SELECT * FROM dbo.ProjectSprints ";
+                String query = "SELECT * FROM dbo.ProjectSprints WHERE IsBP = 1 ";
 
 
                 //cm.Parameters.AddWithValue("@Id", id);
@@ -72,9 +71,9 @@ namespace DAL.Logics
                 {
                     while (dr.Read())
                     {
-                        int sid = Convert.ToInt32(dr["Id"]);
-                        var sprinttaskcount = db.SprintTasks.Where(i => i.SprintId == sid && i.Type == (int)Enums.TaskType.Task).Count();
-                        var sprintbugcount = db.SprintTasks.Where(i => i.SprintId == sid && i.Type == (int)Enums.TaskType.Bug).Count();
+                        //int sid = Convert.ToInt32(dr["Id"]);
+                        //var sprinttaskcount = db.SprintTasks.Where(i => i.SprintId == sid && i.Type == (int)Enums.TaskType.Task).Count();
+                        //var sprintbugcount = db.SprintTasks.Where(i => i.SprintId == sid && i.Type == (int)Enums.TaskType.Bug).Count();
                         model.Add(new ProjectSprints
                         {
                             Id = Convert.ToInt32(dr["Id"]),
@@ -83,7 +82,8 @@ namespace DAL.Logics
                             StartDate = Convert.ToDateTime(dr["StartDate"]),
                             EndDate = Convert.ToDateTime(dr["EndDate"]),
                             Member = Convert.ToString(dr["Member"]),
-
+                            Status = Convert.ToInt32(dr["Status"]),
+                            DoneDate = Convert.ToDateTime(dr["DoneDate"]),
                         });
                     };
                     return model;
@@ -92,7 +92,6 @@ namespace DAL.Logics
             }
             return model;
         }
-
         public List<ProjectSprints> GetSprintByDeveloper(string empCode)
         {
             if (!string.IsNullOrEmpty(empCode))
@@ -120,9 +119,11 @@ namespace DAL.Logics
                     StartDate = ProjSprint.StartDate,
                     EndDate = ProjSprint.EndDate,
                     BP = ProjSprint.BP,
-                    Status = Convert.ToInt32(Enums.SprintType.New),
-                    CreatedBy = setting.UserIP,
-                    CreatedDate = DateTime.UtcNow
+                    Status = Convert.ToInt32(Enums.SprintStatus.New),
+                    CreatedBy = ProjSprint.CreatedBy,
+                    CreatedDate = DateTime.UtcNow,
+                    DoneDate = null,
+                    IsBP = true
                 };
                 db.ProjectSprints.Add(addprosprint);
                 db.SaveChanges();
@@ -143,6 +144,44 @@ namespace DAL.Logics
 
             return true;
             }
+        public bool CreateOtherProjectSprint(ProjectSprints ProjSprint)
+        {
+            String[] members = ProjSprint.Member.ToString().Split(Convert.ToChar(","));
+            using (HPCOMMONEntities db = new HPCOMMONEntities())
+            {
+                var setting = new Settings();
+                var addprosprint = new ProjectSprint
+                {
+                    Title = ProjSprint.Title,
+                    ProgramName = "ALL",
+                    Member = ProjSprint.Member,
+                    StartDate = ProjSprint.StartDate,
+                    EndDate = ProjSprint.EndDate,
+                    BP = "N/A",
+                    Status = Convert.ToInt32(Enums.SprintStatus.New),
+                    CreatedBy = ProjSprint.CreatedBy,
+                    CreatedDate = DateTime.UtcNow,
+                    DoneDate = null,
+                    IsBP = false
+                };
+                db.ProjectSprints.Add(addprosprint);
+                db.SaveChanges();
+
+                foreach (var mem in members)
+                {
+                    var addmemcapacity = new SprintCapacity
+                    {
+                        SprintId = addprosprint.Id,
+                        EmpCode = Convert.ToInt32(mem),
+                        Capacity = 0
+                    };
+                    db.SprintCapacities.Add(addmemcapacity);
+                    db.SaveChanges();
+                }
+            }
+
+            return true;
+        }
         public bool CreateSrintTask(SprintTasks SprintTask)
         {
             using (HPCOMMONEntities db = new HPCOMMONEntities())
@@ -383,6 +422,85 @@ namespace DAL.Logics
                 }
             }
             return model;
+        }
+
+        public ProjectSprints GetProjectSprintById(int sprintId)
+        {
+            var model = new ProjectSprints();
+            using (SqlConnection cn = new SqlConnection(dbcon))
+            {
+                cn.Open();
+
+                String query = "SELECT * FROM dbo.ProjectSprints WHERE Id="+ sprintId +" ";
+                SqlCommand cmd = new SqlCommand(query, cn);
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.HasRows)
+                {
+                    dr.Read();
+                    model.Id = Convert.ToInt32(dr["Id"]);
+                    model.Title = Convert.ToString(dr["Title"]);
+                    model.ProgramName = Convert.ToString(dr["ProgramName"]);
+                    model.StartDate = Convert.ToDateTime(dr["StartDate"]);
+                    model.EndDate = Convert.ToDateTime(dr["EndDate"]);
+                    model.Member = Convert.ToString(dr["Member"]);
+                    model.BP = Convert.ToString(dr["BP"]);
+                    return model;
+                }
+                cn.Close();
+            }
+            return model;
+        }
+
+        public bool UpdateProjectSprint(ProjectSprints projSprint)
+        {
+            using (HPCOMMONEntities db = new HPCOMMONEntities())
+            {
+                var getprojsprint = db.ProjectSprints.Where(i => i.Id == projSprint.Id).FirstOrDefault();
+                if (getprojsprint != null)
+                {
+                    getprojsprint.Title = projSprint.Title;
+                    getprojsprint.StartDate = projSprint.StartDate;
+                    getprojsprint.EndDate = projSprint.EndDate;
+                    getprojsprint.BP = projSprint.BP;
+
+                    db.SaveChanges();
+                }
+            }
+               return true;
+        }
+
+        public bool DeleteProjectSprint(int projSprintId)
+        {
+            using (HPCOMMONEntities db = new HPCOMMONEntities())
+            {
+                var getprojsprint = db.ProjectSprints.Where(i => i.Id == projSprintId).FirstOrDefault();
+                if (getprojsprint != null)
+                {
+                    db.ProjectSprints.Remove(getprojsprint);
+                    var getprojsprintcap = db.SprintCapacities.Where(i => i.SprintId == projSprintId).ToList();
+                    if(getprojsprintcap != null)
+                    {
+                        db.SprintCapacities.RemoveRange(getprojsprintcap);
+                    }
+                    db.SaveChanges();
+                }
+            }
+            return true;
+        }
+        public bool UpdateProjectSprintStatus(int projSprintId)
+        {
+            using (HPCOMMONEntities db = new HPCOMMONEntities())
+            {
+                var getprojsprint = db.ProjectSprints.Where(i => i.Id == projSprintId).FirstOrDefault();
+                if (getprojsprint != null)
+                {
+                    getprojsprint.Status = Convert.ToInt32(Enums.SprintStatus.Done);
+                    getprojsprint.DoneDate = DateTime.UtcNow;
+                    db.SaveChanges();
+                }
+            }
+            return true;
         }
 
         #region GET SPRINT WORKING DAYS

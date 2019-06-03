@@ -10,7 +10,11 @@
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">System Developer</h6>
-
+                    <button class="d-sm-inline-block btn btn-xs btn-primary btn-circle shadow-sm" id="addOtherNewSprint"><i class="fas fa-plus fa-sm"></i></button>
+                    @*<div class="d-sm-flex align-items-center justify-content-between mb-4 py-1">
+                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                        <a href="#" class="d-sm-inline-block btn btn-success btn-circle shadow-sm" id="addOtherNewSprint"><i class="fas fa-plus fa-sm"></i></a>
+                    </div>*@
                 </div>
                 <div class="card-body">
                     <div class="row" id="cardEmpLst">
@@ -51,6 +55,78 @@
                                 <i class="fas fa-window-close"></i>
                             </a>
                         </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Add New Sprint Modal-->
+<div class="modal fade" id="addNewOtherSprintModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add New Sprint for Other Task</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div id="addNewOtherSprintForm">
+                        <form class="user" id="formANS">
+                            <div class="form-group row">
+                                <div class="col-sm-12">
+                                    <label for="txtANSTitle"><b>Title</b></label>
+                                    <input type="text" class="form-control input-sm" id="txtANSTitle" required placeholder="Title" name="ANSTitle" style="border-radius: 0 !important;">
+                                </div>
+                                @*<div class="col-sm-6">
+                                    <label for="txtANSProgramName"><b>Program Name</b></label>
+                                    <input type="text" class="form-control input-sm" id="txtANSProgramName" disabled placeholder="Program" style="border-radius: 0 !important;">
+                                </div>*@
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-12">
+                                    <label for="msANSMember"><b>Member</b></label>
+                                    <select class="form-control input-sm multipleSelect" multiple name="Developer" id="msANSMember" placeholder="Member"></select>
+                                </div>
+
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <label for="txtANSSDate"><b>Start Date</b></label>
+                                    <input type="date" class="form-control input-sm" id="txtANSSDate" required placeholder="Start Date" style="border-radius: 0 !important;">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="txtANSEDate"><b>End Date</b></label>
+                                    <input type="date" class="form-control input-sm" id="txtANSEDate" required placeholder="End Date" style="border-radius: 0 !important;">
+                                </div>
+                            </div>
+                            @*<div class="form-group">
+                                <label for="txtANSEDate"><b>Blue Print</b></label>
+                                <input type="text" class="form-control input-sm" id="txtANSBP" required placeholder="Blue Print Path" style="border-radius: 0 !important;">
+
+                            </div>*@
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <form class="user">
+                    <div class="form-group row">
+                        <div class="col-sm-6">
+                            <a href="#" class="btn btn-primary" id="btnANSSave">
+                                Save
+                                @*<i class="fas fa-save"></i>*@
+                            </a>
+                        </div>
+                        @*<div class="col-sm-6">
+                                <a href="#" class="btn btn-danger">Delete
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </div>*@
                     </div>
                 </form>
             </div>

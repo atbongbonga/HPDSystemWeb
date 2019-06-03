@@ -87,9 +87,6 @@
     <Compile Include="Models\adt_rpt_dtl.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AggregatedCounter.cs">
-      <DependentUpon>HPDModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\ainvh.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
@@ -498,6 +495,15 @@
     <Compile Include="Models\BK_SCDTR.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Blueprint.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BPAttach.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BPStatu.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Branch.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
@@ -540,9 +546,6 @@
     <Compile Include="Models\Calendar.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\captured_columns.cs">
-      <DependentUpon>HPDModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\CCTime.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
@@ -550,9 +553,6 @@
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ChangeLog.cs">
-      <DependentUpon>HPDModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\change_tables.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ClinicianSale.cs">
@@ -666,9 +666,6 @@
     <Compile Include="Models\Connection.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Counter.cs">
-      <DependentUpon>HPDModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\CPMHist.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
@@ -727,9 +724,6 @@
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\daudtischedule.cs">
-      <DependentUpon>HPDModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ddl_history.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\deducfordelete.cs">
@@ -954,6 +948,9 @@
     <Compile Include="Models\EMPLeave.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EmpLeaveCPD.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EmpLeaveGen.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
@@ -982,6 +979,9 @@
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EmpLeaveLogTEST.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EmpLeavePAT.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EmpLeaveSPL.cs">
@@ -1170,9 +1170,6 @@
     <Compile Include="Models\HabitALU.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Hash.cs">
-      <DependentUpon>HPDModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\HepaPType.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
@@ -1242,9 +1239,6 @@
     <Compile Include="Models\IDTK_20180531.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\index_columns.cs">
-      <DependentUpon>HPDModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\InDTR.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
@@ -1305,16 +1299,7 @@
     <Compile Include="Models\JGEFld.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Job.cs">
-      <DependentUpon>HPDModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\JobDescReq.cs">
-      <DependentUpon>HPDModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\JobParameter.cs">
-      <DependentUpon>HPDModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\JobQueue.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\JOB_LIST.cs">
@@ -1350,9 +1335,6 @@
     <Compile Include="Models\LIHdr.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\List.cs">
-      <DependentUpon>HPDModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\LIS_UserSV.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
@@ -1363,9 +1345,6 @@
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LOAReq.cs">
-      <DependentUpon>HPDModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\lsn_time_mapping.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Marlon.cs">
@@ -1866,6 +1845,9 @@
     <Compile Include="Models\PerAttendExEmp.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Person.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\PersonalityTest.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
@@ -2056,6 +2038,9 @@
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProgKill.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProgList.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PROGMON.cs">
@@ -2553,9 +2538,6 @@
     <Compile Include="Models\ScheduleHist.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Schema.cs">
-      <DependentUpon>HPDModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\ScholarReq.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
@@ -2814,19 +2796,19 @@
     <Compile Include="Models\SCViolationTypeLog.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SDForm.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SDno.cs">
+      <DependentUpon>HPDModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SecQA.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Sequence.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Server.cs">
-      <DependentUpon>HPDModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\ServerMaintenance.cs">
-      <DependentUpon>HPDModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Set.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SlsApplog.cs">
@@ -2854,9 +2836,6 @@
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SSSEmp.cs">
-      <DependentUpon>HPDModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\State.cs">
       <DependentUpon>HPDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SVisor.cs">

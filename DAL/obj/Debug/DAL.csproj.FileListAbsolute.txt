@@ -5,6 +5,6 @@ C:\HPDSystemWeb\DAL\bin\Debug\EntityFramework.dll
 C:\HPDSystemWeb\DAL\bin\Debug\EntityFramework.SqlServer.dll
 C:\HPDSystemWeb\DAL\bin\Debug\EntityFramework.xml
 C:\HPDSystemWeb\DAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\HPDSystemWeb\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
 C:\HPDSystemWeb\DAL\obj\Debug\DAL.dll
 C:\HPDSystemWeb\DAL\obj\Debug\DAL.pdb
-C:\HPDSystemWeb\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache

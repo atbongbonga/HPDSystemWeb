@@ -17,5 +17,6 @@ namespace DAL.Models
         public int EmpCode { get; set; }
         public string EmpName { get; set; }
         public string Designation { get; set; }
+        public string ColorCode { get; set; }
     }
 }

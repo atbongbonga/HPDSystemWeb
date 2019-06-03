@@ -59,6 +59,8 @@ namespace HPD.Web.Areas.HPDUtility.Controllers
 
             return Json(JsonConvert.SerializeObject(model), JsonRequestBehavior.AllowGet);
         }
+
+
         public ActionResult GetAllSprintList()
         {
             var sprintTaskComponent = new SprintTaskComponent();
@@ -82,6 +84,9 @@ namespace HPD.Web.Areas.HPDUtility.Controllers
         }
         public ActionResult CreateProjectSprint(ProjectSprints ProjSprint)
         {
+            var identity = ((CustomPrincipal)HttpContext.User);
+            ProjSprint.CreatedBy = identity.UserId.ToString();
+
             var sprintTaskComponent = new SprintTaskComponent();
             var result = sprintTaskComponent.CreateProjectSprint(ProjSprint);
             return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
@@ -169,6 +174,31 @@ namespace HPD.Web.Areas.HPDUtility.Controllers
         {
             var sprintTaskComponent = new SprintTaskComponent();
             var result = sprintTaskComponent.CreateUpdateMemberDaysOff(SprintDaysOff);
+            return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetProjectSprintById(int sprintId)
+        {
+            var sprintTaskComponent = new SprintTaskComponent();
+            var result = sprintTaskComponent.GetProjectSprintById(sprintId);
+            return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult DeleteProjectSprint(int sprintId)
+        {
+            var sprintTaskComponent = new SprintTaskComponent();
+            var result = sprintTaskComponent.DeleteProjectSprint(sprintId);
+            return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
+        }    
+        public ActionResult UpdateProjectSprint(ProjectSprints projSprint)
+        {
+            var sprintTaskComponent = new SprintTaskComponent();
+            var result = sprintTaskComponent.UpdateProjectSprint(projSprint);
+            return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult UpdateProjectSprintStatus(int sprintId)
+        {
+            var sprintTaskComponent = new SprintTaskComponent();
+            var result = sprintTaskComponent.UpdateProjectSprintStatus(sprintId);
             return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
         }
     }

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Newtonsoft.Json;
 using DAL.Logics;
 using HPD.Web.CustomAuthentication;
+using DAL.Entities;
 
 namespace HPD.Web.Areas.HPDUtility.Controllers
 {
@@ -54,5 +55,18 @@ namespace HPD.Web.Areas.HPDUtility.Controllers
             return null;
             
         }
+
+        public ActionResult CreateOtherProjectSprint(ProjectSprints ProjSprint)
+        {
+            var identity = ((CustomPrincipal)HttpContext.User);
+            ProjSprint.CreatedBy = identity.UserId.ToString();
+
+            var sprintTaskComponent = new SprintTaskComponent();
+            var result = sprintTaskComponent.CreateOtherProjectSprint(ProjSprint);
+            return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
+
+        }
+
+
     }
 }

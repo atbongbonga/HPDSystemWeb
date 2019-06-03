@@ -25,11 +25,6 @@ namespace DAL.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<captured_columns> captured_columns { get; set; }
-        public virtual DbSet<change_tables> change_tables { get; set; }
-        public virtual DbSet<ddl_history> ddl_history { get; set; }
-        public virtual DbSet<index_columns> index_columns { get; set; }
-        public virtual DbSet<lsn_time_mapping> lsn_time_mapping { get; set; }
         public virtual DbSet<AccAdmin> AccAdmins { get; set; }
         public virtual DbSet<AcctngALUL> AcctngALULs { get; set; }
         public virtual DbSet<AcsLvl> AcsLvls { get; set; }
@@ -85,6 +80,9 @@ namespace DAL.Models
         public virtual DbSet<BillCode> BillCodes { get; set; }
         public virtual DbSet<BIOITM> BIOITMs { get; set; }
         public virtual DbSet<BKASSIGN> BKASSIGNs { get; set; }
+        public virtual DbSet<Blueprint> Blueprints { get; set; }
+        public virtual DbSet<BPAttach> BPAttaches { get; set; }
+        public virtual DbSet<BPStatu> BPStatus { get; set; }
         public virtual DbSet<Branch> Branches { get; set; }
         public virtual DbSet<BranchMain> BranchMains { get; set; }
         public virtual DbSet<BranchTag> BranchTags { get; set; }
@@ -165,8 +163,10 @@ namespace DAL.Models
         public virtual DbSet<EmpInfraMain> EmpInfraMains { get; set; }
         public virtual DbSet<EmpInfraNotif> EmpInfraNotifs { get; set; }
         public virtual DbSet<EMPLeave> EMPLeaves { get; set; }
+        public virtual DbSet<EmpLeaveCPD> EmpLeaveCPDs { get; set; }
         public virtual DbSet<EmpLeaveHist> EmpLeaveHists { get; set; }
         public virtual DbSet<EmpLeaveList> EmpLeaveLists { get; set; }
+        public virtual DbSet<EmpLeavePAT> EmpLeavePATs { get; set; }
         public virtual DbSet<EmpLeaveSPL> EmpLeaveSPLs { get; set; }
         public virtual DbSet<EmpLeaveYr> EmpLeaveYrs { get; set; }
         public virtual DbSet<EmpNTReq> EmpNTReqs { get; set; }
@@ -324,6 +324,7 @@ namespace DAL.Models
         public virtual DbSet<PeerEval> PeerEvals { get; set; }
         public virtual DbSet<PenaltyTag> PenaltyTags { get; set; }
         public virtual DbSet<PerAttend> PerAttends { get; set; }
+        public virtual DbSet<Person> Persons { get; set; }
         public virtual DbSet<PetronCust> PetronCusts { get; set; }
         public virtual DbSet<PFChat> PFChats { get; set; }
         public virtual DbSet<PFile> PFiles { get; set; }
@@ -356,6 +357,7 @@ namespace DAL.Models
         public virtual DbSet<ProgIssue> ProgIssues { get; set; }
         public virtual DbSet<ProgIssueAttch> ProgIssueAttches { get; set; }
         public virtual DbSet<ProgKill> ProgKills { get; set; }
+        public virtual DbSet<ProgList> ProgLists { get; set; }
         public virtual DbSet<ProgPrerequisite> ProgPrerequisites { get; set; }
         public virtual DbSet<ProgPrio> ProgPrios { get; set; }
         public virtual DbSet<ProgPrio1> ProgPrio1 { get; set; }
@@ -367,7 +369,6 @@ namespace DAL.Models
         public virtual DbSet<ProgSrc> ProgSrcs { get; set; }
         public virtual DbSet<ProgStatDesc> ProgStatDescs { get; set; }
         public virtual DbSet<ProgUpHist> ProgUpHists { get; set; }
-        public virtual DbSet<ProjectSprint> ProjectSprints { get; set; }
         public virtual DbSet<PROvertime> PROvertimes { get; set; }
         public virtual DbSet<PrsnlReq> PrsnlReqs { get; set; }
         public virtual DbSet<PrsnlReqDtl> PrsnlReqDtls { get; set; }
@@ -467,6 +468,8 @@ namespace DAL.Models
         public virtual DbSet<SCTPRemark> SCTPRemarks { get; set; }
         public virtual DbSet<SCTrainee> SCTrainees { get; set; }
         public virtual DbSet<SCTrnsAllow> SCTrnsAllows { get; set; }
+        public virtual DbSet<SDForm> SDForms { get; set; }
+        public virtual DbSet<SDno> SDnoes { get; set; }
         public virtual DbSet<SecQA> SecQAs { get; set; }
         public virtual DbSet<ServerMaintenance> ServerMaintenances { get; set; }
         public virtual DbSet<SlsApplog> SlsApplogs { get; set; }
@@ -518,17 +521,6 @@ namespace DAL.Models
         public virtual DbSet<WEEKLY_SLS_PER_SR> WEEKLY_SLS_PER_SR { get; set; }
         public virtual DbSet<WorkStation> WorkStations { get; set; }
         public virtual DbSet<ZProg> ZProgs { get; set; }
-        public virtual DbSet<AggregatedCounter> AggregatedCounters { get; set; }
-        public virtual DbSet<Counter> Counters { get; set; }
-        public virtual DbSet<Hash> Hashes { get; set; }
-        public virtual DbSet<Job> Jobs { get; set; }
-        public virtual DbSet<JobParameter> JobParameters { get; set; }
-        public virtual DbSet<JobQueue> JobQueues { get; set; }
-        public virtual DbSet<List> Lists { get; set; }
-        public virtual DbSet<Schema> Schemata { get; set; }
-        public virtual DbSet<Server> Servers { get; set; }
-        public virtual DbSet<Set> Sets { get; set; }
-        public virtual DbSet<State> States { get; set; }
         public virtual DbSet<AcsLvl1> AcsLvl1 { get; set; }
         public virtual DbSet<adt_rpt_dtl> adt_rpt_dtl { get; set; }
         public virtual DbSet<ALABANG_008_IDTag_20180706> ALABANG_008_IDTag_20180706 { get; set; }
@@ -1020,5 +1012,6 @@ namespace DAL.Models
         public virtual DbSet<yrevalentry> yrevalentries { get; set; }
         public virtual DbSet<ZipCode> ZipCodes { get; set; }
         public virtual DbSet<ZSQUAREPROGRAM> ZSQUAREPROGRAMS { get; set; }
+        public virtual DbSet<ProjectSprint> ProjectSprints { get; set; }
     }
 }

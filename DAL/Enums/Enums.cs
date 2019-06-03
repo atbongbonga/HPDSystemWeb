@@ -11,10 +11,11 @@ namespace DAL.Enums
         ZSquare,
         DelMonte
     }
-    enum SprintType
+    enum SprintStatus
     {
         New = 1,
-        Expired = 2,
+        Active = 2,
+        Done = 3
     }
     enum TaskActvity
     {
@@ -37,5 +38,9 @@ namespace DAL.Enums
     {
         Closed = 0,
         Open = 1
+    }
+    public enum Programs
+    {
+        All,
     }
 }

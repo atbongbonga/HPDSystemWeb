@@ -18,6 +18,8 @@ namespace DAL.Entities
         public int Status { get; set; }
         public DateTime CreatedDate { get; set; }
         public string CreatedBy { get; set;  }
+        public bool IsBP { get; set; }
+        public DateTime? DoneDate { get; set; }
     }
     public class SprintDetails
     {

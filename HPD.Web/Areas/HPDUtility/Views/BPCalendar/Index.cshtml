@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "BP Calendar";
     Layout = "~/Areas/HPDUtility/Views/Shared/_LayoutAccount.cshtml";
 
     <link rel="stylesheet" type="text/css" href="~/Areas/HPDUtility/Content/css/fastselect.min.css" />
@@ -164,6 +164,7 @@
                     today: 'today',
                     month: 'month'
                 },
+                editable: true,
                 rendering: 'background',
                 height: 700,
                 events: function (start, end, timezone, callback) {
@@ -207,7 +208,9 @@
                                         start: moment(data.EndDate).format('YYYY-MM-DD'),
                                         end: moment(data.EndDate).format('YYYY-MM-DD'),
                                         color: devcc.ColorCode,
-                                        sdate: moment(data.StartDate).format('MM/DD/YYYY')
+                                        sdate: moment(data.StartDate).format('MM/DD/YYYY'),
+                                        donedate: data.DoneDate,
+                                        status: data.Status,
                                     });
                             });
 
@@ -216,10 +219,6 @@
                     });
                 },
                 eventClick: function (calEvent, jsEvent, view) {
-                    @*location.href = '@Url.Action("Sprint", "Project")?Id=' + calEvent.id+'';
-                    alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-                    alert('View: ' + view.name);
-                     change the border color just for fun*@
 
                     var sdate = calEvent.sdate;
                     var edate = calEvent.start;
@@ -243,9 +242,10 @@
                 },
                 eventRender: function (event, element) {
 
-                    element.qtip(
-                        {
-                            content: event.description,
+                    var dondate = event.status == 1 || event.status == 2 ? "" : moment(event.donedate).format('MM/DD/YYYY') 
+                    event.status = event.status == 1 || event.status == 2 ? "Active" : "Done"
+                    element.qtip({
+                            content: event.status + ''+'('+dondate+')'
                         });
 
                     if (event.color) {
