@@ -26,14 +26,17 @@ namespace HPD.Web.CustomAuthentication
 
         public bool IsInRole(string role)
         {
-            if (Roles.Any(r => role.Contains(r)))
+            bool result = false;
+            String[] userrole = role.ToString().Split(Convert.ToChar(","));
+            if (userrole.Contains(Roles))
             {
-                return true;
+                result = true;
             }
             else
             {
-                return false;
+                result = false;
             }
+            return result;
         }
 
         public CustomPrincipal(string username)

@@ -295,40 +295,40 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/06/2019 14:10:34</publishTime>
     </File>
     <File Include="Areas/HPDUtility/Views/Account/Index.cshtml">
-      <publishTime>05/14/2019 15:44:53</publishTime>
+      <publishTime>06/06/2019 10:58:04</publishTime>
     </File>
     <File Include="Areas/HPDUtility/Views/Account/Login.cshtml">
       <publishTime>04/24/2019 12:44:13</publishTime>
     </File>
     <File Include="Areas/HPDUtility/Views/BPCalendar/Index.cshtml">
-      <publishTime>05/27/2019 09:24:57</publishTime>
+      <publishTime>06/06/2019 10:49:17</publishTime>
     </File>
     <File Include="Areas/HPDUtility/Views/DataDictionary/Index.cshtml">
-      <publishTime>05/23/2019 13:31:30</publishTime>
+      <publishTime>05/28/2019 15:05:39</publishTime>
     </File>
     <File Include="Areas/HPDUtility/Views/Error/NotFound.cshtml">
       <publishTime>04/25/2019 08:40:44</publishTime>
     </File>
     <File Include="Areas/HPDUtility/Views/Home/AdminView.cshtml">
-      <publishTime>05/21/2019 10:22:03</publishTime>
+      <publishTime>05/30/2019 11:59:35</publishTime>
     </File>
     <File Include="Areas/HPDUtility/Views/Home/Index.cshtml">
-      <publishTime>05/23/2019 18:00:33</publishTime>
+      <publishTime>05/30/2019 15:11:32</publishTime>
     </File>
     <File Include="Areas/HPDUtility/Views/Home/UserView.cshtml">
-      <publishTime>05/21/2019 10:22:39</publishTime>
+      <publishTime>05/30/2019 10:57:27</publishTime>
     </File>
     <File Include="Areas/HPDUtility/Views/Project/Details.cshtml">
-      <publishTime>05/23/2019 14:11:38</publishTime>
+      <publishTime>05/31/2019 11:50:07</publishTime>
     </File>
     <File Include="Areas/HPDUtility/Views/Project/Sprint.cshtml">
-      <publishTime>05/23/2019 17:13:10</publishTime>
+      <publishTime>06/03/2019 10:20:31</publishTime>
     </File>
     <File Include="Areas/HPDUtility/Views/Shared/_Layout.cshtml">
-      <publishTime>05/22/2019 18:25:26</publishTime>
+      <publishTime>06/04/2019 17:01:47</publishTime>
     </File>
     <File Include="Areas/HPDUtility/Views/Shared/_LayoutAccount.cshtml">
-      <publishTime>05/23/2019 10:43:42</publishTime>
+      <publishTime>06/04/2019 17:01:46</publishTime>
     </File>
     <File Include="Areas/HPDUtility/Views/web.config">
       <publishTime>03/26/2019 15:41:08</publishTime>
@@ -349,13 +349,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/02/2019 15:14:15</publishTime>
     </File>
     <File Include="bin/DAL.dll">
-      <publishTime>05/27/2019 09:36:10</publishTime>
+      <publishTime>06/06/2019 14:20:15</publishTime>
     </File>
     <File Include="bin/DAL.dll.config">
-      <publishTime>05/23/2019 15:18:05</publishTime>
+      <publishTime>06/01/2019 12:27:45</publishTime>
     </File>
     <File Include="bin/DAL.pdb">
-      <publishTime>05/27/2019 09:36:10</publishTime>
+      <publishTime>06/06/2019 14:20:15</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>10/23/2017 13:15:18</publishTime>
@@ -364,10 +364,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/23/2017 13:15:20</publishTime>
     </File>
     <File Include="bin/HPD.Web.dll">
-      <publishTime>05/27/2019 09:36:48</publishTime>
+      <publishTime>06/06/2019 14:56:52</publishTime>
     </File>
     <File Include="bin/HPD.Web.pdb">
-      <publishTime>05/27/2019 09:36:48</publishTime>
+      <publishTime>06/06/2019 14:56:52</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.TelemetryCorrelation.dll">
       <publishTime>03/26/2019 08:58:09</publishTime>
@@ -512,6 +512,18 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Content/css/Global/sb-admin-2.min.css">
       <publishTime>03/28/2019 09:20:32</publishTime>
+    </File>
+    <File Include="Content/image/Global/favicon-16x16.png">
+      <publishTime>06/04/2019 17:00:32</publishTime>
+    </File>
+    <File Include="Content/image/Global/favicon-32x32.png">
+      <publishTime>06/04/2019 17:00:22</publishTime>
+    </File>
+    <File Include="Content/image/Global/favicon.ico">
+      <publishTime>06/04/2019 16:59:58</publishTime>
+    </File>
+    <File Include="Content/image/Global/hipre-banner.jpg">
+      <publishTime>06/04/2019 16:59:29</publishTime>
     </File>
     <File Include="Content/image/Global/hipre-logo.png">
       <publishTime>03/27/2019 16:41:57</publishTime>
@@ -5752,7 +5764,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/22/2019 13:38:02</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>05/27/2019 09:36:49</publishTime>
+      <publishTime>06/06/2019 14:56:53</publishTime>
     </File>
   </ItemGroup>
 </Project>
