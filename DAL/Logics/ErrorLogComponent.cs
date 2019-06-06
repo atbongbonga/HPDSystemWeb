@@ -170,7 +170,7 @@ namespace DAL.Logics
                 String query = "SELECT a.Program,COUNT(1) IssueCount " +
                     "FROM Programs a " +
                     "LEFT JOIN ErrorLog b on a.Program = b.ProgName AND b.fixed = 'N' " +
-                    "WHERE a.InCharge='" + InCharge + "' " +
+                    "WHERE a.InCharge='" + InCharge + "' AND a.Active=1 " +
                     "GROUP BY a.Program";
 
                 //cm.Parameters.AddWithValue("@Id", id);

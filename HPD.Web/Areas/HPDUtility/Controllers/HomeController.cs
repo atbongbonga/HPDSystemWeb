@@ -10,7 +10,7 @@ using DAL.Entities;
 
 namespace HPD.Web.Areas.HPDUtility.Controllers
 {
-    [CustomAuthorize(Roles = "Admin, User")]
+    [CustomAuthorize(Roles = "Admin,User")]
     public class HomeController : Controller
     {
         

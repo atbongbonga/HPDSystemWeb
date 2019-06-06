@@ -17,7 +17,7 @@ namespace HPD.Web.CustomAuthentication
         public string Roles { get; set; }
         #endregion
 
-        string[] role = {"Admin","User"};
+        //string[] role = {"Admin","User"};
 
         public IIdentity Identity
         {
@@ -26,7 +26,7 @@ namespace HPD.Web.CustomAuthentication
 
         public bool IsInRole(string role)
         {
-            if (role.Any(r => role.Contains(r)))
+            if (Roles.Any(r => role.Contains(r)))
             {
                 return true;
             }

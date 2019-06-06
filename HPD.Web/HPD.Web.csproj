@@ -251,7 +251,11 @@
     <Content Include="Areas\HPDUtility\Content\js\fastselect.standalone.min.js" />
     <Content Include="Areas\HPDUtility\Content\js\FullCalendar\jquery.qtip.min.js" />
     <Content Include="Areas\HPDUtility\Content\js\selectize.min.js" />
+    <Content Include="Content\image\Global\favicon-16x16.png" />
+    <Content Include="Content\image\Global\favicon-32x32.png" />
+    <Content Include="Content\image\Global\favicon.ico" />
     <Content Include="Content\image\Global\hipre-logoLg.jpeg" />
+    <Content Include="Content\image\Global\hipre-banner.jpg" />
     <Content Include="Content\js\Global\jquery-1.11.3.min.js" />
     <Content Include="Content\js\Global\jquery-sortable.js" />
     <Content Include="Content\bootstrap.css" />
