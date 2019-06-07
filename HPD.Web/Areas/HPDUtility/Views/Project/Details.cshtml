@@ -67,6 +67,14 @@
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody id="bugTableBody"></tbody>
+                                                                @*<tfoot>
+                                                                    <tr>
+                                                                        <th>Error Code</th>
+                                                                        <th>Error Message</th>
+                                                                        <th>Doc Date</th>
+                                                                        <th>Action</th>
+                                                                    </tr>
+                                                                </tfoot>*@
                                                             </table>
                                                         </div>
                                                     </div>
@@ -160,9 +168,49 @@
         </div>
     </div>
 
-@section scripts
+    <!-- Program Bug Details -->
+    <div class="modal fade" id="programBugDetailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Bug Detail for DOCENTRY#<span class="text-warning" id="bugDocEntry"></span></h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <h5 class="card-title">Error Code</h5>
+                    <p class="card-text" id="pbdmerrorcode">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <h5 class="card-title">Error Message</h5>
+                    <p class="card-text" id="pbdmerrormsg">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <h5 class="card-title">Error Solution</h5>
+                    <div class="form-group">
+                        @*<label for="exampleFormControlTextarea1">Example textarea</label>*@
+                        <textarea class="form-control" id="pbdmtxtareaerrorsol" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <button class="btn btn-success" id="btnPBDMFix" data-id="">
+                            Fix
+                        </button>
+                    </div>
+  
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!--Fix bug error toast-->
+    
+    
+    @section scripts
 {
-    <script>
+        <script>
         $(document).ready(function () {
 
 
@@ -192,39 +240,38 @@
                 });
             });
 
-            $("#bugTable").DataTable({
-                "processing": true, // for show progress bar
-                "serverSide": true, // for process server side
-                "filter": true,     // this is for disable filter (search box)
-                 //"orderMulti": false, // for disable multiple column at once
-                "pageLength": 10,
-
-                "ajax": {
-                "url": "@Url.Action("GetErrorListByProgram", "Project")",
-                "data": {
-                    "ProgramName": ProjectName
-                },
-                "type": "POST",
-                "datatype": "json"
-                },
-                "columns": [
-                    { "data": "ErrCode", "autoWidth": true },
-                    { "data": "ErrMsg", "autoWidth": true },
-                    {
-                        "render": function (data, type, full, meta)
+            var GetBugList = $("#bugTable").DataTable({
+                    "processing": true,
+                    "serverSide": true,
+                    "filter": true,
+                    "pageLength": 10,
+                    "ajax": {
+                        "url": "@Url.Action("GetErrorListByProgram", "Project")",
+                        "data": {
+                            "ProgramName": ProjectName
+                        },
+                        "type": "POST",
+                        "datatype": "json"
+                    },
+                    "columns": [
+                        { "data": "ErrCode", "autoWidth": true },
+                        { "data": "ErrMsg", "autoWidth": true },
                         {
-                            var nowDate = new Date(parseInt(full.DocDate.substr(6))).format("mm/dd/yyyy");
-                            return nowDate;
-                        }
-                    },
-                    {
-                        "data": null, render: function (data, type, row) {
-                            return "<a href='#' class='btn btn-circle btn-sm btn-success'><i class='fas fa-check fa-sm'></i></a>";
-                        }
-                    },
-                ]
-            });
+                            "render": function (data, type, full, meta) {
+                                var nowDate = new Date(parseInt(full.DocDate.substr(6))).format("mm/dd/yyyy");
+                                return nowDate;
+                            }
+                        },
+                        {
+                            "data": null, render: function (data, type, row) {
+                                return "<button data-id='" + data.DocEntry + "' class='btn btn-circle btn-sm btn-success btnBugDetail'><i class='fas fa-info fa-sm'></i></button>";
 
+                            }
+                        },
+                    ]
+            });
+            
+            GetBugList.ajax.reload();
             var GetProjectSprintList = function () {
 
                  $.post("@Url.Action("GetProjectSprintList", "Project")", { ProgramName: ProjectName }, function (data) {
@@ -369,9 +416,50 @@
                 location.href = '@Url.Action("Sprint", "Project")?Id='+sprintId+'';
             });
 
+            $(document).on('click', '.btnBugDetail', function () {
+                var docEntry = $(this).attr("data-id");
+                $("#bugDocEntry").text(docEntry);
+                $("#btnPBDMFix").attr("data-id", docEntry);
+
+                var $row = $(this).closest("tr").off("mousedown");
+                var $tds = $row.find("td:nth-child(2)");
+                var $tdss = $row.find("td:nth-child(1)");
+                $.each($tds, function (i, el) {
+                    var txt = $(this).text();
+                    $("#pbdmerrormsg").text(txt);
+                });
+
+                $.each($tdss, function (i, el) {
+                    var txt = $(this).text();
+                    $("#pbdmerrorcode").text(txt);
+
+                    $.post("@Url.Action("GetErrorSolution", "Project")", { errorCode: txt }, function (data) {
+                        $("#pbdmtxtareaerrorsol").val(data)
+                    });
+
+                });
+                $('#programBugDetailModal').modal('toggle');
+            });
+
+            $("#btnPBDMFix").on("click", function () {
+                var docEntry = $(this).attr("data-id");
+                $.post("@Url.Action("FixProgramBug", "Project")", { docEntry: docEntry}, function (data) {
+                    data = JSON.parse(data);
+                    if (data === true) {
+                        GetBugList.ajax.reload(null, false);
+                        $('#programBugDetailModal').modal('toggle');
+                        toastr.success("Bug #" + docEntry + " Successfully Fixed", "Bug fix");
+                    }
+                    else
+                    {
+                        toastr.warning("Bug #" + docEntry + " Can't Fix", "Bug fix");
+                    }
+                    
+                });
+            });
 
         });
-    </script>
-}
+        </script>
+    }
 
 

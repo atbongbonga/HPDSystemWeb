@@ -201,5 +201,17 @@ namespace HPD.Web.Areas.HPDUtility.Controllers
             var result = sprintTaskComponent.UpdateProjectSprintStatus(sprintId);
             return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
         }
+        public ActionResult GetErrorSolution(string errorCode)
+        {
+            var errorLogComponent = new ErrorLogComponent();
+            var result = errorLogComponent.GetErrorSolution(errorCode);
+            return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult FixProgramBug(int docEntry)
+        {
+            var errorLogComponent = new ErrorLogComponent();
+            var result = errorLogComponent.FixProgramBug(docEntry);
+            return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
+        }
     }
 }

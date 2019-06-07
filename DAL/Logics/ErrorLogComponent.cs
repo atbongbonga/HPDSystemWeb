@@ -263,5 +263,56 @@ namespace DAL.Logics
             return model.ToList();
 
         }
+
+        public string GetErrorSolution(string ErrorCode)
+        {
+            using (HPCOMMONEntities db = new HPCOMMONEntities())
+            {
+                var geterrorsol = db.ErrorSols.Where(i => i.ErrCode == ErrorCode).FirstOrDefault();
+                if (geterrorsol != null)
+                {
+                    return geterrorsol.ErrSol;
+                }
+                return null;
+            }
+        }
+        public bool FixProgramBug(int DocEntry)
+        {
+            using (HPCOMMONEntities db = new HPCOMMONEntities())
+            {
+                var geterrorsol = db.ErrorLogs.Where(i => i.DocEntry == DocEntry).FirstOrDefault();
+                if (geterrorsol != null)
+                {
+                    geterrorsol.Fixed = "Y";
+                    db.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
+        }
+        public bool CreateUpdateErrorSolution(string ErrorCode, string ErrorSol)
+        {
+            using (HPCOMMONEntities db = new HPCOMMONEntities())
+            {
+                var geterrorsol = db.ErrorSols.Where(i => i.ErrCode == ErrorCode).FirstOrDefault();
+                if (geterrorsol == null)
+                {
+                    var errorsol = new ErrorSol()
+                    {
+                        ErrCode = ErrorCode,
+                        ErrSol = ErrorSol
+                    };
+                    db.ErrorSols.Add(errorsol);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    geterrorsol.ErrSol = ErrorSol;
+                    db.SaveChanges();
+                }
+            }
+            return true;
+        }
+        
     }
 }

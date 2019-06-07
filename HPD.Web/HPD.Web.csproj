@@ -251,6 +251,7 @@
     <Content Include="Areas\HPDUtility\Content\js\fastselect.standalone.min.js" />
     <Content Include="Areas\HPDUtility\Content\js\FullCalendar\jquery.qtip.min.js" />
     <Content Include="Areas\HPDUtility\Content\js\selectize.min.js" />
+    <Content Include="Content\css\Global\toastr.min.css" />
     <Content Include="Content\image\Global\favicon-16x16.png" />
     <Content Include="Content\image\Global\favicon-32x32.png" />
     <Content Include="Content\image\Global\favicon.ico" />
@@ -274,6 +275,7 @@
     <Content Include="Content\image\Global\hipre-logo.png" />
     <Content Include="Content\image\Global\icon-image.png" />
     <Content Include="Areas\HPDUtility\Content\js\Home\Index.js" />
+    <Content Include="Content\js\Global\toastr.min.js" />
     <Content Include="Content\js\Global\typeahead.bundle.js" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\vendor\bootstrap\js\bootstrap.bundle.js" />
