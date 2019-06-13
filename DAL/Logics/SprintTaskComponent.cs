@@ -83,7 +83,7 @@ namespace DAL.Logics
                             EndDate = Convert.ToDateTime(dr["EndDate"]),
                             Member = Convert.ToString(dr["Member"]),
                             Status = Convert.ToInt32(dr["Status"]),
-                            DoneDate = Convert.ToDateTime(dr["DoneDate"]),
+                            DoneDate = string.IsNullOrEmpty(Convert.ToString(dr["DoneDate"])) ? Convert.ToDateTime(null) : Convert.ToDateTime(dr["DoneDate"]),
                         });
                     };
                     return model;

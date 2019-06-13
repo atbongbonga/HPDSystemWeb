@@ -104,13 +104,11 @@ namespace DAL.Logics
             {
                 cn.Open();
 
-                String query = "SELECT b.InCharge, COUNT(1) IssueCount, c.EmpCode, " +
-                               "(SELECT EmpImg FROM EMPPic WHERE EmpCode = CAST(c.EmpCode AS varchar)) EmpImg " +
-                               "FROM ErrorLog a " +
-                               "LEFT JOIN Programs b on a.ProgName = b.Program " +
-                               "LEFT JOIN developer c on c.EmpName = b.InCharge " +
-                               "WHERE a.Fixed='"+ "N" +"' AND c.Designation ='" + Office.ZSquare + "' " +
-                               "GROUP BY b.InCharge, c.EmpCode ";
+                String query = "SELECT a.InCharge, COUNT(b.DocEntry) IssueCount, c.EmpCode, (SELECT EmpImg FROM EMPPic WHERE EmpCode = CAST(c.EmpCode AS varchar)) EmpImg " +
+                  "FROM Programs a " +
+                  "LEFT JOIN ErrorLog b on a.Program = b.ProgName AND b.Fixed = 'N' " +
+                  "LEFT JOIN developer c on a.InCharge = c.EmpName " +
+                  "WHERE c.Designation = '" + Enums.Office.ZSquare + "' GROUP BY a.InCharge, c.EmpCode ";
 
                 //cm.Parameters.AddWithValue("@Id", id);
 
@@ -166,12 +164,29 @@ namespace DAL.Logics
             using (SqlConnection cn = new SqlConnection(dbcon))
             {
                 cn.Open();
+                #region OLD QUERY  
+                //String query = "SELECT a.Program, COUNT(b.DocEntry) IssueCount " +
+                //    "FROM Programs a " +
+                //    "LEFT JOIN ErrorLog b on a.Program = b.ProgName AND b.fixed = 'N' " +
+                //    "WHERE a.InCharge='" + InCharge + "' AND a.Active=1 " +
+                //    "GROUP BY a.Program";
 
-                String query = "SELECT a.Program,COUNT(1) IssueCount " +
-                    "FROM Programs a " +
-                    "LEFT JOIN ErrorLog b on a.Program = b.ProgName AND b.fixed = 'N' " +
-                    "WHERE a.InCharge='" + InCharge + "' AND a.Active=1 " +
-                    "GROUP BY a.Program";
+                //String query = "SELECT a.Program, COUNT(b.DocEntry) IssueCount " +
+                //    "FROM dbo.Programs a " +
+                //    "LEFT JOIN dbo.ErrorLog b ON a.Program = b.ProgName AND b.Fixed = 'N' AND b.ErrCode NOT IN(SELECT ErrCode FROM dbo.ErrorException) " +
+                //    "WHERE a.InCharge='" + InCharge + "' AND a.Active=1 " +
+                //    "GROUP BY a.Program ";
+
+                #endregion
+
+                String query = "SELECT a.Program, COUNT(a.Cnt) IssueCount " +
+                    "FROM(SELECT a.Program, b.ErrCode, b.ErrMsg, SUM(b.DocEntry) Cnt " +
+                    "FROM dbo.Programs a " +
+                    "LEFT JOIN dbo.ErrorLog b on a.Program = b.ProgName AND b.Fixed = 'N' " +
+                    "AND b.ErrCode NOT IN(SELECT ErrCode FROM dbo.ErrorException) " +
+                    "WHERE a.InCharge='" + InCharge + "' AND a.Active = 1 " +
+                    "GROUP BY a.Program, b.ErrCode, b.ErrMsg) a " +
+                    "GROUP BY a.Program ";
 
                 //cm.Parameters.AddWithValue("@Id", id);
 
@@ -230,11 +245,29 @@ namespace DAL.Logics
             {
                 cn.Open();
 
-                String query = "SELECT a.* " +
-                               "FROM ErrorLog a " +
-                               "LEFT JOIN Programs b on a.ProgName = b.Program " +
-                               "WHERE a.Fixed='" + "N" + "' AND a.ProgName='" + ProgramName + "' " +
-                               "ORDER BY a.DocDate DESC ";
+                #region OLD Query
+
+
+                //String query = "SELECT a.* " +
+                //               "FROM ErrorLog a " +
+                //               "LEFT JOIN Programs b on a.ProgName = b.Program " +
+                //               "WHERE a.Fixed='" + "N" + "' AND a.ProgName='" + ProgramName + "' " +
+                //               "ORDER BY a.DocDate DESC ";
+
+                //String query = "SELECT a.* " +
+                //    "FROM ErrorLog a " +
+                //    "LEFT JOIN Programs b on a.ProgName = b.Program " +
+                //    "WHERE a.Fixed = 'N' AND  a.ProgName='" + ProgramName + "' AND a.ErrCode NOT IN(SELECT ErrCode FROM dbo.ErrorException) " +
+                //    "ORDER BY a.DocDate DESC ";
+                #endregion
+
+                String query = "SELECT a.ErrCode, a.ErrMsg, a.DocEntry, a.DocDate " +
+                    "FROM(SELECT a.ErrCode, a.ErrMsg, a.ProgName, MAX(a.DocEntry) DocEntry, CAST(MAX(a.DocDate) AS VARCHAR) DocDate " +
+                    "FROM ErrorLog a " +
+                    "LEFT JOIN Programs b on a.ProgName = b.Program " +
+                    "WHERE a.Fixed = 'N' AND a.ErrCode NOT IN(SELECT ErrCode FROM dbo.ErrorException) " +
+                    "GROUP BY a.ErrCode, a.ErrMsg, a.ProgName) a " +
+                    "WHERE a.ProgName='" + ProgramName + "' ";
 
                 //cm.Parameters.AddWithValue("@Id", id);
 
@@ -264,6 +297,46 @@ namespace DAL.Logics
 
         }
 
+        public ErrorLogs GetErrorByDocEntry(string DocEntry)
+        {
+
+            var model = new ErrorLogs();
+
+            using (SqlConnection cn = new SqlConnection(dbcon))
+            {
+                cn.Open();
+
+                String query = "SELECT a.* " +
+                    "FROM ErrorLog a " +
+                    "LEFT JOIN Programs b on a.ProgName = b.Program " +
+                    "WHERE a.Fixed = 'N' AND  a.DocEntry='" + DocEntry + "' AND a.ErrCode NOT IN(SELECT ErrCode FROM dbo.ErrorException) " +
+                    "ORDER BY a.DocDate DESC ";
+
+                //cm.Parameters.AddWithValue("@Id", id);
+
+                SqlCommand cmd = new SqlCommand(query, cn);
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.HasRows)
+                {
+                    dr.Read();
+                    model = new ErrorLogs
+                        {
+                            ErrCode = Convert.ToString(dr["ErrCode"]),
+                            ErrMsg = Convert.ToString(dr["ErrMsg"]),
+                            DocEntry = Convert.ToInt32(dr["DocEntry"]),
+                            ErrDtls = Convert.ToString(dr["ErrDtls"]),
+                            DocDate = Convert.ToDateTime(dr["DocDate"])
+                        };
+                    return model;
+                }
+                cn.Close();
+
+            }
+
+            return model;
+        }
+
         public string GetErrorSolution(string ErrorCode)
         {
             using (HPCOMMONEntities db = new HPCOMMONEntities())
@@ -276,11 +349,12 @@ namespace DAL.Logics
                 return null;
             }
         }
-        public bool FixProgramBug(int DocEntry)
+
+        public bool FixProgramBug(string ErrorCode, string Program)
         {
             using (HPCOMMONEntities db = new HPCOMMONEntities())
             {
-                var geterrorsol = db.ErrorLogs.Where(i => i.DocEntry == DocEntry).FirstOrDefault();
+                var geterrorsol = db.ErrorLogs.Where(i => i.ErrCode == ErrorCode && i.ProgName == Program).FirstOrDefault();
                 if (geterrorsol != null)
                 {
                     geterrorsol.Fixed = "Y";
@@ -290,6 +364,7 @@ namespace DAL.Logics
                 return false;
             }
         }
+
         public bool CreateUpdateErrorSolution(string ErrorCode, string ErrorSol)
         {
             using (HPCOMMONEntities db = new HPCOMMONEntities())
@@ -313,6 +388,26 @@ namespace DAL.Logics
             }
             return true;
         }
-        
+
+        public bool AddBugToErrorException(string ErrorCode, string ErrorDesc)
+        {
+            using (HPCOMMONEntities db = new HPCOMMONEntities())
+            {
+                var checkeerrex = db.ErrorExceptions.Where(i => i.ErrCode == ErrorCode).FirstOrDefault();
+                if (checkeerrex == null)
+                {
+                    var errorexception = new ErrorException()
+                    {
+                        ErrCode = ErrorCode,
+                        Dscrpt = ErrorDesc
+                    };
+                    db.ErrorExceptions.Add(errorexception);
+                    db.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
+
+        } 
     }
 }

@@ -170,10 +170,10 @@
 
     <!-- Program Bug Details -->
     <div class="modal fade" id="programBugDetailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Bug Detail for DOCENTRY#<span class="text-warning" id="bugDocEntry"></span></h5>
+                <h5 class="modal-title" id="exampleModalLabel">Bug Detail for Error Code <span class="text-warning" id="bugErrorCodeTxt"></span></h5>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
@@ -181,9 +181,11 @@
             <div class="modal-body">
                 <div class="container-fluid">
                     <h5 class="card-title">Error Code</h5>
-                    <p class="card-text" id="pbdmerrorcode">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <p class="card-text" id="pbdmerrorcode"></p>
                     <h5 class="card-title">Error Message</h5>
-                    <p class="card-text" id="pbdmerrormsg">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <p class="card-text" id="pbdmerrormsg"></p>
+                    <h5 class="card-title">Error Details</h5>
+                    <p class="card-text" id="pbdmerrordtls"></p>
                     <h5 class="card-title">Error Solution</h5>
                     <div class="form-group">
                         @*<label for="exampleFormControlTextarea1">Example textarea</label>*@
@@ -193,12 +195,18 @@
             </div>
             <div class="modal-footer">
                 <div class="form-group row">
-                    <div class="col-sm-6">
-                        <button class="btn btn-success" id="btnPBDMFix" data-id="">
-                            Fix
-                        </button>
+                    <div class="col-md-12 row">
+                        <div class="col-sm-10">
+                            <button class="btn btn-warning" id="btnPBDMAAE" data-id="">
+                                Add To Exception
+                            </button>
+                        </div>
+                        <div class="col-sm-2">
+                            <button class="btn btn-success" id="btnPBDMFix" data-id="">
+                                Fix
+                            </button>
+                        </div>
                     </div>
-  
                 </div>
             </div>
         </div>
@@ -264,13 +272,13 @@
                         },
                         {
                             "data": null, render: function (data, type, row) {
-                                return "<button data-id='" + data.DocEntry + "' class='btn btn-circle btn-sm btn-success btnBugDetail'><i class='fas fa-info fa-sm'></i></button>";
+                                return "<button data-id='" + data.DocEntry + "' class='btn btn-circle btn-sm btn-secondary btnBugDetail'><i class='fas fa-cog fa-sm'></i></button>";
 
                             }
                         },
                     ]
             });
-            
+
             GetBugList.ajax.reload();
             var GetProjectSprintList = function () {
 
@@ -418,43 +426,57 @@
 
             $(document).on('click', '.btnBugDetail', function () {
                 var docEntry = $(this).attr("data-id");
-                $("#bugDocEntry").text(docEntry);
-                $("#btnPBDMFix").attr("data-id", docEntry);
+                $.post("@Url.Action("GetErrorByDocEntry", "Project")", { docEntry: docEntry }, function (data) {
+                    data = JSON.parse(data);
 
-                var $row = $(this).closest("tr").off("mousedown");
-                var $tds = $row.find("td:nth-child(2)");
-                var $tdss = $row.find("td:nth-child(1)");
-                $.each($tds, function (i, el) {
-                    var txt = $(this).text();
-                    $("#pbdmerrormsg").text(txt);
-                });
+                    $("#bugErrorCodeTxt").text(data.ErrCode);
+                    $("#btnPBDMFix").attr("data-id", data.ErrCode);
+                    $("#pbdmerrorcode").text(data.ErrCode);
+                    $("#pbdmerrormsg").text(data.ErrMsg);
+                    $("#pbdmerrordtls").text(data.ErrDtls);
 
-                $.each($tdss, function (i, el) {
-                    var txt = $(this).text();
-                    $("#pbdmerrorcode").text(txt);
-
-                    $.post("@Url.Action("GetErrorSolution", "Project")", { errorCode: txt }, function (data) {
+                    $.post("@Url.Action("GetErrorSolution", "Project")", { errorCode: data.ErrCode }, function (data) {
                         $("#pbdmtxtareaerrorsol").val(data)
                     });
 
                 });
+
                 $('#programBugDetailModal').modal('toggle');
             });
 
             $("#btnPBDMFix").on("click", function () {
-                var docEntry = $(this).attr("data-id");
-                $.post("@Url.Action("FixProgramBug", "Project")", { docEntry: docEntry}, function (data) {
+                var errorCode = $(this).attr("data-id");
+                $.post("@Url.Action("FixProgramBug", "Project")", { errorCode: errorCode, program: ProjectName}, function (data) {
                     data = JSON.parse(data);
                     if (data === true) {
                         GetBugList.ajax.reload(null, false);
                         $('#programBugDetailModal').modal('toggle');
-                        toastr.success("Bug #" + docEntry + " Successfully Fixed", "Bug fix");
+                        toastr.success("Error Code " + errorCode + " Successfully Fixed", "Bug fix");
                     }
                     else
                     {
-                        toastr.warning("Bug #" + docEntry + " Can't Fix", "Bug fix");
+                        toastr.warning("Error Code" + errorCode + " Can't Fix", "Bug fix");
                     }
-                    
+
+                });
+            });
+
+            $("#btnPBDMAAE").on("click", function () {
+                var errorCode = $("#pbdmerrorcode").text();
+                var errorDesc = $("#pbdmerrormsg").text();
+                $.post("@Url.Action("AddBugToErrorException", "Project")", { errorCode: errorCode, errorDesc: errorDesc }, function (data) {
+                    data = JSON.parse(data);
+                    console.log(data);
+                    if (data === true) {
+                        GetBugList.ajax.reload(null, false);
+                        $('#programBugDetailModal').modal('toggle');
+                        toastr.success("Bug #" + errorCode + " Successfully Added", "Bug Exception");
+                    }
+                    else
+                    {
+                        toastr.warning("Bug #" + errorCode + " Can't add", "Bug Exception");
+                    }
+
                 });
             });
 

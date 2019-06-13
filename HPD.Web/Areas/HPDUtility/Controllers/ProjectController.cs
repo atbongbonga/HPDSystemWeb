@@ -207,10 +207,22 @@ namespace HPD.Web.Areas.HPDUtility.Controllers
             var result = errorLogComponent.GetErrorSolution(errorCode);
             return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
         }
-        public ActionResult FixProgramBug(int docEntry)
+        public ActionResult FixProgramBug(string errorCode, string program)
         {
             var errorLogComponent = new ErrorLogComponent();
-            var result = errorLogComponent.FixProgramBug(docEntry);
+            var result = errorLogComponent.FixProgramBug(errorCode,program);
+            return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult AddBugToErrorException(string errorCode, string errorDesc)
+        {
+            var errorlogComponent = new ErrorLogComponent();
+            var result = errorlogComponent.AddBugToErrorException(errorCode, errorDesc);
+            return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GetErrorByDocEntry(string docEntry)
+        {
+            var errorlogComponent = new ErrorLogComponent();
+            var result = errorlogComponent.GetErrorByDocEntry(docEntry);
             return Json(JsonConvert.SerializeObject(result), JsonRequestBehavior.AllowGet);
         }
     }
