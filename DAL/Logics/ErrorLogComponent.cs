@@ -184,6 +184,7 @@ namespace DAL.Logics
                     "FROM dbo.Programs a " +
                     "LEFT JOIN dbo.ErrorLog b on a.Program = b.ProgName AND b.Fixed = 'N' " +
                     "AND b.ErrCode NOT IN(SELECT ErrCode FROM dbo.ErrorException) " +
+                    "AND b.IPAdd NOT IN('192.171.3.25','192.171.3.30','192.171.3.31','192.171.3.38','192.171.3.27','192.171.3.33','192.171.3.36','192.171.3.37','192.171.3.35','192.171.3.39','192.171.3.29','172.30.0.17','192.171.3.21','192.171.3.19','192.171.3.36','192.171.3.32','192.171.3.12') " +
                     "WHERE a.InCharge='" + InCharge + "' AND a.Active = 1 " +
                     "GROUP BY a.Program, b.ErrCode, b.ErrMsg) a " +
                     "GROUP BY a.Program ";
@@ -266,13 +267,14 @@ namespace DAL.Logics
                     "FROM ErrorLog a " +
                     "LEFT JOIN Programs b on a.ProgName = b.Program " +
                     "WHERE a.Fixed = 'N' AND a.ErrCode NOT IN(SELECT ErrCode FROM dbo.ErrorException) " +
+                    "AND a.IPAdd NOT IN('192.171.3.25','192.171.3.30','192.171.3.31','192.171.3.38','192.171.3.27','192.171.3.33','192.171.3.36','192.171.3.37','192.171.3.35','192.171.3.39','192.171.3.29','172.30.0.17','192.171.3.21','192.171.3.19','192.171.3.36','192.171.3.32','192.171.3.12') " +
                     "GROUP BY a.ErrCode, a.ErrMsg, a.ProgName) a " +
                     "WHERE a.ProgName='" + ProgramName + "' ";
 
                 //cm.Parameters.AddWithValue("@Id", id);
 
                 SqlCommand cmd = new SqlCommand(query, cn);
-                SqlDataReader dr = cmd.ExecuteReader();
+               SqlDataReader dr = cmd.ExecuteReader();
 
                 if (dr.HasRows)
                 {
@@ -350,22 +352,26 @@ namespace DAL.Logics
             }
         }
 
-        public bool FixProgramBug(string ErrorCode, string Program)
+        public bool FixProgramBug(string ErrorCode, string ErrorSol, string Program, int EmpCode)
         {
             using (HPCOMMONEntities db = new HPCOMMONEntities())
             {
-                var geterrorsol = db.ErrorLogs.Where(i => i.ErrCode == ErrorCode && i.ProgName == Program).FirstOrDefault();
-                if (geterrorsol != null)
+                var geterror = db.ErrorLogs.Where(i => i.ErrCode == ErrorCode && i.ProgName == Program && i.Fixed == "N").ToList();
+                if (geterror != null)
                 {
-                    geterrorsol.Fixed = "Y";
-                    db.SaveChanges();
+                    foreach (var data in geterror)
+                    {
+                        data.Fixed = "Y";
+                        db.SaveChanges();
+                    }
+                    CreateUpdateErrorSolution(ErrorCode, ErrorSol, EmpCode);
                     return true;
                 }
                 return false;
             }
         }
 
-        public bool CreateUpdateErrorSolution(string ErrorCode, string ErrorSol)
+        public bool CreateUpdateErrorSolution(string ErrorCode, string ErrorSol, int Empcode)
         {
             using (HPCOMMONEntities db = new HPCOMMONEntities())
             {
@@ -375,14 +381,20 @@ namespace DAL.Logics
                     var errorsol = new ErrorSol()
                     {
                         ErrCode = ErrorCode,
-                        ErrSol = ErrorSol
+                        ErrSol = ErrorSol,
+                        ModBy = Convert.ToString(Empcode),
+                        ModDate = DateTime.UtcNow
                     };
+
                     db.ErrorSols.Add(errorsol);
                     db.SaveChanges();
                 }
                 else
                 {
                     geterrorsol.ErrSol = ErrorSol;
+                    geterrorsol.ModBy = Convert.ToString(Empcode);
+                    geterrorsol.ModDate = DateTime.UtcNow;
+
                     db.SaveChanges();
                 }
             }

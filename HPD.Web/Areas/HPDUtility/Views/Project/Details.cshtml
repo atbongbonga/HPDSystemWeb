@@ -445,8 +445,10 @@
             });
 
             $("#btnPBDMFix").on("click", function () {
+                //var docEntry = $(this).attr("data-id");
                 var errorCode = $(this).attr("data-id");
-                $.post("@Url.Action("FixProgramBug", "Project")", { errorCode: errorCode, program: ProjectName}, function (data) {
+                var errorSol = $("#pbdmtxtareaerrorsol").val();
+                $.post("@Url.Action("FixProgramBug", "Project")", { errorCode: errorCode, errorSol: errorSol, program: ProjectName}, function (data) {
                     data = JSON.parse(data);
                     if (data === true) {
                         GetBugList.ajax.reload(null, false);

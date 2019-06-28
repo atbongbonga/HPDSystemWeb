@@ -58,14 +58,46 @@ namespace DAL.Logics
             return model;
         }
 
-        public List<DataDictionary> GetDatabaseTableList(string servername, string dbname, string username, string password)
+        public List<DataDictionary> GetDatabaseTableList(string servername, string dbname, string username, string password, int tableType)
         {
             String connstr = "Server=" + servername + ";Database=" + dbname + ";Integrated Security=False;UID=" + username + ";PWD=" + password + "";
             var model = new List<DataDictionary>();
             using (SqlConnection cn = new SqlConnection(connstr))
             {
+                String query = "";
                 cn.Open();
-                String query = "SELECT NAME FROM SYS.OBJECTS WHERE TYPE_DESC = 'USER_TABLE' ORDER BY NAME";
+                if (tableType == 0)
+                {
+                    query = "SELECT NAME FROM SYS.OBJECTS WHERE TYPE_DESC = 'USER_TABLE' ORDER BY NAME ";
+                }
+                else if (tableType == 1)
+                {
+                    query = "SELECT TL.TableName ,TL.TotalCol, TL.ValCnt ColWithDisc, (TL.TotalCol - CASE WHEN TL.ValCnt >= TotalCol THEN TL.TotalCol ELSE TL.ValCnt END) AS RemainingCol " +
+                          "FROM(SELECT st.name TableName, COUNT(sc.name) AS TotalCol, ISNULL(ValCnt, 0)ValCnt " +
+                          "FROM SYS.tables st " +
+                          "INNER JOIN SYS.columns sc ON st.object_id = sc.object_id " +
+                          "LEFT JOIN(SELECT o.major_id, SUM(CASE WHEN ISNULL(o.value, '') <> '' THEN 1 ELSE 0 END) ValCnt " +
+                          "FROM SYS.extended_properties o " +
+                          "GROUP BY o.major_id) sep ON st.object_id = sep.major_id " +
+                          "GROUP BY st.name, ValCnt " +
+                          ") AS TL " +
+                          "WHERE TL.ValCnt <> 0 " +
+                          "ORDER BY(TL.TotalCol -TL.ValCnt) ";
+                }
+                else if (tableType == 2)
+                {
+                    query = "SELECT TL.TableName ,TL.TotalCol, TL.ValCnt ColWithDisc, (TL.TotalCol - CASE WHEN TL.ValCnt >= TotalCol THEN TL.TotalCol ELSE TL.ValCnt END) AS RemainingCol " +
+                         "FROM(SELECT st.name TableName, COUNT(sc.name) AS TotalCol, ISNULL(ValCnt, 0)ValCnt " +
+                         "FROM SYS.tables st " +
+                         "INNER JOIN SYS.columns sc ON st.object_id = sc.object_id " +
+                         "LEFT JOIN(SELECT o.major_id, SUM(CASE WHEN ISNULL(o.value, '') <> '' THEN 1 ELSE 0 END) ValCnt " +
+                         "FROM SYS.extended_properties o " +
+                         "GROUP BY o.major_id) sep ON st.object_id = sep.major_id " +
+                         "GROUP BY st.name, ValCnt " +
+                         ") AS TL " +
+                         "WHERE TL.ValCnt = 0 " +
+                         "ORDER BY(TL.TotalCol -TL.ValCnt) ";
+                }
 
                 SqlCommand cmd = new SqlCommand(query, cn);
                 SqlDataReader dr = cmd.ExecuteReader();
@@ -86,7 +118,7 @@ namespace DAL.Logics
             return model;
         }
 
-        public List<DataDictionary> GetTableProperty(string servername, string dbname, string tblname, string username, string password)
+        public List<DataDictionary> GetTableColumnProperty(string servername, string dbname, string tblname, string username, string password)
         {
             String connstr = "Server=" + servername + ";Database=" + dbname + ";Integrated Security=False;UID=" + username + ";PWD=" + password + "";
             var model = new List<DataDictionary>();
@@ -145,6 +177,7 @@ namespace DAL.Logics
                           "@level2type=N'COLUMN', @level2name=N'" + colname + "' ";
                     cmd = new SqlCommand(qry, cn);
                     dr = cmd.ExecuteReader();
+                    cn.Close();
                     return true;
                 }
                 else
@@ -157,10 +190,58 @@ namespace DAL.Logics
                           "@level2type=N'COLUMN', @level2name=N'" + colname + "' ";
                     cmd = new SqlCommand(qry, cn);
                     dr = cmd.ExecuteReader();
+                    cn.Close();
                     return true;
                 }
                    
-                cn.Close();
+                
+            }
+        }
+        public bool SaveTableExtendedProperty(string servername, string dbname, string tblname, string username, string password, string tbldesc)
+        {
+            String connstr = "Server=" + servername + ";Database=" + dbname + ";Integrated Security=False;UID=" + username + ";PWD=" + password + "";
+            var model = new List<DataDictionary>();
+            using (SqlConnection cn = new SqlConnection(connstr))
+            {
+                cn.Open();
+                String query = "SELECT * FROM sys.extended_properties WHERE NAME = '" + tblname + "' ";
+                SqlCommand cmd = new SqlCommand(query, cn);
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.Read())
+                {
+
+                    dr.Close();
+                    String qry = "EXEC sp_updateextendedproperty  " +
+                        "@name = N'" + tblname + "', " +
+                        "@value = N'" + tbldesc + "', " +
+                        "@level0type = N'Schema'," +
+                        "@level0name = 'dbo', " +
+                        "@level1type = N'Table', " +
+                        "@level1name = '" + tblname + "' ";
+                    cmd = new SqlCommand(qry, cn);
+                    dr = cmd.ExecuteReader();
+                    cn.Close();
+                    return true;
+                }
+                else
+                {
+                    dr.Close();
+                    String qry = "EXEC sp_addextendedproperty  " +
+                       "@name = N'" + tblname + "', " +
+                       "@value = N'" + tbldesc + "', " +
+                       "@level0type = N'Schema'," +
+                       "@level0name = 'dbo'," +
+                       "@level1type = N'Table', " +
+                       "@level1name = '" + tblname + "' ";
+
+                    cmd = new SqlCommand(qry, cn);
+                    dr = cmd.ExecuteReader();
+                    cn.Close();
+                    return true;
+                }
+
+
             }
         }
         public DataDictionaryInfo GetDatabaseInformation(string servername, string dbname, string tblname, string username, string password)
@@ -170,10 +251,20 @@ namespace DAL.Logics
             using (SqlConnection cn = new SqlConnection(connstr))
             {
                 cn.Open();
-                String query = "with fs as (SELECT * FROM sys.master_files) " +
-                    "SELECT(SELECT Name)DatabaseName, " +
+                String query = "with fs as " +
+                    "(SELECT * FROM sys.master_files) SELECT(SELECT Name) DatabaseName, " +
                     "(SELECT CAST(SUM((size * 8) / 1024) AS VARCHAR) FROM fs WHERE TYPE = 0 and fs.database_id = db.database_id) DataFileSizeMB, " +
                     "(SELECT CAST(SUM((size * 8) / 1024) AS VARCHAR) FROM fs WHERE TYPE = 1 and fs.database_id = db.database_id) LogFileSizeMB, " +
+                    "(SELECT COUNT(TL.TableName) " +
+                    "FROM(SELECT st.name TableName, COUNT(sc.name) AS TotalCol, ISNULL(ValCnt, 0)ValCnt " +
+                    "FROM SYS.tables st " +
+                    "INNER JOIN SYS.columns sc ON st.object_id = sc.object_id " +
+                    "LEFT JOIN(SELECT o.major_id, SUM(CASE WHEN ISNULL(o.value, '') <> '' THEN 1 ELSE 0 END) ValCnt " +
+                    "FROM SYS.extended_properties o " +
+                    "GROUP BY o.major_id) sep ON st.object_id = sep.major_id " +
+                    "GROUP BY st.name, ValCnt) AS TL " +
+                    "WHERE TL.ValCnt <> 0) DataDictionary, " +
+                    "(SELECT Value FROM sys.extended_properties WHERE name ='" + tblname + "') TableDescription, " +
                     "(SELECT CAST(COUNT(*)AS VARCHAR) FROM sys.tables ) TotalTableCount, " +
                     "(SELECT CAST(COUNT(*)AS VARCHAR) FROM dbo."+ tblname +") TotalTableDataCount " +
                     "FROM sys.databases db WHERE db.name = '" + dbname + "' ";
@@ -187,9 +278,11 @@ namespace DAL.Logics
                         model.LogicalName = Convert.ToString(dr[0]);
                         model.DataFileSize = Convert.ToString(dr[1]);
                         model.LogFileSize = Convert.ToString(dr[2]);
-                        model.DatabaseTableCount = Convert.ToString(dr[3]);
                         model.TableName = Convert.ToString(tblname);
-                        model.TableDataCount = Convert.ToString(dr[4]);
+                        model.DataDictionaryCount = Convert.ToString(dr[3]);
+                        model.TableDesc = Convert.ToString(dr[4]);
+                        model.DatabaseTableCount = Convert.ToString(dr[5]);
+                        model.TableDataCount = Convert.ToString(dr[6]);
                     }
                 }
                 return model;

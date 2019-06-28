@@ -52,29 +52,36 @@
                     <div id="ServerInfoDiv" style="display:none">
                     <h1 class="h5 mb-2 text-gray-800">Server Details:</h1>
                     <div class="row" id="cardTableInfo">
-                        <div class="col-lg-6 col-md-6">
+                       
+                        <div class="col-lg-8 col-md-8">
                             <div class="row">
-                                <div class="col-sm-6 col-md-6">
+                                <div class="col-sm-4 col-md-4">
                                     <div class="form-group">
                                         <select class="form-control sm singleInputDynamic" data-load-once="true" name="Database" id="msDDDatabase" placeholder="Database">
                                         </select>
                                     </div>
-                                </div><br>
-                                <div class="col-sm-6 col-md-6" id="divmsDDTable">
+                                </div>
+                                <div class="col-sm-4 col-md-4" id="divmsDDTableType">
+                                    <div class="form-group">
+                                        <select class="form-control input-sm singleInputDynamic" data-load-once="true" name="Table" id="msDDTableType" placeholder="Table Type">
+                                            <option value="0">All Table</option>
+                                            <option value="1">With Table Column Description</option>
+                                            <option value="2">W/O Table Column Description</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-4" id="divmsDDTable">
                                     <div class="form-group">
                                         <select class="form-control input-sm singleInputDynamic" data-load-once="true" name="Table" id="msDDTable" placeholder="Table">
-
                                         </select>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-2 col-md-2">
-
-                        </div>
+                        
                     </div>
                     <div class="row">
-                        <div class="col-lg-7 col-md-7">
+                        <div class="col-lg-8 col-md-8">
                             <div class="card mb-3">
                                 <div class="card-body">
                                     <table id="tblDDTable" class="table table-bordered table-light table-hover table-responsive" style="width:100%">
@@ -91,7 +98,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-5 col-md-5">
+                        <div class="col-lg-4 col-md-4">
                             <div class="card mb-3">
                                 <div class="card-body">
                                     <div class="row" id="cardDatabaseInfo">
@@ -206,7 +213,6 @@
                 $("#ServerInfoDiv").hide().fadeOut(2000, 500);
 
                 location.reload(true);
-
             });
 
             $('#msDDDatabase').fastselect({
@@ -214,59 +220,112 @@
                     var sname = $("#txtDDSrvName").val();
                     var uname = $("#txtDDSrvUserName").val();
                     var pass = $("#txtDDSrvPassword").val();
+                    var ttype = $("#msDDTableType").val();
                     var db = itemModel.value;
-                    $.post("@Url.Action("GetDatabaseTableList", "DataDictionary")", { servername: sname, dbname: db, username: uname, password: pass }, function (data) {
-                        //$('#msDDTable').fastselect({
-                        //    onItemSelect: null
-                        //});
-                        var mstbList = $('#divmsDDTable').find('.fstResults');
+
+                    $.post("@Url.Action("GetDatabaseTableList", "DataDictionary")", { servername: sname, dbname: db, username: uname, password: pass, tableType: ttype}, function (data) {
                         var tbList = $('#msDDTable');
                         tbList.empty();
                         data = JSON.parse(data);
                         $(data).each(function (index, tb) {
                             tbList.append(
                                 '<option value="' + tb.TableName + '">' + tb.TableName + '</option>'
-                            );
-                        });
+                            ).data('fastselect').destroy();
 
+                            $('#msDDTable').fastselect({
+                                onItemSelect: function ($item, itemModel) {
+
+                                    var tbl = itemModel.value;
+                                    $("#tblDDTable").dataTable().fnDestroy();
+                                    tblTableProperties(sname, db, tbl, uname, pass);
+
+                                    $.post("@Url.Action("GetDatabaseInformation", "DataDictionary")", { servername: sname, dbname: db, tblname: tbl, username: uname, password: pass } , function(res) {
+                                        var dbinfo = $('#cardDatabaseInfo');
+                                        dbinfo.empty();
+                                        res = JSON.parse(res);
+                                        var ddper = parseFloat(parseInt(res.DataDictionaryCount, 10) * 100) / parseInt(res.DatabaseTableCount, 10);
+                                        dbinfo.append(
+                                            '<div class="">' +
+                                            '<div class="">' +
+                                            '<h5 class="card-title text-info">Database Information</h5>' +
+                                            '<label>Database Name:<span class="label label-primary"> ' + res.LogicalName +'</span></label></br>' +
+                                            '<label>Data File Size:<span class="label label-primary"> ' + res.DataFileSize.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") +' MB</span></label></br>' +
+                                            '<label>Log File Size:<span class="label label-primary"> ' + res.LogFileSize.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") +' MB</span></label></br>' +
+                                            '<label>Total Table:<span class="label label-primary"> ' + res.DatabaseTableCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span></label></br>' +
+                                            '<label>Data Dictionary:<span class="label label-primary"> ' + Math.ceil(ddper) + ' %</span></label></br>' +
+                                            '<h5 class="card-title text-info">Table Information</h5>' +
+                                            '<label>Name:<span class="label label-primary"> ' + res.TableName + '</span></label></br>' +
+                                            '<label>Description:<span class="label label-primary"> ' + res.TableDesc + '</span><button class="btn editTblDesc"><i class="fa fa-pen"></i></button></label></br>' +
+                                            '<label>Total Data:<span class="label label-primary"> ' + res.TableDataCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span></label>' +
+                                            '</div>' +
+                                            '</div>'
+                                        );
+                                    });
+                                    dbDiskUsagePieGraph(sname, db, tbl, uname, pass);
+                                }
+                            });
+
+                        });
                     });
                 }
             });
 
-            $('#msDDTable').fastselect({
+            $('#msDDTableType').fastselect({
                 onItemSelect: function ($item, itemModel) {
                     var sname = $("#txtDDSrvName").val();
                     var uname = $("#txtDDSrvUserName").val();
                     var pass = $("#txtDDSrvPassword").val();
                     var db = $("#msDDDatabase").val();
-                    var tbl = itemModel.value;
-                    $("#tblDDTable").dataTable().fnDestroy();
-                    tblTableProperties(sname, db, tbl, uname, pass);
+                    var ttype = itemModel.value;
 
-                    $.post("@Url.Action("GetDatabaseInformation", "DataDictionary")", { servername: sname, dbname: db, tblname: tbl, username: uname, password: pass } , function(data) {
-                        var dbinfo = $('#cardDatabaseInfo');
-                        dbinfo.empty();
+                    $.post("@Url.Action("GetDatabaseTableList", "DataDictionary")", { servername: sname, dbname: db, username: uname, password: pass, tableType: ttype}, function (data) {
+                        var tbList = $('#msDDTable');
+                        tbList.empty();
                         data = JSON.parse(data);
-                        dbinfo.append(
-                            '<div class="">' +
-                            '<div class="">' +
-                            '<h5 class="card-title text-info">Database Information</h5>' +
-                            '<label>Database Name:<span class="label label-primary"> ' + data.LogicalName +'</span></label></br>' +
-                            '<label>Data File Size:<span class="label label-primary"> ' + data.DataFileSize.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") +' MB</span></label></br>' +
-                            '<label>Log File Size:<span class="label label-primary"> ' + data.LogFileSize.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") +' MB</span></label></br>' +
-                            '<label>Total Table:<span class="label label-primary"> ' + data.DatabaseTableCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span></label></br>' +
-                            '<h5 class="card-title text-info">Table Information</h5>' +
-                            '<label>Table Name:<span class="label label-primary"> ' + data.TableName + '</span></label></br>' +
-                            '<label>Total Data:<span class="label label-primary"> ' + data.TableDataCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span></label>' +
-                            '</div>' +
-                            '</div>'
-                        );
+                        $(data).each(function (index, tb) {
+                            tbList.append(
+                                '<option value="' + tb.TableName + '">' + tb.TableName + '</option>'
+                            ).data('fastselect').destroy();
 
+                            $('#msDDTable').fastselect({
+                                onItemSelect: function ($item, itemModel) {
 
+                                    var tbl = itemModel.value;
+                                    $("#tblDDTable").dataTable().fnDestroy();
+                                    tblTableProperties(sname, db, tbl, uname, pass);
+
+                                    $.post("@Url.Action("GetDatabaseInformation", "DataDictionary")", { servername: sname, dbname: db, tblname: tbl, username: uname, password: pass } , function(res) {
+                                        var dbinfo = $('#cardDatabaseInfo');
+                                        dbinfo.empty();
+                                        res = JSON.parse(res);
+                                        dbinfo.append(
+                                            '<div class="">' +
+                                            '<div class="">' +
+                                            '<h5 class="card-title text-info">Database Information</h5>' +
+                                            '<label>Database Name:<span class="label label-primary"> ' + res.LogicalName +'</span></label></br>' +
+                                            '<label>Data File Size:<span class="label label-primary"> ' + res.DataFileSize.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") +' MB</span></label></br>' +
+                                            '<label>Log File Size:<span class="label label-primary"> ' + res.LogFileSize.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") +' MB</span></label></br>' +
+                                            '<label>Total Table:<span class="label label-primary"> ' + res.DatabaseTableCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span></label></br>' +
+                                            '<h5 class="card-title text-info">Table Information</h5>' +
+                                            '<label>Table Name:<span class="label label-primary"> ' + res.TableName + '</span></label></br>' +
+                                            '<label>Description:<span class="label label-primary"> ' + res.TableDesc + '<button class="btn editTblDesc"><i class="fa fa-pen"></i></button></span></label></br>' +
+                                            '<label>Total Data:<span class="label label-primary"> ' + res.TableDataCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span></label>' +
+                                            '</div>' +
+                                            '</div>'
+                                        );
+                                    });
+                                    dbDiskUsagePieGraph(sname, db, tbl, uname, pass);
+                                }
+                            });
+
+                        });
                     });
-                    dbDiskUsagePieGraph(sname, db, tbl, uname, pass);
                 }
             });
+
+            $('#msDDTable').fastselect();
+
+
 
             var tblTableProperties = function (sname, db, tbl, uname, pass) {
                 $("#tblDDTable").DataTable({
@@ -275,7 +334,7 @@
                         "filter": false,
                         "pageLength": 10,
                         "ajax": {
-                            "url": "@Url.Action("GetTableProperty", "DataDictionary")",
+                            "url": "@Url.Action("GetTableColumnProperty", "DataDictionary")",
                             "data": {
                                 "servername": sname,
                                 "dbname": db,
@@ -444,6 +503,7 @@
                     $.each($tds, function (i, el) {
                         var txt = $(this).find("input").val()
                         $(this).html(txt);
+
                     });
 
                     $.post("@Url.Action("SaveExtendedProperty", "DataDictionary")", { servername: sname, dbname: db, tblname: tbl, username: uname, password: pass, colname: name, coldesc: desc}, function (data) {
@@ -473,6 +533,34 @@
                 $.post("@Url.Action("SaveExtendedProperty", "DataDictionary")", { servername: sname, dbname: db, tblname: tbl, username: uname, password: pass, colname: name, coldesc: desc}, function (data) {
                     //alert(data);
                 });
+            });
+
+
+            $(document).on('click', '.editTblDesc', function () {
+                $(this).find('i').removeClass().addClass("fa fa-check");
+                $(this).removeClass('editTblDesc').addClass("saveTblDesc");
+                var txt = $(this).prev("span").text();
+                $(this).prev("span").html("").append("<input class='form-control input-sm' id='txttbldesc' type='text' value=\"" + txt + "\">");
+
+            });
+
+            $(document).on('click', '.saveTblDesc', function () {
+                $(this).find('i').removeClass().addClass("fa fa-pen");
+                $(this).removeClass('saveTblDesc').addClass("editTblDesc");
+                var desc = $("#txttbldesc").val();
+                $(this).prev("span").html("").append(desc);
+
+                var sname = $("#txtDDSrvName").val();
+                var uname = $("#txtDDSrvUserName").val();
+                var pass = $("#txtDDSrvPassword").val();
+                var db = $("#msDDDatabase").val();
+                var tbl = $("#msDDTable").val();
+
+                $.post("@Url.Action("SaveTableExtendedProperty", "DataDictionary")", { servername: sname, dbname: db, tblname: tbl, username: uname, password: pass, tbldesc: desc }, function (data) {
+
+                });
+
+
             });
         });
 
