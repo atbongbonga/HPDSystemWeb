@@ -126,6 +126,8 @@ C:\HPDSystemWeb\HPD.Web\bin\Antlr3.Runtime.pdb
 C:\HPDSystemWeb\HPD.Web\bin\System.Diagnostics.DiagnosticSource.xml
 C:\HPDSystemWeb\HPD.Web\bin\Microsoft.AspNet.TelemetryCorrelation.xml
 C:\HPDSystemWeb\HPD.Web\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\HPDSystemWeb\HPD.Web\obj\Debug\HPD.Web.csprojResolveAssemblyReference.cache
 C:\HPDSystemWeb\HPD.Web\obj\Debug\HPD.Web.dll
 C:\HPDSystemWeb\HPD.Web\obj\Debug\HPD.Web.pdb
+C:\HPDSystemWeb\HPD.Web\obj\Debug\HPD.Web.csprojAssemblyReference.cache
+C:\HPDSystemWeb\HPD.Web\obj\Debug\HPD.Web.csproj.CoreCompileInputs.cache
+C:\HPDSystemWeb\HPD.Web\obj\Debug\HPD.Web.csproj.CopyComplete
